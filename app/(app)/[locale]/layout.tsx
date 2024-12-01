@@ -7,11 +7,11 @@ import type { ReactNode } from "react";
 import { LocalizedStringProvider as Translations } from "react-aria-components/i18n";
 import { jsonLdScriptProps } from "react-schemaorg";
 
-import { AppFooter } from "@/app/[locale]/_components/app-footer";
-import { AppHeader } from "@/app/[locale]/_components/app-header";
-import { AppLayout } from "@/app/[locale]/_components/app-layout";
-import { Providers } from "@/app/[locale]/_components/providers";
-import { TailwindIndicator } from "@/app/[locale]/_components/tailwind-indicator";
+import { AppFooter } from "@/app/(app)/[locale]/_components/app-footer";
+import { AppHeader } from "@/app/(app)/[locale]/_components/app-header";
+import { AppLayout } from "@/app/(app)/[locale]/_components/app-layout";
+import { Providers } from "@/app/(app)/[locale]/_components/providers";
+import { TailwindIndicator } from "@/app/(app)/[locale]/_components/tailwind-indicator";
 import { id } from "@/components/main-content";
 import { SkipLink } from "@/components/skip-link";
 import { env } from "@/config/env.config";

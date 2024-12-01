@@ -1,0 +1,175 @@
+/* stylelint-disable custom-property-empty-line-before */
+/* stylelint-disable selector-class-pattern */
+
+body {
+	/**
+	 * FIXME: workaround for unavailable italics font style.
+	 *
+	 * @see https://github.com/Thinkmill/keystatic/issues/1292
+	 */
+	font-synthesis: style;
+}
+
+/** Color tokens copied from `@/styles/tokens.css`. */
+
+.kui-theme.kui-scheme--dark {
+	--color-background-alternate: var(--color-grey-solid-850);
+	--color-background-base: var(--color-grey-solid-900);
+	--color-background-brand: var(--color-brand-dark-1000);
+	--color-background-inverse: var(--color-grey-solid-0);
+	--color-background-overlay: var(--color-grey-solid-800);
+	--color-background-raised: var(--color-grey-solid-850);
+	--color-background-sunken: var(--color-grey-solid-1000);
+
+	--color-fill-brand-strong: var(--color-brand-dark-1000);
+	--color-fill-brand-weak: var(--color-brand-dark-50);
+	--color-fill-disabled: var(--color-grey-dark-100);
+	--color-fill-error-strong: var(--color-red-dark-1000);
+	--color-fill-error-weak: var(--color-red-dark-50);
+	--color-fill-hover: var(--color-grey-dark-50);
+	--color-fill-information-strong: var(--color-teal-dark-1000);
+	--color-fill-information-weak: var(--color-teal-dark-50);
+	--color-fill-inverse-disabled: var(--color-grey-light-100);
+	--color-fill-inverse-hover: var(--color-grey-light-50);
+	--color-fill-inverse-press: var(--color-grey-light-100);
+	--color-fill-inverse-strong: var(--color-grey-solid-900);
+	--color-fill-inverse-weak: var(--color-grey-light-50);
+	--color-fill-overlay: var(--color-grey-light-1000);
+	--color-fill-press: var(--color-grey-dark-100);
+	--color-fill-selected: var(--color-brand-dark-1000);
+	--color-fill-strong: var(--color-grey-dark-1000);
+	--color-fill-success-strong: var(--color-green-dark-1000);
+	--color-fill-success-weak: var(--color-green-dark-50);
+	--color-fill-warning-strong: var(--color-amber-dark-1000);
+	--color-fill-warning-weak: var(--color-amber-dark-50);
+	--color-fill-weak: var(--color-grey-dark-50);
+	--color-fill-weaker: var(--color-grey-dark-25);
+	--color-fill-white: var(--color-grey-solid-0);
+	--color-fill-yellow: var(--color-yellow-solid-1000);
+
+	--color-icon-brand: var(--color-brand-dark-800);
+	--color-icon-disabled: var(--color-grey-dark-100);
+	--color-icon-error: var(--color-red-dark-800);
+	--color-icon-information: var(--color-teal-dark-800);
+	--color-icon-inverse: var(--color-grey-light-500);
+	--color-icon-inverse-disabled: var(--color-grey-light-100);
+	--color-icon-inverse-strong: var(--color-grey-light-1000);
+	--color-icon-neutral: var(--color-grey-dark-500);
+	--color-icon-success: var(--color-green-dark-800);
+	--color-icon-warning: var(--color-amber-dark-800);
+
+	--color-stroke-brand-strong: var(--color-brand-dark-800);
+	--color-stroke-brand-weak: var(--color-brand-dark-200);
+	--color-stroke-disabled: var(--color-grey-dark-100);
+	--color-stroke-error-strong: var(--color-red-dark-800);
+	--color-stroke-error-weak: var(--color-red-dark-200);
+	--color-stroke-focus: var(--color-brand-dark-1000);
+	--color-stroke-information-strong: var(--color-teal-dark-800);
+	--color-stroke-information-weak: var(--color-teal-dark-200);
+	--color-stroke-inverse-disabled: var(--color-grey-light-100);
+	--color-stroke-inverse-strong: var(--color-grey-light-500);
+	--color-stroke-inverse-weak: var(--color-grey-light-100);
+	--color-stroke-selected: var(--color-brand-dark-1000);
+	--color-stroke-strong: var(--color-grey-dark-500);
+	--color-stroke-success-strong: var(--color-green-dark-800);
+	--color-stroke-success-weak: var(--color-green-dark-200);
+	--color-stroke-warning-strong: var(--color-amber-dark-800);
+	--color-stroke-warning-weak: var(--color-amber-dark-200);
+	--color-stroke-weak: var(--color-grey-dark-100);
+
+	--color-text-brand: var(--color-brand-dark-1000);
+	--color-text-disabled: var(--color-grey-dark-100);
+	--color-text-error: var(--color-red-dark-1000);
+	--color-text-information: var(--color-teal-dark-1000);
+	--color-text-inverse-disabled: var(--color-grey-light-100);
+	--color-text-inverse-strong: var(--color-grey-light-1000);
+	--color-text-inverse-weak: var(--color-grey-light-700);
+	--color-text-strong: var(--color-grey-dark-1000);
+	--color-text-success: var(--color-green-dark-1000);
+	--color-text-warning: var(--color-amber-dark-1000);
+	--color-text-weak: var(--color-grey-dark-700);
+
+	color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+	.kui-theme.kui-scheme--auto {
+		--color-background-alternate: var(--color-grey-solid-850);
+		--color-background-base: var(--color-grey-solid-900);
+		--color-background-brand: var(--color-brand-dark-1000);
+		--color-background-inverse: var(--color-grey-solid-0);
+		--color-background-overlay: var(--color-grey-solid-800);
+		--color-background-raised: var(--color-grey-solid-850);
+		--color-background-sunken: var(--color-grey-solid-1000);
+
+		--color-fill-brand-strong: var(--color-brand-dark-1000);
+		--color-fill-brand-weak: var(--color-brand-dark-50);
+		--color-fill-disabled: var(--color-grey-dark-100);
+		--color-fill-error-strong: var(--color-red-dark-1000);
+		--color-fill-error-weak: var(--color-red-dark-50);
+		--color-fill-hover: var(--color-grey-dark-50);
+		--color-fill-information-strong: var(--color-teal-dark-1000);
+		--color-fill-information-weak: var(--color-teal-dark-50);
+		--color-fill-inverse-disabled: var(--color-grey-light-100);
+		--color-fill-inverse-hover: var(--color-grey-light-50);
+		--color-fill-inverse-press: var(--color-grey-light-100);
+		--color-fill-inverse-strong: var(--color-grey-solid-900);
+		--color-fill-inverse-weak: var(--color-grey-light-50);
+		--color-fill-overlay: var(--color-grey-light-1000);
+		--color-fill-press: var(--color-grey-dark-100);
+		--color-fill-selected: var(--color-brand-dark-1000);
+		--color-fill-strong: var(--color-grey-dark-1000);
+		--color-fill-success-strong: var(--color-green-dark-1000);
+		--color-fill-success-weak: var(--color-green-dark-50);
+		--color-fill-warning-strong: var(--color-amber-dark-1000);
+		--color-fill-warning-weak: var(--color-amber-dark-50);
+		--color-fill-weak: var(--color-grey-dark-50);
+		--color-fill-weaker: var(--color-grey-dark-25);
+		--color-fill-white: var(--color-grey-solid-0);
+		--color-fill-yellow: var(--color-yellow-solid-1000);
+
+		--color-icon-brand: var(--color-brand-dark-800);
+		--color-icon-disabled: var(--color-grey-dark-100);
+		--color-icon-error: var(--color-red-dark-800);
+		--color-icon-information: var(--color-teal-dark-800);
+		--color-icon-inverse: var(--color-grey-light-500);
+		--color-icon-inverse-disabled: var(--color-grey-light-100);
+		--color-icon-inverse-strong: var(--color-grey-light-1000);
+		--color-icon-neutral: var(--color-grey-dark-500);
+		--color-icon-success: var(--color-green-dark-800);
+		--color-icon-warning: var(--color-amber-dark-800);
+
+		--color-stroke-brand-strong: var(--color-brand-dark-800);
+		--color-stroke-brand-weak: var(--color-brand-dark-200);
+		--color-stroke-disabled: var(--color-grey-dark-100);
+		--color-stroke-error-strong: var(--color-red-dark-800);
+		--color-stroke-error-weak: var(--color-red-dark-200);
+		--color-stroke-focus: var(--color-brand-dark-1000);
+		--color-stroke-information-strong: var(--color-teal-dark-800);
+		--color-stroke-information-weak: var(--color-teal-dark-200);
+		--color-stroke-inverse-disabled: var(--color-grey-light-100);
+		--color-stroke-inverse-strong: var(--color-grey-light-500);
+		--color-stroke-inverse-weak: var(--color-grey-light-100);
+		--color-stroke-selected: var(--color-brand-dark-1000);
+		--color-stroke-strong: var(--color-grey-dark-500);
+		--color-stroke-success-strong: var(--color-green-dark-800);
+		--color-stroke-success-weak: var(--color-green-dark-200);
+		--color-stroke-warning-strong: var(--color-amber-dark-800);
+		--color-stroke-warning-weak: var(--color-amber-dark-200);
+		--color-stroke-weak: var(--color-grey-dark-100);
+
+		--color-text-brand: var(--color-brand-dark-1000);
+		--color-text-disabled: var(--color-grey-dark-100);
+		--color-text-error: var(--color-red-dark-1000);
+		--color-text-information: var(--color-teal-dark-1000);
+		--color-text-inverse-disabled: var(--color-grey-light-100);
+		--color-text-inverse-strong: var(--color-grey-light-1000);
+		--color-text-inverse-weak: var(--color-grey-light-700);
+		--color-text-strong: var(--color-grey-dark-1000);
+		--color-text-success: var(--color-green-dark-1000);
+		--color-text-warning: var(--color-amber-dark-1000);
+		--color-text-weak: var(--color-grey-dark-700);
+
+		color-scheme: dark;
+	}
+}

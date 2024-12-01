@@ -27,6 +27,7 @@
 	"i18n-ally.sortKeys": true,
 	"i18n-ally.tabStyle": "tab",
 	"less.validate": false,
+	"mdx.server.enable": true,
 	"prettier.ignorePath": ".gitignore",
 	"scss.validate": false,
 	"stylelint.enable": true,
@@ -60,6 +61,10 @@
 	"workbench.editor.labelFormat": "medium",
 	"workbench.tree.enableStickyScroll": true,
 	"[markdown]": {
+		"editor.wordWrap": "on"
+	},
+	"[mdx]": {
+		"editor.formatOnSave": false,
 		"editor.wordWrap": "on"
 	}
 }

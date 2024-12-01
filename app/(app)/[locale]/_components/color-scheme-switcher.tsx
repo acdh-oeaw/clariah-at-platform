@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { type ReactNode, useMemo } from "react";
 
-import { ColorSchemeSelect } from "@/app/[locale]/_components/color-scheme-select-loader";
+import { ColorSchemeSelect } from "@/app/(app)/[locale]/_components/color-scheme-select-loader";
 import type { ColorScheme } from "@/lib/color-scheme-script";
 
 export function ColorSchemeSwitcher(): ReactNode {

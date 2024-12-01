@@ -9,7 +9,10 @@ const config = {
 	},
 	darkMode: [
 		"variant",
-		['&:where([data-ui-color-scheme="dark"], [data-ui-color-scheme="dark"] *)'],
+		[
+			'&:where([data-ui-color-scheme="dark"], [data-ui-color-scheme="dark"] *)',
+			"&:where(.kui-theme.kui-scheme--dark, .kui-theme.kui-scheme--dark *)",
+		],
 	],
 	plugins: [animatePlugin, reactAriaComponentsPlugin],
 	theme: {

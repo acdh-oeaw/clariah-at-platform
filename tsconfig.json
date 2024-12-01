@@ -11,9 +11,14 @@
 		"./next-env.d.ts",
 		"./**/*.d.ts",
 		"./**/*.js",
+		// "./**/*.mdx",
 		"./**/*.ts",
 		"./**/*.tsx",
 		".next/types/**/*.ts"
 	],
-	"exclude": ["node_modules", "out"]
+	"exclude": ["node_modules", "out"],
+	"mdx": {
+		"checkMdx": false,
+		"plugins": ["remark-frontmatter", "remark-gfm"]
+	}
 }

@@ -1,4 +1,9 @@
 {
+	"mdx": {
+		"footnote-back-label": "Back to reference {reference}",
+		"footnotes": "Footnotes",
+		"table-of-contents": "Table of contents"
+	},
 	"AboutPage": {
 		"meta": {
 			"title": "About the project"

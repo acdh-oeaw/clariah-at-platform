@@ -1,4 +1,5 @@
 @import url("@/styles/tokens.css");
+@import url("@/styles/content.css");
 
 @tailwind base;
 @tailwind components;
@@ -217,12 +218,59 @@
 	/** Typography. */
 
 	.typography {
-		--color-typography-strong: var(--color-text-strong);
-		--color-typography-weak: var(--color-text-weak);
+		--typography-scale-factor: 1;
+		--color-typography-text: var(--color-text-weak);
+		--color-typography-heading: var(--color-text-strong);
+		--color-typography-link: var(--color-text-strong);
+		--color-typography-divider: var(--color-stroke-weak);
+		--color-typography-code: var(--color-text-strong);
+		--color-typography-marker: var(--color-stroke-strong);
+		--font-size-typography-heading-1: calc(
+			var(--font-size-heading-1) * var(--typography-scale-factor, 1)
+		);
+		--font-size-typography-heading-2: calc(
+			var(--font-size-heading-2) * var(--typography-scale-factor, 1)
+		);
+		--font-size-typography-heading-3: calc(
+			var(--font-size-heading-3) * var(--typography-scale-factor, 1)
+		);
+		--font-size-typography-heading-4: calc(
+			var(--font-size-heading-4) * var(--typography-scale-factor, 1)
+		);
+		--font-size-typography-lead: calc(
+			var(--font-size-heading-4) * var(--typography-scale-factor, 1)
+		);
+		--font-size-typography-text: calc(var(--font-size-small) * var(--typography-scale-factor, 1));
+		--font-size-typography-code: calc(var(--font-size-tiny) * var(--typography-scale-factor, 1));
+		--font-size-typography-caption: calc(var(--font-size-tiny) * var(--typography-scale-factor, 1));
+		--line-height-typography-heading-1: calc(
+			var(--line-height-heading-1) * var(--typography-scale-factor, 1)
+		);
+		--line-height-typography-heading-2: calc(
+			var(--line-height-heading-2) * var(--typography-scale-factor, 1)
+		);
+		--line-height-typography-heading-3: calc(
+			var(--line-height-heading-3) * var(--typography-scale-factor, 1)
+		);
+		--line-height-typography-heading-4: calc(
+			var(--line-height-heading-4) * var(--typography-scale-factor, 1)
+		);
+		--line-height-typography-lead: calc(
+			var(--line-height-heading-4) * var(--typography-scale-factor, 1)
+		);
+		--line-height-typography-text: calc(
+			var(--line-height-small) * var(--typography-scale-factor, 1)
+		);
+		--line-height-typography-code: calc(
+			var(--line-height-small) * var(--typography-scale-factor, 1)
+		);
+		--line-height-typography-caption: calc(
+			var(--line-height-tiny) * var(--typography-scale-factor, 1)
+		);
 
-		color: var(--color-typography-weak);
-		font-size: var(--font-size-small);
-		line-height: var(--line-height-small);
+		color: var(--color-typography-text);
+		font-size: var(--font-size-typography-text);
+		line-height: var(--line-height-typography-text);
 
 		& > :first-child {
 			margin-block-start: 0;
@@ -234,27 +282,26 @@
 
 		& :where(p) {
 			margin-block: 0.75rem;
-			font-size: var(--font-size-small);
-			line-height: var(--line-small);
+			font-size: var(--font-size-typography-text);
+			line-height: var(--line-height-typography-text);
 		}
 
 		& :where(.lead) {
 			margin-block: 0.875rem;
-			color: var(--color-typography-weak);
-			font-size: var(--font-size-small);
-			line-height: var(--line-height-small);
+			color: var(--color-typography-text);
+			font-size: var(--font-size-typography-text);
+			line-height: var(--line-height-typography-text);
 
 			/* stylelint-disable-next-line at-rule-no-unknown, order/order */
 			@screen xs {
-				font-size: var(--font-size-heading-4);
-				line-height: var(--line-height-heading-4);
+				font-size: var(--font-size-typography-lead);
+				line-height: var(--line-height-typography-lead);
 			}
 		}
 
 		& :where(a) {
-			color: var(--color-typography-strong);
+			color: var(--color-typography-link);
 			font-weight: var(--font-weight-strong);
-			font-weight: 500;
 			text-decoration: underline;
 
 			&:hover {
@@ -263,15 +310,15 @@
 		}
 
 		& :where(h1, h2, h3, h4, h5, h6) {
-			color: var(--color-typography-strong);
+			color: var(--color-typography-heading);
 			font-family: var(--font-family-heading);
 		}
 
 		& :where(h1) {
 			margin-block: 2.5rem 0.25rem;
 			font-weight: var(--font-weight-strong);
-			font-size: var(--font-size-heading-1);
-			line-height: var(--line-height-heading-1);
+			font-size: var(--font-size-typography-heading-1);
+			line-height: var(--line-height-typography-heading-1);
 			letter-spacing: -0.5px;
 
 			& code {
@@ -283,8 +330,8 @@
 		& :where(h2) {
 			margin-block: 2.25rem 0.25rem;
 			font-weight: var(--font-weight-strong);
-			font-size: var(--font-size-heading-2);
-			line-height: var(--line-height-heading-2);
+			font-size: var(--font-size-typography-heading-2);
+			line-height: var(--line-height-typography-heading-2);
 
 			& code {
 				font-size: 75%;
@@ -294,8 +341,8 @@
 		& :where(h3) {
 			margin-block: 2rem 0.25rem;
 			font-weight: var(--font-weight-strong);
-			font-size: var(--font-size-heading-3);
-			line-height: var(--line-height-heading-3);
+			font-size: var(--font-size-typography-heading-3);
+			line-height: var(--line-height-typography-heading-3);
 
 			& code {
 				font-size: 75%;
@@ -305,8 +352,8 @@
 		& :where(h4) {
 			margin-block: 1.5rem 0.25rem;
 			font-weight: var(--font-weight-strong);
-			font-size: var(--font-size-heading-4);
-			line-height: var(--line-height-heading-4);
+			font-size: var(--font-size-typography-heading-4);
+			line-height: var(--line-height-typography-heading-4);
 
 			& code {
 				font-size: 75%;
@@ -315,10 +362,10 @@
 
 		& :where(blockquote) {
 			margin-block: 1.25rem;
-			color: var(--color-typography-strong);
+			color: var(--color-typography-heading);
 			font-weight: 500;
 			font-style: italic;
-			border-inline-start: 0.25rem solid var(--color-stroke-weak);
+			border-inline-start: 0.25rem solid var(--color-typography-divider);
 			padding-inline-start: 1rem;
 
 			& > :first-child {
@@ -332,7 +379,7 @@
 
 		& :where(hr) {
 			margin-block: 2.5rem;
-			border-top: 1px solid var(--color-stroke-weak);
+			border-top: 1px solid var(--color-typography-divider);
 
 			& + * {
 				margin-block-start: 0.75rem;
@@ -341,9 +388,9 @@
 
 		& :where(code) {
 			margin-inline: 2px;
-			color: var(--color-typography-strong);
+			color: var(--color-typography-code);
 			font-weight: var(--font-weight-strong);
-			font-size: var(--font-size-tiny);
+			font-size: var(--font-size-typography-code);
 			font-family: var(--font-family-mono);
 		}
 
@@ -356,9 +403,9 @@
 			background-color: var(--color-fill-strong);
 			color: var(--color-text-inverse-strong);
 			font-weight: var(--font-weight-weak);
-			font-size: var(--font-size-tiny);
+			font-size: var(--font-size-typography-code);
 			font-family: var(--font-family-mono);
-			line-height: var(--line-height-small);
+			line-height: var(--line-height-typography-code);
 		}
 
 		& :where(pre code) {
@@ -430,7 +477,7 @@
 			padding-inline-start: 0.375rem;
 
 			&::marker {
-				color: var(--color-stroke-strong);
+				color: var(--color-typography-marker);
 			}
 		}
 
@@ -463,7 +510,7 @@
 		}
 
 		& :where(img, video) {
-			border: 1px solid var(--color-stroke-weak);
+			border: 1px solid var(--color-typography-divider);
 			border-radius: var(--corner-radius-16);
 		}
 
@@ -477,9 +524,9 @@
 
 		& :where(figcaption) {
 			margin-inline: 1.5rem;
-			color: var(--color-typography-weak);
-			font-size: var(--font-size-tiny);
-			line-height: var(--line-height-tiny);
+			color: var(--color-typography-text);
+			font-size: var(--font-size-typography-caption);
+			line-height: var(--line-height-typography-caption);
 			margin-block-start: 0.5rem;
 		}
 
@@ -493,17 +540,17 @@
 			margin-top: 1.25rem;
 			margin-bottom: 1.25rem;
 			table-layout: auto;
-			font-size: var(--font-size-tiny);
-			line-height: var(--line-height-tiny);
+			font-size: var(--font-size-typography-caption);
+			line-height: var(--line-height-typography-caption);
 
 			& :where(thead) {
 				border-bottom-width: 1px;
-				border-bottom-color: var(--color-stroke-weak);
+				border-bottom-color: var(--color-typography-divider);
 
 				& :where(th) {
 					vertical-align: bottom;
 					padding-inline: 0.625rem;
-					color: var(--color-stroke-weak);
+					color: var(--color-typography-divider);
 					font-weight: var(--font-weight-strong);
 					padding-block-end: 0.625rem;
 
@@ -520,7 +567,7 @@
 			& :where(tbody) {
 				& :where(tr) {
 					border-bottom-width: 1px;
-					border-bottom-color: var(--color-stroke-weak);
+					border-bottom-color: var(--color-typography-divider);
 
 					&:last-child {
 						border-bottom-width: 0;
@@ -544,7 +591,7 @@
 
 			& :where(tfoot) {
 				border-top-width: 1px;
-				border-top-color: var(--color-stroke-weak);
+				border-top-color: var(--color-typography-divider);
 
 				& :where(td) {
 					vertical-align: top;
@@ -565,5 +612,9 @@
 				text-align: start;
 			}
 		}
+	}
+
+	.typography-scale-small {
+		--typography-scale-factor: 0.875;
 	}
 }

@@ -6,7 +6,7 @@ import {
 	MastodonLogo,
 	TwitterLogo,
 	YouTubeLogo,
-} from "@/app/[locale]/_components/social-media-logos";
+} from "@/app/(app)/[locale]/_components/social-media-logos";
 import { Logo } from "@/components/logo";
 import { NavLink, type NavLinkProps } from "@/components/nav-link";
 import type { Locale } from "@/config/i18n.config";

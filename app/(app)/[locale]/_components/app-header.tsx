@@ -5,9 +5,9 @@ import {
 	AppNavigation,
 	AppNavigationMobile,
 	type NavigationItem,
-} from "@/app/[locale]/_components/app-navigation";
-import { ColorSchemeSwitcher } from "@/app/[locale]/_components/color-scheme-switcher";
-import { LocaleSwitcher } from "@/app/[locale]/_components/locale-switcher";
+} from "@/app/(app)/[locale]/_components/app-navigation";
+import { ColorSchemeSwitcher } from "@/app/(app)/[locale]/_components/color-scheme-switcher";
+import { LocaleSwitcher } from "@/app/(app)/[locale]/_components/locale-switcher";
 import { createHref } from "@/lib/create-href";
 
 export function AppHeader(): ReactNode {

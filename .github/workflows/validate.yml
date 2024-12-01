@@ -14,8 +14,28 @@ on:
       - main
 
 jobs:
+  changes:
+    name: Check changed files
+    runs-on: ubuntu-latest
+
+    outputs:
+      src: ${{ steps.filter.outputs.src }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            src:
+              - '!(content|public)/**'
+
   validate:
     name: Validate
+    needs: [changes]
+    if: ${{ needs.changes.outputs.src == 'true' }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
 
@@ -104,8 +124,9 @@ jobs:
 
   build-deploy:
     name: Build and deploy
-    if: ${{ github.event_name == 'push' }}
     needs: [validate]
+    # @see https://github.com/orgs/community/discussions/45058
+    if: ${{ github.event_name == 'push' && !failure() && !cancelled() }}
     uses: ./.github/workflows/build-deploy.yml
     secrets: inherit
     # https://docs.github.com/en/actions/using-workflows/reusing-workflows#access-and-permissions
