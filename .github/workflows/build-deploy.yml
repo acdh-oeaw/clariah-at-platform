@@ -112,6 +112,10 @@ jobs:
             "NEXT_PUBLIC_MATOMO_BASE_URL=${{ vars.NEXT_PUBLIC_MATOMO_BASE_URL }}"
             "NEXT_PUBLIC_MATOMO_ID=${{ vars.NEXT_PUBLIC_MATOMO_ID }}"
             "NEXT_PUBLIC_REDMINE_ID=${{ vars.SERVICE_ID }}"
+          secrets: |
+            "KEYSTATIC_GITHUB_CLIENT_ID=${{ secrets.K8S_SECRET_KEYSTATIC_GITHUB_CLIENT_ID }}"
+            "KEYSTATIC_GITHUB_CLIENT_SECRET=${{ secrets.K8S_SECRET_KEYSTATIC_GITHUB_CLIENT_SECRET }}"
+            "KEYSTATIC_SECRET=${{ secrets.K8S_SECRET_KEYSTATIC_SECRET }}"
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
