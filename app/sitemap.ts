@@ -17,7 +17,9 @@ const baseUrl = env.NEXT_PUBLIC_APP_BASE_URL;
  * @see https://nextjs.org/docs/app/api-reference/functions/generate-sitemaps
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	const paths = await glob("./**/page.tsx", { cwd: join(process.cwd(), "app", "[locale]") });
+	const paths = await glob("./**/page.tsx", {
+		cwd: join(process.cwd(), "app", "(app)", "[locale]"),
+	});
 
 	const routes: Array<string> = [];
 
