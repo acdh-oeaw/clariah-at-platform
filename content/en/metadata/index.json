@@ -1,13 +1,13 @@
 {
-	"description": "ACDH-CH Application template",
-	"title": "ACDH-CH App",
-	"twitter": {
-		"creator": "@acdh_oeaw",
-		"site": "@acdh_oeaw"
-	},
-	"manifest": {
-		"description": "ACDH-CH Application template",
-		"name": "ACDH-CH App",
-		"short-name": "ACDH-CH App"
-	}
+  "title": "CLARIAH-AT Platform",
+  "description": "An open network facilitating the application of digital methods in the humanities and the development of relevant research infrastructures.",
+  "twitter": {
+    "creator": "@AtClariah",
+    "site": "@AtClariah"
+  },
+  "manifest": {
+    "name": "CLARIAH-AT Platform",
+    "short-name": "CLARIAH-AT Platform",
+    "description": "CLARIAH-AT Platform"
+  }
 }

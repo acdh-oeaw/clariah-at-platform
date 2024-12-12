@@ -1,13 +1,13 @@
 {
-	"description": "ACDH-CH Application template",
-	"title": "ACDH-CH App",
-	"twitter": {
-		"creator": "@acdh_oeaw",
-		"site": "@acdh_oeaw"
-	},
-	"manifest": {
-		"description": "ACDH-CH Application template",
-		"name": "ACDH-CH App",
-		"short-name": "ACDH-CH App"
-	}
+  "title": "CLARIAH-AT Plattform",
+  "description": "Ein offenes Netzwerk, das die Anwendung digitaler Methoden in den Geisteswissenschaften und die Entwicklung der entsprechenden Forschungsinfrastrukturen fördert und unterstützt.",
+  "twitter": {
+    "creator": "@AtClariah",
+    "site": "@AtClariah"
+  },
+  "manifest": {
+    "name": "CLARIAH-AT Plattform",
+    "short-name": "CLARIAH-AT Plattform",
+    "description": "Ein offenes Netzwerk, das die Anwendung digitaler Methoden in den Geisteswissenschaften und die Entwicklung der entsprechenden Forschungsinfrastrukturen fördert und unterstützt."
+  }
 }
