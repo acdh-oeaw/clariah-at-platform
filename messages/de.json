@@ -1,0 +1,72 @@
+{
+	"AboutPage": {
+		"meta": {
+			"title": "Über das Projekt"
+		},
+		"title": "Über das Projekt"
+	},
+	"AppFooter": {
+		"links": {
+			"contact": "Kontakt",
+			"imprint": "Impressum"
+		},
+		"navigation-secondary": "Sekundär",
+		"navigation-social-media": "Social media",
+		"social-media": {
+			"bluesky": "Bluesky",
+			"mastodon": "Mastodon",
+			"twitter": "Twitter",
+			"youtube": "YouTube"
+		}
+	},
+	"AppHeader": {
+		"links": {
+			"about": "Über das Projekt",
+			"home": "Startseite"
+		},
+		"navigation-menu": "Navigationsmenü",
+		"navigation-menu-close": "Navigationsmenü schließen",
+		"navigation-menu-open": "Navigationsmenü öffnen",
+		"navigation-primary": "Primär"
+	},
+	"ColorSchemeSwitcher": {
+		"change-color-scheme": "Farbschema ändern",
+		"color-schemes": {
+			"dark": "Dunkel",
+			"light": "Hell",
+			"system": "System"
+		}
+	},
+	"Error": {
+		"something-went-wrong": "Etwas ist schief gelaufen!",
+		"try-again": "Erneut versuchen"
+	},
+	"ImprintPage": {
+		"meta": {
+			"title": "Impressum"
+		},
+		"title": "Impressum"
+	},
+	"IndexPage": {
+		"badge": "ACDH-CH frontend team",
+		"lead-in": "Dies ist eine mit Next.js 14 erstellte Startervorlage. Sie umfasst Internationalisierung, Dark Mode und End-to-End-Tests.",
+		"title": "Anwendungs-Template"
+	},
+	"Loading": {
+		"loading": "Laden"
+	},
+	"LocaleLayout": {
+		"skip-to-main-content": "Zum Hauptinhalt springen"
+	},
+	"LocaleSwitcher": {
+		"current-locale": "Aktuelle Sprache: {locale}",
+		"switch-locale": "Sprache wechseln",
+		"switch-locale-to": "Zu {locale} wechseln"
+	},
+	"NotFoundPage": {
+		"meta": {
+			"title": "Seite nicht gefunden"
+		},
+		"title": "Seite nicht gefunden"
+	}
+}
