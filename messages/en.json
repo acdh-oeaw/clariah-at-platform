@@ -53,9 +53,8 @@
 		"title": "Imprint"
 	},
 	"IndexPage": {
-		"badge": "ACDH-CH frontend team",
-		"lead-in": "This is a starter template built with Next.js 14. It includes internationalisation, dark mode, and end-to-end testing.",
-		"title": "Application template"
+		"lead-in": "An open network facilitating the application of digital methods in the humanities and the development of relevant research infrastructures.",
+		"title": "CLARIAH-AT Platform"
 	},
 	"Loading": {
 		"loading": "Loading"

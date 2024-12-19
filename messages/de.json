@@ -53,9 +53,8 @@
 		"title": "Impressum"
 	},
 	"IndexPage": {
-		"badge": "ACDH-CH frontend team",
-		"lead-in": "Dies ist eine mit Next.js 14 erstellte Startervorlage. Sie umfasst Internationalisierung, Dark Mode und End-to-End-Tests.",
-		"title": "Anwendungs-Template"
+		"lead-in": "Ein offenes Netzwerk, das die Anwendung digitaler Methoden in den Geisteswissenschaften und die Entwicklung der entsprechenden Forschungsinfrastrukturen fördert und unterstützt.",
+		"title": "CLARIAH-AT Plattform"
 	},
 	"Loading": {
 		"loading": "Laden"
