@@ -15,10 +15,30 @@ export function createLinkSchema<TPath extends `/${string}/`>(
 			defaultValue: "external",
 		}),
 		{
-			documentation: fields.relationship({
-				label: "Documentation",
+			consortium: fields.relationship({
+				label: "Consortium",
 				validation: { isRequired: true },
-				collection: withI18nPrefix("documentation", locale),
+				collection: withI18nPrefix("consortium", locale),
+			}),
+			events: fields.relationship({
+				label: "Event",
+				validation: { isRequired: true },
+				collection: withI18nPrefix("events", locale),
+			}),
+			news: fields.relationship({
+				label: "News",
+				validation: { isRequired: true },
+				collection: withI18nPrefix("news", locale),
+			}),
+			projects: fields.relationship({
+				label: "Project",
+				validation: { isRequired: true },
+				collection: withI18nPrefix("projects", locale),
+			}),
+			pages: fields.relationship({
+				label: "Pages",
+				validation: { isRequired: true },
+				collection: withI18nPrefix("pages", locale),
 			}),
 			download: fields.file({
 				label: "Download",
@@ -29,6 +49,10 @@ export function createLinkSchema<TPath extends `/${string}/`>(
 				label: "URL",
 				validation: { isRequired: true },
 			}),
+			"index-page": fields.empty(),
+			"events-overview": fields.empty(),
+			"news-overview": fields.empty(),
+			"projects-overview": fields.empty(),
 		},
 	);
 }

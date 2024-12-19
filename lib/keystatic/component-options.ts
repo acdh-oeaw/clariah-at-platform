@@ -34,9 +34,17 @@ export const gridLayouts = [
 export type GridLayout = (typeof gridLayouts)[number]["value"];
 
 export const linkKinds = [
-	{ label: "Documentation", value: "documentation" },
 	{ label: "Download", value: "download" },
 	{ label: "External", value: "external" },
+	{ label: "Home page", value: "index-page" },
+	{ label: "Consortium", value: "consortium" },
+	{ label: "Events", value: "events" },
+	{ label: "Events overview", value: "events-overview" },
+	{ label: "News", value: "news" },
+	{ label: "News overview", value: "news-overview" },
+	{ label: "Projects", value: "projects" },
+	{ label: "Projects overview", value: "projects-overview" },
+	{ label: "Pages", value: "pages" },
 ] as const;
 
 export type LinkKind = (typeof linkKinds)[number]["value"];
