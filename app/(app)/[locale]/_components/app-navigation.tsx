@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@acdh-oeaw/style-variants";
+import type { Entry } from "@keystatic/core/reader";
 import { ChevronDownIcon, ChevronRightIcon, MenuIcon, XIcon } from "lucide-react";
 import { PrefetchKind } from "next/dist/client/components/router-reducer/router-reducer-types";
 import { Fragment, type ReactNode } from "react";
@@ -24,7 +25,12 @@ import {
 
 import { Logo } from "@/components/logo";
 import { NavLink, type NavLinkProps } from "@/components/nav-link";
+import type keystaticConfig from "@/keystatic.config";
+import { createHref } from "@/lib/create-href";
 import { useRouter } from "@/lib/i18n/navigation";
+import { getLinkProps } from "@/lib/keystatic/get-link-props";
+
+type NavigationProps = Entry<(typeof keystaticConfig)["singletons"]["en:navigation"]>["links"];
 
 interface NavigationLink {
 	type: "link";
@@ -46,11 +52,13 @@ export type NavigationItem = NavigationLink | NavigationSeparator | NavigationMe
 
 interface AppNavigationProps {
 	label: string;
-	navigation: { home: NavigationLink } & Record<string, NavigationItem>;
+	home: NavigationLink;
+	//navigation: { home: NavigationLink } & Record<string, NavigationItem>;
+	navigation: NavigationProps;
 }
 
 export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
-	const { label, navigation } = props;
+	const { label, home, navigation } = props;
 
 	return (
 		<nav aria-label={label} className="hidden md:flex md:gap-x-12">
@@ -59,27 +67,31 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 					"-ml-2 grid shrink-0 place-content-center self-center rounded-2 p-2",
 					"interactive focus-visible:focus-outline",
 				)}
-				href={navigation.home.href}
+				href={home.href}
 			>
-				<Logo className="h-8 w-auto text-text-strong" />
-				<span className="sr-only">{navigation.home.label}</span>
+				<Logo className="h-12 w-auto text-text-strong" />
+				<span className="sr-only">{home.label}</span>
 			</NavLink>
 
 			<ul className="flex flex-wrap text-small" role="list">
-				{Object.entries(navigation).map(([id, item]) => {
-					switch (item.type) {
+				{navigation.map((navigationItem, idx) => {
+					const key = `nav-item-${String(idx)}`;
+					switch (navigationItem.discriminant) {
 						case "link": {
+							const { label, link } = navigationItem.value;
+							const { download: _, href: path } = getLinkProps(link);
+							const href = createHref({ pathname: path });
 							return (
-								<li key={id}>
+								<li key={key}>
 									<NavLink
 										className={cn(
 											"inline-flex px-4 py-6 text-text-strong",
 											"interactive focus-visible:focus-outline hover:hover-overlay pressed:press-overlay",
 											"aria-[current]:select-overlay aria-[current]:select-overlay-border-bottom",
 										)}
-										href={item.href}
+										href={href}
 									>
-										{item.label}
+										{label}
 									</NavLink>
 								</li>
 							);
@@ -88,7 +100,7 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 						case "separator": {
 							return (
 								<Separator
-									key={id}
+									key={key}
 									className="mx-1 h-full border-l border-stroke-weak"
 									elementType="li"
 									orientation="vertical"
@@ -97,8 +109,9 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 						}
 
 						case "menu": {
+							const { value: menu } = navigationItem;
 							return (
-								<li key={id}>
+								<li key={key}>
 									<MenuTrigger>
 										<Button
 											className={cn(
@@ -106,7 +119,7 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 												"interactive focus-visible:focus-outline hover:hover-overlay pressed:press-overlay",
 											)}
 										>
-											{item.label}
+											{menu.label}
 											<ChevronDownIcon
 												aria-hidden={true}
 												className="size-6 shrink-0 text-icon-neutral"
@@ -120,9 +133,12 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 											placement="bottom"
 										>
 											<Menu className="max-h-[inherit] min-w-40 overflow-auto py-2">
-												{Object.entries(item.children).map(([id, item]) => {
-													switch (item.type) {
+												{Object.entries(menu.items).map(([id, item]) => {
+													switch (item.discriminant) {
 														case "link": {
+															const { label, link } = item.value;
+															const { download: _, href: path } = getLinkProps(link);
+															const href = createHref({ pathname: path });
 															return (
 																<NavigationMenuItem
 																	key={id}
@@ -130,10 +146,10 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 																		"flex cursor-pointer select-none items-center gap-x-3 px-4 py-3 text-small text-text-strong",
 																		"interactive focus-visible:focus-outline focus-visible:-focus-outline-offset-2 hover:hover-overlay pressed:press-overlay",
 																	)}
-																	href={item.href}
-																	textValue={item.label}
+																	href={href}
+																	textValue={label}
 																>
-																	{item.label}
+																	{label}
 																</NavigationMenuItem>
 															);
 														}
@@ -197,7 +213,7 @@ interface AppNavigationMobileProps {
 	menuCloseLabel: string;
 	menuOpenLabel: string;
 	menuTitleLabel: string;
-	navigation: Record<string, NavigationItem>;
+	navigation: NavigationProps;
 }
 
 export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): ReactNode {
@@ -251,21 +267,25 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 										</Button>
 									</header>
 									<ul className="text-small" role="list">
-										{Object.entries(navigation).map(([id, item]) => {
-											switch (item.type) {
+										{navigation.map((navigationItem, idx) => {
+											const key = `nav-item-${String(idx)}`;
+											switch (navigationItem.discriminant) {
 												case "link": {
+													const { label, link } = navigationItem.value;
+													const { download: _, href: path } = getLinkProps(link);
+													const href = createHref({ pathname: path });
 													return (
-														<li key={id}>
+														<li key={key}>
 															<NavLink
 																className={cn(
 																	"inline-flex w-full px-6 py-3 text-text-strong",
 																	"interactive focus-visible:focus-outline focus-visible:-focus-outline-offset-2 hover:hover-overlay pressed:press-overlay",
 																	"aria-[current]:hover-overlay aria-[current]:select-overlay",
 																)}
-																href={item.href}
+																href={href}
 																onPress={close}
 															>
-																{item.label}
+																{label}
 															</NavLink>
 														</li>
 													);
@@ -274,7 +294,7 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 												case "separator": {
 													return (
 														<Separator
-															key={id}
+															key={key}
 															className="my-1 w-full border-b border-stroke-weak"
 															elementType="li"
 														/>
@@ -282,8 +302,9 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 												}
 
 												case "menu": {
+													const { value: menu } = navigationItem;
 													return (
-														<li key={id}>
+														<li key={key}>
 															<Disclosure>
 																<Heading>
 																	<Button
@@ -294,7 +315,7 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 																		)}
 																		slot="trigger"
 																	>
-																		{item.label}
+																		{menu.label}
 																		<ChevronRightIcon
 																			aria-hidden={true}
 																			className="size-5 shrink-0"
@@ -303,9 +324,12 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 																</Heading>
 																<DisclosurePanel>
 																	<ul role="list">
-																		{Object.entries(item.children).map(([id, item]) => {
-																			switch (item.type) {
+																		{Object.entries(menu.items).map(([id, item]) => {
+																			switch (item.discriminant) {
 																				case "link": {
+																					const { label, link } = item.value;
+																					const { download: _, href: path } = getLinkProps(link);
+																					const href = createHref({ pathname: path });
 																					return (
 																						<li key={id}>
 																							<NavLink
@@ -314,10 +338,10 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 																									"interactive focus-visible:focus-outline focus-visible:-focus-outline-offset-2 hover:hover-overlay pressed:press-overlay",
 																									"aria-[current]:hover-overlay aria-[current]:select-overlay",
 																								)}
-																								href={item.href}
+																								href={href}
 																								onPress={close}
 																							>
-																								{item.label}
+																								{label}
 																							</NavLink>
 																						</li>
 																					);

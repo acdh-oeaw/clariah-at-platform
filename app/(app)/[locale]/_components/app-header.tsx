@@ -1,43 +1,38 @@
-import { useTranslations } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
 import {
 	AppNavigation,
 	AppNavigationMobile,
-	type NavigationItem,
 } from "@/app/(app)/[locale]/_components/app-navigation";
 import { ColorSchemeSwitcher } from "@/app/(app)/[locale]/_components/color-scheme-switcher";
 import { LocaleSwitcher } from "@/app/(app)/[locale]/_components/locale-switcher";
 import { createHref } from "@/lib/create-href";
+import { createSingletonResource } from "@/lib/keystatic/resources";
 
-export function AppHeader(): ReactNode {
-	const t = useTranslations("AppHeader");
-
+export async function AppHeader(): Promise<ReactNode> {
+	const locale = await getLocale();
+	const t = await getTranslations({ locale, namespace: "AppHeader" });
 	const label = t("navigation-primary");
 
-	const navigation = {
-		home: {
-			type: "link",
-			href: createHref({ pathname: "/" }),
-			label: t("links.home"),
-		},
-		about: {
-			type: "link",
-			href: createHref({ pathname: "/about" }),
-			label: t("links.about"),
-		},
-	} satisfies Record<string, NavigationItem>;
+	const navigation = await createSingletonResource("navigation", locale).read();
+	const { links } = navigation.data;
+	const home = {
+		type: "link",
+		href: createHref({ pathname: "/" }),
+		label: t("links.home"),
+	} as const;
 
 	return (
 		<header className="layout-grid border-b border-stroke-weak bg-fill-weaker">
 			<div className="flex justify-between gap-x-12">
-				<AppNavigation label={label} navigation={navigation} />
+				<AppNavigation home={home} label={label} navigation={links} />
 				<AppNavigationMobile
 					label={label}
 					menuCloseLabel={t("navigation-menu-close")}
 					menuOpenLabel={t("navigation-menu-open")}
 					menuTitleLabel={t("navigation-menu")}
-					navigation={navigation}
+					navigation={links}
 				/>
 
 				<div className="flex items-center gap-x-6">
