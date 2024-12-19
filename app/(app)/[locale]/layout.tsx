@@ -131,6 +131,7 @@ export default async function LocaleLayout(props: Readonly<LocaleLayoutProps>): 
 
 				<Providers locale={locale} messages={errorPageMessages}>
 					<AppLayout>
+						{/** @ts-expect-error @see https://github.com/vercel/next.js/discussions/67365 */}
 						<AppHeader />
 						{children}
 						<AppFooter />
