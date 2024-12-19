@@ -1,8 +1,251 @@
-import { createLabel, createSingleton } from "@acdh-oeaw/keystatic-lib";
+import {
+	createAssetOptions,
+	createLabel,
+	createSingleton,
+	withI18nPrefix,
+} from "@acdh-oeaw/keystatic-lib";
 import { fields, singleton } from "@keystatic/core";
 
 import { createLinkSchema } from "@/lib/keystatic/create-link-schema";
 import * as validation from "@/lib/keystatic/validation";
+
+export const createIndexPage = createSingleton("/index-page/", (paths, locale) => {
+	return singleton({
+		label: createLabel("Home page", locale),
+		path: paths.contentPath,
+		format: { data: "json" },
+		entryLayout: "form",
+		schema: {
+			hero: fields.object(
+				{
+					title: fields.text({
+						label: "Title",
+						validation: { isRequired: true },
+					}),
+					lead: fields.text({
+						label: "Lead",
+						validation: { isRequired: true },
+						multiline: true,
+					}),
+					image: fields.image({
+						label: "Image",
+						validation: { isRequired: true },
+						...createAssetOptions(paths.assetPath),
+					}),
+				},
+				{
+					label: "Hero section",
+				},
+			),
+			main: fields.object(
+				{
+					sections: fields.blocks(
+						{
+							cardsSection: {
+								label: "Cards section",
+								itemLabel(props) {
+									return `${props.fields.title.value} (Cards)`;
+								},
+								schema: fields.object(
+									{
+										title: fields.text({
+											label: "Title",
+											validation: { isRequired: true },
+										}),
+										cards: fields.blocks(
+											{
+												custom: {
+													label: "Custom card",
+													itemLabel(props) {
+														return props.fields.title.value;
+													},
+													schema: fields.object(
+														{
+															title: fields.text({
+																label: "Title",
+																validation: { isRequired: true },
+															}),
+															image: fields.image({
+																label: "Image",
+																validation: { isRequired: false },
+																...createAssetOptions(paths.assetPath),
+															}),
+															summary: fields.text({
+																label: "Summary",
+																validation: { isRequired: true },
+																multiline: true,
+															}),
+															link: fields.object(
+																{
+																	label: fields.text({
+																		label: "Label",
+																		validation: { isRequired: true },
+																	}),
+																	href: fields.url({
+																		label: "URL",
+																		validation: { isRequired: true },
+																	}),
+																},
+																{
+																	label: "Link",
+																},
+															),
+														},
+														{
+															label: "Custom card",
+														},
+													),
+												},
+												event: {
+													label: "Event card",
+													itemLabel(props) {
+														return props.fields.title.value;
+													},
+													schema: fields.object(
+														{
+															title: fields.text({
+																label: "Title",
+																validation: { isRequired: true },
+															}),
+															reference: fields.relationship({
+																label: "Event",
+																validation: { isRequired: true },
+																collection: withI18nPrefix("events", locale),
+															}),
+														},
+														{
+															label: "Event card",
+														},
+													),
+												},
+												news: {
+													label: "News card",
+													itemLabel(props) {
+														return props.fields.title.value;
+													},
+													schema: fields.object(
+														{
+															title: fields.text({
+																label: "Title",
+																validation: { isRequired: true },
+															}),
+															reference: fields.relationship({
+																label: "News",
+																validation: { isRequired: true },
+																collection: withI18nPrefix("news", locale),
+															}),
+														},
+														{
+															label: "News card",
+														},
+													),
+												},
+												page: {
+													label: "Page card",
+													itemLabel(props) {
+														return props.fields.title.value;
+													},
+													schema: fields.object(
+														{
+															title: fields.text({
+																label: "Title",
+																validation: { isRequired: true },
+															}),
+															reference: fields.relationship({
+																label: "Page",
+																validation: { isRequired: true },
+																collection: withI18nPrefix("pages", locale),
+															}),
+														},
+														{
+															label: "Page card",
+														},
+													),
+												},
+											},
+											{
+												label: "Cards",
+												validation: { length: { min: 1 } },
+											},
+										),
+									},
+									{
+										label: "Cards section",
+									},
+								),
+							},
+						},
+						{
+							label: "Sections",
+							validation: { length: { min: 1 } },
+						},
+					),
+				},
+				{ label: "Main content" },
+			),
+		},
+	});
+});
+
+export const createEventsOverview = createSingleton("/events-overview/", (paths, locale) => {
+	return singleton({
+		label: createLabel("Events Overview", locale),
+		path: paths.contentPath,
+		format: { data: "json" },
+		entryLayout: "form",
+		schema: {
+			title: fields.text({
+				label: "Title",
+				validation: { isRequired: true },
+			}),
+			lead: fields.text({
+				label: "Lead",
+				validation: { isRequired: true },
+				multiline: true,
+			}),
+		},
+	});
+});
+
+export const createNewsOverview = createSingleton("/news-overview/", (paths, locale) => {
+	return singleton({
+		label: createLabel("News Overview", locale),
+		path: paths.contentPath,
+		format: { data: "json" },
+		entryLayout: "form",
+		schema: {
+			title: fields.text({
+				label: "Title",
+				validation: { isRequired: true },
+			}),
+			lead: fields.text({
+				label: "Lead",
+				validation: { isRequired: true },
+				multiline: true,
+			}),
+		},
+	});
+});
+
+export const createProjectsOverview = createSingleton("/projects-overview/", (paths, locale) => {
+	return singleton({
+		label: createLabel("Projects Overview", locale),
+		path: paths.contentPath,
+		format: { data: "json" },
+		entryLayout: "form",
+		schema: {
+			title: fields.text({
+				label: "Title",
+				validation: { isRequired: true },
+			}),
+			lead: fields.text({
+				label: "Lead",
+				validation: { isRequired: true },
+				multiline: true,
+			}),
+		},
+	});
+});
 
 export const createMetadata = createSingleton("/metadata/", (paths, locale) => {
 	return singleton({
