@@ -44,6 +44,16 @@
           "discriminant": "projects-overview"
         }
       }
+    },
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "Über uns",
+        "link": {
+          "discriminant": "pages",
+          "value": "ueber-uns"
+        }
+      }
     }
   ]
 }

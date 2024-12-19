@@ -44,6 +44,16 @@
           "discriminant": "projects-overview"
         }
       }
+    },
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "About the project",
+        "link": {
+          "discriminant": "pages",
+          "value": "about-the-project"
+        }
+      }
     }
   ]
 }
