@@ -1,0 +1,48 @@
+{
+  "hero": {
+    "title": "CLARIAH-AT",
+    "lead": "Ein offenes Netzwerk, das die Anwendung digitaler Methoden in den Geisteswissenschaften und die Entwicklung der entsprechenden Forschungsinfrastrukturen fördert und unterstützt.",
+    "image": "/assets/content/assets/de/index-page/hero/image.jpg"
+  },
+  "main": {
+    "sections": [
+      {
+        "discriminant": "cardsSection",
+        "value": {
+          "title": "Titel des Abschnittes",
+          "cards": [
+            {
+              "discriminant": "event",
+              "value": {
+                "title": "Demo Veranstaltung 1",
+                "reference": "demo-veranstaltung-1"
+              }
+            },
+            {
+              "discriminant": "event",
+              "value": {
+                "title": "Demo Veranstaltung 2",
+                "reference": "demo-veranstaltung-2"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "discriminant": "cardsSection",
+        "value": {
+          "title": "Titel des Abschnitts",
+          "cards": [
+            {
+              "discriminant": "news",
+              "value": {
+                "title": "Demo News 1",
+                "reference": "demo-news-1"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

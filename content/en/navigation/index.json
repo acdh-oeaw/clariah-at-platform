@@ -1,0 +1,49 @@
+{
+  "links": [
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Sample Menu",
+        "items": [
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Sample Page",
+              "link": {
+                "discriminant": "pages",
+                "value": "sample-page-1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "Events",
+        "link": {
+          "discriminant": "events-overview"
+        }
+      }
+    },
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "News",
+        "link": {
+          "discriminant": "news-overview"
+        }
+      }
+    },
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "Projects",
+        "link": {
+          "discriminant": "projects-overview"
+        }
+      }
+    }
+  ]
+}

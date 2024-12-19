@@ -1,0 +1,49 @@
+{
+  "links": [
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Demo Menu",
+        "items": [
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Seite 1",
+              "link": {
+                "discriminant": "pages",
+                "value": "demo-seite-1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "Veranstaltungen",
+        "link": {
+          "discriminant": "events-overview"
+        }
+      }
+    },
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "Aktuelles",
+        "link": {
+          "discriminant": "news-overview"
+        }
+      }
+    },
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "Projekte",
+        "link": {
+          "discriminant": "projects-overview"
+        }
+      }
+    }
+  ]
+}

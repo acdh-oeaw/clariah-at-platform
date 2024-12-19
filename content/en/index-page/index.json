@@ -1,0 +1,33 @@
+{
+  "hero": {
+    "title": "CLARIAH-AT",
+    "lead": "An open network facilitating the application of digital methods in the humanities and the development of relevant research infrastructures.",
+    "image": "/assets/content/assets/en/index-page/hero/image.jpg"
+  },
+  "main": {
+    "sections": [
+      {
+        "discriminant": "cardsSection",
+        "value": {
+          "title": "Section title",
+          "cards": [
+            {
+              "discriminant": "event",
+              "value": {
+                "title": "sample event 1",
+                "reference": "sample-event-1"
+              }
+            },
+            {
+              "discriminant": "event",
+              "value": {
+                "title": "Sample event 2",
+                "reference": "sample-event-2"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
