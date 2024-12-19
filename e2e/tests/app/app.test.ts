@@ -171,7 +171,7 @@ test.describe("app", () => {
 			await expect(aboutLink).not.toHaveAttribute("aria-current", "page");
 
 			await aboutLink.click();
-			await page.waitForURL("**/about");
+			await page.waitForURL("**/about-the-project");
 
 			await expect(homeLink).not.toHaveAttribute("aria-current", "page");
 			await expect(aboutLink).toHaveAttribute("aria-current", "page");
@@ -200,7 +200,7 @@ test.describe("app", () => {
 			await expect(aboutLink).not.toHaveAttribute("aria-current", "page");
 
 			await aboutLink.click();
-			await page.waitForURL("**/about");
+			await page.waitForURL("**/about-the-project");
 
 			await indexPage.page.getByRole("navigation").getByRole("button").click();
 
