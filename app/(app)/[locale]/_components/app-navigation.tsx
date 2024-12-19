@@ -209,6 +209,7 @@ function NavigationMenuItem(props: Readonly<NavigationMenuItemProps>): ReactNode
 }
 
 interface AppNavigationMobileProps {
+	home: NavigationLink;
 	label: string;
 	menuCloseLabel: string;
 	menuOpenLabel: string;
@@ -217,7 +218,7 @@ interface AppNavigationMobileProps {
 }
 
 export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): ReactNode {
-	const { label, menuCloseLabel, menuOpenLabel, menuTitleLabel, navigation } = props;
+	const { home, label, menuCloseLabel, menuOpenLabel, menuTitleLabel, navigation } = props;
 
 	return (
 		<DialogTrigger>
@@ -266,6 +267,16 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 											<span className="sr-only">{menuCloseLabel}</span>
 										</Button>
 									</header>
+									<NavLink
+										className={cn(
+											"-ml-2 grid shrink-0 place-content-center self-center rounded-2 p-2",
+											"interactive focus-visible:focus-outline",
+										)}
+										href={home.href}
+									>
+										<Logo className="h-12 w-auto text-text-strong" />
+										<span className="sr-only">{home.label}</span>
+									</NavLink>
 									<ul className="text-small" role="list">
 										{navigation.map((navigationItem, idx) => {
 											const key = `nav-item-${String(idx)}`;

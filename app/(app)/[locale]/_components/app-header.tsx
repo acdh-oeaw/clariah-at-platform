@@ -28,6 +28,7 @@ export async function AppHeader(): Promise<ReactNode> {
 			<div className="flex justify-between gap-x-12">
 				<AppNavigation home={home} label={label} navigation={links} />
 				<AppNavigationMobile
+					home={home}
 					label={label}
 					menuCloseLabel={t("navigation-menu-close")}
 					menuOpenLabel={t("navigation-menu-open")}
