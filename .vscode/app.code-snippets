@@ -76,7 +76,7 @@
 			"",
 			"export async function generateStaticParams(props: {",
 			"\tparams: Pick<${1:Name}PageProps[\"params\"], \"locale\">;",
-			"}): Promise<Awaited<Array<Pick<${1:Name}PageProps[\"params\"], \"id\">>>> {",
+			"}): Promise<Array<Pick<${1:Name}PageProps[\"params\"], \"id\">>> {",
 			"\tconst { params } = props;",
 			"",
 			"\tconst { locale } = params;",
