@@ -2,6 +2,7 @@ import { cn } from "@acdh-oeaw/style-variants";
 import type { Entry } from "@keystatic/core/reader";
 import { ArrowRightIcon } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
+import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 
@@ -49,16 +50,19 @@ export default async function IndexPage(props: Readonly<IndexPageProps>): Promis
 
 	const { locale } = params;
 	setRequestLocale(locale);
+	try {
+		const page = await createSingletonResource("index-page", locale).read();
+		const { hero, main } = page.data;
 
-	const page = await createSingletonResource("index-page", locale).read();
-	const { hero, main } = page.data;
-
-	return (
-		<MainContent className="layout-grid content-start">
-			<HeroSection {...hero} />
-			<FeaturesSection {...main} locale={locale} />
-		</MainContent>
-	);
+		return (
+			<MainContent className="layout-grid content-start">
+				<HeroSection {...hero} />
+				<FeaturesSection {...main} locale={locale} />
+			</MainContent>
+		);
+	} catch {
+		return notFound();
+	}
 }
 
 function HeroSection(props: Readonly<HeroSectionProps>): ReactNode {
