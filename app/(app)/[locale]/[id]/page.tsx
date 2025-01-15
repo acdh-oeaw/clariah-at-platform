@@ -1,6 +1,5 @@
 import type { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 
 import { MainContent } from "@/components/main-content";
@@ -41,15 +40,11 @@ export async function generateMetadata(
 	const { locale } = params;
 	const id = decodeURIComponent(params.id);
 
-	const metadata: Metadata = {};
+	const page = await createCollectionResource("pages", locale).read(id);
 
-	try {
-		const page = await createCollectionResource("pages", locale).read(id);
-		metadata.title = page.data.title;
-	} catch {
-		const t = await getTranslations({ locale, namespace: "NotFoundPage" });
-		metadata.title = t("meta.title");
-	}
+	const metadata: Metadata = {
+		title: page.data.title,
+	};
 
 	return metadata;
 }
@@ -62,22 +57,17 @@ export default async function ContentPage(props: Readonly<ContentPageProps>): Pr
 
 	setRequestLocale(locale);
 
-	try {
-		const page = await createCollectionResource("pages", locale).read(id);
+	const page = await createCollectionResource("pages", locale).read(id);
+	const { default: Content } = await page.compile(page.data.content);
 
-		const { default: Content } = await page.compile(page.data.content);
-
-		return (
-			<MainContent className="layout-grid content-start">
-				<section className="layout-subgrid relative py-16 xs:py-24">
-					<h1 className="text-balance font-heading text-heading-1 font-strong text-text-strong">
-						{page.data.title}
-					</h1>
-					<Content />
-				</section>
-			</MainContent>
-		);
-	} catch {
-		notFound();
-	}
+	return (
+		<MainContent className="layout-grid content-start">
+			<section className="layout-subgrid relative py-16 xs:py-24">
+				<h1 className="text-balance font-heading text-heading-1 font-strong text-text-strong">
+					{page.data.title}
+				</h1>
+				<Content />
+			</section>
+		</MainContent>
+	);
 }
