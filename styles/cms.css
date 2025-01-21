@@ -10,6 +10,13 @@ body {
 	font-synthesis: style;
 }
 
+/**
+ * Workaround for .svg images without width and height attributes not being visible.
+ */
+.kui\:reset > img[src^="blob:"] {
+	min-height: 48px;
+}
+
 /** Color tokens copied from `@/styles/tokens.css`. */
 
 .kui-theme.kui-scheme--dark {
