@@ -7,6 +7,7 @@ import {
 import { fields, singleton } from "@keystatic/core";
 
 import { createLinkSchema } from "@/lib/keystatic/create-link-schema";
+import { identifier } from "@/lib/keystatic/fields";
 import * as validation from "@/lib/keystatic/validation";
 
 export const createIndexPage = createSingleton("/index-page/", (paths, locale) => {
@@ -48,6 +49,7 @@ export const createIndexPage = createSingleton("/index-page/", (paths, locale) =
 								},
 								schema: fields.object(
 									{
+										id: identifier({ label: "", defaultValue: crypto.randomUUID() }),
 										title: fields.text({
 											label: "Title",
 											validation: { isRequired: true },
@@ -61,6 +63,7 @@ export const createIndexPage = createSingleton("/index-page/", (paths, locale) =
 													},
 													schema: fields.object(
 														{
+															id: identifier({ label: "", defaultValue: crypto.randomUUID() }),
 															title: fields.text({
 																label: "Title",
 																validation: { isRequired: true },
