@@ -72,5 +72,8 @@
 			"title": "Seite nicht gefunden"
 		},
 		"title": "Seite nicht gefunden"
+	},
+	"Card": {
+		"read-more": "Mehr Info"
 	}
 }

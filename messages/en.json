@@ -72,5 +72,8 @@
 			"title": "Page not found"
 		},
 		"title": "Page not found"
+	},
+	"Card": {
+		"read-more": "Read more"
 	}
 }
