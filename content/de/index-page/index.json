@@ -9,35 +9,21 @@
       {
         "discriminant": "cardsSection",
         "value": {
-          "title": "Titel des Abschnittes",
+          "id": "31eaf718-946a-4b38-9233-5c959ff0a133",
+          "title": "Veranstaltungen",
           "cards": [
             {
               "discriminant": "event",
               "value": {
-                "title": "Demo Veranstaltung 1",
+                "title": "Veranstaltung 1",
                 "reference": "demo-veranstaltung-1"
               }
             },
             {
               "discriminant": "event",
               "value": {
-                "title": "Demo Veranstaltung 2",
+                "title": "Veranstaltung 2",
                 "reference": "demo-veranstaltung-2"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "discriminant": "cardsSection",
-        "value": {
-          "title": "Titel des Abschnitts",
-          "cards": [
-            {
-              "discriminant": "news",
-              "value": {
-                "title": "Demo News 1",
-                "reference": "demo-news-1"
               }
             }
           ]

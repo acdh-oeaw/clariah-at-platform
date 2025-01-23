@@ -9,20 +9,14 @@
       {
         "discriminant": "cardsSection",
         "value": {
-          "title": "Section title",
+          "id": "fe67c6ca-3b58-4db3-a13e-e020a68b1738",
+          "title": "Section Title",
           "cards": [
             {
               "discriminant": "event",
               "value": {
-                "title": "sample event 1",
+                "title": "Sample Event 1",
                 "reference": "sample-event-1"
-              }
-            },
-            {
-              "discriminant": "event",
-              "value": {
-                "title": "Sample event 2",
-                "reference": "sample-event-2"
               }
             }
           ]
