@@ -1,5 +1,4 @@
 import { ArrowRightIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
 import { Card } from "@/components/card";
@@ -13,7 +12,7 @@ type CardSectionComponentProps = CardSectionProps & {
 
 export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNode {
 	const { className, title, cards, locale } = props;
-	const t = useTranslations("Card");
+
 	return (
 		<section className={className}>
 			<header className="max-w-text grid gap-y-4">
@@ -45,7 +44,7 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 						case "news": {
 							const id = card.value.reference;
 							const news = await createCollectionResource("news", locale).read(id);
-							const link = { label: t("read-more"), href: `/news/${id}` };
+							const link = { label: "", href: `/news/${id}` };
 
 							return (
 								<li key={id}>
@@ -63,7 +62,7 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 						case "page": {
 							const id = card.value.reference;
 							const page = await createCollectionResource("pages", locale).read(id);
-							const link = { label: t("read-more"), href: `/${id}` };
+							const link = { label: "", href: `/${id}` };
 							return (
 								<li key={id}>
 									<Card
@@ -78,7 +77,7 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 						case "event": {
 							const id = card.value.reference;
 							const event = await createCollectionResource("events", locale).read(id);
-							const link = { label: t("read-more"), href: `/events/${id}` };
+							const link = { label: "", href: `/events/${id}` };
 							return (
 								<li key={id}>
 									<Card

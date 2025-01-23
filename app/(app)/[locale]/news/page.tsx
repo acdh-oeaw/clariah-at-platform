@@ -1,10 +1,8 @@
-import { cn } from "@acdh-oeaw/style-variants";
 import type { Metadata, ResolvingMetadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 
-import { Image } from "@/components/image";
-import { Link } from "@/components/link";
+import { Card } from "@/components/card";
 import { MainContent } from "@/components/main-content";
 import type { Locale } from "@/config/i18n.config";
 import { createCollectionResource, createSingletonResource } from "@/lib/keystatic/resources";
@@ -61,40 +59,15 @@ export default async function NewsOverviewPage(
 					{news.map(async (newsobj) => {
 						const id = newsobj.id;
 						const newsItem = await createCollectionResource("news", locale).read(id);
-						const { image, summary, title } = newsItem.data;
+						const link = { label: "", href: `/news/${id}` };
 						return (
 							<li key={id}>
-								<article className="grid h-full grid-rows-[13rem,auto] overflow-hidden rounded-4 border border-stroke-weak bg-background-raised shadow-raised">
-									<Image
-										alt=""
-										className="size-full border-b border-stroke-weak object-cover"
-										height={300}
-										/** Preload image because it's the largest contentful paint (lcp) element. */
-										priority={true}
-										src={image}
-										unoptimized={true}
-										width={400}
-									/>
-									<div className="grid gap-y-6 p-8">
-										<div className="flex flex-col">
-											<h3 className="font-heading text-heading-4 font-strong text-text-strong">
-												{title}
-											</h3>
-											<p className="grow text-small text-text-weak">{summary}</p>
-											<footer>
-												<Link
-													className={cn(
-														"my-4 inline-flex min-h-12 w-fit rounded-2 border border-stroke-strong bg-fill-strong px-4 py-2.5 font-strong text-text-inverse-strong",
-														"interactive focus-visible:focus-outline hover:hover-overlay pressed:press-overlay",
-													)}
-													href={`news/${newsItem.id}`}
-												>
-													Mehr Info
-												</Link>
-											</footer>
-										</div>
-									</div>
-								</article>
+								<Card
+									className="grid h-full grid-rows-[13rem,auto] overflow-hidden rounded-4 border border-stroke-weak bg-background-raised shadow-raised"
+									{...newsItem.data}
+									id={id}
+									link={link}
+								></Card>
 							</li>
 						);
 					})}
