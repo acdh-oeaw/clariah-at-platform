@@ -159,11 +159,12 @@ test.describe("app", () => {
 			await indexPage.goto();
 
 			const homeLink = indexPage.page
+				.getByRole("navigation")
 				.getByRole("link", {
 					name: i18n.t("AppHeader.links.home"),
 				})
 				.first();
-			const aboutLink = indexPage.page.getByRole("link", {
+			const aboutLink = indexPage.page.getByRole("navigation").getByRole("link", {
 				name: i18n.t("AppHeader.links.about"),
 			});
 
@@ -188,11 +189,12 @@ test.describe("app", () => {
 			await indexPage.page.getByRole("navigation").getByRole("button").click();
 
 			const homeLink = indexPage.page
+				.getByRole("dialog")
 				.getByRole("link", {
 					name: i18n.t("AppHeader.links.home"),
 				})
 				.first();
-			const aboutLink = indexPage.page.getByRole("link", {
+			const aboutLink = indexPage.page.getByRole("dialog").getByRole("link", {
 				name: i18n.t("AppHeader.links.about"),
 			});
 
