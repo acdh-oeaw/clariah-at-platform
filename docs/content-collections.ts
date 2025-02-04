@@ -60,7 +60,8 @@ interface Organisation {
     caption?: MdxInlineContent;
   };
   affiliations: Array<Organisation>;
-  consortiumStatus: "member" | "observer";
+	contact: Array<Person>;
+  consortiumStatus: "member" | "observer" | "none";
   description: MdxContent;
 }
 
@@ -85,7 +86,6 @@ interface Person {
   };
   affiliations: Array<Organisation>;
   links: Array<SocialMediaLink>;
-  contact: Array<Person>;
   description: MdxContent;
 }
 
@@ -99,9 +99,17 @@ interface Project {
     content: MdxInlineContent;
     title?: string;
   };
+	funding: Funding;
+	responsiblePersons: Array<Person>;
+	projectPartners: Array<Organisation>
   startDate?: IsoDateString;
   endDate?: IsoDateString;
 	keywords: Array<Keyword>;
+	links: Array<{
+    label: string;
+    href: string;
+  }>;
+	content: MdxContent;
 }
 
 interface Keyword {
@@ -111,6 +119,12 @@ interface Keyword {
     label: string;
     href: string;
   }>;
+}
+
+interface Funding {
+	 type:
+		| "go!digital"
+	  | "CLARIAH-AT 2022"
 }
 
 interface SocialMediaLink {
