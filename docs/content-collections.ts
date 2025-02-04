@@ -101,6 +101,12 @@ interface Project {
   };
   startDate?: IsoDateString;
   endDate?: IsoDateString;
+	keywords: Array<Keyword>;
+}
+
+interface Keyword {
+  key: string;
+	label: string;
 }
 
 interface SocialMediaLink {
