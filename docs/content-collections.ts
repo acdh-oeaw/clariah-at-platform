@@ -105,8 +105,12 @@ interface Project {
 }
 
 interface Keyword {
-  key: string;
 	label: string;
+	description: MdxContent;
+	links: Array<{
+    label: string;
+    href: string;
+  }>;
 }
 
 interface SocialMediaLink {
