@@ -12,7 +12,7 @@ interface Event {
     caption?: MdxInlineContent;
   };
   summary: {
-    content: string;
+    content: MdxInlineContent;
     title?: string;
   };
   startDate: IsoDateString;
@@ -39,7 +39,7 @@ interface News {
     caption?: MdxInlineContent;
   };
   summary: {
-    content: string;
+    content: MdxInlineContent;
     title?: string;
   };
 	links: Array<{
@@ -71,7 +71,7 @@ interface Page {
     caption?: MdxInlineContent;
   };
   summary: {
-    content: string;
+    content: MdxInlineContent;
     title?: string;
   };
   content: MdxContent;
@@ -96,7 +96,7 @@ interface Project {
     caption?: MdxInlineContent;
   };
   summary: {
-    content: string;
+    content: MdxInlineContent;
     title?: string;
   };
   startDate?: IsoDateString;
