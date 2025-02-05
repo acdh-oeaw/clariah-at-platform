@@ -4,9 +4,19 @@ import { test as setup } from "@playwright/test";
 import { env } from "@/config/env.config";
 
 if (env.NEXT_PUBLIC_MATOMO_BASE_URL != null) {
-	const baseUrl = String(createUrl({ baseUrl: env.NEXT_PUBLIC_MATOMO_BASE_URL, pathname: "/matomo.php?**" }));
+	const scriptUrl = String(
+		createUrl({ baseUrl: env.NEXT_PUBLIC_MATOMO_BASE_URL, pathname: "/matomo.js" }),
+	);
+
+	const baseUrl = String(
+		createUrl({ baseUrl: env.NEXT_PUBLIC_MATOMO_BASE_URL, pathname: "/matomo.php?**" }),
+	);
 
 	setup.beforeEach("should block requests to analytics service", async ({ context }) => {
+		await context.route(scriptUrl, (route) => {
+			return route.fulfill({ status: 200, body: "" });
+		});
+
 		await context.route(baseUrl, (route) => {
 			return route.fulfill({ status: 204, body: "" });
 		});
