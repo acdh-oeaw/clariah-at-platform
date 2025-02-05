@@ -27,17 +27,12 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 				className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,18rem),1fr))] gap-8"
 				role="list"
 			>
-				{cards.map(async (card) => {
+				{cards.map(async (card, idx) => {
 					switch (card.discriminant) {
 						case "custom": {
 							return (
-								<li key={card.value.id}>
-									{
-										<Card
-											className="grid h-full grid-rows-[13rem,auto] overflow-hidden rounded-4 border border-stroke-weak bg-background-raised shadow-raised"
-											{...card.value}
-										/>
-									}
+								<li key={idx}>
+									{<Card className="grid h-full grid-rows-[13rem,auto]" {...card.value} />}
 								</li>
 							);
 						}
@@ -50,9 +45,8 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 								<li key={id}>
 									{
 										<Card
-											className="grid h-full grid-rows-[13rem,auto] overflow-hidden rounded-4 border border-stroke-weak bg-background-raised shadow-raised"
+											className="grid h-full grid-rows-[13rem,auto]"
 											{...news.data}
-											id={id}
 											link={link}
 										/>
 									}
@@ -66,8 +60,7 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 							return (
 								<li key={id}>
 									<Card
-										className="grid h-full grid-rows-[13rem,auto] overflow-hidden rounded-4 border border-stroke-weak bg-background-raised shadow-raised"
-										id={id}
+										className="grid h-full grid-rows-[13rem,auto] "
 										link={link}
 										{...page.data}
 									/>
@@ -81,9 +74,8 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 							return (
 								<li key={id}>
 									<Card
-										className="grid h-full grid-rows-[13rem,auto] overflow-hidden rounded-4 border border-stroke-weak bg-background-raised shadow-raised"
+										className="grid h-full grid-rows-[13rem,auto]"
 										{...event.data}
-										id={id}
 										link={link}
 									/>
 								</li>
