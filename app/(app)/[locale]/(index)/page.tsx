@@ -76,13 +76,13 @@ function FeaturesSection(props: Readonly<FeatureSectionProps>): ReactNode {
 
 	return (
 		<div>
-			{sections.map((section) => {
+			{sections.map((section, idx) => {
 				switch (section.discriminant) {
 					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 					case "cardsSection": {
 						return (
 							<CardSection
-								key={section.value.id}
+								key={idx}
 								cards={section.value.cards}
 								className="layout-subgrid relative gap-y-12 border-t border-stroke-weak py-16 xs:py-24"
 								locale={locale}

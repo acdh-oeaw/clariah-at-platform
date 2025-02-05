@@ -1,34 +1,33 @@
 {
-  "hero": {
-    "title": "CLARIAH-AT",
-    "lead": "Ein offenes Netzwerk, das die Anwendung digitaler Methoden in den Geisteswissenschaften und die Entwicklung der entsprechenden Forschungsinfrastrukturen fördert und unterstützt.",
-    "image": "/assets/content/assets/de/index-page/hero/image.jpg"
-  },
-  "main": {
-    "sections": [
-      {
-        "discriminant": "cardsSection",
-        "value": {
-          "id": "31eaf718-946a-4b38-9233-5c959ff0a133",
-          "title": "Veranstaltungen",
-          "cards": [
-            {
-              "discriminant": "event",
-              "value": {
-                "title": "Veranstaltung 1",
-                "reference": "demo-veranstaltung-1"
-              }
-            },
-            {
-              "discriminant": "event",
-              "value": {
-                "title": "Veranstaltung 2",
-                "reference": "demo-veranstaltung-2"
-              }
-            }
-          ]
-        }
-      }
-    ]
-  }
+	"hero": {
+		"title": "CLARIAH-AT",
+		"lead": "Ein offenes Netzwerk, das die Anwendung digitaler Methoden in den Geisteswissenschaften und die Entwicklung der entsprechenden Forschungsinfrastrukturen fördert und unterstützt.",
+		"image": "/assets/content/assets/de/index-page/hero/image.jpg"
+	},
+	"main": {
+		"sections": [
+			{
+				"discriminant": "cardsSection",
+				"value": {
+					"title": "Veranstaltungen",
+					"cards": [
+						{
+							"discriminant": "event",
+							"value": {
+								"title": "Veranstaltung 1",
+								"reference": "demo-veranstaltung-1"
+							}
+						},
+						{
+							"discriminant": "event",
+							"value": {
+								"title": "Veranstaltung 2",
+								"reference": "demo-veranstaltung-2"
+							}
+						}
+					]
+				}
+			}
+		]
+	}
 }

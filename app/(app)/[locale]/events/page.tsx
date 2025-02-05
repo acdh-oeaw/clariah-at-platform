@@ -64,9 +64,8 @@ export default async function EventsOverviewPage(
 						return (
 							<li key={id}>
 								<Card
-									className="grid h-full grid-rows-[13rem,auto] overflow-hidden rounded-4 border border-stroke-weak bg-background-raised shadow-raised"
+									className="grid h-full grid-rows-[13rem,auto]"
 									{...eventItem.data}
-									id={id}
 									link={link}
 								></Card>
 							</li>

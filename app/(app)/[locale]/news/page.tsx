@@ -63,9 +63,8 @@ export default async function NewsOverviewPage(
 						return (
 							<li key={id}>
 								<Card
-									className="grid h-full grid-rows-[13rem,auto] overflow-hidden rounded-4 border border-stroke-weak bg-background-raised shadow-raised"
+									className="grid h-full grid-rows-[13rem,auto]"
 									{...newsItem.data}
-									id={id}
 									link={link}
 								></Card>
 							</li>
