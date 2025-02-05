@@ -25,9 +25,17 @@ export const test = base.extend<Fixtures>({
 	beforeEachTest: [
 		async ({ context }, use) => {
 			if (env.NEXT_PUBLIC_MATOMO_BASE_URL != null) {
+				const scriptUrl = String(
+					createUrl({ baseUrl: env.NEXT_PUBLIC_MATOMO_BASE_URL, pathname: "/matomo.js" }),
+				);
+
 				const baseUrl = String(
 					createUrl({ baseUrl: env.NEXT_PUBLIC_MATOMO_BASE_URL, pathname: "/matomo.php?**" }),
 				);
+
+				await context.route(scriptUrl, (route) => {
+					return route.fulfill({ status: 200, body: "" });
+				});
 
 				await context.route(baseUrl, (route) => {
 					return route.fulfill({ status: 204, body: "" });
