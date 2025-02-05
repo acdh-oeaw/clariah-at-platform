@@ -43,6 +43,9 @@ export const Link = forwardRef(function Link(
 	props: Readonly<LinkProps>,
 	forwardedRef: ForwardedRef<HTMLAnchorElement | HTMLSpanElement>,
 ): ReactNode {
+	/** Ensure `className` is passed to `mergProps` only once to avoid duplication. */
+	const { className: _, ...interactionProps } = props;
+
 	const ref = useRef<HTMLAnchorElement | HTMLSpanElement>(null);
 	const linkRef = useObjectRef(
 		useMemo(() => {
@@ -56,9 +59,9 @@ export const Link = forwardRef(function Link(
 	const isLinkElement = Boolean(props.href) && !isDisabled;
 	const ElementType: ElementType = isLinkElement ? LocaleLink : "span";
 
-	const { focusableProps } = useFocusable(props, linkRef);
-	const { pressProps, isPressed } = usePress({ ...props, ref: linkRef });
-	const { hoverProps, isHovered } = useHover(props);
+	const { focusableProps } = useFocusable(interactionProps, linkRef);
+	const { pressProps, isPressed } = usePress({ ...interactionProps, ref: linkRef });
+	const { hoverProps, isHovered } = useHover(interactionProps);
 	const { focusProps, isFocused, isFocusVisible } = useFocusRing();
 
 	const renderProps = useRenderProps({
