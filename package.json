@@ -50,6 +50,7 @@
 		"@shikijs/rehype": "^1.29.1",
 		"@vercel/otel": "^1.10.0",
 		"client-only": "^0.0.1",
+		"date-fns": "^4.1.0",
 		"fast-glob": "^3.3.3",
 		"image-dimensions": "^2.3.0",
 		"lucide-react": "^0.468.0",
