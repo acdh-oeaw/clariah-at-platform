@@ -25,17 +25,22 @@ export const test = base.extend<Fixtures>({
 	beforeEachTest: [
 		async ({ context }, use) => {
 			if (env.NEXT_PUBLIC_MATOMO_BASE_URL != null) {
-				const scriptUrl = String(
-					createUrl({ baseUrl: env.NEXT_PUBLIC_MATOMO_BASE_URL, pathname: "/matomo.js" }),
-				);
+				/**
+				 * If we were to block loading the actual matomo javascript snippet, we would need to
+				 * check if `windows._paq` was pushed to (because no requests to `matomo.php`
+				 * would be dispatched).
+				 */
+				// const scriptUrl = String(
+				// 	createUrl({ baseUrl: env.NEXT_PUBLIC_MATOMO_BASE_URL, pathname: "/matomo.js" }),
+				// );
+
+				// await context.route(scriptUrl, (route) => {
+				// 	return route.fulfill({ status: 200, body: "" });
+				// });
 
 				const baseUrl = String(
 					createUrl({ baseUrl: env.NEXT_PUBLIC_MATOMO_BASE_URL, pathname: "/matomo.php?**" }),
 				);
-
-				await context.route(scriptUrl, (route) => {
-					return route.fulfill({ status: 200, body: "" });
-				});
 
 				await context.route(baseUrl, (route) => {
 					return route.fulfill({ status: 204, body: "" });
