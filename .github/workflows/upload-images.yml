@@ -12,39 +12,37 @@ on:
 jobs:
   upload:
     runs-on: ubuntu-latest
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 60
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Install AWS CLI
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y awscli
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Upload images to S3
-      run: |
-        BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }}
-        IMAGES_PATH=public/assets/content/assets/
-        IMAGE_BASEURL=https://imgproxy.acdh.oeaw.ac.at
-        IMAGE_PROXY_KEY=${{ secrets.IMAGE_PROXY_KEY }}
-        IMAGE_PROXY_SALT=${{ secrets.IMAGE_PROXY_SALT }}
+      - name: Upload images to S3
+        run: |
+          BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }}
+          IMAGES_PATH=public/assets/content/assets/
+          IMAGE_BASEURL=https://imgproxy.acdh.oeaw.ac.at
+          IMAGE_PROXY_KEY=${{ secrets.IMAGE_PROXY_KEY }}
+          IMAGE_PROXY_SALT=${{ secrets.IMAGE_PROXY_SALT }}
 
 
-        # Presign URLs and upload images
-        find $IMAGES_PATH -type f -name '*' | while read image; do
-          aws s3 cp $IMAGES_PATH/$image s3://$BUCKET_NAME/$image
-          #??? add function for presigning
-          #PROXY_URL=$(??)
-          IMAGE_URL=$IMAGE_BASEURL/$PROXY_URL
-          echo "URL for $image: $IMAGE_URL"
-        done
+          # Presign URLs and upload images
+          find $IMAGES_PATH -type f -name '*' | while read image; do
+            aws s3 cp $IMAGES_PATH/$image s3://$BUCKET_NAME/$image
+            #??? add function for presigning
+            #PROXY_URL=$(??)
+            IMAGE_URL=$IMAGE_BASEURL/$PROXY_URL
+            echo "URL for $image: $IMAGE_URL"
+          done
