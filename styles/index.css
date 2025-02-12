@@ -115,8 +115,7 @@
 	.alignment-grid {
 		--alignment-color: var(--color-neutral-200);
 
-		background-image:
-			linear-gradient(to right, var(--alignment-color) 1px, transparent 1px),
+		background-image: linear-gradient(to right, var(--alignment-color) 1px, transparent 1px),
 			linear-gradient(to bottom, var(--alignment-color) 1px, transparent 1px);
 		background-size: 24px 24px;
 	}
