@@ -10,7 +10,19 @@ import { getImageDimensions } from "@/lib/server/get-image-dimensions";
 interface ServerImageProps extends Omit<NextImageProps, "loader"> {}
 
 export async function ServerImage(props: Readonly<ServerImageProps>): Promise<ReactNode> {
-	const { alt = "", decoding = "async", fill, height, loading = "lazy", src, width } = props;
+	const {
+		alt = "",
+		decoding: _decoding,
+		fill,
+		height,
+		loading: _loading,
+		priority,
+		src,
+		width,
+	} = props;
+
+	const decoding = _decoding ?? (priority ? "auto" : "async");
+	const loading = _loading ?? (priority ? "eager" : "lazy");
 
 	const dimensions =
 		typeof src === "object" || fill === true || (width != null && height != null)
@@ -29,6 +41,7 @@ export async function ServerImage(props: Readonly<ServerImageProps>): Promise<Re
 			decoding={decoding}
 			height={dimensions.height}
 			loading={loading}
+			priority={priority}
 			width={dimensions.width}
 		/>
 	);
