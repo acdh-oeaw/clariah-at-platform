@@ -1,5 +1,5 @@
-@import "@/styles/tokens.css";
-@import "@/styles/content.css";
+@import url("@/styles/tokens.css");
+@import url("@/styles/content.css");
 
 @tailwind base;
 @tailwind components;
