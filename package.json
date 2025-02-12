@@ -5,9 +5,9 @@
 	"type": "module",
 	"engines": {
 		"node": "22.x",
-		"pnpm": "9.x"
+		"pnpm": "10.x"
 	},
-	"packageManager": "pnpm@9.15.0",
+	"packageManager": "pnpm@10.3.0",
 	"scripts": {
 		"analyze": "BUNDLE_ANALYZER=\"enabled\" next build --no-lint",
 		"build": "next build",
@@ -70,7 +70,7 @@
 		"server-only": "^0.0.1",
 		"sharp": "^0.33.5",
 		"shiki": "^1.29.1",
-		"valibot": "1.0.0-beta.14"
+		"valibot": "^1.0.0-rc.0"
 	},
 	"devDependencies": {
 		"@acdh-oeaw/eslint-config": "^2.0.6",
@@ -98,9 +98,9 @@
 		"dotenv": "^16.4.7",
 		"dotenv-cli": "^7.4.4",
 		"dotenv-expand": "^12.0.1",
-		"eslint": "^9.18.0",
-		"eslint-config-flat-gitignore": "^0.3.0",
-		"eslint-plugin-check-file": "^2.8.0",
+		"eslint": "^9.20.1",
+		"eslint-config-flat-gitignore": "^2.0.0",
+		"eslint-plugin-check-file": "^3.0.0",
 		"globals": "^15.14.0",
 		"is-ci": "^3.0.1",
 		"lint-staged": "^15.4.2",
@@ -113,7 +113,14 @@
 		"tailwindcss": "^3.4.17",
 		"tailwindcss-animate": "^1.0.7",
 		"tailwindcss-react-aria-components": "^1.2.0",
-		"typescript": "^5.7.3"
+		"typescript": "^5.7.3",
+		"typescript-eslint": "^8.24.0"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"sharp",
+			"simple-git-hooks"
+		]
 	},
 	"browserslist": {
 		"development": [

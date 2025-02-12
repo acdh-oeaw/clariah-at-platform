@@ -16,6 +16,11 @@ node_modules/
 .stylelintcache
 *.tsbuildinfo
 
+# performance profiles
+*.cpuprofile
+*.heapprofile
+*.heapsnapshot
+
 # vercel
 .vercel
 

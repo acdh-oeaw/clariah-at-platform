@@ -2,7 +2,7 @@
 
 import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
-import { I18nProvider, RouterProvider } from "react-aria-components";
+import { I18nProvider as RacI18nProvider, RouterProvider } from "react-aria-components";
 
 import type { Locale } from "@/config/i18n.config";
 import { useRouter } from "@/lib/i18n/navigation";
@@ -16,13 +16,23 @@ interface ProvidersProps {
 export function Providers(props: Readonly<ProvidersProps>): ReactNode {
 	const { children, locale, messages } = props;
 
+	return (
+		<NextIntlClientProvider locale={locale} messages={messages}>
+			<RacI18nProvider locale={locale}>
+				<RacRouterProvider>{children}</RacRouterProvider>
+			</RacI18nProvider>
+		</NextIntlClientProvider>
+	);
+}
+
+interface RacRouterProviderProps {
+	children: ReactNode;
+}
+
+function RacRouterProvider(props: RacRouterProviderProps): ReactNode {
+	const { children } = props;
+
 	const router = useRouter();
 
-	return (
-		<RouterProvider navigate={router.push}>
-			<NextIntlClientProvider locale={locale} messages={messages}>
-				<I18nProvider locale={locale}>{children}</I18nProvider>
-			</NextIntlClientProvider>
-		</RouterProvider>
-	);
+	return <RouterProvider navigate={router.push}>{children}</RouterProvider>;
 }

@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.12-labs
+# syntax=docker/dockerfile:1-labs
 # labs version is needed for `COPY --exclude`.
 # @see https://docs.docker.com/reference/dockerfile/#copy---exclude
 
