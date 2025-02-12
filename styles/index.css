@@ -1,5 +1,5 @@
-@import url("@/styles/tokens.css");
-@import url("@/styles/content.css");
+@import "@/styles/tokens.css";
+@import "@/styles/content.css";
 
 @tailwind base;
 @tailwind components;
@@ -59,6 +59,15 @@
 		border: 0;
 	}
 
+	input[type="search"]:is(
+			::-webkit-search-cancel-button,
+			::-webkit-search-decoration,
+			::-webkit-search-results-button,
+			::-webkit-search-results-decoration
+		) {
+		display: none;
+	}
+
 	p {
 		text-wrap: pretty;
 	}
@@ -106,7 +115,8 @@
 	.alignment-grid {
 		--alignment-color: var(--color-neutral-200);
 
-		background-image: linear-gradient(to right, var(--alignment-color) 1px, transparent 1px),
+		background-image:
+			linear-gradient(to right, var(--alignment-color) 1px, transparent 1px),
 			linear-gradient(to bottom, var(--alignment-color) 1px, transparent 1px);
 		background-size: 24px 24px;
 	}
