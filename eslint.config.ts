@@ -1,5 +1,3 @@
-/** @typedef {import("typescript-eslint").Config} Config */
-
 import baseConfig from "@acdh-oeaw/eslint-config";
 import nextConfig from "@acdh-oeaw/eslint-config-next";
 import nodeConfig from "@acdh-oeaw/eslint-config-node";
@@ -9,9 +7,9 @@ import tailwindcssConfig from "@acdh-oeaw/eslint-config-tailwindcss";
 import gitignore from "eslint-config-flat-gitignore";
 // @ts-expect-error Missing type declaration.
 import checkFilePlugin from "eslint-plugin-check-file";
+import type { Config } from "typescript-eslint";
 
-/** @type {Config} */
-const config = [
+const config: Config = [
 	gitignore({ strict: false }),
 	...baseConfig,
 	...reactConfig,
