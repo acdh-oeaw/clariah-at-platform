@@ -7,7 +7,7 @@ next.js app. supersedes [clariah-at-website](https://github.com/acdh-oeaw/claria
 prerequisites:
 
 - [node.js v22](https://nodejs.org/en/download)
-- [pnpm v9](https://pnpm.io/installation)
+- [pnpm v10](https://pnpm.io/installation)
 
 > [!TIP]
 >

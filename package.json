@@ -5,9 +5,9 @@
 	"type": "module",
 	"engines": {
 		"node": "22.x",
-		"pnpm": "9.x"
+		"pnpm": "10.x"
 	},
-	"packageManager": "pnpm@9.15.0",
+	"packageManager": "pnpm@10.3.0",
 	"scripts": {
 		"analyze": "BUNDLE_ANALYZER=\"enabled\" next build --no-lint",
 		"build": "next build",
@@ -114,6 +114,12 @@
 		"tailwindcss-animate": "^1.0.7",
 		"tailwindcss-react-aria-components": "^1.2.0",
 		"typescript": "^5.7.3"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"sharp",
+			"simple-git-hooks"
+		]
 	},
 	"browserslist": {
 		"development": [
