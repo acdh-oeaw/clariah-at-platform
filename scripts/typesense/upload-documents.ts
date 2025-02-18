@@ -5,8 +5,10 @@ import { log } from "@acdh-oeaw/lib";
 
 import { env } from "@/config/env.config";
 import { TYPESENSE_DOCUMENTS_DIR } from "@/lib/typesense/constants";
-import { client } from "@/lib/typesense/typesense-client";
+import { createTypesenseClient } from "@/lib/typesense/typesense-client";
 import type { Resource } from "@/types/resources";
+
+const client = createTypesenseClient(env.TYPESENSE_ADMIN_API_KEY);
 
 async function importDocuments() {
 	const filenames = readdirSync(path.join(import.meta.dirname, TYPESENSE_DOCUMENTS_DIR));
