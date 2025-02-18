@@ -103,7 +103,12 @@ jobs:
 
       - name: Populate typesense
         run: pnpm run prebuild
-        continue-on-error: true
+        env:
+          TYPESENSE_ADMIN_API_KEY: "${{secrets.TYPESENSE_ADMIN_API_KEY}}"
+          NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME: "${{ vars.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME }}"
+          NEXT_PUBLIC_TYPESENSE_HOST: "${{ vars.NEXT_PUBLIC_TYPESENSE_HOST }}"
+          NEXT_PUBLIC_TYPESENSE_PORT: "${{ vars.NEXT_PUBLIC_TYPESENSE_PORT }}"
+          NEXT_PUBLIC_TYPESENSE_PROTOCOL: "${{ vars.NEXT_PUBLIC_TYPESENSE_PROTOCOL }}"
       - name: Build app
         run: pnpm run build
         env:
