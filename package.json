@@ -124,6 +124,14 @@
 		"tsx": "^4.19.2",
 		"typescript": "^5.7.3"
 	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild",
+			"sharp",
+			"simple-git-hooks",
+			"typesense-instantsearch-adapter"
+		]
+	},
 	"browserslist": {
 		"development": [
 			"last 1 chrome version",
