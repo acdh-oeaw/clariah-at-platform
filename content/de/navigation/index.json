@@ -54,6 +54,15 @@
           "value": "ueber-uns"
         }
       }
+    },
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "Suche",
+        "link": {
+          "discriminant": "search"
+        }
+      }
     }
   ]
 }

@@ -54,6 +54,15 @@
           "value": "about-the-project"
         }
       }
+    },
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "Search",
+        "link": {
+          "discriminant": "search"
+        }
+      }
     }
   ]
 }
