@@ -101,6 +101,9 @@ jobs:
           path: "${{ github.workspace }}/.next/cache"
           key: "${{ matrix.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}"
 
+      - name: Populate typesense
+        run: pnpm run prebuild
+        continue-on-error: true
       - name: Build app
         run: pnpm run build
         env:
