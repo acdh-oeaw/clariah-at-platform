@@ -53,6 +53,7 @@ export function createLinkSchema<TPath extends `/${string}/`>(
 			"events-overview": fields.empty(),
 			"news-overview": fields.empty(),
 			"projects-overview": fields.empty(),
+			search: fields.empty(),
 		},
 	);
 }

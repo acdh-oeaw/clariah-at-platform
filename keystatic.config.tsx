@@ -19,6 +19,7 @@ import {
 	createNavigation,
 	createNewsOverview,
 	createProjectsOverview,
+	createSearch,
 } from "@/lib/keystatic/singletons";
 
 export default config({
@@ -59,6 +60,9 @@ export default config({
 
 		[withI18nPrefix("projects-overview", "de")]: createProjectsOverview("de"),
 		[withI18nPrefix("projects-overview", "en")]: createProjectsOverview("en"),
+
+		[withI18nPrefix("search", "de")]: createSearch("de"),
+		[withI18nPrefix("search", "en")]: createSearch("en"),
 	},
 	storage:
 		env.NEXT_PUBLIC_KEYSTATIC_MODE === "github" &&
@@ -115,6 +119,9 @@ export default config({
 			}),
 			Metadata: locales.map((locale) => {
 				return withI18nPrefix("metadata", locale);
+			}),
+			Search: locales.map((locale) => {
+				return withI18nPrefix("search", locale);
 			}),
 		},
 	},

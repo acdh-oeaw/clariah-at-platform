@@ -49,5 +49,9 @@ export function getLinkProps(params: LinkSchema) {
 		case "pages": {
 			return { href: `/${params.value}` };
 		}
+
+		case "search": {
+			return { href: `/search` };
+		}
 	}
 }
