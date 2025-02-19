@@ -23,7 +23,7 @@
 		"typesense:get-sshoc-data": "pnpm tsx ./scripts/typesense/get-sshoc-data.ts",
 		"typesense:create-collection": "pnpm tsx ./scripts/typesense/create-collection.ts",
 		"typesense:upload-documents": "pnpm tsx ./scripts/typesense/upload-documents.ts",
-		"prebuild": "npm-run-all typesense:create-collection typesense:get-sshoc-data typesense:upload-documents",
+		"prebuild": "run-s typesense:create-collection typesense:get-sshoc-data typesense:upload-documents",
 		"preinstall": "npx only-allow pnpm",
 		"prepare": "run-s setup",
 		"setup": "is-ci || simple-git-hooks",
