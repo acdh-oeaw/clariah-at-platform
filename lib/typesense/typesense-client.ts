@@ -1,4 +1,4 @@
-import { type Client, Client as TypesenseClient } from "typesense";
+import { Client as TypesenseClient } from "typesense";
 
 import { env } from "@/config/env.config";
 
