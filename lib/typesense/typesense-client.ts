@@ -1,9 +1,8 @@
-import { Client } from "typesense";
+import { Client as TypesenseClient } from "typesense";
 
 import { env } from "@/config/env.config";
 
 export const typesenseSettings = {
-	apiKey: env.NEXT_PUBLIC_TYPESENSE_SEARCH_API_KEY,
 	connectionTimeoutSeconds: 10,
 	nodes: [
 		{
@@ -14,4 +13,8 @@ export const typesenseSettings = {
 	],
 };
 
-export const client = new Client(typesenseSettings);
+export function createTypesenseClient(
+	apiKey: string = env.NEXT_PUBLIC_TYPESENSE_SEARCH_API_KEY,
+): TypesenseClient {
+	return new TypesenseClient({ ...typesenseSettings, apiKey });
+}

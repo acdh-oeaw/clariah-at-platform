@@ -6,8 +6,10 @@ import { Errors } from "typesense";
 
 import { env } from "@/config/env.config";
 import { TYPESENSE_DOCUMENTS_DIR } from "@/lib/typesense/constants";
-import { client } from "@/lib/typesense/typesense-client";
+import { createTypesenseClient } from "@/lib/typesense/typesense-client";
 import { collectionSchema } from "@/lib/typesense/typesense-schema";
+
+const client = createTypesenseClient(env.TYPESENSE_ADMIN_API_KEY);
 
 try {
 	await client.collections(env.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME).delete();
