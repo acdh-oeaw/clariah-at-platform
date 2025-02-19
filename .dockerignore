@@ -70,6 +70,6 @@ playwright.config.ts
 # misc
 .editorconfig
 
-#typesense
+# typesense
 scripts/typesense/documents/
 scripts/typesense/sshoc-items.json
