@@ -100,6 +100,14 @@ jobs:
         with:
           path: "${{ github.workspace }}/.next/cache"
           key: "${{ matrix.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}"
+      - name: Populate typesense
+        run: pnpm run typesense:populate
+        env:
+          NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME: "${{ vars.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME }}"
+          NEXT_PUBLIC_TYPESENSE_HOST: "${{ vars.NEXT_PUBLIC_TYPESENSE_HOST }}"
+          NEXT_PUBLIC_TYPESENSE_PORT: "${{ vars.NEXT_PUBLIC_TYPESENSE_PORT }}"
+          NEXT_PUBLIC_TYPESENSE_PROTOCOL: "${{ vars.NEXT_PUBLIC_TYPESENSE_PROTOCOL }}"
+          TYPESENSE_ADMIN_API_KEY: "${{ secrets.TYPESENSE_ADMIN_API_KEY }}"
       - name: Build app
         run: pnpm run build
         env:
@@ -107,7 +115,6 @@ jobs:
           NEXT_PUBLIC_MATOMO_BASE_URL: "${{ vars.NEXT_PUBLIC_MATOMO_BASE_URL }}"
           NEXT_PUBLIC_MATOMO_ID: "${{ vars.NEXT_PUBLIC_MATOMO_ID }}"
           NEXT_PUBLIC_REDMINE_ID: "${{ vars.SERVICE_ID }}"
-          TYPESENSE_ADMIN_API_KEY: "${{ secrets.TYPESENSE_ADMIN_API_KEY }}"
           NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME: "${{ vars.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME }}"
           NEXT_PUBLIC_TYPESENSE_HOST: "${{ vars.NEXT_PUBLIC_TYPESENSE_HOST }}"
           NEXT_PUBLIC_TYPESENSE_PORT: "${{ vars.NEXT_PUBLIC_TYPESENSE_PORT }}"
@@ -121,7 +128,6 @@ jobs:
           NEXT_PUBLIC_MATOMO_BASE_URL: "${{ vars.NEXT_PUBLIC_MATOMO_BASE_URL }}"
           NEXT_PUBLIC_MATOMO_ID: "${{ vars.NEXT_PUBLIC_MATOMO_ID }}"
           NEXT_PUBLIC_REDMINE_ID: "${{ vars.SERVICE_ID }}"
-          TYPESENSE_ADMIN_API_KEY: "${{ secrets.TYPESENSE_ADMIN_API_KEY }}"
           NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME: "${{ vars.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME }}"
           NEXT_PUBLIC_TYPESENSE_HOST: "${{ vars.NEXT_PUBLIC_TYPESENSE_HOST }}"
           NEXT_PUBLIC_TYPESENSE_PORT: "${{ vars.NEXT_PUBLIC_TYPESENSE_PORT }}"
