@@ -15,6 +15,6 @@ export const typesenseSettings = {
 
 export function createTypesenseClient(
 	apiKey: string = env.NEXT_PUBLIC_TYPESENSE_SEARCH_API_KEY,
-): Client {
+): TypesenseClient {
 	return new TypesenseClient({ ...typesenseSettings, apiKey });
 }
