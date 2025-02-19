@@ -42,6 +42,6 @@ out/
 /playwright-report/
 /test-results/
 
-#typesense
+# typesense
 scripts/typesense/documents/
 scripts/typesense/sshoc-items.json
