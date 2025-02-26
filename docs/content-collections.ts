@@ -119,6 +119,7 @@ interface Keyword {
     label: string;
     href: string;
   }>;
+	synonyms: Array<string>; # alternative labels for a keyword, to be used for mapping of external data
 }
 
 interface Funding {
