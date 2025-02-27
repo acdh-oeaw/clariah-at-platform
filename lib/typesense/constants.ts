@@ -7,3 +7,5 @@ export const SSHOC_ITEMS_BATCH_SIZE = 25;
 export const SSHOC_ITEMS_FILE_NAME = "sshoc-items.json";
 
 export const TYPESENSE_DOCUMENTS_DIR = "documents";
+
+export const SSHOC_FRONTEND = "https://marketplace.sshopencloud.eu";
