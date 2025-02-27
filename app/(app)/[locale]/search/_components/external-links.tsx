@@ -13,13 +13,7 @@ export function ExternalLinks(props: ExternalLinksProps): ReactNode {
 		<ul className="flex flex-wrap items-center gap-8 pt-2">
 			{links
 				.sort((a, b) => {
-					if (a.label.includes("SSHOC")) {
-						return -1;
-					}
-					if (b.label.includes("SSHOC")) {
-						return 1;
-					}
-					return 0;
+					return a.order - b.order;
 				})
 				.map((link, idx) => {
 					return <li key={idx}>{<ExternalLink link={link} />}</li>;

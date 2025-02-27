@@ -16,7 +16,7 @@ export function ExternalLink(props: ExternalLinkProps): ReactNode {
 	return (
 		<Link
 			className={cn(
-				link.label.includes("SSHOC") &&
+				link.order === 0 &&
 					"inline-flex w-fit rounded-2 border-2 border-gray-950 px-2 py-0.5 text-sm ",
 				"focus-visible:focus-outline pressed:press-overlay",
 			)}
@@ -24,7 +24,7 @@ export function ExternalLink(props: ExternalLinkProps): ReactNode {
 			rel="noreferrer"
 			target="_blank"
 		>
-			{link.label.includes("SSHOC") ? (
+			{link.order === 0 ? (
 				link.label
 			) : (
 				<>
