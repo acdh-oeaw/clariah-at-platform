@@ -5,6 +5,7 @@ import type { SSHOC_ITEM_CATEGORIES } from "@/lib/typesense/constants";
 type ResourceLanguage = "de" | "en" | "un";
 
 export interface Link {
+	order: number;
 	label: string;
 	href: string;
 }
@@ -115,4 +116,19 @@ interface ResourceSearchResponse extends SearchResponse {
 				highlight: Record<string, Array<string>> | null;
 		  }>
 		| [];
+}
+
+/* Courses */
+
+interface Course {
+	id: number;
+	name: string;
+	description: string;
+	info_url: string;
+	language: CourseLanguage;
+}
+
+interface CourseLanguage {
+	id: number;
+	name: "German" | "English";
 }
