@@ -55,6 +55,7 @@ export interface Item {
 	version: string;
 	persistentId: string;
 	lastInfoUpdate: string;
+	accessibleAt: Array<string>;
 }
 
 export interface ToolService {

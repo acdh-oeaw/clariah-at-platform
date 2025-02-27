@@ -5,6 +5,7 @@ import { env } from "@/config/env.config";
 
 export const collectionSchema: CollectionCreateSchema = {
 	name: env.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME,
+	enable_nested_fields: true,
 	fields: [
 		{
 			name: "title",
@@ -30,6 +31,11 @@ export const collectionSchema: CollectionCreateSchema = {
 			name: "keywords",
 			type: "string[]",
 			facet: true,
+		},
+		{
+			name: "links",
+			type: "object[]",
+			facet: false,
 		},
 	],
 };
