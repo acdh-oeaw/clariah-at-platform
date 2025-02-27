@@ -141,15 +141,17 @@ function sshocItemToTypesenseDocument(item: Item) {
 		.map((prop) => {
 			return prop.concept.label;
 		});
-	const links: Array<Link> = item.accessibleAt.map((link) => {
+	const links: Array<Link> = item.accessibleAt.map((link, idx) => {
 		return {
 			href: link,
 			label: "Accessable at",
+			order: idx + 1,
 		};
 	});
 	links.push({
 		label: "Visit at SSHOC",
 		href: `${SSHOC_FRONTEND}/${item.category}/${item.persistentId}`,
+		order: 0,
 	});
 	const language = "un";
 	const importedAt = Date.now();
