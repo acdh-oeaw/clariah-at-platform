@@ -5,6 +5,7 @@ import { createUrl, createUrlSearchParams } from "@acdh-oeaw/lib";
 
 import {
 	SSHOC_ACTOR_ID,
+	SSHOC_FRONTEND,
 	SSHOC_ITEM_CATEGORIES,
 	SSHOC_ITEMS_BATCH_SIZE,
 	SSHOC_ITEMS_FILE_NAME,
@@ -140,7 +141,16 @@ function sshocItemToTypesenseDocument(item: Item) {
 		.map((prop) => {
 			return prop.concept.label;
 		});
-	const links: Array<Link> = [];
+	const links: Array<Link> = item.accessibleAt.map((link) => {
+		return {
+			href: link,
+			label: "Accessable at",
+		};
+	});
+	links.push({
+		label: "Visit at SSHOC",
+		href: `${SSHOC_FRONTEND}/${item.category}/${item.persistentId}`,
+	});
 	const language = "un";
 	const importedAt = Date.now();
 	return new TypesenseDocument(
