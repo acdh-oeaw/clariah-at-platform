@@ -1,6 +1,6 @@
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 
-import type { SSHOC_ITEM_CATEGORIES } from "@/lib/typesense/constants";
+import type { CMS_CONTENT_TYPES, SSHOC_ITEM_CATEGORIES } from "@/lib/typesense/constants";
 
 type ResourceLanguage = "de" | "en" | "un";
 
@@ -22,8 +22,6 @@ export interface Resource {
 /* SSHOC */
 
 type SShocItemCategory = (typeof SSHOC_ITEM_CATEGORIES)[number];
-
-type ResourceCategory = SShocItemCategory | "publication" | "course";
 
 interface SShocActor {
 	id: number;
@@ -132,3 +130,7 @@ interface CourseLanguage {
 	id: number;
 	name: "German" | "English";
 }
+
+type CMSContentTypes = (typeof CMS_CONTENT_TYPES)[number];
+
+type ResourceCategory = SShocItemCategory | CMSContentTypes | "publication" | "course";

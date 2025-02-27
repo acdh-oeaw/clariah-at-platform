@@ -16,3 +16,5 @@ export const LANGUAGE_MAPPINGS = {
 	English: "en",
 	German: "de",
 } as const;
+
+export const CMS_CONTENT_TYPES = ["events", "news", "projects", "pages"] as const;
