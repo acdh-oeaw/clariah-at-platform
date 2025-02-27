@@ -1,0 +1,37 @@
+import { cn } from "@acdh-oeaw/style-variants";
+import { ExternalLink as ExternalLinkIcon } from "lucide-react";
+import type { ReactNode } from "react";
+
+import { Link } from "@/components/link";
+import type { Link as ResourceLink } from "@/types/resources";
+
+interface ExternalLinkProps {
+	link: ResourceLink;
+}
+
+export function ExternalLink(props: ExternalLinkProps): ReactNode {
+	const { link } = props;
+	const externalResourceHost = new URL(link.href).host;
+
+	return (
+		<Link
+			className={cn(
+				link.label.includes("SSHOC") &&
+					"inline-flex w-fit rounded-2 border-2 border-gray-950 px-2 py-0.5 text-sm ",
+				"focus-visible:focus-outline pressed:press-overlay",
+			)}
+			href={link.href}
+			rel="noreferrer"
+			target="_blank"
+		>
+			{link.label.includes("SSHOC") ? (
+				link.label
+			) : (
+				<>
+					<ExternalLinkIcon className={"size-5"} />
+					<span className="sr-only">External Resource at {externalResourceHost}</span>
+				</>
+			)}
+		</Link>
+	);
+}
