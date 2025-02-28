@@ -52,6 +52,7 @@ const CMSContentToTypesenseDocument = function (
 
 	filePaths.map((filePath) => {
 		const mdxContent = readFileSync(filePath, "utf-8");
+		const slug = path.basename(path.dirname(filePath));
 
 		try {
 			const { data: frontmatter, content }: GrayMatterFile<string> = matter(mdxContent);
@@ -67,6 +68,10 @@ const CMSContentToTypesenseDocument = function (
 			const keywords: Array<string> = [];
 			const links: Array<Link> = [];
 			const importedAt = Date.now();
+
+			const href = contentType !== "pages" ? `/${contentType}/${slug}` : `/${slug}`;
+			links.push({ label: "Details", href: href, order: 0 });
+
 			const typesenseDocument = new TypesenseDocument(
 				title as string,
 				parsedContent,
@@ -79,7 +84,7 @@ const CMSContentToTypesenseDocument = function (
 
 			typesenseDocuments.push(typesenseDocument);
 		} catch (err: unknown) {
-			console.log(err);
+			console.warn(err);
 		}
 	});
 	return typesenseDocuments;
