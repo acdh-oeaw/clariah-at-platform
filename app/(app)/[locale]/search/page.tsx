@@ -55,7 +55,7 @@ export default async function SearchPage(props: Readonly<SearchPageProps>): Prom
 				</h1>
 				<p>{lead}</p>
 				<section className="py-16 xs:py-24">
-					<Search />
+					<Search locale={locale} />
 				</section>
 			</section>
 		</MainContent>
