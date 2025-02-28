@@ -63,12 +63,14 @@ function courseToTypesenseDocument(course: Course) {
 		label: "Visit at Course Registry",
 		href: `${COURSE_REGISTRY_FRONTEND}/${String(course.id)}`,
 		order: 0,
+		isExternal: true,
 	});
 
 	links.push({
 		label: "Accessable at",
 		href: course.info_url,
 		order: 1,
+		isExternal: true,
 	});
 
 	const importedAt = Date.now();

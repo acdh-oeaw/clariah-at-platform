@@ -136,12 +136,14 @@ function sshocItemToTypesenseDocument(item: Item) {
 			href: link,
 			label: "Accessable at",
 			order: idx + 1,
+			isExternal: true,
 		};
 	});
 	links.push({
 		label: "Visit at SSHOC",
 		href: `${SSHOC_FRONTEND}/${item.category}/${item.persistentId}`,
 		order: 0,
+		isExternal: true,
 	});
 	const importedAt = Date.now();
 	return new TypesenseDocument(

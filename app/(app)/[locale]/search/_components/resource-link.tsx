@@ -12,11 +12,9 @@ interface ResourceLinkProps {
 export function ResourceLink(props: ResourceLinkProps): ReactNode {
 	const { link } = props;
 	let externalResourceHost;
-	try {
+	if (link.isExternal) {
 		const url = new URL(link.href);
 		externalResourceHost = url.host;
-	} catch (err: unknown) {
-		console.warn(err);
 	}
 
 	return (

@@ -8,6 +8,7 @@ export interface Link {
 	order: number;
 	label: string;
 	href: string;
+	isExternal: boolean;
 }
 
 export interface Resource {

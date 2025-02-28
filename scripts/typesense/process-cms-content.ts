@@ -70,7 +70,7 @@ const CMSContentToTypesenseDocument = function (
 			const importedAt = Date.now();
 
 			const href = contentType !== "pages" ? `/${contentType}/${slug}` : `/${slug}`;
-			links.push({ label: "Details", href: href, order: 0 });
+			links.push({ label: "Details", href: href, order: 0, isExternal: false });
 
 			const typesenseDocument = new TypesenseDocument(
 				title as string,
