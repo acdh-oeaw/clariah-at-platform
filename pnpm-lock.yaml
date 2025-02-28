@@ -65,6 +65,9 @@ importers:
       image-dimensions:
         specifier: ^2.3.0
         version: 2.3.0
+      instantsearch.js:
+        specifier: ^4.77.3
+        version: 4.77.3(algoliasearch@5.20.3)
       lucide-react:
         specifier: ^0.468.0
         version: 0.468.0(react@18.3.1)

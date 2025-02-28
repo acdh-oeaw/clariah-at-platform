@@ -59,6 +59,7 @@
 		"date-fns": "^4.1.0",
 		"fast-glob": "^3.3.3",
 		"image-dimensions": "^2.3.0",
+		"instantsearch.js": "^4.77.3",
 		"lucide-react": "^0.468.0",
 		"next": "^14.2.23",
 		"next-intl": "^3.26.3",
