@@ -11,14 +11,7 @@ import {
 	SSHOC_ITEMS_FILE_NAME,
 	TYPESENSE_DOCUMENTS_DIR,
 } from "@/lib/typesense/constants";
-import type {
-	Item,
-	Link,
-	Resource,
-	ResourceLanguage,
-	SShocActor,
-	SShocItemCategory,
-} from "@/types/resources";
+import type { Item, Link, Resource, SShocActor, SShocItemCategory } from "@/types/resources";
 
 class TypesenseDocument implements Resource {
 	title: string;
@@ -26,7 +19,6 @@ class TypesenseDocument implements Resource {
 	kind: SShocItemCategory;
 	keywords: Array<string>;
 	links: Array<Link>;
-	language: ResourceLanguage;
 	importedAt: number;
 	constructor(
 		title: string,
@@ -34,7 +26,6 @@ class TypesenseDocument implements Resource {
 		kind: SShocItemCategory,
 		keywords: Array<string>,
 		links: Array<Link>,
-		language: ResourceLanguage,
 		importedAt: number,
 	) {
 		this.title = title;
@@ -42,7 +33,6 @@ class TypesenseDocument implements Resource {
 		this.kind = kind;
 		this.keywords = keywords;
 		this.links = links;
-		this.language = language;
 		this.importedAt = importedAt;
 	}
 }
@@ -153,7 +143,6 @@ function sshocItemToTypesenseDocument(item: Item) {
 		href: `${SSHOC_FRONTEND}/${item.category}/${item.persistentId}`,
 		order: 0,
 	});
-	const language = "un";
 	const importedAt = Date.now();
 	return new TypesenseDocument(
 		item.label,
@@ -161,7 +150,6 @@ function sshocItemToTypesenseDocument(item: Item) {
 		item.category as SShocItemCategory,
 		keywords,
 		links,
-		language,
 		importedAt,
 	);
 }

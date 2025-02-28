@@ -2,7 +2,7 @@ import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 
 import type { CMS_CONTENT_TYPES, SSHOC_ITEM_CATEGORIES } from "@/lib/typesense/constants";
 
-type ResourceLanguage = "de" | "en" | "un";
+type ResourceLanguage = "de" | "en";
 
 export interface Link {
 	order: number;
@@ -15,7 +15,7 @@ export interface Resource {
 	kind: ResourceCategory;
 	description: string;
 	links: Array<Link>;
-	language: ResourceLanguage;
+	language?: ResourceLanguage;
 	keywords: Array<Keyword>;
 }
 

@@ -3,12 +3,8 @@ import path from "node:path";
 
 import { createUrl, createUrlSearchParams } from "@acdh-oeaw/lib";
 
-import {
-	COURSE_REGISTRY_FRONTEND,
-	LANGUAGE_MAPPINGS,
-	TYPESENSE_DOCUMENTS_DIR,
-} from "@/lib/typesense/constants";
-import type { Course, Link, Resource, ResourceLanguage } from "@/types/resources";
+import { COURSE_REGISTRY_FRONTEND, TYPESENSE_DOCUMENTS_DIR } from "@/lib/typesense/constants";
+import type { Course, Link, Resource } from "@/types/resources";
 
 class TypesenseDocument implements Resource {
 	title: string;
@@ -16,7 +12,6 @@ class TypesenseDocument implements Resource {
 	kind: "course";
 	keywords: Array<string>;
 	links: Array<Link>;
-	language: ResourceLanguage;
 	importedAt: number;
 	constructor(
 		title: string,
@@ -24,7 +19,6 @@ class TypesenseDocument implements Resource {
 		kind: "course",
 		keywords: Array<string>,
 		links: Array<Link>,
-		language: ResourceLanguage,
 		importedAt: number,
 	) {
 		this.title = title;
@@ -32,7 +26,6 @@ class TypesenseDocument implements Resource {
 		this.kind = kind;
 		this.keywords = keywords;
 		this.links = links;
-		this.language = language;
 		this.importedAt = importedAt;
 	}
 }
@@ -64,7 +57,6 @@ async function getCourses() {
 
 function courseToTypesenseDocument(course: Course) {
 	const keywords: Array<string> = [];
-	const language: ResourceLanguage = LANGUAGE_MAPPINGS[course.language.name];
 	const links: Array<Link> = [];
 
 	links.push({
@@ -86,7 +78,6 @@ function courseToTypesenseDocument(course: Course) {
 		"course",
 		keywords,
 		links,
-		language,
 		importedAt,
 	);
 }
