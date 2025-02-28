@@ -5,13 +5,19 @@ import type { ReactNode } from "react";
 import { Link } from "@/components/link";
 import type { Link as ResourceLink } from "@/types/resources";
 
-interface ExternalLinkProps {
+interface ResourceLinkProps {
 	link: ResourceLink;
 }
 
-export function ExternalLink(props: ExternalLinkProps): ReactNode {
+export function ResourceLink(props: ResourceLinkProps): ReactNode {
 	const { link } = props;
-	const externalResourceHost = new URL(link.href).host;
+	let externalResourceHost;
+	try {
+		const url = new URL(link.href);
+		externalResourceHost = url.host;
+	} catch (err: unknown) {
+		console.warn(err);
+	}
 
 	return (
 		<Link
@@ -29,7 +35,9 @@ export function ExternalLink(props: ExternalLinkProps): ReactNode {
 			) : (
 				<>
 					<ExternalLinkIcon className={"size-5"} />
-					<span className="sr-only">External Resource at {externalResourceHost}</span>
+					{externalResourceHost ? (
+						<span className="sr-only">External Resource at {externalResourceHost}</span>
+					) : null}
 				</>
 			)}
 		</Link>

@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 
-import { ExternalLink } from "@/app/(app)/[locale]/search/_components/external-link";
-import type { Link as ResourceLink } from "@/types/resources";
+import { ResourceLink } from "@/app/(app)/[locale]/search/_components/resource-link";
+import type { Link } from "@/types/resources";
 
 interface ExternalLinksProps {
-	links: Array<ResourceLink>;
+	links: Array<Link>;
 }
 
 export function ExternalLinks(props: ExternalLinksProps): ReactNode {
@@ -16,7 +16,7 @@ export function ExternalLinks(props: ExternalLinksProps): ReactNode {
 					return a.order - b.order;
 				})
 				.map((link, idx) => {
-					return <li key={idx}>{<ExternalLink link={link} />}</li>;
+					return <li key={idx}>{<ResourceLink link={link} />}</li>;
 				})}
 		</ul>
 	);
