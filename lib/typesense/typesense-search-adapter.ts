@@ -14,7 +14,6 @@ export const typesenseInstantsearchAdapter: TypesenseInstantsearchAdapter =
 	new TypesenseInstantSearchAdapter({
 		server: { ...typesenseSettings, apiKey },
 		additionalSearchParameters: {
-			query_by: "title",
-			per_page: 25,
+			query_by: "title,description",
 		},
 	});

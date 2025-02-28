@@ -12,11 +12,12 @@ export function SearchInput(props: UseSearchBoxProps): ReactNode {
 		>
 			<Label className="sr-only">Search</Label>
 			<Input
-				className="border border-gray-300"
+				className="border-2"
 				onChange={(e) => {
 					refine((e.target as HTMLInputElement).value);
 				}}
 				placeholder="Filter"
+				value={query}
 			/>
 			{query ? <Button className="-ms-4">✕</Button> : null}
 		</SearchField>
