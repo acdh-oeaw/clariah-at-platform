@@ -3,11 +3,11 @@ import type { ReactNode } from "react";
 import { ResourceLink } from "@/app/(app)/[locale]/search/_components/resource-link";
 import type { Link } from "@/types/resources";
 
-interface ExternalLinksProps {
+interface ResourceLinksProps {
 	links: Array<Link>;
 }
 
-export function ExternalLinks(props: ExternalLinksProps): ReactNode {
+export function ResourceLinks(props: ResourceLinksProps): ReactNode {
 	const { links } = props;
 	return (
 		<ul className="flex flex-wrap items-center gap-8 pt-2">
