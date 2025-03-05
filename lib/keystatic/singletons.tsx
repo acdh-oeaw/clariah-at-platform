@@ -27,27 +27,10 @@ export const createIndexPage = createSingleton("/index-page/", (paths, locale) =
 						validation: { isRequired: true },
 						multiline: true,
 					}),
-					image: fields.object({
-						src: fields.image({
-							label: "Image",
-							validation: { isRequired: true },
-							...createAssetOptions(paths.assetPath),
-						}),
-						caption: fields.mdx.inline({
-							label: "Image Caption",
-							options: {
-								heading: false,
-								orderedList: false,
-								unorderedList: false,
-								divider: false,
-								code: false,
-								codeBlock: false,
-								blockquote: false,
-								table: false,
-								image: false,
-								strikethrough: false,
-							},
-						}),
+					image: fields.image({
+						label: "Image",
+						validation: { isRequired: true },
+						...createAssetOptions(paths.assetPath),
 					}),
 				},
 				{
