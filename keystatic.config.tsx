@@ -5,11 +5,13 @@ import { Logo } from "@/components/logo";
 import { env } from "@/config/env.config";
 import { locales } from "@/config/i18n.config";
 import {
-	createConsortium,
 	createDocumentation,
 	createEvents,
+	createKeywords,
 	createNews,
+	createOrganisation,
 	createPages,
+	createPersons,
 	createProjects,
 } from "@/lib/keystatic/collections";
 import {
@@ -24,14 +26,20 @@ import {
 
 export default config({
 	collections: {
-		[withI18nPrefix("consortium", "de")]: createConsortium("de"),
-		[withI18nPrefix("consortium", "en")]: createConsortium("en"),
-
 		[withI18nPrefix("events", "de")]: createEvents("de"),
 		[withI18nPrefix("events", "en")]: createEvents("en"),
 
+		[withI18nPrefix("keywords", "de")]: createKeywords("de"),
+		[withI18nPrefix("keywords", "en")]: createKeywords("en"),
+
 		[withI18nPrefix("news", "de")]: createNews("de"),
 		[withI18nPrefix("news", "en")]: createNews("en"),
+
+		[withI18nPrefix("organisations", "de")]: createOrganisation("de"),
+		[withI18nPrefix("organisations", "en")]: createOrganisation("en"),
+
+		[withI18nPrefix("persons", "de")]: createPersons("de"),
+		[withI18nPrefix("persons", "en")]: createPersons("en"),
 
 		[withI18nPrefix("projects", "de")]: createProjects("de"),
 		[withI18nPrefix("projects", "en")]: createProjects("en"),
@@ -96,11 +104,20 @@ export default config({
 			"Events Overview": locales.map((locale) => {
 				return withI18nPrefix("events-overview", locale);
 			}),
+			Keywords: locales.map((locale) => {
+				return withI18nPrefix("keywords", locale);
+			}),
 			News: locales.map((locale) => {
 				return withI18nPrefix("news", locale);
 			}),
 			"News Overview": locales.map((locale) => {
 				return withI18nPrefix("news-overview", locale);
+			}),
+			Organisations: locales.map((locale) => {
+				return withI18nPrefix("organisations", locale);
+			}),
+			Persons: locales.map((locale) => {
+				return withI18nPrefix("persons", locale);
 			}),
 			Projects: locales.map((locale) => {
 				return withI18nPrefix("projects", locale);
@@ -110,9 +127,6 @@ export default config({
 			}),
 			Pages: locales.map((locale) => {
 				return withI18nPrefix("pages", locale);
-			}),
-			Consortium: locales.map((locale) => {
-				return withI18nPrefix("consortium", locale);
 			}),
 			Navigation: locales.map((locale) => {
 				return withI18nPrefix("navigation", locale);

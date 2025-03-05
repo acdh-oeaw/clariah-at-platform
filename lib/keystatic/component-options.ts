@@ -37,7 +37,6 @@ export const linkKinds = [
 	{ label: "Download", value: "download" },
 	{ label: "External", value: "external" },
 	{ label: "Home page", value: "index-page" },
-	{ label: "Consortium", value: "consortium" },
 	{ label: "Events", value: "events" },
 	{ label: "Events overview", value: "events-overview" },
 	{ label: "News", value: "news" },

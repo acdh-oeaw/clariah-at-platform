@@ -18,10 +18,6 @@ export function getLinkProps(params: LinkSchema) {
 			return { href: "/" };
 		}
 
-		case "consortium": {
-			return { href: `/consortium/${params.value}` };
-		}
-
 		case "events": {
 			return { href: `/events/${params.value}/` };
 		}

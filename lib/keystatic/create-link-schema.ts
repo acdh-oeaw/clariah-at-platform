@@ -15,11 +15,6 @@ export function createLinkSchema<TPath extends `/${string}/`>(
 			defaultValue: "external",
 		}),
 		{
-			consortium: fields.relationship({
-				label: "Consortium",
-				validation: { isRequired: true },
-				collection: withI18nPrefix("consortium", locale),
-			}),
 			events: fields.relationship({
 				label: "Event",
 				validation: { isRequired: true },
