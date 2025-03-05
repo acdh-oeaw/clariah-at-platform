@@ -32,7 +32,13 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 						case "custom": {
 							return (
 								<li key={idx}>
-									{<Card className="grid h-full grid-rows-[13rem,auto]" {...card.value} />}
+									{
+										<Card
+											className="grid h-full grid-rows-[13rem,auto]"
+											locale={locale}
+											{...card.value}
+										/>
+									}
 								</li>
 							);
 						}
@@ -48,6 +54,7 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 											className="grid h-full grid-rows-[13rem,auto]"
 											{...news.data}
 											link={link}
+											locale={locale}
 										/>
 									}
 								</li>
@@ -62,6 +69,7 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 									<Card
 										className="grid h-full grid-rows-[13rem,auto] "
 										link={link}
+										locale={locale}
 										{...page.data}
 									/>
 								</li>
@@ -77,6 +85,7 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 										className="grid h-full grid-rows-[13rem,auto]"
 										{...event.data}
 										link={link}
+										locale={locale}
 									/>
 								</li>
 							);

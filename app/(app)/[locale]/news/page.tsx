@@ -66,6 +66,7 @@ export default async function NewsOverviewPage(
 									className="grid h-full grid-rows-[13rem,auto]"
 									{...newsItem.data}
 									link={link}
+									locale={locale}
 								></Card>
 							</li>
 						);

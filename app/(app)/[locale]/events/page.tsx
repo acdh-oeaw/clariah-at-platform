@@ -67,6 +67,7 @@ export default async function EventsOverviewPage(
 									className="grid h-full grid-rows-[13rem,auto]"
 									{...eventItem.data}
 									link={link}
+									locale={locale}
 								></Card>
 							</li>
 						);

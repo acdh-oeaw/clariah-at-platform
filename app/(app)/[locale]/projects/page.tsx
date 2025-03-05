@@ -67,6 +67,7 @@ export default async function ProjectPage(
 									className="grid h-full grid-rows-[13rem,auto]"
 									{...projectItem.data}
 									link={link}
+									locale={locale}
 								></Card>
 							</li>
 						);

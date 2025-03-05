@@ -2,8 +2,10 @@ import { cn } from "@acdh-oeaw/style-variants";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
+import { DateComponent } from "@/components/date";
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
+import type { Locale } from "@/config/i18n.config";
 import type { CardProps } from "@/types/keystatic";
 
 type CardComponentProps = CardProps & {
@@ -12,35 +14,53 @@ type CardComponentProps = CardProps & {
 		label: string;
 		href: string;
 	};
+	summary: {
+		title?: string;
+		content: string;
+	};
+	title: string;
+	startDate?: string | null;
+	locale: Locale;
+	location?: string;
 };
 
 export function Card(props: Readonly<CardComponentProps>): ReactNode {
 	const _t = useTranslations("Card");
 
-	const { className, title, link, ...rest } = props;
+	const { className, link, locale, location, summary, startDate, title, ...rest } = props;
 
 	const defaultClassNames =
 		"relative overflow-hidden rounded-4 border border-stroke-weak bg-background-raised shadow-raised hover:shadow-overlay";
 
 	return (
 		<article className={cn(defaultClassNames, className)}>
-			{"image" in rest && rest.image != null && (
+			{"image" in rest ? (
 				<Image
 					alt=""
 					className="size-full border-b border-stroke-weak object-cover"
 					height={300}
 					/** Preload image because it's the largest contentful paint (lcp) element. */
 					priority={true}
-					src={rest.image}
+					src={rest.image.src}
 					unoptimized={true}
 					width={400}
 				/>
-			)}
+			) : null}
 			<div className="grid gap-y-6 p-8">
 				<div className="flex flex-col">
-					<h3 className="pb-2 font-heading text-heading-4 font-strong text-text-strong">{title}</h3>
-					{"summary" in rest && <p className="grow text-small text-text-weak">{rest.summary}</p>}
-
+					<h3 className="pb-2 font-heading text-heading-4 font-strong text-text-strong">
+						{
+							// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+							summary.title || title
+						}
+					</h3>
+					{startDate ? (
+						<p className="grow text-small text-text-weak">
+							<DateComponent date={startDate} dateLocale={locale} />
+						</p>
+					) : null}
+					{location ? <p className="grow text-small text-text-weak">{location}</p> : null}
+					<p className="grow text-small text-text-weak">{summary.content}</p>
 					<footer>
 						{link !== undefined && (
 							<Link
