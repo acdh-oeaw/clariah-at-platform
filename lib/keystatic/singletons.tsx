@@ -27,10 +27,27 @@ export const createIndexPage = createSingleton("/index-page/", (paths, locale) =
 						validation: { isRequired: true },
 						multiline: true,
 					}),
-					image: fields.image({
-						label: "Image",
-						validation: { isRequired: true },
-						...createAssetOptions(paths.assetPath),
+					image: fields.object({
+						src: fields.image({
+							label: "Image",
+							validation: { isRequired: true },
+							...createAssetOptions(paths.assetPath),
+						}),
+						caption: fields.mdx.inline({
+							label: "Image Caption",
+							options: {
+								heading: false,
+								orderedList: false,
+								unorderedList: false,
+								divider: false,
+								code: false,
+								codeBlock: false,
+								blockquote: false,
+								table: false,
+								image: false,
+								strikethrough: false,
+							},
+						}),
 					}),
 				},
 				{
@@ -65,15 +82,47 @@ export const createIndexPage = createSingleton("/index-page/", (paths, locale) =
 																label: "Title",
 																validation: { isRequired: true },
 															}),
-															image: fields.image({
-																label: "Image",
-																validation: { isRequired: false },
-																...createAssetOptions(paths.assetPath),
+															image: fields.object({
+																src: fields.image({
+																	label: "Image",
+																	validation: { isRequired: true },
+																	...createAssetOptions(paths.assetPath),
+																}),
+																caption: fields.mdx.inline({
+																	label: "Image Caption",
+																	options: {
+																		heading: false,
+																		orderedList: false,
+																		unorderedList: false,
+																		divider: false,
+																		code: false,
+																		codeBlock: false,
+																		blockquote: false,
+																		table: false,
+																		image: false,
+																		strikethrough: false,
+																	},
+																}),
 															}),
-															summary: fields.text({
-																label: "Summary",
-																validation: { isRequired: true },
-																multiline: true,
+															summary: fields.object({
+																title: fields.text({
+																	label: "Summary title",
+																	validation: { isRequired: false },
+																}),
+																content: fields.mdx.inline({
+																	label: "Summary content",
+																	options: {
+																		heading: false,
+																		orderedList: false,
+																		unorderedList: false,
+																		divider: false,
+																		code: false,
+																		codeBlock: false,
+																		blockquote: false,
+																		table: false,
+																		image: false,
+																	},
+																}),
 															}),
 															link: fields.object(
 																{
