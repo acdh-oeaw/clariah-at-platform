@@ -98,6 +98,9 @@ CMS_CONTENT_TYPES.map((contentType) => {
 			contentType,
 			filePaths,
 		);
+		if (typesenseDocuments.length === 0) {
+			return;
+		}
 		writeFileSync(
 			path.join(import.meta.dirname, TYPESENSE_DOCUMENTS_DIR, `${contentType}-${lang}.json`),
 			JSON.stringify(typesenseDocuments),
