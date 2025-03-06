@@ -35,11 +35,11 @@
                   "caption": "this is image caption\n"
                 },
                 "summary": {
-                  "title": "summary title",
+                  "title": "Project 1",
                   "content": "this is the summary content\n"
                 },
                 "link": {
-                  "label": "LinkLabel",
+                  "label": "Read more",
                   "href": "https://clariah.at/en/projects/3d-digitizing-glaser-squeezes/"
                 }
               }
@@ -61,11 +61,11 @@
                   "caption": "Image Caption comes here\n"
                 },
                 "summary": {
-                  "title": "this is the summary title",
+                  "title": "Sustaining a Digital Humanities Infrastructure and Network for Austria",
                   "content": "here is the summary content\n"
                 },
                 "link": {
-                  "label": "LinkLabel",
+                  "label": "Read more",
                   "href": "https://clariah.at/en/news/sustaining-a-digital-humanities-infrastructure-and-network-for-austria/"
                 }
               }
@@ -79,11 +79,11 @@
                   "caption": "this is the image caption\n"
                 },
                 "summary": {
-                  "title": "this is the summary title",
+                  "title": "A retrospective of the ONB Labs Symposium “Newspapers as Datasets”",
                   "content": "this is the summary content\n"
                 },
                 "link": {
-                  "label": "linklabel",
+                  "label": "Read more",
                   "href": "https://clariah.at/en/news/retrospective-onb-labs-symposium-2024/"
                 }
               }
@@ -97,11 +97,11 @@
                   "caption": "image caption\n"
                 },
                 "summary": {
-                  "title": "summary title",
+                  "title": "Retrospective of the CLARIAH-AT Summer School 2024",
                   "content": "summary content comes here\n"
                 },
                 "link": {
-                  "label": "LinkLabel",
+                  "label": "Read more",
                   "href": "https://clariah.at/en/news/retrospective-clariah-at-summerschool2024/"
                 }
               }
@@ -123,11 +123,11 @@
                   "caption": "image caption\n"
                 },
                 "summary": {
-                  "title": "summary title",
+                  "title": "Transkribus",
                   "content": "summary content\n"
                 },
                 "link": {
-                  "label": "LinkLabel",
+                  "label": "learn more",
                   "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
                 }
               }
@@ -141,11 +141,11 @@
                   "caption": "image caption\n"
                 },
                 "summary": {
-                  "title": "summary title",
+                  "title": "License Pool for Software",
                   "content": "summary content comes here\n"
                 },
                 "link": {
-                  "label": "LinkLabel",
+                  "label": "learn more",
                   "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
                 }
               }
@@ -159,11 +159,11 @@
                   "caption": "image caption comes here\n"
                 },
                 "summary": {
-                  "title": "summary title",
+                  "title": "Travel Grants",
                   "content": "summary content comes here\n"
                 },
                 "link": {
-                  "label": "LinkLabel",
+                  "label": "learn more",
                   "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
                 }
               }
@@ -177,11 +177,11 @@
                   "caption": "image caption\n"
                 },
                 "summary": {
-                  "title": "summary title",
-                  "content": "summary content comes here\n"
+                  "title": "Grassroot funding (?)",
+                  "content": "if available the educated guess is that the grassroot funding comes here too\n"
                 },
                 "link": {
-                  "label": "LinkLabel",
+                  "label": "learn more",
                   "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
                 }
               }
