@@ -48,19 +48,105 @@
     {
       "discriminant": "link",
       "value": {
-        "label": "About the project",
+        "label": "Search (aka. Resources)",
         "link": {
-          "discriminant": "pages",
-          "value": "about-the-project"
+          "discriminant": "search"
         }
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Community",
+        "items": [
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Funding for Early Career Researchers",
+              "link": {
+                "discriminant": "pages",
+                "value": "sample-page-1"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Community Schools",
+              "link": {
+                "discriminant": "pages",
+                "value": "sample-page-1"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Impact Stories, Blogposts and Interviews",
+              "link": {
+                "discriminant": "pages",
+                "value": "sample-page-1"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Outreach",
+              "link": {
+                "discriminant": "pages",
+                "value": "sample-page-1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "About",
+        "items": [
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "in a nutshell",
+              "link": {
+                "discriminant": "pages",
+                "value": "sample-page-1"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Vision & Strategy ",
+              "link": {
+                "discriminant": "pages",
+                "value": "sample-page-1"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Governance & how to join",
+              "link": {
+                "discriminant": "pages",
+                "value": "sample-page-1"
+              }
+            }
+          }
+        ]
       }
     },
     {
       "discriminant": "link",
       "value": {
-        "label": "Search",
+        "label": "About the project",
         "link": {
-          "discriminant": "search"
+          "discriminant": "pages",
+          "value": "about-the-project"
         }
       }
     }
