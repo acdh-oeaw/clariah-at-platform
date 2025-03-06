@@ -20,6 +20,174 @@
             }
           ]
         }
+      },
+      {
+        "discriminant": "cardsSection",
+        "value": {
+          "title": "Projects",
+          "cards": [
+            {
+              "discriminant": "custom",
+              "value": {
+                "title": "Project 1",
+                "image": {
+                  "src": "/assets/content/assets/en/index-page/main/sections/1/value/cards/0/value/image/src.png",
+                  "caption": "this is image caption\n"
+                },
+                "summary": {
+                  "title": "summary title",
+                  "content": "this is the summary content\n"
+                },
+                "link": {
+                  "label": "LinkLabel",
+                  "href": "https://clariah.at/en/projects/3d-digitizing-glaser-squeezes/"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "discriminant": "cardsSection",
+        "value": {
+          "title": "Community",
+          "cards": [
+            {
+              "discriminant": "custom",
+              "value": {
+                "title": "Sustaining a Digital Humanities Infrastructure and Network for Austria",
+                "image": {
+                  "src": "/assets/content/assets/en/index-page/main/sections/2/value/cards/0/value/image/src.jpeg",
+                  "caption": "Image Caption comes here\n"
+                },
+                "summary": {
+                  "title": "this is the summary title",
+                  "content": "here is the summary content\n"
+                },
+                "link": {
+                  "label": "LinkLabel",
+                  "href": "https://clariah.at/en/news/sustaining-a-digital-humanities-infrastructure-and-network-for-austria/"
+                }
+              }
+            },
+            {
+              "discriminant": "custom",
+              "value": {
+                "title": "A retrospective of the ONB Labs Symposium “Newspapers as Datasets”",
+                "image": {
+                  "src": "/assets/content/assets/en/index-page/main/sections/2/value/cards/1/value/image/src.png",
+                  "caption": "this is the image caption\n"
+                },
+                "summary": {
+                  "title": "this is the summary title",
+                  "content": "this is the summary content\n"
+                },
+                "link": {
+                  "label": "linklabel",
+                  "href": "https://clariah.at/en/news/retrospective-onb-labs-symposium-2024/"
+                }
+              }
+            },
+            {
+              "discriminant": "custom",
+              "value": {
+                "title": "Retrospective of the CLARIAH-AT Summer School 2024",
+                "image": {
+                  "src": "/assets/content/assets/en/index-page/main/sections/2/value/cards/2/value/image/src.png",
+                  "caption": "image caption\n"
+                },
+                "summary": {
+                  "title": "summary title",
+                  "content": "summary content comes here\n"
+                },
+                "link": {
+                  "label": "LinkLabel",
+                  "href": "https://clariah.at/en/news/retrospective-clariah-at-summerschool2024/"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "discriminant": "cardsSection",
+        "value": {
+          "title": "Funding Opportunities",
+          "cards": [
+            {
+              "discriminant": "custom",
+              "value": {
+                "title": "Funding Transkribus",
+                "image": {
+                  "src": "/assets/content/assets/en/index-page/main/sections/3/value/cards/0/value/image/src.png",
+                  "caption": "image caption\n"
+                },
+                "summary": {
+                  "title": "summary title",
+                  "content": "summary content\n"
+                },
+                "link": {
+                  "label": "LinkLabel",
+                  "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
+                }
+              }
+            },
+            {
+              "discriminant": "custom",
+              "value": {
+                "title": "Funding License Pool",
+                "image": {
+                  "src": "/assets/content/assets/en/index-page/main/sections/3/value/cards/1/value/image/src.png",
+                  "caption": "image caption\n"
+                },
+                "summary": {
+                  "title": "summary title",
+                  "content": "summary content comes here\n"
+                },
+                "link": {
+                  "label": "LinkLabel",
+                  "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
+                }
+              }
+            },
+            {
+              "discriminant": "custom",
+              "value": {
+                "title": "Funding Travelgrants",
+                "image": {
+                  "src": "/assets/content/assets/en/index-page/main/sections/3/value/cards/2/value/image/src.png",
+                  "caption": "image caption comes here\n"
+                },
+                "summary": {
+                  "title": "summary title",
+                  "content": "summary content comes here\n"
+                },
+                "link": {
+                  "label": "LinkLabel",
+                  "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
+                }
+              }
+            },
+            {
+              "discriminant": "custom",
+              "value": {
+                "title": "Grassroot Funding?",
+                "image": {
+                  "src": "/assets/content/assets/en/index-page/main/sections/3/value/cards/3/value/image/src.jpeg",
+                  "caption": "image caption\n"
+                },
+                "summary": {
+                  "title": "summary title",
+                  "content": "summary content comes here\n"
+                },
+                "link": {
+                  "label": "LinkLabel",
+                  "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
+                }
+              }
+            }
+          ]
+        }
       }
     ]
   }
