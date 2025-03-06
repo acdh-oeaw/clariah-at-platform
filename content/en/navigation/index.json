@@ -1,24 +1,6 @@
 {
   "links": [
     {
-      "discriminant": "menu",
-      "value": {
-        "label": "Sample Menu",
-        "items": [
-          {
-            "discriminant": "link",
-            "value": {
-              "label": "Sample Page",
-              "link": {
-                "discriminant": "pages",
-                "value": "sample-page-1"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
       "discriminant": "link",
       "value": {
         "label": "Events",
@@ -138,16 +120,6 @@
             }
           }
         ]
-      }
-    },
-    {
-      "discriminant": "link",
-      "value": {
-        "label": "About the project",
-        "link": {
-          "discriminant": "pages",
-          "value": "about-the-project"
-        }
       }
     }
   ]
