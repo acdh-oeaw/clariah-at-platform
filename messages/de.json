@@ -4,12 +4,6 @@
 		"footnotes": "Fußnoten",
 		"table-of-contents": "Inhaltsverzeichnis"
 	},
-	"AboutPage": {
-		"meta": {
-			"title": "Über das Projekt"
-		},
-		"title": "Über das Projekt"
-	},
 	"AppFooter": {
 		"links": {
 			"contact": "Kontakt",
@@ -26,7 +20,6 @@
 	},
 	"AppHeader": {
 		"links": {
-			"about": "Über das Projekt",
 			"home": "Startseite"
 		},
 		"navigation-menu": "Navigationsmenü",
