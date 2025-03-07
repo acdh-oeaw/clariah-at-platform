@@ -164,18 +164,16 @@ test.describe("app", () => {
 					name: i18n.t("AppHeader.links.home"),
 				})
 				.first();
-			const aboutLink = indexPage.page.getByRole("navigation").getByRole("link", {
-				name: i18n.t("AppHeader.links.about"),
-			});
+			const searchLink = indexPage.page.getByRole("navigation").locator('a[href$="/search"]');
 
 			await expect(homeLink).toHaveAttribute("aria-current", "page");
-			await expect(aboutLink).not.toHaveAttribute("aria-current", "page");
+			await expect(searchLink).not.toHaveAttribute("aria-current", "page");
 
-			await aboutLink.click();
-			await page.waitForURL("**/about-the-project");
+			await searchLink.click();
+			await page.waitForURL("**/search");
 
 			await expect(homeLink).not.toHaveAttribute("aria-current", "page");
-			await expect(aboutLink).toHaveAttribute("aria-current", "page");
+			await expect(searchLink).toHaveAttribute("aria-current", "page");
 		});
 	});
 
@@ -194,20 +192,18 @@ test.describe("app", () => {
 					name: i18n.t("AppHeader.links.home"),
 				})
 				.first();
-			const aboutLink = indexPage.page.getByRole("dialog").getByRole("link", {
-				name: i18n.t("AppHeader.links.about"),
-			});
+			const searchLink = indexPage.page.getByRole("dialog").locator('a[href$="/search"]');
 
 			await expect(homeLink).toHaveAttribute("aria-current", "page");
-			await expect(aboutLink).not.toHaveAttribute("aria-current", "page");
+			await expect(searchLink).not.toHaveAttribute("aria-current", "page");
 
-			await aboutLink.click();
-			await page.waitForURL("**/about-the-project");
+			await searchLink.click();
+			await page.waitForURL("**/search");
 
 			await indexPage.page.getByRole("navigation").getByRole("button").click();
 
 			await expect(homeLink).not.toHaveAttribute("aria-current", "page");
-			await expect(aboutLink).toHaveAttribute("aria-current", "page");
+			await expect(searchLink).toHaveAttribute("aria-current", "page");
 		});
 	});
 });
