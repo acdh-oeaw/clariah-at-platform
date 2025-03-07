@@ -61,7 +61,7 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 	const { label, home, navigation } = props;
 
 	return (
-		<nav aria-label={label} className="hidden md:flex md:gap-x-12">
+		<nav aria-label={label} className="hidden lg:flex lg:gap-x-12">
 			<NavLink
 				className={cn(
 					"-ml-2 grid shrink-0 place-content-center self-center rounded-2 p-2",
@@ -222,7 +222,7 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 
 	return (
 		<DialogTrigger>
-			<nav aria-label={label} className="flex items-center py-3 md:hidden">
+			<nav aria-label={label} className="flex items-center py-3 lg:hidden">
 				<Button
 					className={cn(
 						"-ml-3 grid place-content-center rounded-2 p-3",
