@@ -1,9 +1,6 @@
-// eslint-disable-next-line no-restricted-imports
-import type { StaticImageData } from "next/image";
 import type { ReactNode } from "react";
 
 import { Image } from "@/components/image";
-import logo from "@/public/assets/images/clariah_at_logo_text_as_path.svg";
 
 interface LogoProps {
 	className?: string;
@@ -18,7 +15,7 @@ export function Logo(props: Readonly<LogoProps>): ReactNode {
 			className={className}
 			height={60}
 			priority={true}
-			src={logo as StaticImageData}
+			src="/assets/images/clariah_at_logo_text_as_path.svg"
 			width={163}
 		/>
 	);
