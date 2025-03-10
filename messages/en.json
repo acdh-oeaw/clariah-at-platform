@@ -5,6 +5,8 @@
 		"table-of-contents": "Table of contents"
 	},
 	"AppFooter": {
+		"bmbwf": "Austrian Federal Ministry of Education, Science and Research",
+		"funded-by": "Funded by",
 		"links": {
 			"contact": "Contact",
 			"imprint": "Imprint"

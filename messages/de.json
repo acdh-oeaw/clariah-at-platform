@@ -5,6 +5,8 @@
 		"table-of-contents": "Inhaltsverzeichnis"
 	},
 	"AppFooter": {
+		"bmbwf": "Bundesministerium Bildung, Wissenschaft und Forschung",
+		"funded-by": "Gefördert von",
 		"links": {
 			"contact": "Kontakt",
 			"imprint": "Impressum"
