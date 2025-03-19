@@ -455,7 +455,7 @@ export const createOrganisation = createCollection("/organisations/", (paths, lo
 		format: { contentField: "description" },
 		slugField: "name",
 		columns: ["name"],
-		entryLayout: "content",
+		entryLayout: "form",
 		schema: {
 			name: fields.slug({
 				name: {
