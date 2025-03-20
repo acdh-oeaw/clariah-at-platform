@@ -50,6 +50,36 @@
                 "value": "early-career-funding"
               }
             }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Community Schools",
+              "link": {
+                "discriminant": "pages",
+                "value": "demo-seite-1"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Fallstudien, Blogposts und Interviews",
+              "link": {
+                "discriminant": "pages",
+                "value": "demo-seite-1"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Outreach",
+              "link": {
+                "discriminant": "pages",
+                "value": "demo-seite-1"
+              }
+            }
           }
         ]
       }
