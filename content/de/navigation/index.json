@@ -1,24 +1,6 @@
 {
   "links": [
     {
-      "discriminant": "menu",
-      "value": {
-        "label": "Demo Menu",
-        "items": [
-          {
-            "discriminant": "link",
-            "value": {
-              "label": "Seite 1",
-              "link": {
-                "discriminant": "pages",
-                "value": "demo-seite-1"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
       "discriminant": "link",
       "value": {
         "label": "Veranstaltungen",
@@ -48,20 +30,96 @@
     {
       "discriminant": "link",
       "value": {
-        "label": "Über uns",
+        "label": "Suche (aka. Ressourcen)",
         "link": {
-          "discriminant": "pages",
-          "value": "ueber-uns"
+          "discriminant": "search"
         }
       }
     },
     {
-      "discriminant": "link",
+      "discriminant": "menu",
       "value": {
-        "label": "Suche",
-        "link": {
-          "discriminant": "search"
-        }
+        "label": "Community",
+        "items": [
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Early Career Förderungen",
+              "link": {
+                "discriminant": "pages",
+                "value": "early-career-funding"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Community Schools",
+              "link": {
+                "discriminant": "pages",
+                "value": "demo-seite-1"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Fallstudien, Blogposts und Interviews",
+              "link": {
+                "discriminant": "pages",
+                "value": "demo-seite-1"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Outreach",
+              "link": {
+                "discriminant": "pages",
+                "value": "demo-seite-1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Über uns",
+        "items": [
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "in a Nutshell",
+              "link": {
+                "discriminant": "pages",
+                "value": "in-a-nutshell"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Vision & Strategie",
+              "link": {
+                "discriminant": "pages",
+                "value": "vision-und-strategie"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "CLARIAH-AT beitreten",
+              "link": {
+                "discriminant": "pages",
+                "value": "beitritt-zu-clariah-at"
+              }
+            }
+          }
+        ]
       }
     }
   ]

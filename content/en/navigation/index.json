@@ -47,7 +47,7 @@
               "label": "Funding for Early Career Researchers",
               "link": {
                 "discriminant": "pages",
-                "value": "sample-page-1"
+                "value": "Early Career Funding"
               }
             }
           },
@@ -95,7 +95,7 @@
               "label": "in a nutshell",
               "link": {
                 "discriminant": "pages",
-                "value": "sample-page-1"
+                "value": "in-a-nutshell"
               }
             }
           },
@@ -105,17 +105,17 @@
               "label": "Vision & Strategy ",
               "link": {
                 "discriminant": "pages",
-                "value": "sample-page-1"
+                "value": "vision-and-strategy"
               }
             }
           },
           {
             "discriminant": "link",
             "value": {
-              "label": "Governance & how to join",
+              "label": "How to join",
               "link": {
                 "discriminant": "pages",
-                "value": "sample-page-1"
+                "value": "how-to-join"
               }
             }
           }
