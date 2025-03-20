@@ -39,6 +39,24 @@
     {
       "discriminant": "menu",
       "value": {
+        "label": "Community",
+        "items": [
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Early Career Förderungen",
+              "link": {
+                "discriminant": "pages",
+                "value": "early-career-funding"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
         "label": "Über uns",
         "items": [
           {
