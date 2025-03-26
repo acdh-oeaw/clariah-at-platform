@@ -312,6 +312,12 @@ export const createKeywords = createCollection("/keywords/", (paths, locale) => 
 				fields.text({
 					label: "Synonym",
 				}),
+				{
+					label: "Synonyms",
+					itemLabel(props) {
+						return props.value;
+					},
+				},
 			),
 		},
 	});
@@ -492,6 +498,9 @@ export const createOrganisation = createCollection("/organisations/", (paths, lo
 				}),
 				{
 					label: "Affiliations",
+					itemLabel(props) {
+						return props.value ?? "";
+					},
 				},
 			),
 			contact: fields.array(
@@ -501,6 +510,9 @@ export const createOrganisation = createCollection("/organisations/", (paths, lo
 				}),
 				{
 					label: "Contact",
+					itemLabel(props) {
+						return props.value ?? "";
+					},
 				},
 			),
 			consortiumStatus: fields.select({
@@ -839,6 +851,9 @@ export const createPersons = createCollection("/persons/", (paths, locale) => {
 				}),
 				{
 					label: "Affiliations",
+					itemLabel(props) {
+						return props.value ?? "";
+					},
 				},
 			),
 			links: fields.array(
