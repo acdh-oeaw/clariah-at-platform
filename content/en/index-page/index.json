@@ -43,18 +43,51 @@
             {
               "discriminant": "custom",
               "value": {
-                "title": "Project 1",
+                "title": "Esperanto Newspaper Excerpts",
                 "image": {
                   "src": "/assets/content/assets/en/index-page/main/sections/1/value/cards/0/value/image/src.png",
-                  "caption": "this is image caption\n"
+                  "caption": ""
                 },
                 "summary": {
-                  "title": "Project 1",
-                  "content": "this is the summary content\n"
+                  "content": "The Project deals with digitized newspaper excerpts about Esperanto, which are preserved in the Department of Planned Languages and Esperanto Museum of the Austrian National Library.\n"
                 },
                 "link": {
-                  "label": "Read more",
-                  "href": "https://clariah.at/en/projects/3d-digitizing-glaser-squeezes/"
+                  "label": "read more",
+                  "href": "https://clariah.at/en/projects/esperanto-newspaper-excerpts/"
+                }
+              }
+            },
+            {
+              "discriminant": "custom",
+              "value": {
+                "title": "LadderWeb",
+                "image": {
+                  "src": "/assets/content/assets/en/index-page/main/sections/1/value/cards/1/value/image/src.png",
+                  "caption": ""
+                },
+                "summary": {
+                  "content": "**A pragmatically annotated web-based corpus query interface for requests and cancellations in Italian L1 and L2:** The final product will provide an online platform that allows linguists to search the aforementioned corpora for speech acts of requests and cancellations in different languages and varieties.\n"
+                },
+                "link": {
+                  "label": "read more",
+                  "href": "https://clariah.at/en/projects/ladderweb-pragmatically-annotated-web-based-corpus-query-interface-requests-and-cancellations/"
+                }
+              }
+            },
+            {
+              "discriminant": "custom",
+              "value": {
+                "title": "Sharing the CROWN",
+                "image": {
+                  "src": "/assets/content/assets/en/index-page/main/sections/1/value/cards/2/value/image/src.png",
+                  "caption": ""
+                },
+                "summary": {
+                  "content": "**Establishing a Workflow from Collection Data to Linked Research Data:** The objective of this project is to develop and implement a best practice workflow for modelling, transforming, and publishing data from tools like TMS into [**FAIR**](https://www.go-fair.org/fair-principles/) research data.\n"
+                },
+                "link": {
+                  "label": "read more",
+                  "href": "https://clariah.at/en/projects/sharing-crown-establishing-workflow-collection-data-linked-research-data/"
                 }
               }
             }
