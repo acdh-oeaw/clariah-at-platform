@@ -30,7 +30,7 @@
     {
       "discriminant": "link",
       "value": {
-        "label": "Search (aka. Resources)",
+        "label": "Resources",
         "link": {
           "discriminant": "search"
         }
@@ -54,20 +54,10 @@
           {
             "discriminant": "link",
             "value": {
-              "label": "Community Schools",
+              "label": "Community Board",
               "link": {
                 "discriminant": "pages",
-                "value": "sample-page-1"
-              }
-            }
-          },
-          {
-            "discriminant": "link",
-            "value": {
-              "label": "Impact Stories, Blogposts and Interviews",
-              "link": {
-                "discriminant": "pages",
-                "value": "sample-page-1"
+                "value": "community-board"
               }
             }
           },
@@ -77,7 +67,7 @@
               "label": "Outreach",
               "link": {
                 "discriminant": "pages",
-                "value": "sample-page-1"
+                "value": "outreach"
               }
             }
           }
@@ -92,7 +82,7 @@
           {
             "discriminant": "link",
             "value": {
-              "label": "in a nutshell",
+              "label": "In a Nutshell",
               "link": {
                 "discriminant": "pages",
                 "value": "in-a-nutshell"
