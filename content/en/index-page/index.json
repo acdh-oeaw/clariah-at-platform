@@ -171,11 +171,11 @@
                 },
                 "summary": {
                   "title": "Transkribus",
-                  "content": "summary content\n"
+                  "content": "Get free Transkribus credit packages for the (handwritten) text recognition of your research material!\n"
                 },
                 "link": {
                   "label": "learn more",
-                  "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
+                  "href": "https://clariah-at-platform.acdh-ch-dev.oeaw.ac.at/en/early-career-funding"
                 }
               }
             },
@@ -189,11 +189,11 @@
                 },
                 "summary": {
                   "title": "License Pool for Software",
-                  "content": "summary content comes here\n"
+                  "content": "Young scholar can get support for the acquisition of specific **software for the implementation of their research work**\n"
                 },
                 "link": {
                   "label": "learn more",
-                  "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
+                  "href": "https://clariah-at-platform.acdh-ch-dev.oeaw.ac.at/en/early-career-funding"
                 }
               }
             },
@@ -207,29 +207,11 @@
                 },
                 "summary": {
                   "title": "Travel Grants",
-                  "content": "summary content comes here\n"
+                  "content": "CLARIAH-AT supports students and early career researchers with travel grants, to present a part of their current research in the field of Digital Humanities / Cultural Heritage in the form of a paper or poster at a conference, or to acquire skills needed for their research through participation in a workshop.\n"
                 },
                 "link": {
                   "label": "learn more",
-                  "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
-                }
-              }
-            },
-            {
-              "discriminant": "custom",
-              "value": {
-                "title": "Grassroot Funding?",
-                "image": {
-                  "src": "/assets/content/assets/en/index-page/main/sections/3/value/cards/3/value/image/src.jpeg",
-                  "caption": "image caption\n"
-                },
-                "summary": {
-                  "title": "Grassroot funding (?)",
-                  "content": "if available the educated guess is that the grassroot funding comes here too\n"
-                },
-                "link": {
-                  "label": "learn more",
-                  "href": "https://clariah.at/en/funding-opportunities-for-junior-researcher/"
+                  "href": "https://clariah-at-platform.acdh-ch-dev.oeaw.ac.at/en/early-career-funding"
                 }
               }
             }
