@@ -1,0 +1,33 @@
+---
+title: >-
+  Sharing the CROWN - Establishing a Workflow from Collection Data to Linked
+  Research Data
+image:
+  src: /assets/content/assets/en/projects/sharing-the-crown/image/src.png
+  caption: ''
+summary:
+  content: ''
+funding: clariah-at-2022
+responsiblePersons: []
+projectPartners: []
+keywords: []
+additionalImages: []
+links:
+  - label: GitHub Repository
+    url: https://github.com/DigitalHumanitiesCraft/crown
+  - label: Poster
+    url: https://zenodo.org/records/7711407
+---
+## **Context**
+
+The *Imperial Crown* of the Holy Roman Empire is one of the most important symbols of European history. Today it is part of the collections of the *Kunsthistorisches Museum* in Vienna (KHM). In the course of the so-called [***CROWN*****&#x20;project**](https://www.projekt-reichskrone.at/) initiated by the KHM, a comprehensive analysis of the *Imperial Crown* is being carried out. For this purpose, all components like gems, pearls, plates, etc. will be analysed from a scientific, historical and art-historical point of view. This project, which is currently running until 2024, is thus a truly interdisciplinary endeavour. Research data resulting from the application of highly sophisticated analytical techniques to study manufacturing techniques and materials used, is recorded using [**The Museum System (TMS)**](https://www.gallerysystems.com/solutions/collections-management/) . TMS is a widely used software solution designed for museums. It provides a relational database that can be used for inventorying, documenting, and managing collections.
+
+The CROWN project is faced with an in-depth and complex analysis of a single object. It must fulfil the scientific mandate of a world leading museum and has to be based on the already established TMS for data management. Therefore, it is necessary to implement newly developed workflows in the CROWN project using TMS. Concerning data processing this is a flagship project within the *KHM-Museumsverband*. It is no longer “usual” collection data that needs to be recorded and managed, but highly specific research data that requires special modelling and representation. As specific expertise is not available at the KHM, the proposed project is performed in cooperation with the [**Department of Digital Humanities**](https://digital-humanities.uni-graz.at/en/) (formerly Centre for Information Modelling, ZIM), University of Graz.
+
+To be usable also for future research, the proposed project is not to develop a ready-made software, but to describe a workflow of a best practice solution to create highly complex, formalised and linked research data in the context of museums according to the FAIR criteria. For this reason, the tools used, TMS or GAMS ( [**Geisteswissenschaftliches Asset Management System**](https://gams.uni-graz.at/) ), are exchangeable, and the workflows developed are transferable to other existing systems.
+
+## **Main Goal**
+
+The objective of the proposed project is to develop and implement a best practice workflow for modelling, transforming, and publishing data from tools like TMS into [**FAIR**](https://www.go-fair.org/fair-principles/) research data. Such a workflow does not include “usual” collection data, but goes far beyond that. This is due to the highly specific research domains in the museum context for which there are insufficient templates for acquisition and standardisation.
+
+In the case of CROWN, the relevant research question, i.e. origin and dating of the crown, can only be answered on the basis of a large volume of interdisciplinary investigations and findings. These in turn, i.e. the connection of scientific measurements with historical findings, go beyond the usual structure of data describing objects in collections. In order to formally represent both the model and entities in the data set, a Semantic Web approach is chosen. The RDF data thus generated is based on a domain-specific ontology derived from [**CIDOC-CRM**](https://www.cidoc-crm.org/) and [**Basic Formal Ontology (BFO)**](https://basic-formal-ontology.org/) , linking its entities to controlled vocabularies and [**Wikidata**](https://www.wikidata.org/) . Finally, a web-based proof-of-concept prototype of a user interface adapted to the requirements of the different disciplines involved is developed for the domain described, enabling aggregation, visualisation, exploration and analysis of the processed data.
