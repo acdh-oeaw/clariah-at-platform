@@ -61,7 +61,7 @@
 		"image-dimensions": "^2.3.0",
 		"instantsearch.js": "^4.77.3",
 		"lucide-react": "^0.468.0",
-		"next": "^14.2.23",
+		"next": "^14.2.25",
 		"next-intl": "^3.26.3",
 		"react": "^18.3.1",
 		"react-aria": "^3.37.0",
@@ -79,8 +79,8 @@
 		"server-only": "^0.0.1",
 		"sharp": "^0.33.5",
 		"shiki": "^1.29.1",
-		"typesense": "^1.8.2",
-		"typesense-instantsearch-adapter": "^2.8.0",
+		"typesense": "^2.0.2",
+		"typesense-instantsearch-adapter": "^2.9.0",
 		"valibot": "1.0.0-beta.14"
 	},
 	"devDependencies": {

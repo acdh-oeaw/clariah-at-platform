@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@acdh-oeaw/keystatic-lib':
         specifier: ^0.5.3
-        version: 0.5.3(@keystatic/core@0.5.43(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+        version: 0.5.3(@keystatic/core@0.5.43(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@acdh-oeaw/lib':
         specifier: ^0.1.12
         version: 0.1.12
@@ -25,13 +25,13 @@ importers:
         version: 0.0.3
       '@keystar/ui':
         specifier: ^0.7.15
-        version: 0.7.15(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 0.7.15(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@keystatic/core':
         specifier: ^0.5.43
-        version: 0.5.43(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 0.5.43(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@keystatic/next':
         specifier: ^5.0.2
-        version: 5.0.2(@keystatic/core@0.5.43(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 5.0.2(@keystatic/core@0.5.43(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@opentelemetry/api':
         specifier: ^1.9.0
         version: 1.9.0
@@ -72,11 +72,11 @@ importers:
         specifier: ^0.468.0
         version: 0.468.0(react@18.3.1)
       next:
-        specifier: ^14.2.23
-        version: 14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^14.2.25
+        version: 14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-intl:
         specifier: ^3.26.3
-        version: 3.26.3(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 3.26.3(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -94,7 +94,7 @@ importers:
         version: 7.15.3(algoliasearch@5.20.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-instantsearch-nextjs:
         specifier: ^0.4.4
-        version: 0.4.4(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-instantsearch@7.15.3(algoliasearch@5.20.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+        version: 0.4.4(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-instantsearch@7.15.3(algoliasearch@5.20.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       react-schemaorg:
         specifier: ^2.0.0
         version: 2.0.0(react@18.3.1)(schema-dts@1.1.2(typescript@5.7.3))(typescript@5.7.3)
@@ -126,11 +126,11 @@ importers:
         specifier: ^1.29.1
         version: 1.29.1
       typesense:
-        specifier: ^1.8.2
-        version: 1.8.2(@babel/runtime@7.26.0)
+        specifier: ^2.0.2
+        version: 2.0.3(@babel/runtime@7.26.0)
       typesense-instantsearch-adapter:
-        specifier: ^2.8.0
-        version: 2.8.0(@babel/runtime@7.26.0)
+        specifier: ^2.9.0
+        version: 2.9.0(@babel/runtime@7.26.0)
       valibot:
         specifier: 1.0.0-beta.14
         version: 1.0.0-beta.14(typescript@5.7.3)
@@ -1085,62 +1085,62 @@ packages:
   '@next/bundle-analyzer@14.2.23':
     resolution: {integrity: sha512-BZJTrSZY1kemDMl8hOEu5Vj7Oy5rCa5ZPJ/bSAFPoaOQS21YVwX4xbZCEteCKu6FiXnTwnprxbGgEOmyhH0aoA==}
 
-  '@next/env@14.2.23':
-    resolution: {integrity: sha512-CysUC9IO+2Bh0omJ3qrb47S8DtsTKbFidGm6ow4gXIG6reZybqxbkH2nhdEm1tC8SmgzDdpq3BIML0PWsmyUYA==}
+  '@next/env@14.2.26':
+    resolution: {integrity: sha512-vO//GJ/YBco+H7xdQhzJxF7ub3SUwft76jwaeOyVVQFHCi5DCnkP16WHB+JBylo4vOKPoZBlR94Z8xBxNBdNJA==}
 
   '@next/eslint-plugin-next@14.2.23':
     resolution: {integrity: sha512-efRC7m39GoiU1fXZRgGySqYbQi6ZyLkuGlvGst7IwkTTczehQTJA/7PoMg4MMjUZvZEGpiSEu+oJBAjPawiC3Q==}
 
-  '@next/swc-darwin-arm64@14.2.23':
-    resolution: {integrity: sha512-WhtEntt6NcbABA8ypEoFd3uzq5iAnrl9AnZt9dXdO+PZLACE32z3a3qA5OoV20JrbJfSJ6Sd6EqGZTrlRnGxQQ==}
+  '@next/swc-darwin-arm64@14.2.26':
+    resolution: {integrity: sha512-zDJY8gsKEseGAxG+C2hTMT0w9Nk9N1Sk1qV7vXYz9MEiyRoF5ogQX2+vplyUMIfygnjn9/A04I6yrUTRTuRiyQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
 
-  '@next/swc-darwin-x64@14.2.23':
-    resolution: {integrity: sha512-vwLw0HN2gVclT/ikO6EcE+LcIN+0mddJ53yG4eZd0rXkuEr/RnOaMH8wg/sYl5iz5AYYRo/l6XX7FIo6kwbw1Q==}
+  '@next/swc-darwin-x64@14.2.26':
+    resolution: {integrity: sha512-U0adH5ryLfmTDkahLwG9sUQG2L0a9rYux8crQeC92rPhi3jGQEY47nByQHrVrt3prZigadwj/2HZ1LUUimuSbg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
 
-  '@next/swc-linux-arm64-gnu@14.2.23':
-    resolution: {integrity: sha512-uuAYwD3At2fu5CH1wD7FpP87mnjAv4+DNvLaR9kiIi8DLStWSW304kF09p1EQfhcbUI1Py2vZlBO2VaVqMRtpg==}
+  '@next/swc-linux-arm64-gnu@14.2.26':
+    resolution: {integrity: sha512-SINMl1I7UhfHGM7SoRiw0AbwnLEMUnJ/3XXVmhyptzriHbWvPPbbm0OEVG24uUKhuS1t0nvN/DBvm5kz6ZIqpg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-arm64-musl@14.2.23':
-    resolution: {integrity: sha512-Mm5KHd7nGgeJ4EETvVgFuqKOyDh+UMXHXxye6wRRFDr4FdVRI6YTxajoV2aHE8jqC14xeAMVZvLqYqS7isHL+g==}
+  '@next/swc-linux-arm64-musl@14.2.26':
+    resolution: {integrity: sha512-s6JaezoyJK2DxrwHWxLWtJKlqKqTdi/zaYigDXUJ/gmx/72CrzdVZfMvUc6VqnZ7YEvRijvYo+0o4Z9DencduA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-x64-gnu@14.2.23':
-    resolution: {integrity: sha512-Ybfqlyzm4sMSEQO6lDksggAIxnvWSG2cDWnG2jgd+MLbHYn2pvFA8DQ4pT2Vjk3Cwrv+HIg7vXJ8lCiLz79qoQ==}
+  '@next/swc-linux-x64-gnu@14.2.26':
+    resolution: {integrity: sha512-FEXeUQi8/pLr/XI0hKbe0tgbLmHFRhgXOUiPScz2hk0hSmbGiU8aUqVslj/6C6KA38RzXnWoJXo4FMo6aBxjzg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-linux-x64-musl@14.2.23':
-    resolution: {integrity: sha512-OSQX94sxd1gOUz3jhhdocnKsy4/peG8zV1HVaW6DLEbEmRRtUCUQZcKxUD9atLYa3RZA+YJx+WZdOnTkDuNDNA==}
+  '@next/swc-linux-x64-musl@14.2.26':
+    resolution: {integrity: sha512-BUsomaO4d2DuXhXhgQCVt2jjX4B4/Thts8nDoIruEJkhE5ifeQFtvW5c9JkdOtYvE5p2G0hcwQ0UbRaQmQwaVg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-win32-arm64-msvc@14.2.23':
-    resolution: {integrity: sha512-ezmbgZy++XpIMTcTNd0L4k7+cNI4ET5vMv/oqNfTuSXkZtSA9BURElPFyarjjGtRgZ9/zuKDHoMdZwDZIY3ehQ==}
+  '@next/swc-win32-arm64-msvc@14.2.26':
+    resolution: {integrity: sha512-5auwsMVzT7wbB2CZXQxDctpWbdEnEW/e66DyXO1DcgHxIyhP06awu+rHKshZE+lPLIGiwtjo7bsyeuubewwxMw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
 
-  '@next/swc-win32-ia32-msvc@14.2.23':
-    resolution: {integrity: sha512-zfHZOGguFCqAJ7zldTKg4tJHPJyJCOFhpoJcVxKL9BSUHScVDnMdDuOU1zPPGdOzr/GWxbhYTjyiEgLEpAoFPA==}
+  '@next/swc-win32-ia32-msvc@14.2.26':
+    resolution: {integrity: sha512-GQWg/Vbz9zUGi9X80lOeGsz1rMH/MtFO/XqigDznhhhTfDlDoynCM6982mPCbSlxJ/aveZcKtTlwfAjwhyxDpg==}
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
 
-  '@next/swc-win32-x64-msvc@14.2.23':
-    resolution: {integrity: sha512-xCtq5BD553SzOgSZ7UH5LH+OATQihydObTrCTvVzOro8QiWYKdBVwcB2Mn2MLMo6DGW9yH1LSPw7jS7HhgJgjw==}
+  '@next/swc-win32-x64-msvc@14.2.26':
+    resolution: {integrity: sha512-2rdB3T1/Gp7bv1eQTTm9d1Y1sv9UuJ2LAwOE0Pe2prHKe32UNscj7YS13fRB37d0GAiGNR+Y7ZcW8YjDI8Ns0w==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -2250,8 +2250,8 @@ packages:
     peerDependencies:
       playwright: '>1.0.0'
 
-  axios@1.7.9:
-    resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
+  axios@1.8.4:
+    resolution: {integrity: sha512-eBSYY4Y68NNlHbHBMdeDmKNtDgXWhQsJcGqzO3iLUM0GraQFSS9cVgPX5I9b3lbdFKyYoAEGAZF1DwhTaljNAw==}
 
   axobject-query@4.1.0:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
@@ -2777,8 +2777,8 @@ packages:
     peerDependencies:
       eslint: '>=8.40.0'
 
-  eslint-plugin-react-compiler@19.0.0-beta-e1e972c-20250221:
-    resolution: {integrity: sha512-qdkOo4TJqFfK5td7EVNxDG2zAY44qK+ew7GKZ+nybOS/ONHFVRnluMfC+yjqyBexlfDZJul5ZFzsANJDQa3WSw==}
+  eslint-plugin-react-compiler@19.0.0-beta-e993439-20250328:
+    resolution: {integrity: sha512-7hTFaGMz0YYLtkStJFBHjr2zOZwULxg2qCJ8pNYlaOqq2zL1/+Wg7BiDwrPZQIpAn3YQbBu1SHF509M3qpTyIg==}
     engines: {node: ^14.17.0 || ^16.0.0 || >= 18.0.0}
     peerDependencies:
       eslint: '>=7'
@@ -3947,8 +3947,8 @@ packages:
       next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
 
-  next@14.2.23:
-    resolution: {integrity: sha512-mjN3fE6u/tynneLiEg56XnthzuYw+kD7mCujgVqioxyPqbmiotUCGJpIZGS/VaPg3ZDT1tvWxiVyRzeqJFm/kw==}
+  next@14.2.26:
+    resolution: {integrity: sha512-b81XSLihMwCfwiUVRRja3LphLo4uBBMZEzBBWMaISbKTwOmq3wPknIETy/8000tr7Gq4WmbuFYPS7jOYIf+ZJw==}
     engines: {node: '>=18.17.0'}
     hasBin: true
     peerDependencies:
@@ -4911,14 +4911,20 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typesense-instantsearch-adapter@2.8.0:
-    resolution: {integrity: sha512-2q4QVpHoUV0ncf1XOqIC0dufOTkFRxQ0mHzg//H3WK02ZYqdNNPCAacZODhQlltl1cNJdTI8Y4uuGVd6fJuGzw==}
-    engines: {node: '>=16'}
+  typesense-instantsearch-adapter@2.9.0:
+    resolution: {integrity: sha512-ZSgpi9T/S70Zs2eYIv0VmD0o4+VfBN9jz97Rhbf9Bj+gpUAbjmm46XAobEE2TGs2Wo04hpzCrXifXNJecalC/w==}
+    engines: {node: '>=18'}
     peerDependencies:
-      '@babel/runtime': ^7.17.2
+      '@babel/runtime': ^7.24.1
 
-  typesense@1.8.2:
-    resolution: {integrity: sha512-aBpePjA99Qvo+OP2pJwMpvga4Jrm1Y2oV5NsrWXBxlqUDNEUCPZBIksPv2Hq0jxQxHhLLyJVbjXjByXsvpCDVA==}
+  typesense@2.0.3:
+    resolution: {integrity: sha512-fRJjFdDNZn6qF9XzIk+bB8n8cm0fiAx1SGcpLDfNcsGtp8znITfG+SO+l/qk63GCRXZwJGq7wrMDLFUvblJSHA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@babel/runtime': ^7.23.2
+
+  typesense@2.1.0-2:
+    resolution: {integrity: sha512-P6ExbB30OUmSlizOE0+EnrHhnj9AVy95Ps8K4ybC0EWAxCy4Qrrn9Ps9ISkzv3OnlbYrSKK9NR3iDs4qU88KYg==}
     engines: {node: '>=18'}
     peerDependencies:
       '@babel/runtime': ^7.23.2
@@ -5169,7 +5175,7 @@ snapshots:
       eslint-config-prettier: 9.1.0(eslint@9.20.1(jiti@2.4.2))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.20.1(jiti@2.4.2))
       eslint-plugin-react: 7.37.4(eslint@9.20.1(jiti@2.4.2))
-      eslint-plugin-react-compiler: 19.0.0-beta-e1e972c-20250221(eslint@9.20.1(jiti@2.4.2))
+      eslint-plugin-react-compiler: 19.0.0-beta-e993439-20250328(eslint@9.20.1(jiti@2.4.2))
       eslint-plugin-react-hooks: 5.1.0(eslint@9.20.1(jiti@2.4.2))
     transitivePeerDependencies:
       - eslint
@@ -5201,9 +5207,9 @@ snapshots:
       - eslint-plugin-import
       - supports-color
 
-  '@acdh-oeaw/keystatic-lib@0.5.3(@keystatic/core@0.5.43(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+  '@acdh-oeaw/keystatic-lib@0.5.3(@keystatic/core@0.5.43(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
-      '@keystatic/core': 0.5.43(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@keystatic/core': 0.5.43(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@sindresorhus/slugify': 2.2.1
       '@types/mdx': 2.0.13
 
@@ -5983,7 +5989,7 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@keystar/ui@0.7.15(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@keystar/ui@0.7.15(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.26.0
       '@emotion/css': 11.13.5
@@ -6076,11 +6082,11 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     optionalDependencies:
-      next: 14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - supports-color
 
-  '@keystatic/core@0.5.43(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@keystatic/core@0.5.43(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.26.0
       '@braintree/sanitize-url': 6.0.4
@@ -6088,7 +6094,7 @@ snapshots:
       '@emotion/weak-memoize': 0.3.1
       '@floating-ui/react': 0.24.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@internationalized/string': 3.2.5
-      '@keystar/ui': 0.7.15(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@keystar/ui': 0.7.15(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@markdoc/markdoc': 0.4.0(@types/react@18.3.18)(react@18.3.1)
       '@react-aria/focus': 3.19.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/i18n': 3.12.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6159,13 +6165,13 @@ snapshots:
       - next
       - supports-color
 
-  '@keystatic/next@5.0.2(@keystatic/core@0.5.43(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@keystatic/next@5.0.2(@keystatic/core@0.5.43(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.26.0
-      '@keystatic/core': 0.5.43(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@keystatic/core': 0.5.43(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/react': 18.3.18
       chokidar: 3.6.0
-      next: 14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       server-only: 0.0.1
@@ -6217,37 +6223,37 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@next/env@14.2.23': {}
+  '@next/env@14.2.26': {}
 
   '@next/eslint-plugin-next@14.2.23':
     dependencies:
       glob: 10.3.10
 
-  '@next/swc-darwin-arm64@14.2.23':
+  '@next/swc-darwin-arm64@14.2.26':
     optional: true
 
-  '@next/swc-darwin-x64@14.2.23':
+  '@next/swc-darwin-x64@14.2.26':
     optional: true
 
-  '@next/swc-linux-arm64-gnu@14.2.23':
+  '@next/swc-linux-arm64-gnu@14.2.26':
     optional: true
 
-  '@next/swc-linux-arm64-musl@14.2.23':
+  '@next/swc-linux-arm64-musl@14.2.26':
     optional: true
 
-  '@next/swc-linux-x64-gnu@14.2.23':
+  '@next/swc-linux-x64-gnu@14.2.26':
     optional: true
 
-  '@next/swc-linux-x64-musl@14.2.23':
+  '@next/swc-linux-x64-musl@14.2.26':
     optional: true
 
-  '@next/swc-win32-arm64-msvc@14.2.23':
+  '@next/swc-win32-arm64-msvc@14.2.26':
     optional: true
 
-  '@next/swc-win32-ia32-msvc@14.2.23':
+  '@next/swc-win32-ia32-msvc@14.2.26':
     optional: true
 
-  '@next/swc-win32-x64-msvc@14.2.23':
+  '@next/swc-win32-x64-msvc@14.2.26':
     optional: true
 
   '@nodelib/fs.scandir@2.1.5':
@@ -7918,7 +7924,7 @@ snapshots:
       picocolors: 1.1.1
       playwright: 1.50.0
 
-  axios@1.7.9:
+  axios@1.8.4:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.2
@@ -8540,7 +8546,7 @@ snapshots:
       eslint: 9.20.1(jiti@2.4.2)
       globals: 13.24.0
 
-  eslint-plugin-react-compiler@19.0.0-beta-e1e972c-20250221(eslint@9.20.1(jiti@2.4.2)):
+  eslint-plugin-react-compiler@19.0.0-beta-e993439-20250328(eslint@9.20.1(jiti@2.4.2)):
     dependencies:
       '@babel/core': 7.26.0
       '@babel/parser': 7.26.5
@@ -10132,17 +10138,17 @@ snapshots:
 
   negotiator@1.0.0: {}
 
-  next-intl@3.26.3(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
+  next-intl@3.26.3(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
     dependencies:
       '@formatjs/intl-localematcher': 0.5.10
       negotiator: 1.0.0
-      next: 14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       use-intl: 3.26.3(react@18.3.1)
 
-  next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@next/env': 14.2.23
+      '@next/env': 14.2.26
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
       caniuse-lite: 1.0.30001695
@@ -10152,15 +10158,15 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       styled-jsx: 5.1.1(@babel/core@7.26.0)(react@18.3.1)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 14.2.23
-      '@next/swc-darwin-x64': 14.2.23
-      '@next/swc-linux-arm64-gnu': 14.2.23
-      '@next/swc-linux-arm64-musl': 14.2.23
-      '@next/swc-linux-x64-gnu': 14.2.23
-      '@next/swc-linux-x64-musl': 14.2.23
-      '@next/swc-win32-arm64-msvc': 14.2.23
-      '@next/swc-win32-ia32-msvc': 14.2.23
-      '@next/swc-win32-x64-msvc': 14.2.23
+      '@next/swc-darwin-arm64': 14.2.26
+      '@next/swc-darwin-x64': 14.2.26
+      '@next/swc-linux-arm64-gnu': 14.2.26
+      '@next/swc-linux-arm64-musl': 14.2.26
+      '@next/swc-linux-x64-gnu': 14.2.26
+      '@next/swc-linux-x64-musl': 14.2.26
+      '@next/swc-win32-arm64-msvc': 14.2.26
+      '@next/swc-win32-ia32-msvc': 14.2.26
+      '@next/swc-win32-x64-msvc': 14.2.26
       '@opentelemetry/api': 1.9.0
       '@playwright/test': 1.50.0
     transitivePeerDependencies:
@@ -10586,9 +10592,9 @@ snapshots:
       react: 18.3.1
       use-sync-external-store: 1.4.0(react@18.3.1)
 
-  react-instantsearch-nextjs@0.4.4(next@14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-instantsearch@7.15.3(algoliasearch@5.20.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
+  react-instantsearch-nextjs@0.4.4(next@14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-instantsearch@7.15.3(algoliasearch@5.20.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
-      next: 14.2.23(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 14.2.26(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-instantsearch: 7.15.3(algoliasearch@5.20.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   react-instantsearch@7.15.3(algoliasearch@5.20.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
@@ -11458,18 +11464,28 @@ snapshots:
 
   typescript@5.7.3: {}
 
-  typesense-instantsearch-adapter@2.8.0(@babel/runtime@7.26.0):
+  typesense-instantsearch-adapter@2.9.0(@babel/runtime@7.26.0):
     dependencies:
       '@babel/runtime': 7.26.0
-      typesense: 1.8.2(@babel/runtime@7.26.0)
+      typesense: 2.1.0-2(@babel/runtime@7.26.0)
     transitivePeerDependencies:
       - debug
 
-  typesense@1.8.2(@babel/runtime@7.26.0):
+  typesense@2.0.3(@babel/runtime@7.26.0):
     dependencies:
       '@babel/runtime': 7.26.0
-      axios: 1.7.9
+      axios: 1.8.4
       loglevel: 1.9.2
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - debug
+
+  typesense@2.1.0-2(@babel/runtime@7.26.0):
+    dependencies:
+      '@babel/runtime': 7.26.0
+      axios: 1.8.4
+      loglevel: 1.9.2
+      tslib: 2.8.1
     transitivePeerDependencies:
       - debug
 
