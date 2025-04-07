@@ -82,7 +82,7 @@
           {
             "discriminant": "link",
             "value": {
-              "label": "in a nutshell",
+              "label": "In a Nutshell",
               "link": {
                 "discriminant": "pages",
                 "value": "in-a-nutshell"
