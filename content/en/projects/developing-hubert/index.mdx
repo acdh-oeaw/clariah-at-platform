@@ -1,0 +1,34 @@
+---
+title: >-
+  Developing HuBERT: a Natural Language Processing algorithm for extending the
+  Seshat Global History Databank
+image:
+  src: /assets/content/assets/en/projects/developing-hubert/image/src.png
+  caption: ''
+summary:
+  content: ''
+funding: clariah-at-2022
+responsiblePersons: []
+projectPartners: []
+startDate: 2023-03-01
+endDate: 2024-12-31
+keywords: []
+additionalImages: []
+links: []
+---
+This project addresses the challenges of expanding and increasing the cross-utilization of historical datasets by developing a Natural Language Processing (NLP) algorithm that can help expand current databases and increase the translatability of data across projects. Firstly, the project involves the re-organization of the [**Seshat**](https://seshatdatabank.info/seshat-projects/) Literature Repository, which contains over 8,000 academic articles and books on various cultures and civilizations. This re-organization makes the repository easily and automatically accessible to researchers, increasing the usability of the data contained within it. Secondly, the project develops an algorithm called HuBERT that partially automates document screening and data collection from archaeological and historical materials and existing databases. This helps overcome the challenges of slow data collection and error-prone manual entry, thus increasing the translatability of data across projects and enabling researchers to answer a wider range of research questions. In addition to these contributions, the project includes updates to the project website, tutorials, and other resources to make the data and algorithm accessible to a broad range of researchers across multiple disciplines.
+
+## **Project**
+
+A wide range of historical and archaeological works have documented the dynamics of past complex societies from across the globe. Recent projects have focused on recompiling this information across time for different societies (e.g. Seshat and D-place databases), enabling research from multiple disciplines across the Humanities and Social Sciences. Increasing the usability of these databases and increasing the information on them would allow for many more research questions to be answered.
+
+The main challenge for expanding and increasing the cross-utilization of historical datasets is that data collection is slow and that translating information across projects is tedious and prone to error. It takes many human hours to screen through the existing literature, thoroughly read selected articles, and manually record variables or reenter the information into a different framework. The goal of this project is to develop a Natural Language Processing (NLP) algorithm that can help expand current databases and increase the translatability of data across projects. In particular, we will build upon the recent BERT language model to partially automate document screening and data collection from archeological and historical materials and existing databases.
+
+### **This project is organized in three parts:**
+
+1. Organizing and refining labels of the repository of research articles.\
+   The Seshat team has recompiled more than 8000 academic articles and books on different cultures and civilizations. However, there is currently no structured repository that allows for easy or automatic access. Here we will build the Seshat Literature Repository by updating and organizing the current repository so that access can be automatized. We also refine references to link to the particular paragraph(s) where the information was inferred from. This detailed referencing system allows for other researchers to access the Seshat data more easily and is useful for fine tuning NLP algorithms.
+2. Developing a Natural Language Process to aid data extraction data extraction.\
+   Recent developments in NLP have allowed researchers to train language models with the whole English Wikipedia text corpus. Here we will develop HuBERT, a BERT model fine-tuned with the text of social science and humanities research articles in the Seshat literature repository. In particular we aim for HuBERT to able to both screen research articles and pre-select those that might have information on a specific variable and then allow researchers to query Seshat about variables not yet defined there; i.e. HuBERT will do the pre-selection of articles and identify data suitable for reuse by future researchers.
+3. Maintenance and expansion of documentation and tutorials.\
+   We will continue to update and document the Seshat database and the website. We will add data visualizations and documentation, and tutorials for the Seshat Literature Repository and HuBERT.
