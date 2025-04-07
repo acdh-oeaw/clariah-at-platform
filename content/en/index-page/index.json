@@ -14,8 +14,22 @@
             {
               "discriminant": "event",
               "value": {
-                "title": "ACDH-CH Lecture 8.1",
-                "reference": "acdh-ch-lecture-8-1-the-problem-with-social-media-research"
+                "title": "Workshop on IIIF & Digital Scholarly Editions",
+                "reference": "iiif-in-and-digital-scholarly-editions"
+              }
+            },
+            {
+              "discriminant": "event",
+              "value": {
+                "title": "ÖNB Labs Symposium: Newspapers as Datasets",
+                "reference": "onb-labs-symposium-newspapers-as-datasets"
+              }
+            },
+            {
+              "discriminant": "event",
+              "value": {
+                "title": "CLARIAH-AT Summer School: „Vom Archiv zum Algorithmus. Digital Humanities in der Praxis” ",
+                "reference": "summerschool2024"
               }
             }
           ]
