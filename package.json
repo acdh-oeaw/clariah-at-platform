@@ -20,6 +20,7 @@
 		"lint:code:fix": "pnpm run lint:code:check --fix",
 		"lint:styles:check": "stylelint \"./**/*.css\" --cache --ignore-path ./.gitignore",
 		"lint:styles:fix": "pnpm run lint:styles:check --fix",
+		"migrate:news": "dotenv -c -- tsx ./scripts/content-migration/migrate-news.ts",
 		"typesense:get-sshoc-data": "tsx ./scripts/typesense/get-sshoc-data.ts",
 		"typesense:get-courses": "tsx ./scripts/typesense/get-courses.ts",
 		"typesense:transform-cms-content": "tsx ./scripts/typesense/process-cms-content.ts",
@@ -99,6 +100,8 @@
 		"@react-aria/optimize-locales-plugin": "^1.1.4",
 		"@react-types/shared": "^3.27.0",
 		"@types/hast": "^3.0.4",
+		"@types/js-yaml": "^4.0.9",
+		"@types/mdast": "^4.0.4",
 		"@types/mdx": "^2.0.13",
 		"@types/node": "^22.10.9",
 		"@types/react": "^18.3.18",
@@ -115,11 +118,13 @@
 		"globals": "^15.14.0",
 		"gray-matter": "^4.0.3",
 		"is-ci": "^3.0.1",
+		"js-yaml": "^4.1.0",
 		"lint-staged": "^15.4.2",
 		"npm-run-all2": "^7.0.2",
 		"postcss": "^8.5.1",
 		"prettier": "^3.4.2",
 		"rehype-stringify": "^10.0.1",
+		"remark-mdx": "^3.1.0",
 		"remark-parse": "^11.0.0",
 		"remark-stringify": "^11.0.0",
 		"schema-dts": "^1.1.2",
@@ -132,7 +137,10 @@
 		"tsx": "^4.19.2",
 		"typescript": "^5.7.3",
 		"typescript-eslint": "^8.24.1",
-		"unified": "^11.0.5"
+		"unified": "^11.0.5",
+		"unist-util-visit": "^5.0.0",
+		"vfile": "^6.0.3",
+		"vfile-matter": "^5.0.1"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
