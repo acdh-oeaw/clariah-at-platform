@@ -10,6 +10,15 @@ declare module "@acdh-oeaw/keystatic-lib" {
 }
 
 type InferredConfig = typeof keystaticConfig;
+
+type ExtractCollectionType<T extends string> = T extends `${string}:${infer R}` ? R : never;
+
+type Collection = ExtractCollectionType<keyof InferredConfig["collections"]>;
+
+type Keyword = Entry<InferredConfig["collections"]["de:keywords"]>;
+type Person = Entry<InferredConfig["collections"]["de:persons"]>;
+type Organisation = Entry<InferredConfig["collections"]["de:organisations"]>;
+
 type IndexPage = Entry<InferredConfig["singletons"]["de:index-page"]>;
 
 export type HeroSectionProps = IndexPage["hero"];
@@ -21,4 +30,6 @@ type ExtractCardSection = Extract<
 >["value"] & { locale: Locale };
 
 export type CardSectionProps = Omit<ExtractCardSection, "id">;
-export type CardProps = ExtractCardSection["cards"][number]["value"];
+export type CardProps = ExtractCardSection["cards"][number]["value"] & {
+	discriminent: ExtractCardSection["cards"][number]["discriminant"];
+};
