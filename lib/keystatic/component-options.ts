@@ -45,6 +45,7 @@ export const linkKinds = [
 	{ label: "Projects", value: "projects" },
 	{ label: "Projects overview", value: "projects-overview" },
 	{ label: "Pages", value: "pages" },
+	{ label: "Resources", value: "resources" },
 	{ label: "Search", value: "search" },
 ] as const;
 

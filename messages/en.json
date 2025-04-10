@@ -22,7 +22,8 @@
 	},
 	"AppHeader": {
 		"links": {
-			"home": "Home"
+			"home": "Home",
+			"search": "Search"
 		},
 		"navigation-menu": "Navigation menu",
 		"navigation-menu-close": "Close navigation menu",

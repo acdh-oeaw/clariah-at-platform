@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Keyword } from "@/app/(app)/[locale]/search/_components/keyword";
+import { Keyword } from "@/app/(app)/[locale]/_components/search/keyword";
 
 interface KeywordsProps {
 	keywords: Array<string>;

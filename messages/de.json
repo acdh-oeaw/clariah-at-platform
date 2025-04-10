@@ -22,7 +22,8 @@
 	},
 	"AppHeader": {
 		"links": {
-			"home": "Startseite"
+			"home": "Startseite",
+			"search": "Suche"
 		},
 		"navigation-menu": "Navigationsmenü",
 		"navigation-menu-close": "Navigationsmenü schließen",
