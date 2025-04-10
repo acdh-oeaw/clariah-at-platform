@@ -1,3 +1,4 @@
+import typographyPlugin from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import animatePlugin from "tailwindcss-animate";
 import reactAriaComponentsPlugin from "tailwindcss-react-aria-components";
@@ -14,7 +15,7 @@ const config = {
 			"&:where(.kui-theme.kui-scheme--dark, .kui-theme.kui-scheme--dark *)",
 		],
 	],
-	plugins: [animatePlugin, reactAriaComponentsPlugin],
+	plugins: [animatePlugin, reactAriaComponentsPlugin, typographyPlugin],
 	theme: {
 		extend: {
 			borderRadius: {

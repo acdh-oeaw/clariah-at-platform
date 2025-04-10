@@ -35,6 +35,7 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 									{
 										<Card
 											className="grid h-full grid-rows-[13rem,auto]"
+											discriminent="custom"
 											locale={locale}
 											{...card.value}
 										/>
@@ -52,9 +53,31 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 									{
 										<Card
 											className="grid h-full grid-rows-[13rem,auto]"
+											discriminent="news"
 											{...news.data}
 											link={link}
 											locale={locale}
+										/>
+									}
+								</li>
+							);
+						}
+						case "organisation": {
+							const id = card.value.reference;
+							const organisation = await createCollectionResource("organisations", locale).read(id);
+							const link = { label: "", href: `/organisations/${id}` };
+
+							return (
+								<li key={id}>
+									{
+										<Card
+											className="grid h-full grid-rows-[13rem,auto]"
+											discriminent="organisation"
+											{...organisation.data}
+											link={link}
+											locale={locale}
+											summary={{ content: organisation.data.description, title: "" }}
+											title={organisation.data.name}
 										/>
 									}
 								</li>
@@ -68,10 +91,30 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 								<li key={id}>
 									<Card
 										className="grid h-full grid-rows-[13rem,auto] "
+										discriminent="page"
 										link={link}
 										locale={locale}
 										{...page.data}
 									/>
+								</li>
+							);
+						}
+						case "project": {
+							const id = card.value.reference;
+							const project = await createCollectionResource("projects", locale).read(id);
+							const link = { label: "", href: `/projects/${id}` };
+
+							return (
+								<li key={id}>
+									{
+										<Card
+											className="grid h-full grid-rows-[13rem,auto]"
+											discriminent="project"
+											{...project.data}
+											link={link}
+											locale={locale}
+										/>
+									}
 								</li>
 							);
 						}
@@ -83,6 +126,7 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 								<li key={id}>
 									<Card
 										className="grid h-full grid-rows-[13rem,auto]"
+										discriminent="event"
 										{...event.data}
 										link={link}
 										locale={locale}

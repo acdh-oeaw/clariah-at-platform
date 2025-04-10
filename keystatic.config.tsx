@@ -20,6 +20,7 @@ import {
 	createMetadata,
 	createNavigation,
 	createNewsOverview,
+	createNutshell,
 	createProjectsOverview,
 	createSearch,
 } from "@/lib/keystatic/singletons";
@@ -65,6 +66,9 @@ export default config({
 
 		[withI18nPrefix("news-overview", "de")]: createNewsOverview("de"),
 		[withI18nPrefix("news-overview", "en")]: createNewsOverview("en"),
+
+		[withI18nPrefix("in-a-nutshell", "de")]: createNutshell("de"),
+		[withI18nPrefix("in-a-nutshell", "en")]: createNutshell("en"),
 
 		[withI18nPrefix("projects-overview", "de")]: createProjectsOverview("de"),
 		[withI18nPrefix("projects-overview", "en")]: createProjectsOverview("en"),
@@ -112,6 +116,9 @@ export default config({
 			}),
 			"News Overview": locales.map((locale) => {
 				return withI18nPrefix("news-overview", locale);
+			}),
+			"In a Nutshell": locales.map((locale) => {
+				return withI18nPrefix("in-a-nutshell", locale);
 			}),
 			Organisations: locales.map((locale) => {
 				return withI18nPrefix("organisations", locale);

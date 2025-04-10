@@ -34,6 +34,10 @@ export function getLinkProps(params: LinkSchema) {
 			return { href: "/news" };
 		}
 
+		case "in-a-nutshell": {
+			return { href: "/in-a-nutshell" };
+		}
+
 		case "projects": {
 			return { href: `/projects/${params.value}/` };
 		}

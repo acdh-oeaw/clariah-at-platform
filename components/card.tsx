@@ -19,6 +19,7 @@ type CardComponentProps = CardProps & {
 		content: string;
 	};
 	title: string;
+	endDate?: string | null;
 	startDate?: string | null;
 	locale: Locale;
 	location?: string;
@@ -27,7 +28,18 @@ type CardComponentProps = CardProps & {
 export function Card(props: Readonly<CardComponentProps>): ReactNode {
 	const _t = useTranslations("Card");
 
-	const { className, link, locale, location, summary, startDate, title, ...rest } = props;
+	const {
+		className,
+		discriminent,
+		endDate,
+		link,
+		locale,
+		location,
+		summary,
+		startDate,
+		title,
+		...rest
+	} = props;
 
 	const defaultClassNames =
 		"relative overflow-hidden rounded-4 border border-stroke-weak bg-background-raised shadow-raised hover:shadow-overlay";
@@ -37,7 +49,10 @@ export function Card(props: Readonly<CardComponentProps>): ReactNode {
 			{"image" in rest ? (
 				<Image
 					alt=""
-					className="size-full border-b border-stroke-weak object-cover"
+					className={cn("size-full border-b border-stroke-weak", {
+						"object-cover": discriminent !== "organisation",
+						"object-contain": discriminent === "organisation",
+					})}
 					height={300}
 					/** Preload image because it's the largest contentful paint (lcp) element. */
 					priority={true}
@@ -56,11 +71,17 @@ export function Card(props: Readonly<CardComponentProps>): ReactNode {
 					</h3>
 					{startDate ? (
 						<p className="grow text-small text-text-weak">
-							<DateComponent date={startDate} dateLocale={locale} />
+							<span>
+								<DateComponent date={startDate} dateLocale={locale} />
+								{endDate ? " - " : null}
+								{endDate ? <DateComponent date={endDate} dateLocale={locale} /> : null}
+							</span>
 						</p>
 					) : null}
 					{location ? <p className="grow text-small text-text-weak">{location}</p> : null}
-					<p className="grow text-small text-text-weak">{summary.content}</p>
+					<div>
+						<p className="line-clamp-3 grow text-small text-text-weak">{summary.content}</p>
+					</div>
 					<footer>
 						{link !== undefined && (
 							<Link

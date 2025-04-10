@@ -68,6 +68,13 @@
 		},
 		"title": "Page not found"
 	},
+	"ProjectPage": {
+		"keywords": "Keywords",
+		"project-start": "start",
+		"project-end": "end",
+		"partners": "project partners",
+		"responsible-persons": "responsible persons"
+	},
 	"Card": {
 		"read-more": "Read more"
 	}

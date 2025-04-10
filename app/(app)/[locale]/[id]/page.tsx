@@ -69,7 +69,7 @@ export default async function ContentPage(props: Readonly<ContentPageProps>): Pr
 
 		return (
 			<MainContent className="layout-grid content-start">
-				<section className="layout-subgrid relative py-16 xs:py-24">
+				<section className="layout-subgrid prose relative py-16 xs:py-24">
 					<h1 className="text-balance font-heading text-heading-1 font-strong text-text-strong">
 						{page.data.title}
 					</h1>
