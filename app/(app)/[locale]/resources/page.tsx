@@ -7,7 +7,7 @@ import { MainContent } from "@/components/main-content";
 import type { Locale } from "@/config/i18n.config";
 import { createSingletonResource } from "@/lib/keystatic/resources";
 
-interface SearchPageProps {
+interface ResourcesPageProps {
 	params: {
 		locale: Locale;
 	};
@@ -17,23 +17,25 @@ interface SearchPageProps {
 	}>;
 }
 export async function generateMetadata(
-	props: Readonly<SearchPageProps>,
+	props: Readonly<ResourcesPageProps>,
 	_parent: ResolvingMetadata,
 ): Promise<Metadata> {
 	const { params } = props;
 
 	const { locale } = params;
 
-	const search = await createSingletonResource("search", locale).read();
+	const resources = await createSingletonResource("resources", locale).read();
 
 	const metadata: Metadata = {
-		title: search.data.title,
+		title: resources.data.title,
 	};
 
 	return metadata;
 }
 
-export default async function SearchPage(props: Readonly<SearchPageProps>): Promise<ReactNode> {
+export default async function ResourcesPage(
+	props: Readonly<ResourcesPageProps>,
+): Promise<ReactNode> {
 	const { params } = props;
 
 	const { locale } = params;
@@ -42,8 +44,8 @@ export default async function SearchPage(props: Readonly<SearchPageProps>): Prom
 		const query = searchParams?.query || "";
 		const currentPage = Number(searchParams?.page) || 1;*/
 
-	const search = await createSingletonResource("search", locale).read();
-	const { title, lead } = search.data;
+	const resources = await createSingletonResource("resources", locale).read();
+	const { title, lead } = resources.data;
 
 	setRequestLocale(locale);
 
@@ -55,7 +57,7 @@ export default async function SearchPage(props: Readonly<SearchPageProps>): Prom
 				</h1>
 				<p>{lead}</p>
 				<section className="py-16 xs:py-24">
-					<Search locale={locale} />
+					<Search content="resources" locale={locale} />
 				</section>
 			</section>
 		</MainContent>

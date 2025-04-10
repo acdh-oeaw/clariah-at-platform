@@ -30,9 +30,9 @@
     {
       "discriminant": "link",
       "value": {
-        "label": "Suche (aka. Ressourcen)",
+        "label": "Ressourcen",
         "link": {
-          "discriminant": "search"
+          "discriminant": "resources"
         }
       }
     },

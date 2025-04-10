@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useHits, type UseHitsProps } from "react-instantsearch";
 
-import { Hit } from "@/app/(app)/[locale]/search/_components/hit";
+import { Hit } from "@/app/(app)/[locale]/_components/search/hit";
 import type { Resource } from "@/types/resources";
 
 interface HitsProps extends UseHitsProps<Resource> {}

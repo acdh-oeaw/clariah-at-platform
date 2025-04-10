@@ -1,12 +1,18 @@
 import type { ReactNode } from "react";
 import { RefinementList } from "react-instantsearch";
 
+interface FilterProps {
+	content?: string;
+}
+
 const FILTERS = [
 	{ value: "kind", label: "Kind" },
 	{ value: "keywords", label: "Keywords" },
 ];
 
-export function Filters(): ReactNode {
+export function Filters(props: FilterProps): ReactNode {
+	const { content } = props;
+
 	return (
 		<>
 			{FILTERS.map((filter, idx) => {
@@ -21,6 +27,7 @@ export function Filters(): ReactNode {
 								labelText: "ps-1",
 								count: "ml-auto",
 							}}
+							content={content}
 						/>
 					</div>
 				);

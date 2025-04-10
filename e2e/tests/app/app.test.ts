@@ -164,13 +164,13 @@ test.describe("app", () => {
 					name: i18n.t("AppHeader.links.home"),
 				})
 				.first();
-			const searchLink = indexPage.page.getByRole("navigation").locator('a[href$="/search"]');
+			const searchLink = indexPage.page.getByRole("navigation").locator('a[href$="/resources"]');
 
 			await expect(homeLink).toHaveAttribute("aria-current", "page");
 			await expect(searchLink).not.toHaveAttribute("aria-current", "page");
 
 			await searchLink.click();
-			await page.waitForURL("**/search");
+			await page.waitForURL("**/resources");
 
 			await expect(homeLink).not.toHaveAttribute("aria-current", "page");
 			await expect(searchLink).toHaveAttribute("aria-current", "page");
@@ -192,13 +192,13 @@ test.describe("app", () => {
 					name: i18n.t("AppHeader.links.home"),
 				})
 				.first();
-			const searchLink = indexPage.page.getByRole("dialog").locator('a[href$="/search"]');
+			const searchLink = indexPage.page.getByRole("dialog").locator('a[href$="/resources"]');
 
 			await expect(homeLink).toHaveAttribute("aria-current", "page");
 			await expect(searchLink).not.toHaveAttribute("aria-current", "page");
 
 			await searchLink.click();
-			await page.waitForURL("**/search");
+			await page.waitForURL("**/resources");
 
 			await indexPage.page.getByRole("navigation").getByRole("button").click();
 

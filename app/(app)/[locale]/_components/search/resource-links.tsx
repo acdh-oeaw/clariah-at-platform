@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { ResourceLink } from "@/app/(app)/[locale]/search/_components/resource-link";
+import { ResourceLink } from "@/app/(app)/[locale]/_components/search/resource-link";
 import type { Link } from "@/types/resources";
 
 interface ResourceLinksProps {

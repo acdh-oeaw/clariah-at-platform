@@ -50,6 +50,10 @@ export function getLinkProps(params: LinkSchema) {
 			return { href: `/${params.value}` };
 		}
 
+		case "resources": {
+			return { href: `/resources` };
+		}
+
 		case "search": {
 			return { href: `/search` };
 		}

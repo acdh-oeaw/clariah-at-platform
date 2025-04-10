@@ -32,7 +32,7 @@
       "value": {
         "label": "Resources",
         "link": {
-          "discriminant": "search"
+          "discriminant": "resources"
         }
       }
     },

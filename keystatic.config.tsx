@@ -22,6 +22,7 @@ import {
 	createNewsOverview,
 	createNutshell,
 	createProjectsOverview,
+	createResources,
 	createSearch,
 } from "@/lib/keystatic/singletons";
 
@@ -72,6 +73,9 @@ export default config({
 
 		[withI18nPrefix("projects-overview", "de")]: createProjectsOverview("de"),
 		[withI18nPrefix("projects-overview", "en")]: createProjectsOverview("en"),
+
+		[withI18nPrefix("resources", "de")]: createResources("de"),
+		[withI18nPrefix("resources", "en")]: createResources("en"),
 
 		[withI18nPrefix("search", "de")]: createSearch("de"),
 		[withI18nPrefix("search", "en")]: createSearch("en"),
@@ -140,6 +144,9 @@ export default config({
 			}),
 			Metadata: locales.map((locale) => {
 				return withI18nPrefix("metadata", locale);
+			}),
+			Resources: locales.map((locale) => {
+				return withI18nPrefix("resources", locale);
 			}),
 			Search: locales.map((locale) => {
 				return withI18nPrefix("search", locale);

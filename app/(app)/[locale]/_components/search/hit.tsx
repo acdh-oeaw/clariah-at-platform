@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
-import { Keywords } from "@/app/(app)/[locale]/search/_components/keywords";
-import { ResourceLinks } from "@/app/(app)/[locale]/search/_components/resource-links";
+import { Keywords } from "@/app/(app)/[locale]/_components/search/keywords";
+import { ResourceLinks } from "@/app/(app)/[locale]/_components/search/resource-links";
 import type { Resource } from "@/types/resources";
 
 export function Hit(props: Resource): ReactNode {
