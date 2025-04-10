@@ -64,6 +64,7 @@ export default async function NewsOverviewPage(
 							<li key={id}>
 								<Card
 									className="grid h-full grid-rows-[13rem,auto]"
+									discriminent="news"
 									{...newsItem.data}
 									link={link}
 									locale={locale}

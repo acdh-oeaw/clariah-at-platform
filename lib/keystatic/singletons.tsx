@@ -196,11 +196,11 @@ export const createIndexPage = createSingleton("/index-page/", (paths, locale) =
 															reference: fields.relationship({
 																label: "Organisation",
 																validation: { isRequired: true },
-																collection: withI18nPrefix("organisation", locale),
+																collection: withI18nPrefix("organisations", locale),
 															}),
 														},
 														{
-															label: "News card",
+															label: "Organisation card",
 														},
 													),
 												},
@@ -223,6 +223,28 @@ export const createIndexPage = createSingleton("/index-page/", (paths, locale) =
 														},
 														{
 															label: "Page card",
+														},
+													),
+												},
+												project: {
+													label: "Project card",
+													itemLabel(props) {
+														return props.fields.title.value;
+													},
+													schema: fields.object(
+														{
+															title: fields.text({
+																label: "Title",
+																validation: { isRequired: true },
+															}),
+															reference: fields.relationship({
+																label: "Project",
+																validation: { isRequired: true },
+																collection: withI18nPrefix("projects", locale),
+															}),
+														},
+														{
+															label: "Project card",
 														},
 													),
 												},

@@ -99,6 +99,25 @@ export function CardSection(props: Readonly<CardSectionComponentProps>): ReactNo
 								</li>
 							);
 						}
+						case "project": {
+							const id = card.value.reference;
+							const project = await createCollectionResource("projects", locale).read(id);
+							const link = { label: "", href: `/projects/${id}` };
+
+							return (
+								<li key={id}>
+									{
+										<Card
+											className="grid h-full grid-rows-[13rem,auto]"
+											discriminent="project"
+											{...project.data}
+											link={link}
+											locale={locale}
+										/>
+									}
+								</li>
+							);
+						}
 						case "event": {
 							const id = card.value.reference;
 							const event = await createCollectionResource("events", locale).read(id);
