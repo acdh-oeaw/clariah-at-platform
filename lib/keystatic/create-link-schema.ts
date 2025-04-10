@@ -47,6 +47,7 @@ export function createLinkSchema<TPath extends `/${string}/`>(
 			"index-page": fields.empty(),
 			"events-overview": fields.empty(),
 			"news-overview": fields.empty(),
+			"in-a-nutshell": fields.empty(),
 			"projects-overview": fields.empty(),
 			search: fields.empty(),
 		},

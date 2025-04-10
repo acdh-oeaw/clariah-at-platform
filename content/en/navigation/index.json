@@ -84,8 +84,7 @@
             "value": {
               "label": "In a Nutshell",
               "link": {
-                "discriminant": "pages",
-                "value": "in-a-nutshell"
+                "discriminant": "in-a-nutshell"
               }
             }
           },

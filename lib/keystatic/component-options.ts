@@ -41,6 +41,7 @@ export const linkKinds = [
 	{ label: "Events overview", value: "events-overview" },
 	{ label: "News", value: "news" },
 	{ label: "News overview", value: "news-overview" },
+	{ label: "In a nutshell", value: "in-a-nutshell" },
 	{ label: "Projects", value: "projects" },
 	{ label: "Projects overview", value: "projects-overview" },
 	{ label: "Pages", value: "pages" },

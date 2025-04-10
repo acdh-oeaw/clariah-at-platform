@@ -1,11 +1,21 @@
 import {
 	createAssetOptions,
+	createContentFieldOptions,
 	createLabel,
 	createSingleton,
 	withI18nPrefix,
 } from "@acdh-oeaw/keystatic-lib";
 import { fields, singleton } from "@keystatic/core";
 
+import {
+	createFigure,
+	createFootnote,
+	createGrid,
+	createHeadingId,
+	createLink,
+	createLinkButton,
+	createVideo,
+} from "@/lib/keystatic/components";
 import { createLinkSchema } from "@/lib/keystatic/create-link-schema";
 import * as validation from "@/lib/keystatic/validation";
 
@@ -172,6 +182,28 @@ export const createIndexPage = createSingleton("/index-page/", (paths, locale) =
 														},
 													),
 												},
+												organisation: {
+													label: "Organisation card",
+													itemLabel(props) {
+														return props.fields.title.value;
+													},
+													schema: fields.object(
+														{
+															title: fields.text({
+																label: "Title",
+																validation: { isRequired: true },
+															}),
+															reference: fields.relationship({
+																label: "Organisation",
+																validation: { isRequired: true },
+																collection: withI18nPrefix("organisation", locale),
+															}),
+														},
+														{
+															label: "News card",
+														},
+													),
+												},
 												page: {
 													label: "Page card",
 													itemLabel(props) {
@@ -254,6 +286,41 @@ export const createNewsOverview = createSingleton("/news-overview/", (paths, loc
 				label: "Lead",
 				validation: { isRequired: true },
 				multiline: true,
+			}),
+		},
+	});
+});
+
+export const createNutshell = createSingleton("/in-a-nutshell/", (paths, locale) => {
+	return singleton({
+		label: createLabel("In a Nutshell", locale),
+		path: paths.contentPath,
+		format: { data: "json" },
+		entryLayout: "form",
+		schema: {
+			title: fields.text({
+				label: "Title",
+				validation: { isRequired: true },
+			}),
+			lead: fields.mdx.inline({
+				label: "Lead",
+			}),
+			content: fields.mdx({
+				label: "Content",
+				options: createContentFieldOptions(paths),
+				components: {
+					//...createAvatar(paths, locale),
+					//...createDownloadButton(paths, locale),
+					...createFigure(paths, locale),
+					...createFootnote(paths, locale),
+					...createGrid(paths, locale),
+					...createHeadingId(paths, locale),
+					//...createImageLink(paths, locale),
+					...createLink(paths, locale),
+					...createLinkButton(paths, locale),
+					//...createTweet(paths, locale),
+					...createVideo(paths, locale),
+				},
 			}),
 		},
 	});
