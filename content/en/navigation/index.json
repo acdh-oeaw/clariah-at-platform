@@ -60,16 +60,6 @@
                 "value": "community-board"
               }
             }
-          },
-          {
-            "discriminant": "link",
-            "value": {
-              "label": "Outreach",
-              "link": {
-                "discriminant": "pages",
-                "value": "outreach"
-              }
-            }
           }
         ]
       }
@@ -105,6 +95,26 @@
               "link": {
                 "discriminant": "pages",
                 "value": "how-to-join"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Downloads",
+              "link": {
+                "discriminant": "pages",
+                "value": "downloads"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Contact",
+              "link": {
+                "discriminant": "pages",
+                "value": "contact"
               }
             }
           }
