@@ -102,6 +102,16 @@
           {
             "discriminant": "link",
             "value": {
+              "label": "Aktivitäten",
+              "link": {
+                "discriminant": "pages",
+                "value": "activities"
+              }
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
               "label": "Vision & Strategie",
               "link": {
                 "discriminant": "pages",
