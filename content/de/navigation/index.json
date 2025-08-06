@@ -54,17 +54,17 @@
           {
             "discriminant": "link",
             "value": {
-              "label": "Community Schools",
+              "label": "Success Stories",
               "link": {
                 "discriminant": "pages",
-                "value": "demo-seite-1"
+                "value": "success-stories"
               }
             }
           },
           {
             "discriminant": "link",
             "value": {
-              "label": "Fallstudien, Blogposts und Interviews",
+              "label": "Community Schools",
               "link": {
                 "discriminant": "pages",
                 "value": "demo-seite-1"
