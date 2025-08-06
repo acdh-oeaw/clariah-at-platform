@@ -54,10 +54,10 @@
           {
             "discriminant": "link",
             "value": {
-              "label": "Community Board",
+              "label": "Success Stories",
               "link": {
                 "discriminant": "pages",
-                "value": "community-board"
+                "value": "success-stories"
               }
             }
           }
