@@ -1,3 +1,4 @@
+import { compareDesc, parseISO } from "date-fns";
 import type { Metadata, ResolvingMetadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
@@ -56,22 +57,29 @@ export default async function NewsOverviewPage(
 					className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,18rem),1fr))] gap-8"
 					role="list"
 				>
-					{news.map(async (newsobj) => {
-						const id = newsobj.id;
-						const newsItem = await createCollectionResource("news", locale).read(id);
-						const link = { label: "", href: `/news/${id}` };
-						return (
-							<li key={id}>
-								<Card
-									className="grid h-full grid-rows-[13rem,auto]"
-									discriminent="news"
-									{...newsItem.data}
-									link={link}
-									locale={locale}
-								></Card>
-							</li>
-						);
-					})}
+					{news
+						.sort((newsObjA, newsObjB) => {
+							return compareDesc(
+								parseISO(newsObjA.data.publicationDate),
+								parseISO(newsObjB.data.publicationDate),
+							);
+						})
+						.map(async (newsobj) => {
+							const id = newsobj.id;
+							const newsItem = await createCollectionResource("news", locale).read(id);
+							const link = { label: "", href: `/news/${id}` };
+							return (
+								<li key={id}>
+									<Card
+										className="grid h-full grid-rows-[13rem,auto]"
+										discriminent="news"
+										{...newsItem.data}
+										link={link}
+										locale={locale}
+									></Card>
+								</li>
+							);
+						})}
 				</ul>
 			</section>
 		</MainContent>
