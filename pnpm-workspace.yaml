@@ -1,5 +1,6 @@
 ignoredBuiltDependencies:
   - unrs-resolver
+  - typesense-instantsearch-adapter
 onlyBuiltDependencies:
   - esbuild
   - sharp
