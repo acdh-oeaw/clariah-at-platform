@@ -7,7 +7,7 @@
 		"node": "22.x",
 		"pnpm": "10.x"
 	},
-	"packageManager": "pnpm@10.3.0",
+	"packageManager": "pnpm@10.19.0",
 	"scripts": {
 		"analyze": "BUNDLE_ANALYZER=\"enabled\" next build --no-lint",
 		"build": "next build",
@@ -142,14 +142,6 @@
 		"unist-util-visit": "^5.0.0",
 		"vfile": "^6.0.3",
 		"vfile-matter": "^5.0.1"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild",
-			"sharp",
-			"simple-git-hooks",
-			"typesense-instantsearch-adapter"
-		]
 	},
 	"browserslist": {
 		"development": [
