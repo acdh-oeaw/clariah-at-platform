@@ -6,6 +6,131 @@ msgstr ""
 "X-Generator: next-intl\n"
 "X-Crowdin-SourceKey: msgstr\n"
 
+#: app/(app)/[locale]/_components/footer.tsx
+msgid "GjpoLa"
+msgstr "Konsortiumssprecher"
+
+#: app/(app)/[locale]/_components/header.tsx
+msgid "EFTSMc"
+msgstr "Main"
+
+#: app/(app)/[locale]/_components/header.tsx
+#: app/(app)/[locale]/not-found.tsx
+#: app/global-not-found.tsx
+msgid "dhPnn6"
+msgstr "Startseite"
+
+#: app/(app)/[locale]/_components/header.tsx
+msgid "45F_7Z"
+msgstr "Schließen"
+
+#: app/(app)/[locale]/_components/header.tsx
+msgid "MX7Sye"
+msgstr "Menu öffnen"
+
+#: app/(app)/[locale]/_components/header.tsx
+msgid "se6p67"
+msgstr "Sprache"
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+msgid "xmcVZ0"
+msgstr "Search"
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+msgid "U290Kk"
+msgstr "Search is currently unavailable."
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+msgid "V5JQj-"
+msgstr "No results found."
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+msgid "yjSdJl"
+msgstr "Search results pages"
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+msgid "k9hDFZ"
+msgstr "Previous page"
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+msgid "vjVTMR"
+msgstr "{page} of {total}"
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+msgid "rBj9Ib"
+msgstr "Next page"
+
+#: app/(app)/[locale]/(default)/(index)/_components/featured-section.tsx
+msgid "K3ZDoV"
+msgstr "Alle Artikel anzeigen"
+
 #: app/(app)/[locale]/(default)/(index)/page.tsx
-msgid "bdN6eZ"
-msgstr "Hallo, Welt!"
+#: app/(app)/[locale]/(default)/news/[slug]/page.tsx
+#: app/(app)/[locale]/(default)/news/page.tsx
+msgid "yhG18j"
+msgstr "Aktuelles"
+
+#: app/(app)/[locale]/(default)/(index)/page.tsx
+#: app/(app)/[locale]/(default)/events/[slug]/page.tsx
+#: app/(app)/[locale]/(default)/events/page.tsx
+msgid "ZvKSfJ"
+msgstr "Events"
+
+#: app/(app)/[locale]/(default)/(index)/page.tsx
+#: app/(app)/[locale]/(default)/projects/[slug]/page.tsx
+#: app/(app)/[locale]/(default)/projects/page.tsx
+msgid "x9x-dX"
+msgstr "Projekte"
+
+#: app/(app)/[locale]/(default)/layout.tsx
+msgid "DBsIRX"
+msgstr "Zum Hauptinhalt springen"
+
+#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
+#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
+msgid "am5jN9"
+msgstr "Filter {label}"
+
+#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
+#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
+msgid "JIdm6T"
+msgstr "Filter…"
+
+#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
+#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
+msgid "_vMjUJ"
+msgstr "Nothing found."
+
+#: app/(app)/[locale]/(default)/resources/page.tsx
+#: app/(app)/[locale]/(default)/search/page.tsx
+msgid "qi41lO"
+msgstr "Suche"
+
+#: app/(app)/[locale]/not-found.tsx
+#: app/global-not-found.tsx
+msgid "QRccCM"
+msgstr "Page not found"
+
+#: app/(app)/[locale]/not-found.tsx
+#: app/global-not-found.tsx
+msgid "IbI6Uw"
+msgstr "Fehler 404"
+
+#: app/(app)/[locale]/not-found.tsx
+#: app/global-not-found.tsx
+msgid "gifeZv"
+msgstr "Die aufgerufene Seite konnte nicht gefunden werden. Sie wurde möglicherweise verschoben, umbenannt oder hat nie existiert."
+
+#: app/(app)/[locale]/not-found.tsx
+#: app/global-not-found.tsx
+msgid "m-qkrg"
+msgstr "Zurück zur Startseite"
+
+#: app/(app)/[locale]/not-found.tsx
+#: app/global-not-found.tsx
+msgid "Xnd9v7"
+msgstr "Seite nicht gefunden"
+
+#: components/card.tsx
+msgid "iwRrPy"
+msgstr "mehr lesen"

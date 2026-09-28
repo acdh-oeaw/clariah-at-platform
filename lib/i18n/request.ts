@@ -1,9 +1,8 @@
 import { type GetRequestConfigParams, getRequestConfig } from "next-intl/server";
-import { notFound } from "next/navigation";
-import * as rootParams from "next/root-params";
+import { locale } from "next/root-params";
 
 import { formats } from "#/lib/i18n/formats.ts";
-import { type IntlLocale, isValidLocale, timeZone } from "#/lib/i18n/locales.ts";
+import { type IntlLocale, defaultLocale, isValidLocale, timeZone } from "#/lib/i18n/locales.ts";
 import { getIntlMessages } from "#/lib/i18n/messages.ts";
 
 async function getIntlLocale(params: GetRequestConfigParams): Promise<IntlLocale> {
@@ -11,13 +10,9 @@ async function getIntlLocale(params: GetRequestConfigParams): Promise<IntlLocale
 		return params.locale;
 	}
 
-	const locale = await rootParams.locale();
+	const curLocale = await locale();
 
-	if (isValidLocale(locale)) {
-		return locale;
-	}
-
-	notFound();
+	return isValidLocale(curLocale) ? curLocale : defaultLocale;
 }
 
 // oxlint-disable-next-line import/no-default-export

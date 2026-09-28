@@ -18,6 +18,8 @@
 		"format:check": "oxfmt --check",
 		"format:fix": "oxfmt --write",
 		"generate:openapi": "bun ./scripts/openapi/generate.ts",
+		"i18n:convert-messages": "tsx ./scripts/i18n/convert-messages.ts",
+		"i18n:extract-messages": "tsx ./scripts/i18n/extract-messages.ts",
 		"lint:check": "bun run --parallel lint:code:check lint:styles:check",
 		"lint:code:check": "oxlint --report-unused-disable-directives --type-aware --type-check",
 		"lint:code:fix": "oxlint --fix --report-unused-disable-directives --type-aware --type-check",
@@ -36,6 +38,7 @@
 	},
 	"dependencies": {
 		"@acdh-oeaw/lib": "^1.0.7",
+		"@acdh-oeaw/style-variants": "^0.1.0",
 		"@internationalized/date": "^3.12.3",
 		"@tiptap/core": "^3.30.2",
 		"@tiptap/extension-heading": "^3.30.2",
@@ -51,20 +54,24 @@
 		"next": "^16.3.2",
 		"next-intl": "^4.13.7",
 		"react": "^19.2.8",
+		"react-aria": "^3.48.0",
 		"react-aria-components": "^1.20.0",
 		"react-dom": "^19.2.8",
+		"react-multi-carousel": "^2.8.6",
 		"react-schemaorg": "^2.0.1",
 		"server-only": "^0.0.1",
 		"sharp": "^0.35.3",
+		"tsx": "4.23.13",
 		"typesense": "^3.0.6",
 		"valibot": "^1.4.2",
 		"xast-util-feed": "^2.0.0",
 		"xast-util-to-xml": "^4.0.0"
 	},
 	"devDependencies": {
+		"@dotenvx/dotenvx": "^2.30.0",
 		"@eloqnt/cli": "^0.6.17",
-		"@playwright/cli": "^0.1.18",
-		"@playwright/test": "^1.62.1",
+		"@playwright/cli": "^0.1.21",
+		"@playwright/test": "^1.63.0",
 		"@tailwindcss/turbopack": "^4.3.3",
 		"@tailwindcss/typography": "^0.5.20",
 		"@types/bun": "^1.4.0",
@@ -81,6 +88,8 @@
 		"oxfmt": "^0.64.0",
 		"oxlint": "^1.79.0",
 		"oxlint-tsgolint": "^7.0.2001",
+		"playwright": "^1.63.0",
+		"po-parser": "^2.2.0",
 		"schema-dts": "^2.0.0",
 		"stylelint": "^17.14.1",
 		"stylelint-order": "^8.1.1",
@@ -110,5 +119,6 @@
 			"version": "^1.4.0",
 			"onFail": "download"
 		}
-	}
+	},
+	"packageManager": "pnpm@11.22.0"
 }

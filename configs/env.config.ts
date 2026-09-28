@@ -34,7 +34,6 @@ const validate = define({
 		NEXT_RUNTIME: v.optional(v.picklist(["edge", "nodejs"])),
 		PORT: v.optional(v.pipe(v.string(), v.toNumber(), v.integer(), v.minValue(1))),
 		REVALIDATION_WEBHOOK_SECRET: v.optional(v.pipe(v.string(), v.nonEmpty())),
-		TYPESENSE_ADMIN_API_KEY: v.pipe(v.string(), v.nonEmpty()),
 	}),
 });
 
@@ -62,6 +61,5 @@ export const env = validate({
 		NEXT_RUNTIME: process.env.NEXT_RUNTIME,
 		PORT: process.env.PORT,
 		REVALIDATION_WEBHOOK_SECRET: process.env.REVALIDATION_WEBHOOK_SECRET,
-		TYPESENSE_ADMIN_API_KEY: process.env.TYPESENSE_ADMIN_API_KEY,
 	},
 }).unwrap();

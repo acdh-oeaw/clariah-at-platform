@@ -1,3 +1,5 @@
+import type { Locale } from "next-intl";
+
 import {
 	type CollectionDocument,
 	type CollectionFacetableFieldName,
@@ -23,7 +25,10 @@ export const websiteCollection = defineCollection({
 		{ name: "type", type: "string", index: true, facet: true },
 		{ name: "label", type: "string", index: true, sort: true },
 		{ name: "description", type: "string", index: true },
+		{ name: "summary", type: "string", index: false },
+		{ name: "image_key", type: "string", index: false },
 		{ name: "link", type: "string", index: false, optional: true },
+		{ name: "locale", type: "string", index: true, optional: true },
 	] as const,
 });
 
@@ -32,7 +37,6 @@ export const websiteEntityTypes = [
 	"document-or-policy",
 	"event",
 	"funding-call",
-	"governance-body",
 	"impact-case-study",
 	"institution",
 	"national-consortium",
@@ -42,7 +46,6 @@ export const websiteEntityTypes = [
 	"person",
 	"project",
 	"spotlight-article",
-	"working-group",
 ] as const;
 export type WebsiteEntityType = (typeof websiteEntityTypes)[number];
 
@@ -54,24 +57,19 @@ export type WebsiteDocumentType = WebsiteEntityType | WebsiteResourceType;
 export const websiteEntitySources = ["dariah-knowledge-base"] as const;
 export type WebsiteEntitySource = (typeof websiteEntitySources)[number];
 
-export const websiteResourceSources = [
-	"dariah-campus",
-	"episciences",
-	"hal",
-	"open-aire",
-	"ssh-open-marketplace",
-	"zenodo",
-	"zotero",
-] as const;
+export const websiteResourceSources = ["dariah-campus", "ssh-open-marketplace", "zenodo"] as const;
 export type WebsiteResourceSource = (typeof websiteResourceSources)[number];
 
 export type WebsiteDocumentSource = WebsiteEntitySource | WebsiteResourceSource;
+
+export type WebsiteDocumentLocale = Locale;
 
 export interface WebsiteEntityDocument extends CollectionDocument<typeof websiteCollection> {
 	kind: "entity";
 	entity_id: string;
 	source: WebsiteEntitySource;
 	type: WebsiteEntityType;
+	locale: WebsiteDocumentLocale;
 }
 
 export interface WebsiteResourceDocument extends CollectionDocument<typeof websiteCollection> {

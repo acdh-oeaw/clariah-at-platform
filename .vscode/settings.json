@@ -51,5 +51,6 @@
 	"workbench.tree.enableStickyScroll": true,
 	"[markdown]": {
 		"editor.wordWrap": "on"
-	}
+	},
+	"i18n-ally.localesPaths": ["messages", "lib/i18n"]
 }

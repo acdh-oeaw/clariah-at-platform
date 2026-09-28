@@ -9,6 +9,7 @@ import type { ReactNode } from "react";
 import { Providers } from "#/app/(app)/[locale]/_components/providers.tsx";
 import { HtmlDocument } from "#/app/(app)/_components/html-document.tsx";
 import { env } from "#/configs/env.config.ts";
+import { cachedSiteMetadata } from "#/lib/data/api-cache";
 import { routing } from "#/lib/i18n/routing.ts";
 
 export { viewport } from "#/app/(app)/_lib/viewport.config.ts";
@@ -24,12 +25,19 @@ export function generateStaticParams(): Array<Awaited<LocaleLayoutProps["params"
 export async function generateMetadata(): Promise<Promise<Metadata>> {
 	const _locale = await getLocale();
 
-	// TODO:
-	const metadata: Metadata = {
+	const siteMetadata = await cachedSiteMetadata();
+	return {
 		metadataBase: createUrl({ baseUrl: env.NEXT_PUBLIC_APP_BASE_URL }),
+		title: siteMetadata.title,
+		description: siteMetadata.description,
+		openGraph: {
+			title: siteMetadata.ogTitle ?? siteMetadata.title,
+			description: siteMetadata.ogDescription ?? siteMetadata.description,
+			images: siteMetadata.ogImage
+				? [{ url: siteMetadata.ogImage.url, alt: siteMetadata.ogImage.alt ?? undefined }]
+				: undefined,
+		},
 	};
-
-	return metadata;
 }
 
 export default function LocaleLayout(props: Readonly<LocaleLayoutProps>): ReactNode {
