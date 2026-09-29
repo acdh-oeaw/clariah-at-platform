@@ -2,7 +2,6 @@ import { ArrowRightIcon } from "lucide-react";
 import { getExtracted } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { locale } from "next/root-params";
-import { connection } from "next/server";
 import type { ReactNode } from "react";
 
 import { Card } from "#/components/card";
@@ -20,7 +19,6 @@ interface FeaturedSectionProps {
 export async function FeaturedSection(props: FeaturedSectionProps): Promise<ReactNode> {
 	const { entityType, title } = props;
 	const t = await getExtracted();
-	await connection();
 	const currentLocale = await locale();
 	if (!isValidLocale(currentLocale)) {
 		notFound();
