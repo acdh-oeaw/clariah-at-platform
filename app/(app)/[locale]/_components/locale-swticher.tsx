@@ -19,12 +19,14 @@ function getLocalizedPathname(pathname: string, current: IntlLocale, target: Int
 	const currentPrefix = localePrefix.prefixes[current];
 	const targetPrefix = localePrefix.prefixes[target];
 
-	if (pathname === currentPrefix || pathname === `${currentPrefix}/`) {
-		return targetPrefix;
-	}
+	for (const prefix of [currentPrefix, `/${current}`]) {
+		if (pathname === prefix || pathname === `${prefix}/`) {
+			return targetPrefix;
+		}
 
-	if (pathname.startsWith(`${currentPrefix}/`)) {
-		return `${targetPrefix}${pathname.slice(currentPrefix.length)}`;
+		if (pathname.startsWith(`${prefix}/`)) {
+			return `${targetPrefix}${pathname.slice(prefix.length)}`;
+		}
 	}
 
 	return pathname === "/" ? targetPrefix : `${targetPrefix}${pathname}`;
