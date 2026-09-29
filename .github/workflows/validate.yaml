@@ -53,6 +53,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Generate route and OpenAPI types
+        run: |
+          pnpm run types:prepare
+          pnpm run generate:openapi
+
       - name: Format
         run: pnpm run format:check
 
