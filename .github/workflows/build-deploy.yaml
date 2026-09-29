@@ -97,6 +97,8 @@ jobs:
           push: true
           tags: "${{ steps.meta.outputs.tags }}"
           labels: "${{ steps.meta.outputs.labels }}"
+          secrets: |
+            API_ACCESS_TOKEN=${{ secrets.K8S_SECRET_API_ACCESS_TOKEN }}
           build-args: |
             "NEXT_PUBLIC_API_BASE_URL=${{ vars.NEXT_PUBLIC_API_BASE_URL }}"
             "NEXT_PUBLIC_APP_BASE_URL=${{ needs.vars.outputs.public_url }}"

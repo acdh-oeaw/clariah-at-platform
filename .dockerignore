@@ -1,0 +1,15 @@
+.git
+.github
+.vscode
+.devcontainer
+node_modules
+.next
+.pnpm-store
+e2e
+playwright-report
+test-results
+# Local-only typesense dev compose, unrelated to the app image.
+docker
+*.md
+.env*
+tsconfig.tsbuildinfo
