@@ -33,7 +33,7 @@ function getConfig():
 
 	// oxlint-disable-next-line node/no-process-env
 	const port = Number(process.env.PORT) || 3000;
-	const baseUrl = `http://localhost:${String(port)}`;
+	const baseUrl = `http://127.0.0.1:${String(port)}`;
 
 	return {
 		kind: "local",
