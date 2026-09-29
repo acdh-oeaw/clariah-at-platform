@@ -20,7 +20,8 @@ COPY patches ./patches
 # --ignore-scripts skips the root "prepare" script (needs files not copied in yet, and would write a
 # throwaway .env.local); `pnpm rebuild` reruns only what `pnpm-workspace.yaml`'s `allowBuilds` permits.
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --ignore-scripts \
-	&& pnpm rebuild @parcel/watcher @swc/core lefthook
+	&& pnpm rebuild @parcel/watcher @swc/core lefthook \
+	&& ln -sf /usr/local/bin/bun node_modules/.bin/bun
 
 FROM deps AS builder
 WORKDIR /app
