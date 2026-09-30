@@ -11,7 +11,7 @@ import type { NavigationConfig, NavigationLink } from "#/lib/navigation/navigati
 export async function Header(): Promise<ReactNode> {
 	const t = await getExtracted();
 	const locale = await getLocale();
-	const label = t("Main");
+	const label = t("Hauptinhalt");
 
 	const response = await cachedNavigation(locale);
 	//const { primary } = navigation();

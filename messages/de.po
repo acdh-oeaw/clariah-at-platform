@@ -11,8 +11,8 @@ msgid "GjpoLa"
 msgstr "Konsortiumssprecher"
 
 #: app/(app)/[locale]/_components/header.tsx
-msgid "EFTSMc"
-msgstr "Main"
+msgid "RI9V2a"
+msgstr "Hauptinhalt"
 
 #: app/(app)/[locale]/_components/header.tsx
 #: app/(app)/[locale]/not-found.tsx
@@ -33,32 +33,38 @@ msgid "se6p67"
 msgstr "Sprache"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "xmcVZ0"
-msgstr "Search"
+#: app/(app)/[locale]/(default)/resources/page.tsx
+#: app/(app)/[locale]/(default)/search/page.tsx
+#: components/navigation-desktop.tsx
+#: components/navigation-mobile.tsx
+msgid "qi41lO"
+msgstr "Suche"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "U290Kk"
-msgstr "Search is currently unavailable."
+msgid "t6uDQZ"
+msgstr "Suche derzeit nicht verfügbar."
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "V5JQj-"
-msgstr "No results found."
+#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
+#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
+msgid "UkmHx2"
+msgstr "Keine Ergebnisse."
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "yjSdJl"
-msgstr "Search results pages"
+msgid "vQM8m7"
+msgstr "Suchergebnisseiten"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "k9hDFZ"
-msgstr "Previous page"
+msgid "9Q3pmW"
+msgstr "Vorherige Seite"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "vjVTMR"
-msgstr "{page} of {total}"
+msgid "0dnxBg"
+msgstr "{page} von {total}"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "rBj9Ib"
-msgstr "Next page"
+msgid "ha5T3x"
+msgstr "Nächste Seite"
 
 #: app/(app)/[locale]/(default)/(index)/_components/featured-section.tsx
 msgid "K3ZDoV"
@@ -95,16 +101,6 @@ msgstr "Filter {label}"
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
 msgid "JIdm6T"
 msgstr "Filter…"
-
-#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
-#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
-msgid "_vMjUJ"
-msgstr "Nothing found."
-
-#: app/(app)/[locale]/(default)/resources/page.tsx
-#: app/(app)/[locale]/(default)/search/page.tsx
-msgid "qi41lO"
-msgstr "Suche"
 
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx

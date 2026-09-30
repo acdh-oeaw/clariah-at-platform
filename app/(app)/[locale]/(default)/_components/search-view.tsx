@@ -123,7 +123,7 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 				role="search"
 			>
 				<input
-					aria-label={t("Search")}
+					aria-label={t("Suche")}
 					className="min-w-0 flex-1 border border-stroke-weak bg-white px-4 py-2.5 text-regular"
 					name="q"
 					onChange={(event) => {
@@ -154,9 +154,9 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 				</div>
 			) : null}
 
-			{state.status === "error" ? <p role="alert">{t("Search is currently unavailable.")}</p> : null}
+			{state.status === "error" ? <p role="alert">{t("Suche derzeit nicht verfügbar.")}</p> : null}
 
-			{state.status === "success" && state.outcome.items.length === 0 ? <p>{t("No results found.")}</p> : null}
+			{state.status === "success" && state.outcome.items.length === 0 ? <p>{t("Keine Ergebnisse.")}</p> : null}
 
 			{state.outcome != null && state.outcome.items.length > 0 ? (
 				<div className="flex flex-col gap-y-8">
@@ -173,7 +173,7 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 					</ul>
 
 					{state.outcome.pagination.totalPages > 1 ? (
-						<nav aria-label={t("Search results pages")} className="flex items-center gap-x-6">
+						<nav aria-label={t("Suchergebnisseiten")} className="flex items-center gap-x-6">
 							{page > 1 ? (
 								<Button
 									onPress={() => {
@@ -181,11 +181,11 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 									}}
 									variant="link-primary"
 								>
-									{t("Previous page")}
+									{t("Vorherige Seite")}
 								</Button>
 							) : null}
 							<span>
-								{t("{page} of {total}", {
+								{t("{page} von {total}", {
 									page: String(page),
 									total: String(state.outcome.pagination.totalPages),
 								})}
@@ -197,7 +197,7 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 									}}
 									variant="link-primary"
 								>
-									{t("Next page")}
+									{t("Nächste Seite")}
 								</Button>
 							) : null}
 						</nav>

@@ -194,7 +194,7 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 									onChange(keys === "all" ? items.map((item) => item.value) : (Array.from(keys) as Array<string>));
 								}}
 								renderEmptyState={() => (
-									<div className="px-2 py-4 text-center text-small text-text-weak">{t("Nothing found.")}</div>
+									<div className="px-2 py-4 text-center text-small text-text-weak">{t("Keine Ergebnisse.")}</div>
 								)}
 								selectedKeys={new Set(selected)}
 								selectionMode="multiple"

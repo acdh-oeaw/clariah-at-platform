@@ -1,5 +1,5 @@
 import { SearchIcon } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useExtracted, useLocale } from "next-intl";
 import type { ReactNode } from "react";
 
 import { LocaleSwitcher } from "#/app/(app)/[locale]/_components/locale-swticher.tsx";
@@ -20,6 +20,7 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 	const { navigation, handleMobileMenuToggle, localeSwitcherLabel } = props;
 
 	const locale = useLocale();
+	const t = useExtracted();
 
 	return (
 		<div className=" bg-primary-700 fixed top-21 bottom-0 inset-x-0 z-10 justify-between flex flex-col w-screen xl:hidden">
@@ -108,7 +109,7 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 				startIcon={<SearchIcon className="size-6!" />}
 				variant="color-bg"
 			>
-				{"Search"}
+				{t("Suche")}
 			</Link>
 			<div className="w-full border-t border-t-gray-100 px-6 py-4">
 				<LocaleSwitcher label={localeSwitcherLabel} variant="color-bg" />

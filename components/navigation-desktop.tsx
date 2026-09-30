@@ -1,5 +1,5 @@
 import { SearchIcon } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useExtracted, useLocale } from "next-intl";
 import type { ReactNode } from "react";
 
 import { LocaleSwitcher } from "#/app/(app)/[locale]/_components/locale-swticher.tsx";
@@ -18,6 +18,7 @@ export function NavigationDesktop(props: Readonly<NavigationDesktopProps>): Reac
 	const { navigation, localeSwitcherLabel } = props;
 
 	const locale = useLocale();
+	const t = useExtracted();
 
 	return (
 		<div className="hidden flex-wrap items-center justify-end gap-6 xl:flex 2xl:gap-22">
@@ -82,7 +83,7 @@ export function NavigationDesktop(props: Readonly<NavigationDesktopProps>): Reac
 			</ul>
 			<Link
 				href={localizeHref("/search", locale)}
-				aria-label="search"
+				aria-label={t("Suche")}
 				startIcon={<SearchIcon aria-hidden={true} className="size-6" />}
 			/>
 			<LocaleSwitcher label={localeSwitcherLabel} />
