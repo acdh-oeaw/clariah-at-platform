@@ -5,5 +5,5 @@ import { middleware as i18nMiddleware } from "#/lib/i18n/middleware.ts";
 export const proxy: NextProxy = i18nMiddleware;
 
 export const config: ProxyConfig = {
-	matcher: ["/", "/(de|en)/:path*", "/api/:path*"],
+	matcher: ["/", "/(de|en)/:path*"],
 };
