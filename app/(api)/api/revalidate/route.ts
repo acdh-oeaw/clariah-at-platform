@@ -4,12 +4,8 @@ import { type NextRequest, NextResponse } from "next/server";
 import { env } from "#/configs/env.config.ts";
 import { expire, revalidateEntity, tags } from "#/lib/data/api-cache.ts";
 
-/**
- * Cache-tag vocabulary the upstream CMS dispatches (its `x-cache-tags` OpenAPI annotations), not this app's own
- * `EntityType` — mapped in `revalidate` below. Mirrors the receiver in the sibling DARIAH-ERIC/dariah-website app, fed
- * by the same CMS.
- */
-const apiCacheTags = [
+const webhookEntityTypes = [
+	"dariah-projects",
 	"documents-policies",
 	"events",
 	"featured-entities",
@@ -17,54 +13,52 @@ const apiCacheTags = [
 	"governance-bodies",
 	"impact-case-studies",
 	"navigation",
-	"news",
 	"opportunities",
+	"news",
 	"pages",
 	"persons",
-	"projects",
 	"site-metadata",
 	"spotlight-articles",
 	"working-groups",
 ] as const;
 
-type ApiCacheTag = (typeof apiCacheTags)[number];
+type WebhookEntityType = (typeof webhookEntityTypes)[number];
 
-const apiCacheTagSet: ReadonlySet<string> = new Set(apiCacheTags);
+const webhookEntityTypeSet: ReadonlySet<string> = new Set(webhookEntityTypes);
 
-function isApiCacheTag(value: unknown): value is ApiCacheTag {
-	return typeof value === "string" && apiCacheTagSet.has(value);
+function isWebhookEntityType(value: unknown): value is WebhookEntityType {
+	return typeof value === "string" && webhookEntityTypeSet.has(value);
 }
 
 interface RevalidationWebhookPayload {
-	tags: Array<ApiCacheTag>;
+	type: WebhookEntityType;
 }
 
 /**
- * Parses an untrusted webhook body. Returns `null` when it is not a `{ tags }` object or any tag is outside the
- * vocabulary, so an unrecognized tag fails loudly instead of silently leaving stale cache.
+ * Parses an untrusted webhook body. Returns `null` when it is not a `{ type }` object or `type` is outside the
+ * vocabulary, so an unrecognized type fails loudly instead of silently leaving stale cache.
  */
 function parseRevalidationWebhookPayload(value: unknown): RevalidationWebhookPayload | null {
-	if (typeof value !== "object" || value === null || !("tags" in value)) {
+	if (typeof value !== "object" || value === null || !("type" in value) || !isWebhookEntityType(value.type)) {
 		return null;
 	}
 
-	const { tags: incoming } = value;
-
-	if (!Array.isArray(incoming) || incoming.length === 0 || !incoming.every((value) => isApiCacheTag(value))) {
-		return null;
-	}
-
-	return { tags: [...new Set(incoming)] };
+	return { type: value.type };
 }
 
 /**
  * `revalidateEntity` already cascades to that type's sitemap/navigation/announcements/featured/statistics tags where
- * they apply, so most cases are a single call. Three tags aren't entity-shaped, so they expire their own standalone tag
- * directly. "members-partners" isn't its own entity type here: `cachedMembersAndPartners` and `cachedMemberOrPartner`
- * both tag under `collection:country`/`entities:country`, not a dedicated tag.
+ * they apply, so most cases are a single call. Three types aren't entity-shaped, so they expire their own standalone
+ * tag directly. "members-partners" isn't its own entity type here: `cachedMembersAndPartners`/`cachedMemberOrPartner`
+ * both tag under `collection:country`/`entities:country`. "dariah-projects" is this app's plain "projects" —
+ * `cachedProjects` and `cachedDariahProjects` share that tag.
  */
-function revalidate(tag: ApiCacheTag): void {
-	switch (tag) {
+function revalidate(type: WebhookEntityType): void {
+	switch (type) {
+		case "dariah-projects": {
+			revalidateEntity("projects");
+			return;
+		}
 		case "documents-policies": {
 			revalidateEntity("documents_policies");
 			return;
@@ -109,10 +103,6 @@ function revalidate(tag: ApiCacheTag): void {
 			revalidateEntity("persons");
 			return;
 		}
-		case "projects": {
-			revalidateEntity("projects");
-			return;
-		}
 		case "site-metadata": {
 			expire(tags.siteMetadata);
 			return;
@@ -146,11 +136,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 		return NextResponse.json({ message: "Bad Request" }, { status: 400 });
 	}
 
-	for (const tag of payload.tags) {
-		revalidate(tag);
-	}
+	revalidate(payload.type);
 
-	log.info(`[revalidation webhook] received request for tags: ${payload.tags.join(", ")}.`);
+	log.info(`[revalidation webhook] received request for type: ${payload.type}.`);
 
 	return NextResponse.json({ revalidated: true });
 }
