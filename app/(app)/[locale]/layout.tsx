@@ -23,9 +23,9 @@ export function generateStaticParams(): Array<Awaited<LocaleLayoutProps["params"
 }
 
 export async function generateMetadata(): Promise<Promise<Metadata>> {
-	const _locale = await getLocale();
+	const locale = await getLocale();
 
-	const siteMetadata = await cachedSiteMetadata();
+	const siteMetadata = await cachedSiteMetadata(locale);
 	return {
 		metadataBase: createUrl({ baseUrl: env.NEXT_PUBLIC_APP_BASE_URL }),
 		title: siteMetadata.title,

@@ -112,12 +112,12 @@ async function nullOn404<T>(promise: Promise<T>): Promise<T | null> {
 /* Site-wide                                                                  */
 /* -------------------------------------------------------------------------- */
 
-export async function cachedSiteMetadata(): Promise<ApiResponse<"getSiteMetadata">> {
+export async function cachedSiteMetadata(locale: string): Promise<ApiResponse<"getSiteMetadata">> {
 	"use cache";
 	cacheLife("days");
 	cacheTag(tags.siteMetadata);
 
-	return getSiteMetadata();
+	return getSiteMetadata({ query: { locale } });
 }
 
 export async function cachedNavigation(locale: string, menu?: string): Promise<ApiResponse<"getNavigation">> {
