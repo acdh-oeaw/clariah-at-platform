@@ -503,7 +503,7 @@ const statisticsEntityTypes = new Set<EntityType>(["country", "institution", "wo
  * Uses the "max" profile (stale-while-revalidate): the next visitor gets the stale entry while a fresh one is fetched.
  * In a Server Action where the user must see their own write immediately, use `updateTag` instead.
  */
-function expire(tag: string): void {
+export function expire(tag: string): void {
 	revalidateTag(tag, "max");
 }
 
