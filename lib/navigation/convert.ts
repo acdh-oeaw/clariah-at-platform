@@ -48,11 +48,11 @@ export function convertNavigationMenu(
 ): NavigationConfig {
 	const config: NavigationConfig = {};
 
-	for (const item of items) {
+	for (const item of items.toSorted((a, b) => a.position - b.position)) {
 		if (item.children.length > 0) {
 			const children: Record<string, NavigationLink> = {};
 
-			for (const child of item.children) {
+			for (const child of item.children.toSorted((a, b) => a.position - b.position)) {
 				const href = getHref(child);
 				if (href == null) {
 					continue;
