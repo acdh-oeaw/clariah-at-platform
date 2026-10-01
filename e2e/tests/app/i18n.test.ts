@@ -64,16 +64,29 @@ test.describe("i18n", () => {
 		}
 	});
 
-	test("should set alternate links in response header for the homepage", async ({ createIndexPage }) => {
+	test("should set alternate links for the homepage", async ({ createIndexPage }) => {
 		for (const locale of locales) {
 			const { indexPage } = await createIndexPage(locale);
-			const response = await indexPage.goto();
-			const headers = response?.headers().link?.split(/, |\n/);
-			expect(headers).toStrictEqual(
+			await indexPage.goto();
+
+			/**
+			 * `AlternateLinks` renders these as `<link>` tags, not a `Link` response header: a still-open Next.js bug
+			 * repeatedly appends a full duplicate set of header-based alternate links after every Cache Components
+			 * revalidation, eventually growing the header large enough to 502 behind a reverse proxy. See the comment on
+			 * `alternateLinks: false` in `lib/i18n/routing.ts`.
+			 */
+			const alternateLinks = indexPage.page.locator('link[rel="alternate"]');
+			const hrefs = await alternateLinks.evaluateAll((elements) =>
+				elements.map((element) => {
+					return { href: element.getAttribute("href"), hrefLang: element.getAttribute("hreflang") };
+				}),
+			);
+
+			expect(hrefs).toStrictEqual(
 				expect.arrayContaining([
-					`<${createAbsoluteUrl("/de")}>; rel="alternate"; hreflang="de-AT"`,
-					`<${createAbsoluteUrl("/en")}>; rel="alternate"; hreflang="en-GB"`,
-					`<${createAbsoluteUrl("/")}>; rel="alternate"; hreflang="x-default"`,
+					{ href: createAbsoluteUrl("/de"), hrefLang: "de-AT" },
+					{ href: createAbsoluteUrl("/en"), hrefLang: "en-GB" },
+					{ href: createAbsoluteUrl("/"), hrefLang: "x-default" },
 				]),
 			);
 		}

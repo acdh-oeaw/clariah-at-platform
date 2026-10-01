@@ -25,6 +25,15 @@ export const routing = defineRouting({
 	// localeCookie: {
 	// 	maxAge: 60 * 60 * 24 * 365 /** 1 year. */,
 	// },
+	/**
+	 * Not the middleware's own `Link` response header: a still-open Next.js bug repeatedly appends a full duplicate set
+	 * of these after every Cache Components revalidation, eventually growing the header large enough to 502 behind a
+	 * reverse proxy (confirmed in production on "/de"). `AlternateLinks` renders the same links as `<link>` tags in the
+	 * document head instead.
+	 *
+	 * @see {@link https://github.com/vercel/next.js/issues/94945}
+	 */
+	alternateLinks: false,
 	localePrefix,
 	locales,
 });

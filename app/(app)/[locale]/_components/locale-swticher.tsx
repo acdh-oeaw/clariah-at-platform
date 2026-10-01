@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 
 import { type LinkProps, linkStyles } from "#/components/link.tsx";
 import { type IntlLocale, getIntlLanguage, locales } from "#/lib/i18n/locales.ts";
+import { stripLocalePrefix } from "#/lib/i18n/pathname.ts";
 import { localePrefix } from "#/lib/i18n/routing.ts";
 
 /** Language names are shown in their own language, so they are not translated. */
@@ -16,17 +17,11 @@ const languageNames = {
 
 /** Swap the locale prefix of `pathname`, keeping the rest of the path. */
 function getLocalizedPathname(pathname: string, current: IntlLocale, target: IntlLocale): string {
-	const currentPrefix = localePrefix.prefixes[current];
 	const targetPrefix = localePrefix.prefixes[target];
+	const suffix = stripLocalePrefix(pathname, current);
 
-	for (const prefix of [currentPrefix, `/${current}`]) {
-		if (pathname === prefix || pathname === `${prefix}/`) {
-			return targetPrefix;
-		}
-
-		if (pathname.startsWith(`${prefix}/`)) {
-			return `${targetPrefix}${pathname.slice(prefix.length)}`;
-		}
+	if (suffix != null) {
+		return suffix === "" ? targetPrefix : `${targetPrefix}${suffix}`;
 	}
 
 	return pathname === "/" ? targetPrefix : `${targetPrefix}${pathname}`;
@@ -61,7 +56,12 @@ export function LocaleSwitcher(props: Readonly<LocaleSwitcherProps>): ReactNode 
 						aria-current={isCurrent ? "true" : undefined}
 						aria-label={languageNames[locale]}
 						className={linkStyles({
-							className: isCurrent ? "font-bold underline underline-offset-[24%]" : undefined,
+							/**
+							 * `font-bold` is constant, not conditional on `isCurrent`: bold and regular glyphs render at different
+							 * widths, so toggling it shifted the whole switcher's width — and everything after it in the header's
+							 * flex row — on every locale switch. `underline` alone marks the current locale without that.
+							 */
+							className: isCurrent ? "font-bold underline underline-offset-[24%]" : "font-bold",
 							variant,
 						})}
 						href={getLocalizedPathname(pathname, currentLocale, locale)}

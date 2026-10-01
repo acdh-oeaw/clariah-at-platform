@@ -4,10 +4,11 @@ import { createUrl } from "@acdh-oeaw/lib";
 import type { Metadata } from "next";
 import { useLocale } from "next-intl";
 import { getLocale } from "next-intl/server";
-import type { ReactNode } from "react";
+import { type ReactNode, Suspense } from "react";
 
 import { Providers } from "#/app/(app)/[locale]/_components/providers.tsx";
 import { HtmlDocument } from "#/app/(app)/_components/html-document.tsx";
+import { AlternateLinks } from "#/components/alternate-links";
 import { env } from "#/configs/env.config.ts";
 import { cachedSiteMetadata } from "#/lib/data/api-cache";
 import { routing } from "#/lib/i18n/routing.ts";
@@ -48,7 +49,12 @@ export default function LocaleLayout(props: Readonly<LocaleLayoutProps>): ReactN
 	return (
 		<HtmlDocument locale={locale}>
 			<body>
-				<Providers>{children}</Providers>
+				<Providers>
+					<Suspense>
+						<AlternateLinks />
+					</Suspense>
+					{children}
+				</Providers>
 			</body>
 		</HtmlDocument>
 	);
