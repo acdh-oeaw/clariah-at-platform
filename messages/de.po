@@ -41,10 +41,12 @@ msgid "qi41lO"
 msgstr "Suche"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
 msgid "t6uDQZ"
 msgstr "Suche derzeit nicht verfügbar."
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
 #: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
 msgid "UkmHx2"
@@ -87,6 +89,30 @@ msgstr "Events"
 #: app/(app)/[locale]/(default)/projects/page.tsx
 msgid "x9x-dX"
 msgstr "Projekte"
+
+#: app/(app)/[locale]/(default)/events/_components/events-search.tsx
+msgid "0Mtnts"
+msgstr "Kommende Events"
+
+#: app/(app)/[locale]/(default)/events/_components/events-search.tsx
+msgid "3C0-hX"
+msgstr "Vergangene Events"
+
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+msgid "a5RaJV"
+msgstr "Events durchsuchen"
+
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+msgid "dsIkSc"
+msgstr "Suchen"
+
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+msgid "PlIcwy"
+msgstr "Weitere Ergebnisse konnten nicht geladen werden."
+
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+msgid "Tyzzqd"
+msgstr "Mehr laden"
 
 #: app/(app)/[locale]/(default)/layout.tsx
 msgid "DBsIRX"

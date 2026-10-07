@@ -8,29 +8,29 @@ msgstr ""
 
 #: app/(app)/[locale]/_components/footer.tsx
 msgid "GjpoLa"
-msgstr "Consortium Speaker"
+msgstr "Konsortiumssprecher"
 
 #: app/(app)/[locale]/_components/header.tsx
 msgid "RI9V2a"
-msgstr "Main"
+msgstr "Hauptinhalt"
 
 #: app/(app)/[locale]/_components/header.tsx
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
 msgid "dhPnn6"
-msgstr "Landing Page"
+msgstr "Startseite"
 
 #: app/(app)/[locale]/_components/header.tsx
 msgid "45F_7Z"
-msgstr "Close"
+msgstr "Schließen"
 
 #: app/(app)/[locale]/_components/header.tsx
 msgid "MX7Sye"
-msgstr "Open menu"
+msgstr "Menu öffnen"
 
 #: app/(app)/[locale]/_components/header.tsx
 msgid "se6p67"
-msgstr "Language"
+msgstr "Sprache"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
 #: app/(app)/[locale]/(default)/resources/page.tsx
@@ -38,43 +38,45 @@ msgstr "Language"
 #: components/navigation-desktop.tsx
 #: components/navigation-mobile.tsx
 msgid "qi41lO"
-msgstr "Search"
+msgstr "Suche"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
 msgid "t6uDQZ"
-msgstr "Search is currently unavailable."
+msgstr "Suche derzeit nicht verfügbar."
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
 #: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
 msgid "UkmHx2"
-msgstr "No results."
+msgstr "Keine Ergebnisse."
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
 msgid "vQM8m7"
-msgstr "Search result pages"
+msgstr "Suchergebnisseiten"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
 msgid "9Q3pmW"
-msgstr "Previous page"
+msgstr "Vorherige Seite"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
 msgid "0dnxBg"
-msgstr "{page} of {total}"
+msgstr "{page} von {total}"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
 msgid "ha5T3x"
-msgstr "Next page"
+msgstr "Nächste Seite"
 
 #: app/(app)/[locale]/(default)/(index)/_components/featured-section.tsx
 msgid "K3ZDoV"
-msgstr "Show all"
+msgstr "Alle Artikel anzeigen"
 
 #: app/(app)/[locale]/(default)/(index)/page.tsx
 #: app/(app)/[locale]/(default)/news/[slug]/page.tsx
 #: app/(app)/[locale]/(default)/news/page.tsx
 msgid "yhG18j"
-msgstr "News"
+msgstr "Aktuelles"
 
 #: app/(app)/[locale]/(default)/(index)/page.tsx
 #: app/(app)/[locale]/(default)/events/[slug]/page.tsx
@@ -86,11 +88,35 @@ msgstr "Events"
 #: app/(app)/[locale]/(default)/projects/[slug]/page.tsx
 #: app/(app)/[locale]/(default)/projects/page.tsx
 msgid "x9x-dX"
-msgstr "Projects"
+msgstr "Projekte"
+
+#: app/(app)/[locale]/(default)/events/_components/events-search.tsx
+msgid "0Mtnts"
+msgstr "Kommende Events"
+
+#: app/(app)/[locale]/(default)/events/_components/events-search.tsx
+msgid "3C0-hX"
+msgstr "Vergangene Events"
+
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+msgid "a5RaJV"
+msgstr "Events durchsuchen"
+
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+msgid "dsIkSc"
+msgstr "Suchen"
+
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+msgid "PlIcwy"
+msgstr "Weitere Ergebnisse konnten nicht geladen werden."
+
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+msgid "Tyzzqd"
+msgstr "Load more"
 
 #: app/(app)/[locale]/(default)/layout.tsx
 msgid "DBsIRX"
-msgstr "Skip to main content"
+msgstr "Zum Hauptinhalt springen"
 
 #: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
@@ -110,23 +136,23 @@ msgstr "Page not found"
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
 msgid "IbI6Uw"
-msgstr "Error 404"
+msgstr "Fehler 404"
 
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
 msgid "gifeZv"
-msgstr "The page you requested could not be found. It may have been moved, renamed, or may never have existed."
+msgstr "Die aufgerufene Seite konnte nicht gefunden werden. Sie wurde möglicherweise verschoben, umbenannt oder hat nie existiert."
 
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
 msgid "m-qkrg"
-msgstr "Back to the homepage"
+msgstr "Zurück zur Startseite"
 
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
 msgid "Xnd9v7"
-msgstr "Page not found"
+msgstr "Seite nicht gefunden"
 
 #: components/card.tsx
 msgid "iwRrPy"
-msgstr "read more"
+msgstr "mehr lesen"
