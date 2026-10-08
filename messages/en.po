@@ -118,6 +118,10 @@ msgstr "Load more"
 msgid "DBsIRX"
 msgstr "Skip to main content"
 
+#: app/(app)/[locale]/(default)/pages/[slug]/page.tsx
+msgid "mt510S"
+msgstr "Infos"
+
 #: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
 msgid "am5jN9"

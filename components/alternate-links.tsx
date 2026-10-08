@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
 import { env } from "#/configs/env.config.ts";
+import { matchEntityRoute } from "#/lib/i18n/entity-routes.ts";
 import { locales } from "#/lib/i18n/locales.ts";
 import { stripLocalePrefix } from "#/lib/i18n/pathname.ts";
 import { localePrefix } from "#/lib/i18n/routing.ts";
@@ -28,6 +29,11 @@ export function AlternateLinks(): ReactNode {
 	const pathname = usePathname();
 
 	const suffix = stripLocalePrefix(pathname, currentLocale) ?? pathname;
+
+	if (matchEntityRoute(suffix) != null) {
+		return null;
+	}
+
 	const isHomepage = suffix === "" || suffix === "/";
 
 	return (
