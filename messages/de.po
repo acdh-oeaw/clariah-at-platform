@@ -33,12 +33,21 @@ msgid "se6p67"
 msgstr "Sprache"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
+msgid "6M7vT8"
+msgstr "Ressourcen durchsuchen"
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
 #: app/(app)/[locale]/(default)/resources/page.tsx
 #: app/(app)/[locale]/(default)/search/page.tsx
 #: components/navigation-desktop.tsx
 #: components/navigation-mobile.tsx
 msgid "qi41lO"
 msgstr "Suche"
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+msgid "dsIkSc"
+msgstr "Suchen"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
@@ -101,10 +110,6 @@ msgstr "Vergangene Events"
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
 msgid "a5RaJV"
 msgstr "Events durchsuchen"
-
-#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
-msgid "dsIkSc"
-msgstr "Suchen"
 
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
 msgid "PlIcwy"

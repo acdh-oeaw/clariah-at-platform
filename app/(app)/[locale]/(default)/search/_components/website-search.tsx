@@ -63,7 +63,7 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 			const document = item.document;
 			// `document.link` is root-relative and locale-less, like `EntityRef.href` from the CMS API — prefix it the same way.
 			return (
-				<>
+				<div className="flex flex-col gap-y-3 bg-white p-8 rounded-sm shadow-card">
 					<Badge className="inline" intent="primary">
 						{document.type}
 					</Badge>
@@ -75,7 +75,7 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 						)}
 					</h2>
 					<p className="line-clamp-3 text-regular">{document.description}</p>
-				</>
+				</div>
 			);
 		}
 
@@ -87,7 +87,7 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 			.join(" · ");
 
 		return (
-			<>
+			<div className="flex flex-col gap-y-3 bg-white p-8 rounded-sm shadow-card">
 				<Badge className="inline" intent="primary">
 					{document.type}
 				</Badge>
@@ -96,7 +96,7 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 				</h2>
 				<p className="text-small text-text-weak">{meta}</p>
 				<p className="line-clamp-3 text-regular">{document.description}</p>
-			</>
+			</div>
 		);
 	}
 

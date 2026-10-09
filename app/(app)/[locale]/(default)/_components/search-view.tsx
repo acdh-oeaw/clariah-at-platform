@@ -1,9 +1,10 @@
 "use client";
 
 import cn from "clsx/lite";
+import { SearchIcon } from "lucide-react";
 import { useExtracted } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useEffect, useId, useState } from "react";
 
 import { Button } from "#/components/ui/button.tsx";
 import { type SearchOutcome, type SearchParams, type SelectedFacets, useSearch } from "#/lib/search/use-search.ts";
@@ -74,6 +75,7 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 
 	const [input, setInput] = useState(() => searchParams.get("q") ?? "");
 	const query = useDebouncedValue(input.trim(), debounceMilliseconds);
+	const inputId = useId();
 
 	/** Persists across query changes — picking a facet refines within it, it doesn't start a new search. */
 	const [selectedFacets, setSelectedFacets] = useState<SelectedFacets>({});
@@ -116,22 +118,30 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 	return (
 		<div className={className}>
 			<form
-				className="flex"
+				className="flex flex-col gap-y-2"
 				onSubmit={(event) => {
 					event.preventDefault();
 				}}
 				role="search"
 			>
-				<input
-					aria-label={t("Suche")}
-					className="min-w-0 flex-1 border border-stroke-weak bg-white px-4 py-2.5 text-regular"
-					name="q"
-					onChange={(event) => {
-						setInput(event.currentTarget.value);
-					}}
-					type="search"
-					value={input}
-				/>
+				<label className="font-strong text-text-strong" htmlFor={inputId}>
+					{t("Ressourcen durchsuchen")}
+				</label>
+				<div className="flex gap-x-2">
+					<input
+						aria-label={t("Suche")}
+						className="min-w-0 flex-1 border border-stroke-weak bg-white px-4 py-2.5 text-regular"
+						name="q"
+						onChange={(event) => {
+							setInput(event.currentTarget.value);
+						}}
+						type="search"
+						value={input}
+					/>
+					<Button startIcon={<SearchIcon aria-hidden={true} />} type="submit" variant="outline">
+						{t("Suchen")}
+					</Button>
+				</div>
 			</form>
 
 			{renderFacets != null ? (

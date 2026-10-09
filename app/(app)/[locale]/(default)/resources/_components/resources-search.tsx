@@ -26,8 +26,8 @@ function renderItem(document: ResourceDocument): ReactNode {
 		.join(" · ");
 
 	return (
-		<>
-			<Badge className="inline" intent="primary">
+		<div className="flex flex-col gap-y-3 bg-white p-8 rounded-sm shadow-card">
+			<Badge className="inline" intent="primary" isCircle={false}>
 				{document.type}
 			</Badge>
 			<h2 className="text-h3 font-strong text-text-strong">
@@ -35,7 +35,7 @@ function renderItem(document: ResourceDocument): ReactNode {
 			</h2>
 			<p className="text-small text-text-weak">{meta}</p>
 			<p className="line-clamp-3 text-regular">{document.description}</p>
-		</>
+		</div>
 	);
 }
 

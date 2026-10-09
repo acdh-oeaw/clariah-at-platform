@@ -12,7 +12,7 @@ export default async function ResourcesPage(): Promise<ReactNode> {
 			<div className="bg-primary-1000 px-28 py-4">
 				<h1 className="flex relative items-end text-h2 text-white">{t("Suche")}</h1>
 			</div>
-			<div className="container  max-w-7xl">
+			<div className="container max-w-7xl p-12">
 				<Suspense>
 					<ResourcesSearch />
 				</Suspense>

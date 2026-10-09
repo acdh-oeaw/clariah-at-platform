@@ -41,7 +41,7 @@ export default async function EventPage(props: Readonly<EventPageProps>): Promis
 	return (
 		<Main className="flex flex-col gap-y-12 bg-primary-100">
 			<div className="bg-primary-1000 px-28 py-4">
-				<h1 className="flex relative items-end text-h2 text-white">{t("Events")}</h1>
+				<p className="flex relative items-end text-h2 text-white">{t("Events")}</p>
 			</div>
 			<Suspense fallback={<p>Loading</p>}>
 				<EventDetails params={props.params} />

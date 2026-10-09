@@ -41,7 +41,9 @@ export default async function PagePage(props: Readonly<PagePageProps>): Promise<
 	const t = await getExtracted();
 	return (
 		<Main className="flex flex-col gap-y-12 bg-primary-100">
-			<h1 className="flex relative items-end text-h2 text-white">{t("Infos")}</h1>
+			<div className="bg-primary-1000 px-28 py-4">
+				<p className="flex relative items-end text-h2 text-white">{t("Infos")}</p>
+			</div>
 			<Suspense fallback={<p>Loading</p>}>
 				<PageDetails params={props.params} />
 			</Suspense>
