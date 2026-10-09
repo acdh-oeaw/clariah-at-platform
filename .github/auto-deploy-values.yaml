@@ -19,9 +19,9 @@ service:
 ingress:
   enabled: true
   path: "/"
-  className: "nginx"
+  className: "rke2-ingress-nginx-migration"
   annotations:
-    nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+    # nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
 livenessProbe:
   path: /health
   initialDelaySeconds: 15
