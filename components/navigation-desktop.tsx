@@ -43,7 +43,9 @@ export function NavigationDesktop(props: Readonly<NavigationDesktopProps>): Reac
 							return (
 								<li key={id}>
 									<NavMenu>
-										<NavButton>{item.label}</NavButton>
+										<NavButton className="hover:underline hover:decoration-[10%] hover:underline-offset-[24%]">
+											{item.label}
+										</NavButton>
 										<NavMenuItems>
 											{item.children &&
 												Object.entries(item.children).map(([id, item]) => {
@@ -58,7 +60,12 @@ export function NavigationDesktop(props: Readonly<NavigationDesktopProps>): Reac
 
 														case "link": {
 															return (
-																<NavMenuItem key={id} href={item.href} target={item.target}>
+																<NavMenuItem
+																	className="block hover:bg-primary-200"
+																	key={id}
+																	href={item.href}
+																	target={item.target}
+																>
 																	{item.label}
 																</NavMenuItem>
 															);

@@ -1,7 +1,7 @@
 "use client";
 
 import { type GetVariantProps, cn, styles } from "@acdh-oeaw/style-variants";
-import React, { type ReactNode } from "react";
+import { type ReactNode, useId } from "react";
 import { useFocusRing, useHover, usePress } from "react-aria";
 import {
 	Button as AriaButton,
@@ -152,9 +152,10 @@ interface LinkButtonProps
 export function LinkButton(props: Readonly<LinkButtonProps>): ReactNode {
 	const { children, className, endIcon, startIcon, variant, ...rest } = props;
 
+	const labelId = useId();
 	return (
-		<Link {...rest} className={buttonStyles({ className, variant })} variant="unstyled">
-			<span>
+		<Link aria-labelledby={labelId} {...rest} className={buttonStyles({ className, variant })} variant="unstyled">
+			<span id={labelId}>
 				{variant !== "icon-button" && startIcon}
 				{children}
 				{variant !== "icon-button" && endIcon}
