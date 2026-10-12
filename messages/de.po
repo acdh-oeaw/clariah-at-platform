@@ -7,8 +7,24 @@ msgstr ""
 "X-Crowdin-SourceKey: msgstr\n"
 
 #: app/(app)/[locale]/_components/footer.tsx
-msgid "GjpoLa"
-msgstr "Konsortiumssprecher"
+msgid "r5KMo5"
+msgstr "Weiter Informationen"
+
+#: app/(app)/[locale]/_components/footer.tsx
+msgid "m8oC-I"
+msgstr "Mailingliste beitreten"
+
+#: app/(app)/[locale]/_components/footer.tsx
+msgid "vh8ILm"
+msgstr "Bleiben Sie auf dem Laufenden über Digital Humanities (DH) Aktivitäten in Österreich: Mitglieder der DHA-E-Mail-Liste erhalten nicht nur Informationen zu Events, open Calls und vielem mehr, sondern können auch selbst anstehende Aktivitäten aus der österreichischen DH Landschaft an Mitglieder der Liste versenden."
+
+#: app/(app)/[locale]/_components/footer.tsx
+msgid "rh5NHJ"
+msgstr "Digital Humanities Austria E-Mail-Liste"
+
+#: app/(app)/[locale]/_components/footer.tsx
+msgid "j9gZd-"
+msgstr "Gefördert von"
 
 #: app/(app)/[locale]/_components/header.tsx
 msgid "RI9V2a"
