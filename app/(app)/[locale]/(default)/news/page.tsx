@@ -19,7 +19,7 @@ export default async function NewsPage(): Promise<ReactNode> {
 	return (
 		<Main className="flex flex-col gap-y-12 bg-primary-100">
 			<div className="bg-primary-1000 px-28 py-4">
-				<h1 className="flex relative items-end text-h2 text-white">{t("Aktuelles")}</h1>
+				<h1 className="flex relative items-end text-h2 text-white">{t("News")}</h1>
 			</div>
 			<div className="container  max-w-7xl">
 				<Suspense>

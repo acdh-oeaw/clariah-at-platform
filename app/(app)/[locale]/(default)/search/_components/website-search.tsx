@@ -1,9 +1,11 @@
 "use client";
 
+import { useExtracted } from "next-intl";
 import { type ReactNode, useCallback } from "react";
 
 import { SearchView } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
 import { SearchFacetFilter } from "#/app/(app)/[locale]/(default)/search/_components/facet-filter.tsx";
+import { getFacetLabel } from "#/app/(app)/[locale]/(default)/search/_components/facet-labels";
 import { Link } from "#/components/link.tsx";
 import { Badge } from "#/components/ui/badge.tsx";
 import type { IntlLocale } from "#/lib/i18n/locales.ts";
@@ -57,6 +59,8 @@ function interleave<A, B>(a: ReadonlyArray<A>, b: ReadonlyArray<B>): Array<A | B
 
 export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 	const { locale } = props;
+	const getLabel = getFacetLabel();
+	const t = useExtracted();
 
 	function renderItem(item: CombinedItem): ReactNode {
 		if (item.kind === "website") {
@@ -113,7 +117,14 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 					page: params.page,
 					perPage: websitePerPage,
 					// Website content is locale-specific; resources are not — see the resources call below.
-					filters: [{ operator: "equals", field: "locale", value: locale }],
+					filters: [
+						{ operator: "equals", field: "locale", value: locale },
+						{ operator: "notEquals", field: "type", value: "governance_body" },
+						{ operator: "notEquals", field: "type", value: "person" },
+						{ operator: "notEquals", field: "type", value: "national_consortium" },
+						{ operator: "notEquals", field: "type", value: "country" },
+						{ operator: "notEquals", field: "type", value: "institution" },
+					],
 					facets: { type: { values: selectedTypes } },
 				}),
 				getSearchService().collections.resources.search({
@@ -180,11 +191,10 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 
 		return (
 			<SearchFacetFilter
-				// No nicer labels for the raw indexed values yet — see the TODO below.
-				getLabel={(value) => value}
+				getLabel={(value) => getLabel(value)}
 				facet={facet}
 				isLoading={facets == null}
-				label={facetField}
+				label={t("Typ")}
 				onChange={(values) => {
 					onChange(facetField, values);
 				}}
@@ -192,9 +202,6 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 			/>
 		);
 	}
-
-	// TODO: `getLabel` above shows the raw indexed value (e.g. "news-item", "publication"). Map these to translated,
-	// human-readable labels once the full set of values in use is confirmed against the live index.
 
 	return (
 		<SearchView<CombinedItem>

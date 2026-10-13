@@ -53,7 +53,6 @@ msgid "6M7vT8"
 msgstr "Ressourcen durchsuchen"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-#: app/(app)/[locale]/(default)/resources/page.tsx
 #: app/(app)/[locale]/(default)/search/page.tsx
 #: components/navigation-desktop.tsx
 #: components/navigation-mobile.tsx
@@ -100,8 +99,9 @@ msgstr "Alle Artikel anzeigen"
 #: app/(app)/[locale]/(default)/(index)/page.tsx
 #: app/(app)/[locale]/(default)/news/[slug]/page.tsx
 #: app/(app)/[locale]/(default)/news/page.tsx
-msgid "yhG18j"
-msgstr "Aktuelles"
+#: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
+msgid "NZyhSX"
+msgstr "News"
 
 #: app/(app)/[locale]/(default)/(index)/page.tsx
 #: app/(app)/[locale]/(default)/events/[slug]/page.tsx
@@ -143,6 +143,10 @@ msgstr "Zum Hauptinhalt springen"
 msgid "mt510S"
 msgstr "Infos"
 
+#: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
+msgid "d4FpSu"
+msgstr "Fördercall"
+
 #: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
 msgid "am5jN9"
@@ -152,6 +156,42 @@ msgstr "Filter {label}"
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
 msgid "JIdm6T"
 msgstr "Filter…"
+
+#: app/(app)/[locale]/(default)/resources/page.tsx
+msgid "aOOcfk"
+msgstr "Ressourcen"
+
+#: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
+msgid "fz2AhZ"
+msgstr "Projekt"
+
+#: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
+msgid "m1czzY"
+msgstr "Event"
+
+#: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
+msgid "0sDAwe"
+msgstr "Seite"
+
+#: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
+msgid "r3c0KI"
+msgstr "Publikation"
+
+#: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
+msgid "r3C4x_"
+msgstr "Software"
+
+#: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
+msgid "n7yYXG"
+msgstr "Service"
+
+#: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
+msgid "vkvyOV"
+msgstr "Training Material"
+
+#: app/(app)/[locale]/(default)/search/_components/website-search.tsx
+msgid "xTeBn_"
+msgstr "Typ"
 
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx

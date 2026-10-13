@@ -41,7 +41,7 @@ export default async function NewsItemPage(props: Readonly<NewsItemPageProps>): 
 	return (
 		<Main className="flex flex-col gap-y-12 bg-primary-100">
 			<div className="bg-primary-1000 px-28 py-4">
-				<p className="flex relative items-end text-h2 text-white">{t("Aktuelles")}</p>
+				<p className="flex relative items-end text-h2 text-white">{t("News")}</p>
 			</div>
 			<Suspense fallback={<p>Loading</p>}>
 				<NewsItemDetails params={props.params} />

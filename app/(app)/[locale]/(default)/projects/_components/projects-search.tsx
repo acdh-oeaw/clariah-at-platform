@@ -1,8 +1,10 @@
 "use client";
 
+import { useExtracted } from "next-intl";
 import { type ReactNode, useCallback } from "react";
 
 import { SearchView } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
+import { getFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels";
 import { SearchFacetFilter } from "#/app/(app)/[locale]/(default)/search/_components/facet-filter.tsx";
 import { Card } from "#/components/card";
 import { getAssetImageUrl } from "#/lib/data/api-client";
@@ -20,6 +22,7 @@ interface ProjectsSearchProps {
 
 export function ProjectsSearch(props: ProjectsSearchProps): ReactNode {
 	const { locale } = props;
+	const t = useExtracted();
 
 	// `document.link` is root-relative and locale-less, like `EntityRef.href` from the CMS API — prefix it the same way.
 	function renderItem(document: WebsiteDocument): ReactNode {
@@ -71,11 +74,10 @@ export function ProjectsSearch(props: ProjectsSearchProps): ReactNode {
 
 		return (
 			<SearchFacetFilter
-				// No nicer label for the raw indexed value yet — see the TODO below.
-				getLabel={(value) => value}
+				getLabel={(value) => getFacetLabel(value)}
 				facet={facet}
 				isLoading={facets == null}
-				label={facetField}
+				label={t("Fördercall")}
 				onChange={(values) => {
 					onChange(facetField, values);
 				}}
@@ -83,9 +85,6 @@ export function ProjectsSearch(props: ProjectsSearchProps): ReactNode {
 			/>
 		);
 	}
-
-	// TODO: `label`/`getLabel` above show the raw field name/indexed value. Swap in a translated facet label and
-	// confirm whether the indexed call names need their own display mapping once real data is in the index.
 
 	return <SearchView<WebsiteDocument> renderFacets={renderFacets} renderItem={renderItem} search={search} />;
 }
