@@ -9,6 +9,7 @@ import { Link } from "#/components/link.tsx";
 import { NavLink } from "#/components/nav-link";
 import { LinkButton } from "#/components/ui/button";
 import { cachedNavigation } from "#/lib/data/api-cache";
+import { localizeHref } from "#/lib/navigation/convert";
 import funderLogo from "#/public/assets/images/logo-bmfwf.svg";
 
 interface FooterProps extends ComponentProps<"footer"> {}
@@ -43,7 +44,7 @@ export async function Footer(props: Readonly<FooterProps>): Promise<ReactNode> {
 															{child.href != null && (
 																<Link
 																	className="flex [&_span]:items-center [&_span]:gap-x-1 [&_span]:inline-flex"
-																	href={child.href}
+																	href={child.href.startsWith("/") ? localizeHref(child.href, locale) : child.href}
 																>
 																	{child.href.startsWith("mailto:") ? (
 																		<MailIcon aria-hidden={true} className="size-4" />
