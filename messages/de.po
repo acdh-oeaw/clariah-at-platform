@@ -135,6 +135,10 @@ msgstr "Weitere Ergebnisse konnten nicht geladen werden."
 msgid "Tyzzqd"
 msgstr "Mehr laden"
 
+#: app/(app)/[locale]/(default)/imprint/page.tsx
+msgid "cBXYMi"
+msgstr "Impressum"
+
 #: app/(app)/[locale]/(default)/layout.tsx
 msgid "DBsIRX"
 msgstr "Zum Hauptinhalt springen"
