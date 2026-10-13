@@ -101,7 +101,7 @@ msgstr "View all articles"
 #: app/(app)/[locale]/(default)/news/page.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
 msgid "NZyhSX"
-msgstr "News Item"
+msgstr "News"
 
 #: app/(app)/[locale]/(default)/(index)/page.tsx
 #: app/(app)/[locale]/(default)/events/[slug]/page.tsx
