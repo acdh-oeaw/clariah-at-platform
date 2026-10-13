@@ -72,7 +72,11 @@ export async function Footer(props: Readonly<FooterProps>): Promise<ReactNode> {
 								"Bleiben Sie auf dem Laufenden über Digital Humanities (DH) Aktivitäten in Österreich: Mitglieder der DHA-E-Mail-Liste erhalten nicht nur Informationen zu Events, open Calls und vielem mehr, sondern können auch selbst anstehende Aktivitäten aus der österreichischen DH Landschaft an Mitglieder der Liste versenden.",
 							)}
 						</p>
-						<LinkButton variant="outline" className="text-primary-1000">
+						<LinkButton
+							variant="outline"
+							className="text-primary-1000"
+							href="mailto:dha-join@lists.oeaw.ac.at?subject=DHA list subscription"
+						>
 							{t("Digital Humanities Austria E-Mail-Liste")}
 						</LinkButton>
 					</section>
