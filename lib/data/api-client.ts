@@ -7,6 +7,10 @@ import type { components, operations } from "#/lib/openapi/types";
 
 const DEFAULT_BASE_URL = env.NEXT_PUBLIC_API_BASE_URL.replace(/\/+$/, "");
 
+/**
+ * Sent with every request when configured. Server-only — `API_ACCESS_TOKEN` has no `NEXT_PUBLIC_` prefix, so it is
+ * `undefined` in a browser bundle rather than ever being exposed there.
+ */
 const apiHeaders: HeadersInit | undefined =
 	env.API_ACCESS_TOKEN != null ? { "x-api-access-token": env.API_ACCESS_TOKEN } : undefined;
 
@@ -164,11 +168,7 @@ export async function orNull<T>(promise: Promise<T>): Promise<T | null> {
 /* Request plumbing                                                           */
 /* -------------------------------------------------------------------------- */
 
-/**
- * Array values are serialised as repeated keys (`?type=news&type=opportunities`), which is what the API expects for
- * every repeatable filter.
- */
-
+/** Realm-safe `instanceof Date`. */
 function isDate(value: unknown): value is Date {
 	return Object.prototype.toString.call(value) === "[object Date]";
 }
@@ -193,6 +193,11 @@ function serializeQueryValue(value: unknown): string {
 		}
 	}
 }
+
+/**
+ * Array values are serialised as repeated keys (`?type=news&type=opportunities`), which is what the API expects for
+ * every repeatable filter.
+ */
 function serializeQuery(query: unknown): string {
 	if (query == null || typeof query !== "object") {
 		return "";
@@ -223,6 +228,7 @@ function serializeQuery(query: unknown): string {
 
 function buildHeaders(init: HeadersInit | undefined, accept: string): Headers {
 	const headers = new Headers(apiHeaders);
+
 	// Per-request headers win over the defaults above, same as the `accept` fallback below.
 	if (init != null) {
 		for (const [key, value] of new Headers(init)) {
@@ -324,22 +330,14 @@ function absolutize(url: string): string {
 /**
  * Build a rendition URL from an image's `srcUrl`. The endpoint answers with a redirect to a signed rendition, so the
  * result can go straight into `src`.
- *
- * Omit `width` to serve the source as stored — the only rendition a vector image has. `aspectRatio` crops against the
- * width, so it is ignored without one; the API rejects the combination.
  */
-export function getImageUrl(srcUrl: string, width?: number, aspectRatio?: ImageAspectRatio): string {
-	const base = absolutize(srcUrl);
-
-	if (width == null) {
-		return base;
-	}
-
+export function getImageUrl(srcUrl: string, width: number, aspectRatio?: ImageAspectRatio): string {
 	const params = new URLSearchParams({ w: String(snapImageWidth(width)) });
 	if (aspectRatio != null) {
 		params.set("ar", aspectRatio);
 	}
 
+	const base = absolutize(srcUrl);
 	return `${base}${base.includes("?") ? "&" : "?"}${params.toString()}`;
 }
 
@@ -357,13 +355,6 @@ export function getImageSrcSet(
 	return widths.map((width) => `${getImageUrl(srcUrl, width, aspectRatio)} ${String(width)}w`).join(", ");
 }
 
-/**
- * Storage-key form of the image-variant endpoint: the `{prefix}/{name}/{version}` the API docs describe, rather than an
- * image's `srcUrl`.
- *
- * The URL points at the endpoint, which answers with a 302 to the signed imgproxy rendition — put it straight in `src`.
- * To get the signed URL itself, pass the result to `resolveSignedImageUrl`.
- */
 export function getAssetImageUrl(
 	prefix: AssetPrefix,
 	name: string,
@@ -381,9 +372,10 @@ export function getAssetImageUrl(
 		.join("/");
 	const version = options.version ?? "v1";
 
+	// No width means "give me the largest rendition" — every call site omits it today.
 	return getImageUrl(
 		`${resolveBaseUrl(options.baseUrl)}/api/v1/assets/${key}/image/${version}`,
-		options.width,
+		options.width ?? largestImageWidth,
 		options.aspectRatio,
 	);
 }
@@ -638,6 +630,9 @@ export async function fetchAll<T>(
 	let offset = 0;
 
 	for (let page = 0; page < maxPages; page++) {
+		// Sequential on purpose: `offset` for the next request depends on this response's `limit`, and whether there even
+		// is a next page depends on its `total` — neither is known before this request resolves, so the pages cannot be
+		// requested in parallel with `Promise.all`.
 		// oxlint-disable-next-line no-await-in-loop
 		const response = await endpointFn({
 			...requestOptions,
@@ -663,7 +658,6 @@ export const api = {
 	announcements: { list: getAnnouncements },
 	assets: {
 		imageUrl: getImageUrl,
-		imageSourceUrl: getImageSourceUrl,
 		imageSrcSet: getImageSrcSet,
 		download: getAssetDownload,
 		downloadUrl: getAssetDownloadUrl,
@@ -763,23 +757,21 @@ export const api = {
 
 export type Schemas = components["schemas"];
 
-/** A top-level image: chosen rendition, `srcUrl` for others, source dimensions. */
-export type Image = Schemas["Image"];
-/** An image inside a content block — like `Image`, minus the caption the block reports. */
-export type BlockImage = Schemas["BlockImage"];
-
 export type Announcement = Schemas["Announcement"];
 export type AnnouncementType = Announcement["type"];
 export type NewsAnnouncement = Schemas["NewsAnnouncement"];
 export type OpportunityAnnouncement = Schemas["OpportunityAnnouncement"];
 export type FundingCallAnnouncement = Schemas["FundingCallAnnouncement"];
 
+/** A slice of the api's data — see `lib/openapi/cache-tags.ts` for the runtime vocabulary and per-operation map. */
+export type CacheTag = Schemas["CacheTag"];
+export type RevalidationWebhookPayload = Schemas["RevalidationWebhookPayload"];
+
 export type EntityRef = Schemas["EntityRef"];
 export type EntityType = EntityRef["type"];
 
 export type FeaturedEntities = Schemas["FeaturedEntities"];
 export type FeaturedEvent = Schemas["FeaturedEvent"];
-export type FeaturedProject = Schemas["FeaturedProject"];
 
 export type SitemapEntry = Schemas["SitemapEntry"];
 
@@ -832,5 +824,8 @@ export type ContentBlock = Page["content"][number];
 export type ContentBlockType = ContentBlock["type"];
 export type RelatedResource = Page["relatedResources"][number];
 
-/** @deprecated Use `Image`, which the schema now names directly. */
-export type ImageAsset = Image;
+/** A top-level image with renditions (`srcUrl`) and intrinsic dimensions. */
+export type ImageAsset = NonNullable<PageBase["image"]>;
+
+/** An image block's own image, embedded in `content`/`description`/`biography` rather than a top-level `image`. */
+export type BlockImage = Schemas["BlockImage"];

@@ -6,7 +6,9 @@ import {
 	type AnnouncementType,
 	type ApiQuery,
 	type ApiResponse,
+	type CacheTag,
 	type EntityType,
+	type JsonOperationId,
 	type PaginatedResponse,
 	fetchAll,
 	getAnnouncements,
@@ -53,6 +55,7 @@ import {
 	getWorkingGroups,
 	isNotFound,
 } from "#/lib/data/api-client.ts";
+import { operationCacheTags } from "#/lib/openapi/cache-tags.ts";
 
 /**
  * Cached read layer. Requires `cacheComponents: true` in next.config.ts.
@@ -86,15 +89,68 @@ export const tags = {
 	entity: (type: EntityType, slug: string): string => `entity:${type}:${slug}`,
 
 	announcements: "announcements",
+	assets: "assets",
 	featured: "featured",
 	navigation: "navigation",
 	siteMetadata: "site-metadata",
 	sitemap: "sitemap",
+	socialMedia: "social-media",
 	statistics: "statistics",
 } as const;
 
 function detailTags(type: EntityType, slug: string): [string, string] {
 	return [tags.entities(type), tags.entity(type, slug)];
+}
+
+/**
+ * Maps the api's own `CacheTag` vocabulary (see `lib/openapi/cache-tags.ts`) to the `EntityType` `expireByCacheTag`
+ * below expires for it — also what the `revalidate` webhook's payload validates against, so
+ * `app/(api)/api/revalidate/route.ts` calls `expireByCacheTag` directly instead of keeping a second copy of this
+ * mapping. "members-partners" isn't its own entity type here: `cachedMembersAndPartners`/`cachedMemberOrPartner` both
+ * tag under `collection:country`/`entities:country`.
+ */
+const entityTypeByCacheTag: Partial<Record<CacheTag, EntityType>> = {
+	"documents-policies": "documents_policies",
+	events: "events",
+	"funding-calls": "funding_calls",
+	"governance-bodies": "governance_body",
+	"impact-case-studies": "impact_case_studies",
+	"members-partners": "country",
+	news: "news",
+	opportunities: "opportunities",
+	pages: "pages",
+	persons: "persons",
+	projects: "projects",
+	"spotlight-articles": "spotlight_articles",
+	"working-groups": "working_group",
+};
+
+/** `CacheTag` values with no backing `EntityType`. */
+const standaloneTagsByCacheTag: Partial<Record<CacheTag, string>> = {
+	assets: tags.assets,
+	"featured-entities": tags.featured,
+	navigation: tags.navigation,
+	"site-metadata": tags.siteMetadata,
+	"social-media": tags.socialMedia,
+};
+
+/**
+ * Resolves an operation's `x-cache-tags` — the api's own declaration of every entity type its response transitively
+ * depends on, including embedded/joined data (e.g. a person's response embeds governance-body and working-group
+ * affiliations) — into this app's own cache tags. Pass the result to `cacheTag()` alongside a function's own
+ * `detailTags`/`collection` tag: this only adds the dependencies the api declares beyond the entity's own type, it
+ * carries no slug-level granularity of its own.
+ */
+function relatedTags(operationId: JsonOperationId): ReadonlyArray<string> {
+	return operationCacheTags[operationId].flatMap((apiCacheTag) => {
+		const entityType = entityTypeByCacheTag[apiCacheTag];
+		if (entityType != null) {
+			return [tags.entities(entityType)];
+		}
+
+		const standaloneTag = standaloneTagsByCacheTag[apiCacheTag];
+		return standaloneTag != null ? [standaloneTag] : [];
+	});
 }
 
 async function nullOn404<T>(promise: Promise<T>): Promise<T | null> {
@@ -115,7 +171,7 @@ async function nullOn404<T>(promise: Promise<T>): Promise<T | null> {
 export async function cachedSiteMetadata(locale: string): Promise<ApiResponse<"getSiteMetadata">> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(tags.siteMetadata);
+	cacheTag(tags.siteMetadata, ...relatedTags("getSiteMetadata"));
 
 	return getSiteMetadata({ query: { locale } });
 }
@@ -123,7 +179,7 @@ export async function cachedSiteMetadata(locale: string): Promise<ApiResponse<"g
 export async function cachedNavigation(locale: string, menu?: string): Promise<ApiResponse<"getNavigation">> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(tags.navigation);
+	cacheTag(tags.navigation, ...relatedTags("getNavigation"));
 
 	return getNavigation({ query: { locale, menu } });
 }
@@ -131,7 +187,7 @@ export async function cachedNavigation(locale: string, menu?: string): Promise<A
 export async function cachedStatistics(): Promise<ApiResponse<"getStatistics">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.statistics);
+	cacheTag(tags.statistics, ...relatedTags("getStatistics"));
 
 	return getStatistics();
 }
@@ -143,7 +199,7 @@ export async function cachedStatistics(): Promise<ApiResponse<"getStatistics">> 
 export async function cachedFeaturedEntities(locale: string): Promise<ApiResponse<"getFeaturedEntities">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.featured);
+	cacheTag(tags.featured, ...relatedTags("getFeaturedEntities"));
 
 	return getFeaturedEntities({ query: { locale } });
 }
@@ -152,7 +208,7 @@ export async function cachedFeaturedEntities(locale: string): Promise<ApiRespons
 export async function cachedSitemap(): Promise<ApiResponse<"getSitemap">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.sitemap);
+	cacheTag(tags.sitemap, ...relatedTags("getSitemap"));
 
 	return getSitemap();
 }
@@ -172,7 +228,7 @@ export async function cachedAnnouncements(
 ): Promise<ApiResponse<"getAnnouncements">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.announcements);
+	cacheTag(tags.announcements, ...relatedTags("getAnnouncements"));
 
 	return getAnnouncements({ query: { type: types, limit, offset } });
 }
@@ -180,7 +236,7 @@ export async function cachedAnnouncements(
 export async function cachedNews(locale: string, limit = 12, offset = 0): Promise<ApiResponse<"getNews">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.collection("news"));
+	cacheTag(tags.collection("news"), ...relatedTags("getNews"));
 
 	return getNews({ query: { locale, limit, offset } });
 }
@@ -197,7 +253,7 @@ export async function cachedUpcomingEvents(
 ): Promise<ApiResponse<"getEvents">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.collection("events"));
+	cacheTag(tags.collection("events"), ...relatedTags("getEvents"));
 
 	return getEvents({ query: { from, locale, limit, offset } });
 }
@@ -211,7 +267,7 @@ export async function cachedPastEvents(
 ): Promise<ApiResponse<"getEvents">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.collection("events"));
+	cacheTag(tags.collection("events"), ...relatedTags("getEvents"));
 
 	return getEvents({ query: { until, locale, limit, offset } });
 }
@@ -224,7 +280,7 @@ export async function cachedProjects(
 ): Promise<ApiResponse<"getProjects">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.collection("projects"));
+	cacheTag(tags.collection("projects"), ...relatedTags("getProjects"));
 
 	return getProjects({ query: { locale, status, limit, offset } });
 }
@@ -237,7 +293,7 @@ export async function cachedDariahProjects(
 ): Promise<ApiResponse<"getDariahProjects">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.collection("projects"));
+	cacheTag(tags.collection("projects"), ...relatedTags("getDariahProjects"));
 
 	return getDariahProjects({ query: { locale, status, limit, offset } });
 }
@@ -248,7 +304,7 @@ export async function cachedWorkingGroups(
 ): Promise<ApiResponse<"getWorkingGroups">> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(tags.collection("working_group"));
+	cacheTag(tags.collection("working_group"), ...relatedTags("getWorkingGroups"));
 
 	return getWorkingGroups({ query: { locale, status, limit: 100 } });
 }
@@ -256,7 +312,7 @@ export async function cachedWorkingGroups(
 export async function cachedMembersAndPartners(locale: string): Promise<ApiResponse<"getMembersAndPartners">> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(tags.collection("country"));
+	cacheTag(tags.collection("country"), ...relatedTags("getMembersAndPartners"));
 
 	return getMembersAndPartners({ query: { locale, limit: 100 } });
 }
@@ -269,7 +325,7 @@ export async function cachedFundingCalls(
 ): Promise<ApiResponse<"getFundingCalls">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.collection("funding_calls"));
+	cacheTag(tags.collection("funding_calls"), ...relatedTags("getFundingCalls"));
 
 	return getFundingCalls({ query: { locale, status, limit, offset } });
 }
@@ -283,7 +339,7 @@ export async function cachedOpportunities(
 ): Promise<ApiResponse<"getOpportunities">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.collection("opportunities"));
+	cacheTag(tags.collection("opportunities"), ...relatedTags("getOpportunities"));
 
 	return getOpportunities({ query: { locale, status, source, limit, offset } });
 }
@@ -295,7 +351,7 @@ export async function cachedSpotlightArticles(
 ): Promise<ApiResponse<"getSpotlightArticles">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.collection("spotlight_articles"));
+	cacheTag(tags.collection("spotlight_articles"), ...relatedTags("getSpotlightArticles"));
 
 	return getSpotlightArticles({ query: { locale, limit, offset } });
 }
@@ -307,7 +363,7 @@ export async function cachedImpactCaseStudies(
 ): Promise<ApiResponse<"getImpactCaseStudies">> {
 	"use cache";
 	cacheLife("hours");
-	cacheTag(tags.collection("impact_case_studies"));
+	cacheTag(tags.collection("impact_case_studies"), ...relatedTags("getImpactCaseStudies"));
 
 	return getImpactCaseStudies({ query: { locale, limit, offset } });
 }
@@ -315,7 +371,7 @@ export async function cachedImpactCaseStudies(
 export async function cachedDocumentsPoliciesTree(locale: string): Promise<ApiResponse<"getDocumentsPoliciesTree">> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(tags.collection("documents_policies"));
+	cacheTag(tags.collection("documents_policies"), ...relatedTags("getDocumentsPoliciesTree"));
 
 	return getDocumentsPoliciesTree({ query: { locale } });
 }
@@ -327,7 +383,7 @@ export async function cachedDocumentsPoliciesTree(locale: string): Promise<ApiRe
 export async function cachedPage(slug: string, locale: string): Promise<ApiResponse<"getPageBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("pages", slug));
+	cacheTag(...detailTags("pages", slug), ...relatedTags("getPageBySlug"));
 
 	return nullOn404(getPageBySlug(slug, { query: { locale } }));
 }
@@ -335,7 +391,7 @@ export async function cachedPage(slug: string, locale: string): Promise<ApiRespo
 export async function cachedNewsItem(slug: string, locale: string): Promise<ApiResponse<"getNewsItemBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("news", slug));
+	cacheTag(...detailTags("news", slug), ...relatedTags("getNewsItemBySlug"));
 
 	return nullOn404(getNewsItemBySlug(slug, { query: { locale } }));
 }
@@ -344,7 +400,7 @@ export async function cachedEvent(slug: string, locale: string): Promise<ApiResp
 	"use cache";
 	cacheLife("days");
 	// prev/next links point at neighbours, so a new event must expire these too.
-	cacheTag(...detailTags("events", slug), tags.collection("events"));
+	cacheTag(...detailTags("events", slug), tags.collection("events"), ...relatedTags("getEventBySlug"));
 
 	return nullOn404(getEventBySlug(slug, { query: { locale } }));
 }
@@ -355,7 +411,7 @@ export async function cachedFundingCall(
 ): Promise<ApiResponse<"getFundingCallBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("funding_calls", slug));
+	cacheTag(...detailTags("funding_calls", slug), ...relatedTags("getFundingCallBySlug"));
 
 	return nullOn404(getFundingCallBySlug(slug, { query: { locale } }));
 }
@@ -366,7 +422,7 @@ export async function cachedOpportunity(
 ): Promise<ApiResponse<"getOpportunityBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("opportunities", slug));
+	cacheTag(...detailTags("opportunities", slug), ...relatedTags("getOpportunityBySlug"));
 
 	return nullOn404(getOpportunityBySlug(slug, { query: { locale } }));
 }
@@ -374,7 +430,7 @@ export async function cachedOpportunity(
 export async function cachedProject(slug: string, locale: string): Promise<ApiResponse<"getProjectBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("projects", slug));
+	cacheTag(...detailTags("projects", slug), ...relatedTags("getProjectBySlug"));
 
 	return nullOn404(getProjectBySlug(slug, { query: { locale } }));
 }
@@ -385,7 +441,7 @@ export async function cachedDariahProject(
 ): Promise<ApiResponse<"getDariahProjectBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("projects", slug));
+	cacheTag(...detailTags("projects", slug), ...relatedTags("getDariahProjectBySlug"));
 
 	return nullOn404(getDariahProjectBySlug(slug, { query: { locale } }));
 }
@@ -393,7 +449,7 @@ export async function cachedDariahProject(
 export async function cachedPerson(slug: string, locale: string): Promise<ApiResponse<"getPersonBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("persons", slug));
+	cacheTag(...detailTags("persons", slug), ...relatedTags("getPersonBySlug"));
 
 	return nullOn404(getPersonBySlug(slug, { query: { locale } }));
 }
@@ -404,7 +460,7 @@ export async function cachedWorkingGroup(
 ): Promise<ApiResponse<"getWorkingGroupBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("working_group", slug));
+	cacheTag(...detailTags("working_group", slug), ...relatedTags("getWorkingGroupBySlug"));
 
 	return nullOn404(getWorkingGroupBySlug(slug, { query: { locale } }));
 }
@@ -416,7 +472,7 @@ export async function cachedMemberOrPartner(
 ): Promise<ApiResponse<"getMemberOrPartnerBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("country", slug));
+	cacheTag(...detailTags("country", slug), ...relatedTags("getMemberOrPartnerBySlug"));
 
 	return nullOn404(getMemberOrPartnerBySlug(slug, { query: { locale } }));
 }
@@ -427,7 +483,7 @@ export async function cachedSpotlightArticle(
 ): Promise<ApiResponse<"getSpotlightArticleBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("spotlight_articles", slug));
+	cacheTag(...detailTags("spotlight_articles", slug), ...relatedTags("getSpotlightArticleBySlug"));
 
 	return nullOn404(getSpotlightArticleBySlug(slug, { query: { locale } }));
 }
@@ -438,7 +494,7 @@ export async function cachedImpactCaseStudy(
 ): Promise<ApiResponse<"getImpactCaseStudyBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("impact_case_studies", slug));
+	cacheTag(...detailTags("impact_case_studies", slug), ...relatedTags("getImpactCaseStudyBySlug"));
 
 	return nullOn404(getImpactCaseStudyBySlug(slug, { query: { locale } }));
 }
@@ -449,7 +505,7 @@ export async function cachedDocumentOrPolicy(
 ): Promise<ApiResponse<"getDocumentOrPolicyBySlug"> | null> {
 	"use cache";
 	cacheLife("days");
-	cacheTag(...detailTags("documents_policies", slug));
+	cacheTag(...detailTags("documents_policies", slug), ...relatedTags("getDocumentOrPolicyBySlug"));
 
 	return nullOn404(getDocumentOrPolicyBySlug(slug, { query: { locale } }));
 }
@@ -527,5 +583,23 @@ export function revalidateEntity(type: EntityType, slug?: string): void {
 	}
 	if (statisticsEntityTypes.has(type)) {
 		expire(tags.statistics);
+	}
+}
+
+/**
+ * Call from the CMS webhook route handler, passing one of the api's own `CacheTag` values (see
+ * `lib/openapi/cache-tags.ts`) — the single source of truth this and `relatedTags` both resolve against, so the
+ * webhook's invalidation and a cached response's own tags can never drift apart.
+ */
+export function expireByCacheTag(apiCacheTag: CacheTag): void {
+	const entityType = entityTypeByCacheTag[apiCacheTag];
+	if (entityType != null) {
+		revalidateEntity(entityType);
+		return;
+	}
+
+	const standaloneTag = standaloneTagsByCacheTag[apiCacheTag];
+	if (standaloneTag != null) {
+		expire(standaloneTag);
 	}
 }
