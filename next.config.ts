@@ -37,12 +37,6 @@ const config: NextConfig = {
 		 */
 		deviceSizes: [640, 960, 1280, 1600, 2048, 2560, 3200, 3840],
 		imageSizes: [320, 480],
-		/**
-		 * Every image on the site is now addressed through `lib/images/loader.ts`: api images become variant-endpoint urls,
-		 * and everything local is handed back to `/_next/image`. No image url reaches the optimizer from outside this app
-		 * any more, which is what `remotePatterns` used to be here to allow.
-		 */
-		loaderFile: "./lib/images/loader.ts",
 		qualities: [imageQuality],
 	},
 	logging: {
