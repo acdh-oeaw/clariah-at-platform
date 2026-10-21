@@ -18,7 +18,7 @@ export async function Footer(props: Readonly<FooterProps>): Promise<ReactNode> {
 	const { className, ...rest } = props;
 	const t = await getExtracted();
 	const locale = await getLocale();
-	const label = t("Weiter Informationen");
+	const label = t("Weitere Informationen");
 
 	const response = await cachedNavigation(locale);
 	//const { primary } = navigation();
@@ -26,8 +26,8 @@ export async function Footer(props: Readonly<FooterProps>): Promise<ReactNode> {
 	assert(navigation != null, "Missing primary navigation.");
 
 	return (
-		<footer {...rest} className={cn("z-9 p-12 text-primary-1000", className)}>
-			<div className="flex flex-col gap-12 lg:flex-row px-8 py-4 sm:px-16">
+		<footer {...rest} className={cn("z-9 p-4 text-primary-1000 md:p-12", className)}>
+			<div className="flex flex-col gap-12 lg:flex-row px-4 md:px-8 py-4 sm:px-16">
 				<section className="grid grid-cols-1 gap-y-8 lg:grid-cols-[2fr_1fr_1fr] justify-between">
 					{/** <Image alt="" width={200} src={logo} />* */}
 					<div>

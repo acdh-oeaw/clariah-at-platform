@@ -20,7 +20,7 @@ export interface SearchParams {
 
 export interface SearchOutcome<Document> {
 	items: Array<{ document: Document }>;
-	pagination: { page: number; totalPages: number };
+	pagination: { page: number; totalPages: number; total: number };
 	facets?: Record<string, SearchFacetResult>;
 }
 

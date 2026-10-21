@@ -1,10 +1,12 @@
 "use client";
 
 import { useExtracted } from "next-intl";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type ReactNode, useCallback } from "react";
 
-import { SearchView } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
-import { getFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels";
+import { SearchView, type SearchViewParams } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
+import { useFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels";
+import { searchParams } from "#/app/(app)/[locale]/(default)/projects/search-params.ts";
 import { SearchFacetFilter } from "#/app/(app)/[locale]/(default)/search/_components/facet-filter.tsx";
 import { Card } from "#/components/card";
 import { getAssetImageUrl } from "#/lib/data/api-client";
@@ -20,25 +22,59 @@ interface ProjectsSearchProps {
 	locale: IntlLocale;
 }
 
-export function ProjectsSearch(props: ProjectsSearchProps): ReactNode {
+function toRawSearchParams(params: SearchViewParams): { q: string; project_call: string | undefined; page: number } {
+	return {
+		q: params.query,
+		page: params.page,
+		project_call: params.facets[facetField]?.[0],
+	};
+}
+
+function toSearchViewParams(raw: { q: string; project_call?: string | undefined; page: number }): SearchViewParams {
+	const facets: SelectedFacets = {};
+	if (raw.project_call != null) {
+		facets[facetField] = [raw.project_call];
+	}
+	return { facets, page: raw.page, query: raw.q };
+}
+
+export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode {
 	const { locale } = props;
+	const getLabel = useFacetLabel();
 	const t = useExtracted();
+	const pathname = usePathname();
+	const router = useRouter();
+	const rawSearchParams = useSearchParams();
+
+	/**
+	 * No local state: `params` is derived fresh from the url on every render, not mirrored into a `useState` that would
+	 * need manual syncing. `router.replace` below already updates the url; `useSearchParams` reactively reflects that on
+	 * the very next render, so there is nothing else to keep in sync by hand.
+	 */
+	const params = toSearchViewParams(searchParams.parse(rawSearchParams));
+
+	function getHref(nextParams: SearchViewParams): string {
+		const { query } = searchParams.encode(toRawSearchParams(nextParams));
+		return query !== "" ? `${pathname}?${query}` : pathname;
+	}
+
+	function onParamsChange(nextParams: SearchViewParams): void {
+		router.replace(getHref(nextParams), { scroll: false });
+	}
 
 	// `document.link` is root-relative and locale-less, like `EntityRef.href` from the CMS API — prefix it the same way.
 	function renderItem(document: WebsiteDocument): ReactNode {
 		const link = document.link != null && document.link !== "" ? localizeHref(document.link, locale) : undefined;
 
-		/**
-		 * Typesense only indexes the asset key, not the full api `Image` (no known dimensions, alt text, caption or
-		 * license) — `Card`'s `image` prop needs that full shape, so the fields it can't know are left `null`. `ApiImage`
-		 * never reads `url`/`caption`/`license`, and a `null` width/height takes the same safe, unknown-dimensions fallback
-		 * path a vector image would.
-		 */
-		const srcUrl =
-			document.image_key != null && document.image_key !== "" ? getAssetImageUrl("images", document.image_key) : null;
 		const image =
-			srcUrl != null
-				? { alt: null, caption: null, height: null, license: null, srcUrl, url: srcUrl, width: null }
+			document.image_key !== ""
+				? {
+						alt: document.image_alt ?? null,
+						height: document.image_height ?? null,
+						mimeType: document.image_mime_type ?? "",
+						srcUrl: getAssetImageUrl("images", document.image_key),
+						width: document.image_width ?? null,
+					}
 				: null;
 
 		return <Card image={image} link={link} summary={document.description} title={document.label} />;
@@ -74,10 +110,11 @@ export function ProjectsSearch(props: ProjectsSearchProps): ReactNode {
 
 		return (
 			<SearchFacetFilter
-				getLabel={(value) => getFacetLabel(value)}
+				// No nicer label for the raw indexed value yet — see the TODO below.
+				getLabel={(value) => getLabel(value)}
 				facet={facet}
 				isLoading={facets == null}
-				label={t("Fördercall")}
+				label={t("Förderprogramm")}
 				onChange={(values) => {
 					onChange(facetField, values);
 				}}
@@ -86,5 +123,18 @@ export function ProjectsSearch(props: ProjectsSearchProps): ReactNode {
 		);
 	}
 
-	return <SearchView<WebsiteDocument> renderFacets={renderFacets} renderItem={renderItem} search={search} />;
+	// TODO: `label`/`getLabel` above show the raw field name/indexed value. Swap in a translated facet label and
+	// confirm whether the indexed call names need their own display mapping once real data is in the index.
+
+	return (
+		<SearchView<WebsiteDocument>
+			getHref={getHref}
+			label={t("Projekte filtern")}
+			onParamsChange={onParamsChange}
+			params={params}
+			renderFacets={renderFacets}
+			renderItem={renderItem}
+			search={search}
+		/>
+	);
 }

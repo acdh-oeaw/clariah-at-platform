@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
+import { ApiImage } from "#/components/api-image.tsx";
 import { ContentBlocks } from "#/components/content-blocks.tsx";
-import { ApiImage } from "#/components/image";
 import type { NewsItem as NewsItemProps } from "#/lib/data/api-client.ts";
 
 export function NewsItem(props: NewsItemProps): ReactNode {
@@ -20,7 +20,7 @@ export function NewsItem(props: NewsItemProps): ReactNode {
 				<div className="p-16">
 					<h1 className="text-h1">{title}</h1>
 
-					<ContentBlocks fields={content} />
+					<ContentBlocks blocks={content} />
 				</div>
 			</div>
 		</section>

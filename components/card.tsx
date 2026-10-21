@@ -3,7 +3,7 @@ import { useExtracted } from "next-intl";
 import type { ReactNode } from "react";
 
 import { ApiImage } from "#/components/image.tsx";
-import { LinkButton } from "#/components/ui/button.tsx";
+import { LinkButton } from "#/components/ui/button";
 import type { ImageAsset } from "#/lib/images/variants.ts";
 
 interface CardProps {
@@ -39,7 +39,7 @@ export function Card(props: CardProps): ReactNode {
 				className="w-full justify-between bg-primary-200 px-8 py-4"
 				endIcon={<ArrowRightIcon />}
 				href={link}
-				variant="secondary"
+				variant="unstyled"
 			>
 				{t("mehr lesen")}
 			</LinkButton>

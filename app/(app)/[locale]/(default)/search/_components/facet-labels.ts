@@ -1,43 +1,37 @@
 import { useExtracted } from "next-intl";
 
-export function getFacetLabel(): (status: string) => string {
+export function useFacetLabel(): (status: string) => string {
 	const t = useExtracted();
-	let label: string;
 	return (value: string) => {
 		switch (value) {
 			case "project": {
-				label = t("Projekt");
-				break;
+				return t("Projekt");
 			}
 			case "news-item": {
-				label = t("News");
-				break;
+				return t("News");
 			}
 			case "event": {
-				label = t("Event");
-				break;
+				return t("Event");
 			}
 			case "page": {
-				label = t("Seite");
-				break;
+				return t("Seite");
 			}
 			case "publication": {
-				label = t("Publikation");
-				break;
+				return t("Publikation");
 			}
 			case "software": {
-				label = t("Software");
-				break;
+				return t("Software");
 			}
 			case "service": {
-				label = t("Service");
-				break;
+				return t("Service");
 			}
 			case "training-material": {
-				label = t("Training Material");
-				break;
+				return t("Training Material");
+			}
+			// No nicer label for a value outside the known vocabulary yet — fall back to the raw indexed value.
+			default: {
+				return value;
 			}
 		}
-		return label;
 	};
 }

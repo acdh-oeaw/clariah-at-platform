@@ -1,11 +1,13 @@
 "use client";
 
 import { useExtracted } from "next-intl";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type ReactNode, useCallback } from "react";
 
-import { SearchView } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
+import { SearchView, type SearchViewParams } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
+import { searchParams } from "#/app/(app)/[locale]/(default)/search-params.ts";
 import { SearchFacetFilter } from "#/app/(app)/[locale]/(default)/search/_components/facet-filter.tsx";
-import { getFacetLabel } from "#/app/(app)/[locale]/(default)/search/_components/facet-labels";
+import { useFacetLabel } from "#/app/(app)/[locale]/(default)/search/_components/facet-labels";
 import { Link } from "#/components/link.tsx";
 import { Badge } from "#/components/ui/badge.tsx";
 import type { IntlLocale } from "#/lib/i18n/locales.ts";
@@ -57,10 +59,59 @@ function interleave<A, B>(a: ReadonlyArray<A>, b: ReadonlyArray<B>): Array<A | B
 	return result;
 }
 
+/**
+ * `SearchViewParams.facets[facetField]` is multi-select (the facet UI is checkboxes), but `search-params.ts`'s `type`
+ * is a single value — the url has room for one. Only the first selected type round-trips through the url and survives a
+ * reload; further ones stay selected in memory until the next full navigation. Flagging this rather than silently
+ * dropping the rest: worth deciding whether the url schema should become an array, or the facet UI single-select.
+ */
+function toRawSearchParams(params: SearchViewParams): {
+	q: string;
+	type: WebsiteDocument["type"] | undefined;
+	page: number;
+} {
+	return {
+		q: params.query,
+		page: params.page,
+		type: params.facets[facetField]?.[0] as WebsiteDocument["type"] | undefined,
+	};
+}
+
+function toSearchViewParams(raw: {
+	q: string;
+	type?: WebsiteDocument["type"] | undefined;
+	page: number;
+}): SearchViewParams {
+	const facets: SelectedFacets = {};
+	if (raw.type != null) {
+		facets[facetField] = [raw.type];
+	}
+	return { facets, page: raw.page, query: raw.q };
+}
+
 export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 	const { locale } = props;
-	const getLabel = getFacetLabel();
+	const getLabel = useFacetLabel();
 	const t = useExtracted();
+	const pathname = usePathname();
+	const router = useRouter();
+	const rawSearchParams = useSearchParams();
+
+	/**
+	 * No local state: `params` is derived fresh from the url on every render, not mirrored into a `useState` that would
+	 * need manual syncing. `router.replace` below already updates the url; `useSearchParams` reactively reflects that on
+	 * the very next render, so there is nothing else to keep in sync by hand.
+	 */
+	const params = toSearchViewParams(searchParams.parse(rawSearchParams));
+
+	function getHref(nextParams: SearchViewParams): string {
+		const { query } = searchParams.encode(toRawSearchParams(nextParams));
+		return query !== "" ? `${pathname}?${query}` : pathname;
+	}
+
+	function onParamsChange(nextParams: SearchViewParams): void {
+		router.replace(getHref(nextParams), { scroll: false });
+	}
 
 	function renderItem(item: CombinedItem): ReactNode {
 		if (item.kind === "website") {
@@ -106,15 +157,15 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 
 	// Depends on `locale`, so it stays referentially stable across re-renders unless the page's own locale changes.
 	const search = useCallback(
-		async (params: SearchParams): Promise<SearchOutcome<CombinedItem> | null> => {
-			const selectedTypes = params.facets?.[facetField] ?? [];
-			const websitePerPage = Math.ceil(params.perPage / 2);
-			const resourcesPerPage = params.perPage - websitePerPage;
+		async (searchParameters: SearchParams): Promise<SearchOutcome<CombinedItem> | null> => {
+			const selectedTypes = searchParameters.facets?.[facetField] ?? [];
+			const websitePerPage = Math.ceil(searchParameters.perPage / 2);
+			const resourcesPerPage = searchParameters.perPage - websitePerPage;
 
 			const [websiteResult, resourcesResult] = await Promise.all([
 				getSearchService().collections.website.search({
-					query: params.query,
-					page: params.page,
+					query: searchParameters.query,
+					page: searchParameters.page,
 					perPage: websitePerPage,
 					// Website content is locale-specific; resources are not — see the resources call below.
 					filters: [
@@ -128,8 +179,8 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 					facets: { type: { values: selectedTypes } },
 				}),
 				getSearchService().collections.resources.search({
-					query: params.query,
-					page: params.page,
+					query: searchParameters.query,
+					page: searchParameters.page,
 					perPage: resourcesPerPage,
 					facets: { type: { values: selectedTypes } },
 				}),
@@ -161,8 +212,9 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 					return { document: item };
 				}),
 				pagination: {
-					page: params.page,
-					totalPages: params.perPage > 0 ? Math.ceil(total / params.perPage) : 0,
+					page: searchParameters.page,
+					total,
+					totalPages: searchParameters.perPage > 0 ? Math.ceil(total / searchParameters.perPage) : 0,
 				},
 				facets: {
 					[facetField]: {
@@ -177,12 +229,12 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 		[locale],
 	);
 
-	function renderFacets(params: {
+	function renderFacets(renderParams: {
 		facets: SearchOutcome<CombinedItem>["facets"];
 		selected: SelectedFacets;
 		onChange: (field: string, values: ReadonlyArray<string>) => void;
 	}): ReactNode {
-		const { facets, onChange, selected } = params;
+		const { facets, onChange, selected } = renderParams;
 		const facet = facets?.[facetField];
 
 		if (facet?.values.length === 0) {
@@ -205,6 +257,10 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 
 	return (
 		<SearchView<CombinedItem>
+			getHref={getHref}
+			label={t("Website durchsuchen")}
+			onParamsChange={onParamsChange}
+			params={params}
 			renderFacets={renderFacets}
 			renderItem={renderItem}
 			resultsClassName="flex flex-col gap-y-12"

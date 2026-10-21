@@ -21,11 +21,19 @@ export default async function NewsPage(): Promise<ReactNode> {
 			<div className="bg-primary-1000 px-28 py-4">
 				<h1 className="flex relative items-end text-h2 text-white">{t("News")}</h1>
 			</div>
-			<div className="container  max-w-7xl">
+			<div className="md:py-16 px-4 py-8 container max-w-7xl">
 				<Suspense>
-					<NewsSearch locale={currentLocale} />
+					<NewsSearchSection />
 				</Suspense>
 			</div>
 		</Main>
 	);
+}
+
+async function NewsSearchSection(): Promise<ReactNode> {
+	const currentLocale = await locale();
+	if (!isValidLocale(currentLocale)) {
+		notFound();
+	}
+	return <NewsSearch locale={currentLocale} />;
 }

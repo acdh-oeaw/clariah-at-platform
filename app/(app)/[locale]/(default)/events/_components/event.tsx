@@ -1,7 +1,8 @@
+import { cn } from "@acdh-oeaw/style-variants";
 import type { ReactNode } from "react";
 
+import { ApiImage } from "#/components/api-image.tsx";
 import { ContentBlocks } from "#/components/content-blocks.tsx";
-import { ApiImage } from "#/components/image";
 import type { Event as EventProps } from "#/lib/data/api-client.ts";
 
 export function Event(props: EventProps): ReactNode {
@@ -17,10 +18,10 @@ export function Event(props: EventProps): ReactNode {
 					loading="eager"
 					preload={true}
 				/>
-				<div className="p-16">
+				<div className={cn("p-16", "max-inline-measure")}>
 					<h1 className="text-h1">{title}</h1>
 
-					<ContentBlocks fields={content} />
+					<ContentBlocks blocks={content} />
 				</div>
 			</div>
 		</section>

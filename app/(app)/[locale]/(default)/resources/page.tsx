@@ -25,11 +25,19 @@ export default async function ResourcesPage(): Promise<ReactNode> {
 			<div className="container max-w-7xl p-12">
 				<Suspense>
 					<div className="flex flex-col gap-y-8">
-						<div className="max-w-prose">{page?.content && <ContentBlocks fields={page.content} />}</div>
-						<ResourcesSearch />
+						<div className="max-w-prose">{page?.content && <ContentBlocks blocks={page.content} />}</div>
+						<ResourcesSearchSection />
 					</div>
 				</Suspense>
 			</div>
 		</Main>
 	);
+}
+
+async function ResourcesSearchSection(): Promise<ReactNode> {
+	const currentLocale = await locale();
+	if (!isValidLocale(currentLocale)) {
+		notFound();
+	}
+	return <ResourcesSearch />;
 }

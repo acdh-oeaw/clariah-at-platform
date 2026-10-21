@@ -99,7 +99,7 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 				role="search"
 			>
 				<label className="font-strong text-text-strong" htmlFor={inputId}>
-					{t("Events durchsuchen")}
+					{t("Events filtern")}
 				</label>
 				<div className="flex gap-x-2">
 					<input

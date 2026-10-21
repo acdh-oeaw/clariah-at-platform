@@ -62,12 +62,21 @@ export function EventsSearch(props: EventsSearchProps): ReactNode {
 
 	function renderItem(document: WebsiteDocument, context: RenderItemContext): ReactNode {
 		const link = document.link != null && document.link !== "" ? localizeHref(document.link, locale) : undefined;
-		const srcUrl = getAssetImageUrl("images", document.image_key);
+		const image =
+			document.image_key !== ""
+				? {
+						alt: document.image_alt ?? null,
+						height: document.image_height ?? null,
+						mimeType: document.image_mime_type ?? "",
+						srcUrl: getAssetImageUrl("images", document.image_key),
+						width: document.image_width ?? null,
+					}
+				: null;
 
 		return (
 			<EventCard
 				duration={{ start: document.start_date, end: document.end_date }}
-				image={{ srcUrl, height: 0, width: 0 }}
+				image={image}
 				headingLevel={context.headingLevel}
 				link={link}
 				summary={document.description}

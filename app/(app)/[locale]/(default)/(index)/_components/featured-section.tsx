@@ -56,7 +56,7 @@ export async function FeaturedSection(props: FeaturedSectionProps): Promise<Reac
 					);
 				})}
 			</ul>
-			<div className="mt-8 flex justify-end">
+			<div className="mt-8 flex justify-center md:justify-end">
 				<LinkButton endIcon={<ArrowRightIcon />} href={localizeHref(`/${entityType}`, currentLocale)} variant="outline">
 					{t("Alle Artikel anzeigen")}
 				</LinkButton>

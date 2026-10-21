@@ -21,11 +21,19 @@ export default async function EventsPage(): Promise<ReactNode> {
 			<div className="bg-primary-1000 px-28 py-4">
 				<h1 className="flex relative items-end text-h2 text-white">{t("Events")}</h1>
 			</div>
-			<div className="container max-w-6xl p-12">
+			<div className="container max-w-6xl p-4 md:p-12">
 				<Suspense>
-					<EventsSearch locale={currentLocale} />
+					<EventsSearchSection />
 				</Suspense>
 			</div>
 		</Main>
 	);
+}
+
+async function EventsSearchSection(): Promise<ReactNode> {
+	const currentLocale = await locale();
+	if (!isValidLocale(currentLocale)) {
+		notFound();
+	}
+	return <EventsSearch locale={currentLocale} />;
 }

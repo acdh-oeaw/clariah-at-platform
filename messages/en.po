@@ -48,16 +48,21 @@ msgstr "Open menu"
 msgid "se6p67"
 msgstr "Language"
 
-#: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "6M7vT8"
+#: app/(app)/[locale]/(default)/_components/pagination.tsx
+msgid "yjSdJl"
 msgstr ""
 
-#: app/(app)/[locale]/(default)/_components/search-view.tsx
-#: app/(app)/[locale]/(default)/search/page.tsx
-#: components/navigation-desktop.tsx
-#: components/navigation-mobile.tsx
-msgid "qi41lO"
-msgstr "Search"
+#: app/(app)/[locale]/(default)/_components/pagination.tsx
+msgid "k9hDFZ"
+msgstr ""
+
+#: app/(app)/[locale]/(default)/_components/pagination.tsx
+msgid "ZIstZx"
+msgstr ""
+
+#: app/(app)/[locale]/(default)/_components/pagination.tsx
+msgid "rBj9Ib"
+msgstr ""
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
@@ -65,32 +70,16 @@ msgid "dsIkSc"
 msgstr "Search"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
-msgid "t6uDQZ"
-msgstr "Search currently unavailable."
+msgid "U290Kk"
+msgstr "Suche derzeit nicht verfügbar."
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
-#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
-#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
-msgid "UkmHx2"
-msgstr "No results."
+msgid "V5JQj-"
+msgstr "No results found."
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "vQM8m7"
-msgstr "Search results pages"
-
-#: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "9Q3pmW"
-msgstr "Previous page"
-
-#: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "0dnxBg"
-msgstr "{page} of {total}"
-
-#: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "ha5T3x"
-msgstr "Next page"
+msgid "qcAbB2"
+msgstr "{total} Search results"
 
 #: app/(app)/[locale]/(default)/(index)/_components/featured-section.tsx
 msgid "K3ZDoV"
@@ -124,8 +113,18 @@ msgid "3C0-hX"
 msgstr "Past events"
 
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
-msgid "a5RaJV"
-msgstr "Search events"
+msgid "6dsmkY"
+msgstr "Filter events"
+
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+msgid "t6uDQZ"
+msgstr "Search currently unavailable."
+
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
+#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
+msgid "UkmHx2"
+msgstr "No results."
 
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
 msgid "PlIcwy"
@@ -143,13 +142,53 @@ msgstr "Imprint"
 msgid "DBsIRX"
 msgstr "Skip to main content"
 
+#: app/(app)/[locale]/(default)/news/_components/news-search.tsx
+msgid "9QD4qH"
+msgstr ""
+
 #: app/(app)/[locale]/(default)/pages/[slug]/page.tsx
 msgid "mt510S"
 msgstr "Infos"
 
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "_ErBVb"
+msgstr "Go!Digital 1.0"
+
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "NdYKJi"
+msgstr "Go!Digital 2.0"
+
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "vx7WLn"
+msgstr "Go!Digital 3.0"
+
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "jjVZVR"
+msgstr "Go!digital Next Generation"
+
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "z0kyzm"
+msgstr "CLARIAH-AT Project Funding 2022"
+
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "4Hqet1"
+msgstr "CLARIAH-AT Project Funding 2024"
+
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "JlRoSH"
+msgstr "CLARIAH-AT Project Funding 2025"
+
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "PjYJev"
+msgstr "CLARIAH-AT Project Funding 2026"
+
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
-msgid "d4FpSu"
+msgid "GfQtQD"
 msgstr "Funding Call"
+
+#: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
+msgid "LIsWz1"
+msgstr "Filter Projects"
 
 #: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
@@ -160,6 +199,15 @@ msgstr "Filter {label}"
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
 msgid "JIdm6T"
 msgstr "Filter…"
+
+#: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
+#: app/(app)/[locale]/(default)/search/_components/website-search.tsx
+msgid "xTeBn_"
+msgstr "Type"
+
+#: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
+msgid "wnypiT"
+msgstr ""
 
 #: app/(app)/[locale]/(default)/resources/page.tsx
 msgid "aOOcfk"
@@ -194,8 +242,14 @@ msgid "vkvyOV"
 msgstr "Training Material"
 
 #: app/(app)/[locale]/(default)/search/_components/website-search.tsx
-msgid "xTeBn_"
-msgstr "Type"
+msgid "fuRekU"
+msgstr "Search website"
+
+#: app/(app)/[locale]/(default)/search/page.tsx
+#: components/navigation-desktop.tsx
+#: components/navigation-mobile.tsx
+msgid "qi41lO"
+msgstr "Search"
 
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
@@ -225,3 +279,15 @@ msgstr "Page not found"
 #: components/card.tsx
 msgid "iwRrPy"
 msgstr "Read more"
+
+#: components/rich-text.tsx
+msgid "4ioeud"
+msgstr ""
+
+#: components/rich-text.tsx
+msgid "t1Ql7Y"
+msgstr ""
+
+#: components/rich-text.tsx
+msgid "TiPYmy"
+msgstr ""

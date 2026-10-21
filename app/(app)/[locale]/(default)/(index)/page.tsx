@@ -26,7 +26,7 @@ export default async function IndexPage(): Promise<ReactNode> {
 					<h1 className="text-h1 text-center">{siteMetadata.title}</h1>
 					<p className="text-3xl text-center">{siteMetadata.description}</p>
 				</HeroSection>
-				<div className="flex flex-col gap-y-16 md:py-16 xs:px-4 container max-w-7xl">
+				<div className="flex flex-col gap-y-16 md:py-16 px-4 py-8 container max-w-7xl">
 					<FeaturedSection title={t("News")} entityType="news" />
 					<FeaturedSection title={t("Events")} entityType="events" />
 					<FeaturedSection title={t("Projekte")} entityType="projects" />
