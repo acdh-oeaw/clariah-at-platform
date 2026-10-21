@@ -5,13 +5,25 @@ import { imageVariantWidths, maxImageVariantWidth, sourceWidthParam } from "#/co
  * An image as the api describes it.
  *
  * `width` and `height` are the source's own pixel dimensions and are null for vectors, which have no raster resolution
- * — see `ApiImage` for what that changes about how one is rendered.
+ * — see `ApiImage` for what that changes about how one is rendered. `mimeType` is what `isSvgImage` below checks; fall
+ * back to `""` (never matches) wherever it genuinely isn't known, e.g. a search index entry indexed before this field
+ * existed.
  */
 export interface ImageAsset {
 	alt?: string | null;
 	height: number | null;
+	mimeType: string;
 	srcUrl: string;
 	width: number | null;
+}
+
+/**
+ * Whether an api image is an svg, by the media type the api records for it. A vector has no resolution to request
+ * renditions against, and no pixel size — only an aspect ratio — so it takes a different path wherever a raster would
+ * be scaled.
+ */
+export function isSvgImage(image: Readonly<{ mimeType: string }>): boolean {
+	return image.mimeType === "image/svg+xml";
 }
 
 /**

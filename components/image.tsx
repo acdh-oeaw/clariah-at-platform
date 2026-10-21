@@ -2,16 +2,17 @@ import NextImage, { type ImageProps as NextImageProps } from "next/image";
 import type { ReactNode } from "react";
 
 import { sourceWidthParam } from "#/configs/image.config";
-import { type ImageAsset, appendSearchParams } from "#/lib/images/variants.ts";
+import { apiImageLoader } from "#/lib/images/loader.ts";
+import { type ImageAsset, appendSearchParams, isSvgImage } from "#/lib/images/variants.ts";
 
-interface ImageProps extends Omit<NextImageProps, "loader" | "unoptimized"> {}
+export interface ImageProps extends Omit<NextImageProps, "loader" | "unoptimized"> {}
 
 /**
  * Locally served images: static imports and files under `/public`.
  *
- * Vectors are served as-is. `next/image` normally arranges that itself, but only while the default loader is in play —
- * registering `images.loaderFile` turns the check off (`isDefaultLoader` in next's `get-img-props`), and the optimizer
- * refuses svg without `dangerouslyAllowSVG`. So the exemption has to be made here instead, or every local logo 400s.
+ * Vectors are served as-is — the optimizer refuses svg without `dangerouslyAllowSVG`, and there is nothing to resize in
+ * one anyway. `next/image`'s default loader already exempts these on its own; marking them `unoptimized` here too is
+ * defensive, not load-bearing.
  */
 export function Image(props: Readonly<ImageProps>): ReactNode {
 	const { alt, ...rest } = props;
@@ -28,7 +29,7 @@ function isVectorSrc(src: NextImageProps["src"]): boolean {
 interface ApiImageProps extends Omit<ImageProps, "alt" | "src"> {
 	/** Overrides the alt text the api records for the asset; pass `""` to mark it decorative. */
 	alt?: string;
-	image: ImageAsset | null;
+	image: ImageAsset;
 }
 
 /**
@@ -40,9 +41,6 @@ interface ApiImageProps extends Omit<ImageProps, "alt" | "src"> {
  */
 export function ApiImage(props: Readonly<ApiImageProps>): ReactNode {
 	const { alt, image, ...rest } = props;
-	if (!image) {
-		return <p>No Image found</p>;
-	}
 
 	/**
 	 * Source dimensions stand in for a slot that declares none, which is how a logo or a content image gets its aspect
@@ -54,9 +52,10 @@ export function ApiImage(props: Readonly<ApiImageProps>): ReactNode {
 	/**
 	 * A vector has no resolution to ladder against, and imgproxy runs with svg processing disabled, so it hands the
 	 * source back untouched. Naming a width would only mint a second cache entry for the same bytes, so the base url is
-	 * requested as it stands — one url, no `srcset`, which is what `unoptimized` asks `next/image` for.
+	 * requested as it stands — one url, no `srcset`, which is what `unoptimized` asks `next/image` for. A raster whose
+	 * resolution the api (or, for a synthetic search-result image, the search index) does not know takes the same path.
 	 */
-	if (image.width == null) {
+	if (isSvgImage(image) || image.width == null) {
 		const layoutWidth = toLayoutWidth(rest.width);
 		const src = image.srcUrl;
 
@@ -99,7 +98,7 @@ export function ApiImage(props: Readonly<ApiImageProps>): ReactNode {
 
 	const src = appendSearchParams(image.srcUrl, { [sourceWidthParam]: String(image.width) });
 
-	return <NextImage {...intrinsic} {...rest} alt={alt ?? image.alt ?? ""} src={src} />;
+	return <NextImage {...intrinsic} {...rest} alt={alt ?? image.alt ?? ""} loader={apiImageLoader} src={src} />;
 }
 
 function toLayoutWidth(width: NextImageProps["width"]): number | undefined {

@@ -1,272 +1,351 @@
-"use client";
-import { cn } from "@acdh-oeaw/style-variants";
+// https://github.com/DARIAH-ERIC/dariah-website/blob/main/components/rich-text.tsx
+
 import type { JSONContent } from "@tiptap/core";
-import { Heading } from "@tiptap/extension-heading";
-import { Table } from "@tiptap/extension-table";
-import { TableKit } from "@tiptap/extension-table/kit";
-import { StarterKit } from "@tiptap/starter-kit";
 import { renderToReactElement } from "@tiptap/static-renderer/pm/react";
-import { useFormatter } from "next-intl";
-import type { ReactNode } from "react";
+import cn from "clsx/lite";
+import { useExtracted as useTranslations } from "next-intl";
+import { Fragment, type ReactNode, useId } from "react";
 
-import { ButtonLink, renderButtonLink } from "#/components/button-link";
-import { linkStyles } from "#/components/link";
-import { PlaceholderValue, renderPlaceholderValue } from "#/components/placeholder-value";
-import { RichTextCaption } from "#/components/rich-text-caption";
-import { createRichTextLinkRenderer } from "#/components/rich-text-link";
-import { Footnote, RichTextFootnote } from "#/components/richt-text-footnote";
+import { createRichTextExtensions } from "#/lib/rich-text-extensions.ts";
+import { collectFootnotes, identifyHeadings, isEmptyRichTextDocument, numberFootnotes } from "#/lib/rich-text.ts";
 
-interface RichTextProps {
-	content: JSONContent;
-	footnoteScope?: string;
-}
+const extensions = createRichTextExtensions();
 
-interface HeadingAttributes {
-	level: number;
-	id?: string;
-}
+const listFormatter = new Intl.ListFormat("en", { style: "long", type: "conjunction" });
 
-/** An empty spacer paragraph - `{ "type": "paragraph" }`, or one holding only whitespace. */
-function isBlankNode(node: JSONContent): boolean {
-	if (node.type !== "paragraph") {
-		return false;
-	}
-
-	return (node.content ?? []).every((child) => child.type === "text" && (child.text ?? "").trim() === "");
+function isRecord(value: unknown): value is Record<string, unknown> {
+	return value !== null && typeof value === "object";
 }
 
 /**
- * Drops blank paragraphs from the start and end of a document, as the backend does before rendering. The WordPress
- * import left spacer paragraphs throughout the content, and one sitting at the edge of a block contributes an empty
- * line box plus its top margin to the gap against the neighbouring block. Interior blanks stay: they separate
- * paragraphs that are visible either way, so dropping them would edit the copy rather than the spacing between blocks.
+ * A resolved `placeholderValue` node's `value` attribute, formatted for display. `null` for a kind the api left
+ * unresolved, which falls back to the node's own label.
  */
-function withTrimmedBlankEdges(document: JSONContent): JSONContent {
-	const nodes = document.content;
+function formatPlaceholderValue(attrs: Record<string, unknown> | null | undefined): string | null {
+	const value = attrs?.value;
 
-	if (nodes == null) {
-		return document;
+	if (typeof value === "number") {
+		return String(value);
 	}
 
-	let start = 0;
-	let end = nodes.length;
+	if (Array.isArray(value)) {
+		const names = value
+			.map((item) => (isRecord(item) && typeof item.name === "string" ? item.name : null))
+			.filter((name): name is string => name != null);
 
-	while (start < end) {
-		const node = nodes[start];
-		if (node == null || !isBlankNode(node)) {
-			break;
-		}
-		start += 1;
+		return listFormatter.format(names);
 	}
 
-	while (end > start) {
-		const node = nodes[end - 1];
-		if (node == null || !isBlankNode(node)) {
-			break;
-		}
-		end -= 1;
-	}
-
-	return { ...document, content: nodes.slice(start, end) };
+	return null;
 }
 
 /**
- * Lists take the same top margin as paragraphs, so one following a heading is not flush against it, while a list nested
- * in an item stays tight to the line introducing it. Markers hang outside the content box, so wrapped lines line up
- * with the text rather than with the marker.
+ * A link, resolved to a plain `href` by the api (see `lib/rich-text-extensions.ts`). A mark with no `href` - its target
+ * was deleted, unpublished, or never resolved - degrades to plain text rather than a link to nowhere.
  */
-const listStyles = cn("mbs-4 list-outside ps-6", "[&>li>p:first-child]:mbs-0!", "[&>li>ol]:mbs-0! [&>li>ul]:mbs-0!");
+function renderLinkMark(
+	props: Readonly<{
+		mark: { attrs?: Record<string, unknown> | null };
+		children?: ReactNode | Array<ReactNode>;
+	}>,
+): ReactNode {
+	const href = props.mark.attrs?.href;
 
-const richTextLink = createRichTextLinkRenderer(
-	cn(
-		linkStyles({ variant: "paragraph" }),
-		"inline [font-size:inherit]! leading-[inherit]! break-all [[href^='mailto:']]:whitespace-nowrap",
-	),
-);
+	if (typeof href !== "string" || href === "") {
+		return props.children ?? null;
+	}
 
-interface TableCellNodeProps {
-	node: { attrs: Record<string, unknown> };
-	children?: ReactNode;
+	return <a href={href}>{props.children}</a>;
 }
 
-interface TableNodeProps {
-	node: { attrs: Record<string, unknown> };
-	children?: ReactNode;
+const markMapping = { link: renderLinkMark };
+
+/**
+ * Renders a nested `{ doc > paragraph }` richtext value (a footnote's note, a table's caption, a content block's
+ * caption) as part of the surrounding line rather than as its own paragraph block.
+ *
+ * Takes the same node mappings as a `rich_text` block: a caption can carry footnote markers and placeholder values too,
+ * and the custom nodes declare no `renderHTML` to fall back on.
+ */
+function renderInlineRichText(content: unknown): ReactNode {
+	if (isEmptyRichTextDocument(content as JSONContent | null | undefined)) {
+		return null;
+	}
+
+	return renderToReactElement({
+		content: content as JSONContent,
+		extensions,
+		options: {
+			markMapping,
+			nodeMapping: {
+				// oxlint-disable-next-line typescript/no-use-before-define -- Only read at render time, after the module has loaded.
+				...nodeMapping,
+				paragraph: (paragraphProps: Readonly<{ children?: ReactNode | Array<ReactNode> }>) =>
+					paragraphProps.children ?? null,
+			},
+		},
+	});
 }
 
 /**
- * The cell extensions spell their span attributes the HTML way, which React rejects, so render cells here instead of
- * letting the static renderer serialise them.
+ * The marker, as a link to its note at the end of the document. `number` is attached by {@link numberFootnotes} before
+ * rendering; a marker somehow without one (should not happen once numbered) renders nothing rather than an unanchored
+ * mark.
+ *
+ * `fn`/`fnref` and the `doc-noteref`/`doc-backlink` roles are Pandoc's convention for footnotes, which most
+ * markdown-to-html pipelines emit.
+ *
+ * The link sits inside the `sup`, not around it: an underline drawn at the line's baseline under a raised number reads
+ * as a stray underscore. The number is underlined only on hover.
  */
-function renderTableCell(element: "td" | "th", props: TableCellNodeProps): ReactNode {
-	const Element = element;
-	const { colspan, rowspan } = props.node.attrs;
+function FootnoteNode(props: Readonly<{ node: { attrs?: Record<string, unknown> | null } }>): ReactNode {
+	const number = props.node.attrs?.number;
+
+	const t = useTranslations();
+
+	if (typeof number !== "number") {
+		return null;
+	}
 
 	return (
-		<Element
-			className={cn(
-				"border border-gray-300 p-3 align-top [&>p:first-child]:mbs-0!",
-				element === "th" && "bg-gray-100 text-start font-medium",
-			)}
-			colSpan={typeof colspan === "number" ? colspan : undefined}
-			rowSpan={typeof rowspan === "number" ? rowspan : undefined}
-		>
-			{props.children}
-		</Element>
+		<sup>
+			<a
+				aria-label={t("Footnote {number}", { number: String(number) })}
+				className="no-underline hover:underline"
+				href={`#fn${String(number)}`}
+				id={`fnref${String(number)}`}
+				role="doc-noteref"
+			>
+				{number}
+			</a>
+		</sup>
 	);
 }
 
+function renderPlaceholderValueNode(props: Readonly<{ node: { attrs?: Record<string, unknown> | null } }>): ReactNode {
+	const attrs = props.node.attrs ?? null;
+	const resolved = formatPlaceholderValue(attrs);
+
+	if (resolved != null) {
+		return resolved;
+	}
+
+	const label = attrs?.label;
+	const kind = attrs?.kind;
+
+	return typeof label === "string" ? label : typeof kind === "string" ? kind : null;
+}
+
 /**
- * The caption remains the table's first child so it names the table for assistive technology; `caption-bottom` changes
- * only its visual placement.
+ * A heading, carrying the anchor {@link identifyHeadings} derived from its text, so a table of contents (and anyone
+ * sharing a link to a section) can address it. The stock `renderHTML` would emit a bare `h2`/`h3`/`h4` - the id lives
+ * in an attribute the schema does not serialize, the same way a table's caption does.
+ *
+ * The level is clamped to the range the schema allows (see `lib/rich-text-extensions.ts`), so content authored against
+ * an older schema cannot produce an `h1` competing with the page's own, or an `h7`.
  */
-function renderTable(props: TableNodeProps, footnoteScope: string): ReactNode {
-	const caption = props.node.attrs.caption;
+function renderHeadingNode(
+	props: Readonly<{
+		node: { attrs?: Record<string, unknown> | null };
+		children?: ReactNode | Array<ReactNode>;
+	}>,
+): ReactNode {
+	const attrs = props.node.attrs ?? null;
+	const level = typeof attrs?.level === "number" ? Math.min(Math.max(attrs.level, 2), 4) : 2;
+	const id = typeof attrs?.id === "string" && attrs.id !== "" ? attrs.id : undefined;
+
+	const Element = `h${String(level)}` as "h2" | "h3" | "h4";
+
+	return <Element id={id}>{props.children}</Element>;
+}
+
+/**
+ * Lead-in text, the introduction a content page or detail page opens with, set in the design's `lead-in` style. The cms
+ * renders it with the typography plugin's `lead` class, whose smaller, weaker text is not the design's.
+ */
+function renderLeadInNode(props: Readonly<{ children?: ReactNode | Array<ReactNode> }>): ReactNode {
+	return <p className="lead-in">{props.children}</p>;
+}
+
+function renderButtonLinkNode(props: Readonly<{ node: { attrs?: Record<string, unknown> | null } }>): ReactNode {
+	const attrs = props.node.attrs ?? null;
+	const href = attrs?.href;
+	const label = attrs?.label;
+
+	if (typeof href !== "string" || href === "" || typeof label !== "string" || label === "") {
+		return null;
+	}
+
+	return <a href={href}>{label}</a>;
+}
+
+/**
+ * A table, with its caption rendered from the `caption` attribute {@link createRichTextExtensions} declares - the node's
+ * default `renderHTML` would only be able to flatten it to text, since a dom output spec has nowhere to put richtext
+ * json.
+ */
+function renderTableNode(
+	props: Readonly<{
+		node: { attrs?: Record<string, unknown> | null };
+		children?: ReactNode | Array<ReactNode>;
+	}>,
+): ReactNode {
+	const renderedCaption = renderInlineRichText(props.node.attrs?.caption);
 
 	return (
-		<div className="overflow-x-auto my-4">
-			<table className="w-full border-collapse">
-				{caption != null ? (
-					<caption className="caption-bottom pt-2 text-left text-small text-gray-900">
-						<RichTextCaption content={caption} footnoteScope={footnoteScope} />
-					</caption>
-				) : null}
-				<tbody>{props.children}</tbody>
-			</table>
+		<table>
+			{renderedCaption != null ? <caption>{renderedCaption}</caption> : null}
+			<tbody>{props.children}</tbody>
+		</table>
+	);
+}
+
+const nodeMapping = {
+	buttonLink: renderButtonLinkNode,
+	footnote: FootnoteNode,
+	heading: renderHeadingNode,
+	leadIn: renderLeadInNode,
+	placeholderValue: renderPlaceholderValueNode,
+	table: renderTableNode,
+};
+
+interface InlineRichTextProps {
+	/** Tiptap json for a nested `{ doc > paragraph }` value, e.g. a content block's `caption`. */
+	content: unknown;
+}
+
+/**
+ * A nested richtext value rendered inline, without a paragraph wrapper - for a caller which supplies the surrounding
+ * element itself, like the `figcaption` of a content block (`components/content-blocks.tsx`).
+ */
+export function InlineRichText(props: Readonly<InlineRichTextProps>): ReactNode {
+	return renderInlineRichText(props.content);
+}
+
+interface FootnotesProps {
+	notes: Array<JSONContent | null>;
+}
+
+/**
+ * The footnotes an item's `rich_text` content carries, in the reading order their markers appear. Exported for
+ * `components/content-blocks.tsx`, which lists the notes of every `rich_text` block in an item's content once, at the
+ * end, rather than once per block.
+ *
+ * Set apart from the text above by a rule, in caption-sized type, and numbered like the markers in the text. Notes are
+ * rendered outside the typography plugin's `prose` scope, so their links take the accent colour and focus outline here.
+ * Notes often cite a long url, which may break anywhere rather than overflow the column; the back link stays on the
+ * line of the note's last word. The section's heading is for a screen reader only, as a landmark in the page's outline:
+ * the rule already sets the notes apart visually.
+ */
+export function Footnotes(props: Readonly<FootnotesProps>): ReactNode {
+	const t = useTranslations();
+
+	const headingId = useId();
+
+	return (
+		<section
+			aria-labelledby={headingId}
+			className="clear-both border-bs border-stroke-weak text-caption mbs-14 pbs-8"
+			role="doc-endnotes"
+		>
+			<h2 className="sr-only" id={headingId}>
+				{t("Footnotes")}
+			</h2>
+			<ol className="flex list-decimal flex-col gap-3 ps-6 marker:text-text-weak marker:tabular-nums [&_a]:font-medium [&_a]:text-text-accent [&_a]:focus-visible-outline">
+				{props.notes.map((note, index) => {
+					const number = index + 1;
+
+					return (
+						<li
+							className="wrap-anywhere ps-1 [&_a:not([role=doc-backlink])]:underline"
+							id={`fn${String(number)}`}
+							// oxlint-disable-next-line react/no-array-index-key -- Footnotes carry no id of their own; the list is server-rendered and never reordered.
+							key={index}
+						>
+							{renderInlineRichText(note)}
+							{"\u00A0"}
+							<a
+								aria-label={t("Back to footnote {number} in the text", { number: String(number) })}
+								href={`#fnref${String(number)}`}
+								role="doc-backlink"
+							>
+								{"↩"}
+							</a>
+						</li>
+					);
+				})}
+			</ol>
+		</section>
+	);
+}
+
+interface RichTextContentProps {
+	/**
+	 * Tiptap json for one `rich_text` block. Footnote markers must already carry their `number` attr (see
+	 * {@link numberFootnotes}) - this renders the tree only, with no footnotes section of its own, for a caller that
+	 * lists notes once across several blocks (`components/content-blocks.tsx`). {@link RichText} is the standalone
+	 * version that numbers and lists its own.
+	 */
+	content: unknown;
+	className?: string;
+}
+
+export function RichTextContent(props: Readonly<RichTextContentProps>): ReactNode {
+	const { content, className } = props;
+
+	if (isEmptyRichTextDocument(content as JSONContent | null | undefined)) {
+		return null;
+	}
+
+	return (
+		/**
+		 * `prose-lg` for the design's 18px body text, where plain `prose` would set 16px, at the reading line height.
+		 * `max-inline-none` drops the plugin's own 65ch cap: the column the content is rendered into sets the measure (see
+		 * `max-inline-measure`), so text and the blocks between it share one width. Headings take the design's title styles
+		 * rather than the plugin's scale: 56px above a section, and above a subsection at least the space between
+		 * paragraphs - the design's 16px would rely on collapsing into the margin of whatever precedes it, which a block
+		 * with none, or in a formatting context of its own, does not provide. On a phone each heading is a step smaller,
+		 * 24px and 20px: next to the page's title, 32px there and light, a bold 28px section heading reads as the stronger
+		 * one. Links take the accent colour and the site's focus outline. Lists are tight or loose as in markdown (see
+		 * `prose-tight-lists`).
+		 */
+		<div
+			className={cn(
+				"leading-reading prose prose-lg max-inline-none prose-h2:mbs-14 prose-a:font-medium prose-a:focus-visible-outline prose-a:hover:decoration-2",
+				className,
+			)}
+		>
+			{renderToReactElement({
+				content: content as JSONContent,
+				extensions,
+				options: { markMapping, nodeMapping },
+			})}
 		</div>
 	);
 }
 
-const ExtendedHeading = Heading.extend({
-	addAttributes() {
-		return {
-			...this.parent?.(),
-			id: {
-				default: null,
-				renderHTML(attributes: HeadingAttributes) {
-					const id = attributes.id;
-					if (id != null) {
-						return { id };
-					}
-					return {};
-				},
-			},
-		};
-	},
-});
+interface RichTextProps {
+	/** Tiptap json, as sent by the api for a `rich_text` content block's `content` field. */
+	content: unknown;
+	className?: string;
+}
 
 /**
- * A table caption is rich-text JSON stored as an attribute because the table's children must all be rows. Registering
- * it on the schema preserves it until the custom table mapping can render it.
+ * Renders a standalone tiptap document: numbers its own footnote markers and lists their notes at the end. An item
+ * whose content is split across several `rich_text` blocks (interleaved with images, a callout, ...) needs to number
+ * and list footnotes across all of them together instead, per the api's documented contract (see the `content` doc
+ * comments in `lib/api/schemas.ts`) - `components/content-blocks.tsx` does that, using {@link RichTextContent} and
+ * {@link Footnotes} directly.
  */
-const CaptionedTable = Table.extend({
-	addAttributes() {
-		return {
-			...this.parent?.(),
-			caption: { default: null },
-		};
-	},
-}).configure({ resizable: false });
-
 export function RichText(props: Readonly<RichTextProps>): ReactNode {
-	const { content, footnoteScope = "rich-text" } = props;
+	const { content, className } = props;
+	const numbered = numberFootnotes(identifyHeadings(content));
+	const footnotes = collectFootnotes(numbered);
 
-	const format = useFormatter();
-
-	return renderToReactElement({
-		content: withTrimmedBlankEdges(content),
-		extensions: [
-			StarterKit.configure({
-				// `ExtendedHeading` replaces the bundled heading extension, which shares its name.
-				heading: false,
-				paragraph: {
-					HTMLAttributes: {
-						class: "text-regular mt-4",
-					},
-				},
-				link: richTextLink.linkOptions,
-				blockquote: {
-					HTMLAttributes: {
-						class: cn(
-							"relative my-5 flex flex-col gap-6 bg-(image:--block-quote-section-bg) p-5 xl:my-13 xl:px-6 xl:py-4 [&>p]:z-2 [&>p]:mbs-0!",
-							"after:absolute after:inset-s-1/2 after:inset-bs-1/2 after:z-1 after:-translate-1/2 after:bg-[url(/assets/images/quote-mark.svg)] after:content-[''] after:block-full after:inline-full after:max-block-38 after:max-inline-56",
-						),
-					},
-				},
-				bulletList: {
-					HTMLAttributes: {
-						class: cn(listStyles, "list-disc"),
-					},
-				},
-				orderedList: {
-					HTMLAttributes: {
-						class: cn(listStyles, "list-decimal"),
-					},
-				},
-				horizontalRule: {
-					HTMLAttributes: {
-						class: "mt-4",
-					},
-				},
-			}),
-			ExtendedHeading.configure({
-				HTMLAttributes: {
-					class: cn(
-						// Every level takes the same top margin, one step above the `mt-4` between
-						// paragraphs, so a heading reads as belonging to the text below it.
-						"mbs-6",
-						"[h1]:text-h2",
-						"[h2]:text-h2 [h2]:text-[2rem] [h2]:leading-normal [h2]:font-medium [h2]:tracking-normal",
-						"[h3]:text-h3",
-						"[h4]:text-h4",
-					),
-				},
-			}),
-			PlaceholderValue,
-			ButtonLink,
-			Footnote,
-			/**
-			 * Tables carry data rather than layout, so column widths are left to the stylesheet: `resizable: false` matches
-			 * the backend, which therefore never writes `colwidth`.
-			 */
-			TableKit.configure({ table: false }),
-			CaptionedTable,
-		],
-		options: {
-			markMapping: richTextLink.markMapping,
-			nodeMapping: {
-				footnote({ node }) {
-					const number: unknown = node.attrs.number;
-
-					return <RichTextFootnote footnoteScope={footnoteScope} number={number} />;
-				},
-				placeholderValue(nodeProps) {
-					return renderPlaceholderValue(nodeProps, format);
-				},
-				/**
-				 * Without a mapping the static renderer serialises the node via its `renderHTML` into a bare `<a
-				 * data-button-link>`, indistinguishable from an ordinary link.
-				 */
-				buttonLink(nodeProps) {
-					return renderButtonLink(nodeProps);
-				},
-				/**
-				 * A table wider than the content column has to scroll on its own rather than widen the page, and the static
-				 * renderer emits no wrapper to scroll. Overriding the node drops the `tbody` that the extension's own
-				 * `renderHTML` provides, so reinstate it here.
-				 */
-				table(nodeProps) {
-					return renderTable(nodeProps, footnoteScope);
-				},
-
-				tableHeader(nodeProps) {
-					return renderTableCell("th", nodeProps);
-				},
-
-				tableCell(nodeProps) {
-					return renderTableCell("td", nodeProps);
-				},
-			},
-		},
-	});
+	return (
+		<Fragment>
+			<RichTextContent className={className} content={numbered} />
+			{footnotes.length > 0 ? <Footnotes notes={footnotes} /> : null}
+		</Fragment>
+	);
 }

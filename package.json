@@ -40,6 +40,7 @@
 		"@acdh-oeaw/lib": "^1.0.7",
 		"@acdh-oeaw/style-variants": "^0.1.0",
 		"@internationalized/date": "^3.12.3",
+		"@sindresorhus/slugify": "^3.0.1",
 		"@tiptap/core": "^3.30.2",
 		"@tiptap/extension-heading": "^3.30.2",
 		"@tiptap/extension-table": "^3.30.2",
