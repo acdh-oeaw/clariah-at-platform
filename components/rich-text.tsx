@@ -1,13 +1,26 @@
 // https://github.com/DARIAH-ERIC/dariah-website/blob/main/components/rich-text.tsx
 
+import type { GetVariantProps } from "@acdh-oeaw/style-variants";
 import type { JSONContent } from "@tiptap/core";
 import { renderToReactElement } from "@tiptap/static-renderer/pm/react";
 import cn from "clsx/lite";
 import { useExtracted as useTranslations } from "next-intl";
 import { Fragment, type ReactNode, useId } from "react";
 
+import { LinkButton, type buttonStyles } from "#/components/ui/button.tsx";
 import { createRichTextExtensions } from "#/lib/rich-text-extensions.ts";
 import { collectFootnotes, identifyHeadings, isEmptyRichTextDocument, numberFootnotes } from "#/lib/rich-text.ts";
+
+type ButtonVariant = NonNullable<GetVariantProps<typeof buttonStyles>["variant"]>;
+
+/**
+ * The cms's own editor constrains which variants an author can pick (see `rich-text-editor.tsx` in
+ * `DARIAH-ERIC/knowledge-base`'s `packages/ui/lib`) - this only has to satisfy `LinkButton`'s type, so an unrecognised
+ * or missing value falls back to the node schema's own default rather than being rejected.
+ */
+function asButtonVariant(value: unknown): ButtonVariant {
+	return typeof value === "string" && value !== "" ? (value as ButtonVariant) : "primary";
+}
 
 const extensions = createRichTextExtensions();
 
@@ -176,7 +189,18 @@ function renderButtonLinkNode(props: Readonly<{ node: { attrs?: Record<string, u
 		return null;
 	}
 
-	return <a href={href}>{label}</a>;
+	return (
+		/**
+		 * `[&>span]:inline-auto`: `buttonStyles`' base sets `*:inline-full` unconditionally on its child wrapper, sized for
+		 * a standalone CTA - inline in a paragraph it would stretch to the full line width instead of sizing to the label.
+		 * `[&>span]` outranks that `*:` universal-child selector on specificity, so it wins regardless of the two rules'
+		 * order in the stylesheet (`buttonStyles` composes classes with `clsx`, not `tailwind-merge`, so source order there
+		 * is not something to rely on).
+		 */
+		<LinkButton className="[&>span]:inline-auto" href={href} variant={asButtonVariant(attrs?.variant)}>
+			{label}
+		</LinkButton>
+	);
 }
 
 /**
