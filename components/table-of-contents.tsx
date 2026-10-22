@@ -13,8 +13,9 @@ interface TableOfContentsProps {
 const indentClassName: Record<number, string> = {
 	2: "",
 	3: "ps-4",
-	4: "ps-8",
 };
+
+const maxLevel = 3;
 
 /**
  * Ids are derived here with the same {@link identifyHeadings} pass `ContentBlocks` runs over the same `blocks`, so an
@@ -24,7 +25,7 @@ const indentClassName: Record<number, string> = {
 export function TableOfContents(props: Readonly<TableOfContentsProps>): ReactNode {
 	const { blocks, className } = props;
 
-	const headings = collectHeadings(identifyHeadings(blocks));
+	const headings = collectHeadings(identifyHeadings(blocks)).filter((heading) => heading.level <= maxLevel);
 
 	if (headings.length === 0) {
 		return null;
