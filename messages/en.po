@@ -182,6 +182,23 @@ msgstr "CLARIAH-AT Project Funding 2025"
 msgid "PjYJev"
 msgstr "CLARIAH-AT Project Funding 2026"
 
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "g8HIH0"
+msgstr "Affiliated Organisations"
+
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "6Aln8l"
+msgstr "Affiliated Persons"
+
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "hUC3XM"
+msgstr "Start"
+
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "8ZB71y"
+msgstr "End"
+
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
 msgid "GfQtQD"
 msgstr "Funding Call"

@@ -182,6 +182,23 @@ msgstr "CLARIAH-AT Projektförderung 2025"
 msgid "PjYJev"
 msgstr "CLARIAH-AT Projektförderung 2026"
 
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "g8HIH0"
+msgstr "Beteiligte Organisationen"
+
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "6Aln8l"
+msgstr "Beteiligte Personen"
+
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "hUC3XM"
+msgstr "Beginn"
+
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "8ZB71y"
+msgstr "Ende"
+
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
 msgid "GfQtQD"
 msgstr "Förderprogramm"
