@@ -8,7 +8,13 @@ import { Caption } from "#/components/caption.tsx";
 import { Footnotes, RichTextContent } from "#/components/rich-text.tsx";
 import { Accordion, type AccordionItem } from "#/components/ui/accordion.tsx";
 import type { BlockImage } from "#/lib/data/api-client.ts";
-import { collectFootnotes, isEmptyRichTextDocument, numberFootnotes, toPlainText } from "#/lib/rich-text.ts";
+import {
+	collectFootnotes,
+	identifyHeadings,
+	isEmptyRichTextDocument,
+	numberFootnotes,
+	toPlainText,
+} from "#/lib/rich-text.ts";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
 	return value !== null && typeof value === "object";
@@ -413,7 +419,7 @@ interface ContentBlocksProps {
  * parent's layout.
  */
 export function ContentBlocks(props: Readonly<ContentBlocksProps>): ReactNode {
-	const blocks = asBlocks(numberFootnotes(props.blocks));
+	const blocks = asBlocks(numberFootnotes(identifyHeadings(props.blocks)));
 
 	if (blocks.length === 0) {
 		return null;

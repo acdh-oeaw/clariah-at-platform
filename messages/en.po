@@ -7,8 +7,8 @@ msgstr ""
 "X-Crowdin-SourceKey: msgstr\n"
 
 #: app/(app)/[locale]/_components/footer.tsx
-msgid "r5KMo5"
-msgstr "More Information"
+msgid "TCmfGw"
+msgstr ""
 
 #: app/(app)/[locale]/_components/footer.tsx
 msgid "m8oC-I"
@@ -49,11 +49,11 @@ msgid "se6p67"
 msgstr "Language"
 
 #: app/(app)/[locale]/(default)/_components/pagination.tsx
-msgid "yjSdJl"
+msgid "ZumCw2"
 msgstr ""
 
 #: app/(app)/[locale]/(default)/_components/pagination.tsx
-msgid "k9hDFZ"
+msgid "9Q3pmW"
 msgstr ""
 
 #: app/(app)/[locale]/(default)/_components/pagination.tsx
@@ -61,7 +61,7 @@ msgid "ZIstZx"
 msgstr ""
 
 #: app/(app)/[locale]/(default)/_components/pagination.tsx
-msgid "rBj9Ib"
+msgid "ha5T3x"
 msgstr ""
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx

@@ -2,10 +2,11 @@ import type { ReactNode } from "react";
 
 import { ApiImage } from "#/components/api-image.tsx";
 import { ContentBlocks } from "#/components/content-blocks.tsx";
+import { TableOfContents } from "#/components/table-of-contents";
 import type { Page as PageProps } from "#/lib/data/api-client.ts";
 
 export function Page(props: PageProps): ReactNode {
-	const { content, image, title } = props;
+	const { content, image, showTableOfContents, title } = props;
 
 	return (
 		<section className="container">
@@ -21,8 +22,12 @@ export function Page(props: PageProps): ReactNode {
 				) : null}
 				<div className="p-16">
 					<h1 className="text-h1">{title}</h1>
-
-					<ContentBlocks blocks={content} />
+					<div className="mt-8 flex flex-col gap-x-12 gap-y-8 lg:flex-row lg:items-start">
+						{showTableOfContents && (
+							<TableOfContents blocks={content} className="lg:sticky lg:top-8 lg:w-64 lg:shrink-0" />
+						)}
+						<ContentBlocks blocks={content} className="flex-1 min-w-0 max-w-prose" />
+					</div>
 				</div>
 			</div>
 		</section>
