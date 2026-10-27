@@ -29,7 +29,7 @@ export async function Header(): Promise<ReactNode> {
 
 	return (
 		<header className={cn("z-10 bg-white")}>
-			<div className="container flex-1 gap-x-12 px-8 py-4 sm:px-16">
+			<div className="container flex-1 gap-x-12 py-4 px-8">
 				<Navigation
 					drawerCloseLabel={t("Schließen")}
 					drawerOpenLabel={t("Menu öffnen")}

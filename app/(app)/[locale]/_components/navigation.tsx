@@ -32,7 +32,7 @@ export function Navigation(props: Readonly<NavigationProps>): ReactNode {
 
 	return (
 		<Fragment>
-			<nav aria-label={label} className="justify-between flex items-center">
+			<nav aria-label={label} className="justify-between container px-4 max-w-7xl flex items-center">
 				<Link
 					className="py-0!"
 					href={home.href}

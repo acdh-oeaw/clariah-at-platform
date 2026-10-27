@@ -22,9 +22,9 @@ export default async function IndexPage(): Promise<ReactNode> {
 	return (
 		<Main className="flex flex-col gap-y-12 bg-primary-100">
 			<Suspense>
-				<HeroSection className="bg-primary-1000 ">
-					<h1 className="text-h1 text-center">{siteMetadata.title}</h1>
-					<p className="text-3xl text-center">{siteMetadata.description}</p>
+				<HeroSection className="bg-primary-1000">
+					<h1 className="text-h1">{siteMetadata.title}</h1>
+					<p className="text-3xl max-w-3xl">{siteMetadata.description}</p>
 				</HeroSection>
 				<div className="flex flex-col gap-y-16 md:py-16 px-4 py-8 container max-w-7xl">
 					<FeaturedSection title={t("News")} entityType="news" />
