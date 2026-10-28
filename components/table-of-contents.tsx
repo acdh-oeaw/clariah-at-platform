@@ -33,13 +33,13 @@ export function TableOfContents(props: Readonly<TableOfContentsProps>): ReactNod
 
 	return (
 		<div className={className}>
-			<ul>
+			<ol className="flex flex-col gap-y-2">
 				{headings.map((heading) => (
 					<li className={indentClassName[heading.level]} key={heading.id}>
 						<Link href={`#${heading.id}`}>{heading.text}</Link>
 					</li>
 				))}
-			</ul>
+			</ol>
 		</div>
 	);
 }

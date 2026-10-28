@@ -10,6 +10,7 @@ import { NavLink } from "#/components/nav-link";
 import { LinkButton } from "#/components/ui/button";
 import { cachedNavigation } from "#/lib/data/api-cache";
 import { localizeHref } from "#/lib/navigation/convert";
+import logo from "#/public/assets/images/logo-clariah-with-text.svg"
 import funderLogo from "#/public/assets/images/logo-bmfwf.svg";
 
 interface FooterProps extends ComponentProps<"footer"> {}
@@ -26,10 +27,25 @@ export async function Footer(props: Readonly<FooterProps>): Promise<ReactNode> {
 	assert(navigation != null, "Missing primary navigation.");
 
 	return (
-		<footer {...rest} className={cn("z-9 p-4 text-primary-1000 md:p-12", className)}>
-			<div className="flex flex-col gap-12 lg:flex-row px-4 md:px-8 py-4 sm:px-16">
-				<section className="grid grid-cols-1 gap-y-8 lg:grid-cols-[2fr_1fr_1fr] justify-between">
-					{/** <Image alt="" width={200} src={logo} />* */}
+		<footer {...rest} className={cn("z-9 p-4 text-primary-1000", className)}>
+			<div className="flex flex-col gap-12 px-4 md:px-8 py-4 sm:px-16 container max-w-7xl">
+			<section className="flex flex-col gap-y-4">
+					<Image alt="" width={200} src={logo} className="pb-4" />
+						<h2 className="font-bold">{t("Mailingliste beitreten")}</h2>
+						<p>
+							{t(
+								"Bleiben Sie auf dem Laufenden über Digital Humanities (DH) Aktivitäten in Österreich: Mitglieder der DHA-E-Mail-Liste erhalten nicht nur Informationen zu Events, open Calls und vielem mehr, sondern können auch selbst anstehende Aktivitäten aus der österreichischen DH Landschaft an Mitglieder der Liste versenden.",
+							)}
+						</p>
+						<LinkButton
+							variant="outline"
+							className="text-primary-1000"
+							href="mailto:dha-join@lists.oeaw.ac.at?subject=DHA list subscription"
+						>
+							{t("Digital Humanities Austria E-Mail-Liste")}
+						</LinkButton>
+					</section>
+				<section className="grid grid-cols-1 gap-y-8 lg:grid-cols-[2fr_1fr] justify-between">
 					<div>
 						<nav aria-label={label}>
 							<ul className="flex flex-wrap gap-x-16 gap-y-4">
@@ -65,21 +81,6 @@ export async function Footer(props: Readonly<FooterProps>): Promise<ReactNode> {
 							</ul>
 						</nav>
 					</div>
-					<section className="flex flex-col gap-y-4">
-						<h2 className="font-bold">{t("Mailingliste beitreten")}</h2>
-						<p>
-							{t(
-								"Bleiben Sie auf dem Laufenden über Digital Humanities (DH) Aktivitäten in Österreich: Mitglieder der DHA-E-Mail-Liste erhalten nicht nur Informationen zu Events, open Calls und vielem mehr, sondern können auch selbst anstehende Aktivitäten aus der österreichischen DH Landschaft an Mitglieder der Liste versenden.",
-							)}
-						</p>
-						<LinkButton
-							variant="outline"
-							className="text-primary-1000"
-							href="mailto:dha-join@lists.oeaw.ac.at?subject=DHA list subscription"
-						>
-							{t("Digital Humanities Austria E-Mail-Liste")}
-						</LinkButton>
-					</section>
 					<div className="lg:justify-self-end">
 						<h2 className="font-bold">{t("Gefördert von")}</h2>
 						<Image alt="" width={200} src={funderLogo} />

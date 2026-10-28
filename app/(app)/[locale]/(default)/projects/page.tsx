@@ -16,7 +16,9 @@ export default async function ProjectPage(props: Readonly<ProjectPageProps>): Pr
 	return (
 		<Main className="flex flex-col gap-y-12 bg-primary-100">
 			<div className="bg-primary-1000 px-28 py-4">
-				<h1 className="flex relative items-end text-h2 text-white">{t("Projekte")}</h1>
+				<div>
+					<h1 className="flex relative items-end text-h2 text-white">{t("Projekte")}</h1>
+				</div>
 			</div>
 			<div className="md:py-16 px-4 py-8 container max-w-7xl">
 				<Suspense>
