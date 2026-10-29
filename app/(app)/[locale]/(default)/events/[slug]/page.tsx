@@ -5,6 +5,7 @@ import { type ReactNode, Suspense } from "react";
 
 import { Event } from "#/app/(app)/[locale]/(default)/events/_components/event";
 import { Main } from "#/app/(app)/[locale]/_components/main";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedEvent, staticSlugs } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";
 import { localizeHref } from "#/lib/navigation/convert";
@@ -39,14 +40,11 @@ export async function generateMetadata(props: Readonly<EventPageProps>): Promise
 export default async function EventPage(props: Readonly<EventPageProps>): Promise<ReactNode> {
 	const t = await getExtracted();
 	return (
-		<Main className="flex flex-col gap-y-12 bg-primary-100">
-			<div className="bg-primary-1000 px-28 py-4">
-				<p className="flex relative items-end text-h2 text-white">{t("Events")}</p>
-			</div>
+		<PageLayout title={t("Events")} titleElement="p">
 			<Suspense fallback={<p>Loading</p>}>
 				<EventDetails params={props.params} />
 			</Suspense>
-		</Main>
+		</PageLayout>
 	);
 }
 

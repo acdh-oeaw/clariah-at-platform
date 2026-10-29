@@ -5,6 +5,7 @@ import { type ReactNode, Suspense } from "react";
 
 import { NewsItem } from "#/app/(app)/[locale]/(default)/news/_components/news-item";
 import { Main } from "#/app/(app)/[locale]/_components/main";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedNewsItem, staticSlugs } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";
 import { localizeHref } from "#/lib/navigation/convert";
@@ -39,14 +40,11 @@ export async function generateMetadata(props: Readonly<NewsItemPageProps>): Prom
 export default async function NewsItemPage(props: Readonly<NewsItemPageProps>): Promise<ReactNode> {
 	const t = await getExtracted();
 	return (
-		<Main className="flex flex-col gap-y-12 bg-primary-100">
-			<div className="bg-primary-1000 px-28 py-4">
-				<p className="flex relative items-end text-h2 text-white">{t("News")}</p>
-			</div>
+		<PageLayout title={t("News")} titleElement="p">
 			<Suspense fallback={<p>Loading</p>}>
 				<NewsItemDetails params={props.params} />
 			</Suspense>
-		</Main>
+		</PageLayout>
 	);
 }
 

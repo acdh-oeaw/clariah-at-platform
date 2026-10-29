@@ -4,7 +4,7 @@ import { locale } from "next/root-params";
 import { type ReactNode, Suspense } from "react";
 
 import { EventsSearch } from "#/app/(app)/[locale]/(default)/events/_components/events-search.tsx";
-import { Main } from "#/components/main";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { isValidLocale } from "#/lib/i18n/locales";
 
 // No props needed: the locale comes from `i18n/request.ts`, which reads it via
@@ -17,16 +17,13 @@ export default async function EventsPage(): Promise<ReactNode> {
 	}
 
 	return (
-		<Main className="flex flex-col gap-y-12 bg-primary-100">
-			<div className="bg-primary-1000 px-28 py-4">
-				<h1 className="flex relative items-end text-h2 text-white">{t("Events")}</h1>
-			</div>
-			<div className="container max-w-6xl p-4 md:p-12">
+		<PageLayout title={t("Events")}>
+			<div className="md:py-16 px-4 py-8 container max-w-7xl">
 				<Suspense>
 					<EventsSearchSection />
 				</Suspense>
 			</div>
-		</Main>
+		</PageLayout>
 	);
 }
 

@@ -5,6 +5,7 @@ import { type ReactNode, Suspense } from "react";
 
 import { Page } from "#/app/(app)/[locale]/(default)/pages/_components/page";
 import { Main } from "#/app/(app)/[locale]/_components/main";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedPage, staticSlugs } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
 import { localizeHref } from "#/lib/navigation/convert.ts";
@@ -40,14 +41,11 @@ export async function generateMetadata(props: Readonly<PagePageProps>): Promise<
 export default async function PagePage(props: Readonly<PagePageProps>): Promise<ReactNode> {
 	const t = await getExtracted();
 	return (
-		<Main className="flex flex-col gap-y-12 bg-primary-100">
-			<div className="bg-primary-1000 px-28 py-4">
-				<p className="flex relative items-end text-h2 text-white">{t("Infos")}</p>
-			</div>
+		<PageLayout title={t("Infos")} titleElement="p">
 			<Suspense fallback={<p>Loading</p>}>
 				<PageDetails params={props.params} />
 			</Suspense>
-		</Main>
+		</PageLayout>
 	);
 }
 

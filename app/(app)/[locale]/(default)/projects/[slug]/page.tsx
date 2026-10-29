@@ -5,6 +5,7 @@ import { type ReactNode, Suspense } from "react";
 
 import { Project } from "#/app/(app)/[locale]/(default)/projects/_components/project";
 import { Main } from "#/app/(app)/[locale]/_components/main";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedProject, staticSlugs } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";
 import { localizeHref } from "#/lib/navigation/convert";
@@ -39,14 +40,11 @@ export async function generateMetadata(props: Readonly<ProjectPageProps>): Promi
 export default async function ProjectPage(props: Readonly<ProjectPageProps>): Promise<ReactNode> {
 	const t = await getExtracted();
 	return (
-		<Main className="flex flex-col gap-y-12 bg-primary-100">
-			<div className="bg-primary-1000 px-28 py-4">
-				<p className="flex relative items-end text-h2 text-white">{t("Projekte")}</p>
-			</div>
+		<PageLayout title={t("Projekte")} titleElement="p">
 			<Suspense fallback={<p>Loading</p>}>
 				<ProjectDetails params={props.params} />
 			</Suspense>
-		</Main>
+		</PageLayout>
 	);
 }
 
