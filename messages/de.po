@@ -104,6 +104,20 @@ msgstr "Events"
 msgid "x9x-dX"
 msgstr "Projekte"
 
+#: app/(app)/[locale]/(default)/events/_components/event.tsx
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "hUC3XM"
+msgstr "Beginn"
+
+#: app/(app)/[locale]/(default)/events/_components/event.tsx
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "8ZB71y"
+msgstr "Ende"
+
+#: app/(app)/[locale]/(default)/events/_components/event.tsx
+msgid "TZgWxf"
+msgstr "Ort"
+
 #: app/(app)/[locale]/(default)/events/_components/events-search.tsx
 msgid "0Mtnts"
 msgstr "Kommende Events"
@@ -182,6 +196,14 @@ msgstr "CLARIAH-AT Projektförderung 2025"
 msgid "PjYJev"
 msgstr "CLARIAH-AT Projektförderung 2026"
 
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "abJS9_"
+msgstr "DH Langzeitprojekte zum kulturellen Erbe"
+
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "iwL9SY"
+msgstr "Sonstiges"
+
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 msgid "g8HIH0"
 msgstr "Beteiligte Organisationen"
@@ -189,14 +211,6 @@ msgstr "Beteiligte Organisationen"
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 msgid "6Aln8l"
 msgstr "Beteiligte Personen"
-
-#: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "hUC3XM"
-msgstr "Beginn"
-
-#: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "8ZB71y"
-msgstr "Ende"
 
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx

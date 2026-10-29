@@ -104,6 +104,20 @@ msgstr "Events"
 msgid "x9x-dX"
 msgstr "Projects"
 
+#: app/(app)/[locale]/(default)/events/_components/event.tsx
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "hUC3XM"
+msgstr "Start"
+
+#: app/(app)/[locale]/(default)/events/_components/event.tsx
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "8ZB71y"
+msgstr "End"
+
+#: app/(app)/[locale]/(default)/events/_components/event.tsx
+msgid "TZgWxf"
+msgstr ""
+
 #: app/(app)/[locale]/(default)/events/_components/events-search.tsx
 msgid "0Mtnts"
 msgstr "Upcoming events"
@@ -182,6 +196,14 @@ msgstr "CLARIAH-AT Project Funding 2025"
 msgid "PjYJev"
 msgstr "CLARIAH-AT Project Funding 2026"
 
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "abJS9_"
+msgstr "DH Long-Term Projects on Cultural Heritage"
+
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgid "iwL9SY"
+msgstr "Other"
+
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 msgid "g8HIH0"
 msgstr "Affiliated Organisations"
@@ -189,14 +211,6 @@ msgstr "Affiliated Organisations"
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 msgid "6Aln8l"
 msgstr "Affiliated Persons"
-
-#: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "hUC3XM"
-msgstr "Start"
-
-#: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "8ZB71y"
-msgstr "End"
 
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx

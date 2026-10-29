@@ -35,6 +35,12 @@ export function useFacetLabel(): (status: string) => string {
 			case "clariah_at_project_funding_2026": {
 				return t("CLARIAH-AT Projektförderung 2026");
 			}
+			case "dh_long_term_projects_cultural_heritage": {
+				return t("DH Langzeitprojekte zum kulturellen Erbe");
+			}
+			case "other": {
+				return t("Sonstiges");
+			}
 			default: {
 				return value;
 			}
