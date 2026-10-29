@@ -6,7 +6,6 @@ import { type ReactNode, Suspense } from "react";
 import { ProjectsSearch } from "#/app/(app)/[locale]/(default)/projects/_components/projects-search.tsx";
 import { searchParams } from "#/app/(app)/[locale]/(default)/projects/search-params.ts";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
-import { Main } from "#/components/main";
 import { isValidLocale } from "#/lib/i18n/locales";
 
 interface ProjectPageProps extends PageProps<"/[locale]/projects"> {}

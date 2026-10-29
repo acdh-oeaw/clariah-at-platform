@@ -5,7 +5,6 @@ import { type ReactNode, Suspense } from "react";
 
 import { searchParams } from "#/app/(app)/[locale]/(default)/search-params";
 import { WebsiteSearch } from "#/app/(app)/[locale]/(default)/search/_components/website-search.tsx";
-import { Main } from "#/app/(app)/[locale]/_components/main.tsx";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
 

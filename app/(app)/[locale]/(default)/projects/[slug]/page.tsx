@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { type ReactNode, Suspense } from "react";
 
 import { Project } from "#/app/(app)/[locale]/(default)/projects/_components/project";
-import { Main } from "#/app/(app)/[locale]/_components/main";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedProject, staticSlugs } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";

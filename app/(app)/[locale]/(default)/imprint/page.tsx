@@ -4,7 +4,6 @@ import { locale } from "next/root-params";
 import { type ReactNode, Suspense } from "react";
 
 import { AcdhImprint } from "#/app/(app)/[locale]/(default)/imprint/_components/acdh-imprint";
-import { Main } from "#/app/(app)/[locale]/_components/main.tsx";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
 

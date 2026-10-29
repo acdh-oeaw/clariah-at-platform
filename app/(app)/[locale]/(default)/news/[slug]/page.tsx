@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { type ReactNode, Suspense } from "react";
 
 import { NewsItem } from "#/app/(app)/[locale]/(default)/news/_components/news-item";
-import { Main } from "#/app/(app)/[locale]/_components/main";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedNewsItem, staticSlugs } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";
