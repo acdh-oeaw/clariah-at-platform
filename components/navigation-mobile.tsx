@@ -22,87 +22,86 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 	const t = useExtracted();
 
 	return (
-		<div className=" bg-white fixed top-16 bottom-0 inset-x-0 z-10  flex flex-col w-screen xl:hidden">
-			<DisclosureGroup className="flex flex-col gap-y-4 w-full pt-8">
-				{Object.entries(navigation).map(([id, item]) => {
-					switch (item.type) {
-						case "action": {
-							return <li key={id}></li>;
-						}
+		<div className="overflow-y-auto bg-white fixed top-16 bottom-0 inset-x-0 z-10 flex flex-col w-screen xl:hidden">
+			<DisclosureGroup>
+				<ul role="list" className="flex flex-col gap-y-4 w-full pt-8">
+					{Object.entries(navigation).map(([id, item]) => {
+						switch (item.type) {
+							case "link": {
+								return (
+									<li key={id}>
+										<Link
+											className="w-full py-4! px-6! font-heading text-regular h-fit"
+											href={item.href}
+											onClick={handleMobileMenuToggle}
+											target={item.target}
+											variant="primary"
+										>
+											{item.label}
+										</Link>
+									</li>
+								);
+							}
 
-						case "link": {
-							return (
-								<li key={id}>
-									<Link
-										className="w-full py-4! px-6! font-heading text-regular h-fi"
-										href={item.href}
-										onClick={handleMobileMenuToggle}
-										target={item.target}
-										variant="primary"
-									>
-										{item.label}
-									</Link>
-								</li>
-							);
-						}
+							case "menu": {
+								return (
+									<li key={id}>
+										<Disclosure>
+											<DisclosureHeader>{item.label}</DisclosureHeader>
+											<DisclosurePanel>
+												<NavMenu aria-labelledby={item.label}>
+													{item.children &&
+														Object.entries(item.children).map(([id, item]) => {
+															switch (item.type) {
+																case "action": {
+																	return (
+																		<NavMenuItem
+																			key={id}
+																			className="h-11 flex items-center"
+																			onAction={item.onAction}
+																			onClick={handleMobileMenuToggle}
+																		>
+																			{item.label}
+																		</NavMenuItem>
+																	);
+																}
 
-						case "menu": {
-							return (
-								<li key={id}>
-									<Disclosure>
-										<DisclosureHeader>{item.label}</DisclosureHeader>
-										<DisclosurePanel>
-											<NavMenu aria-labelledby={item.label}>
-												{item.children &&
-													Object.entries(item.children).map(([id, item]) => {
-														switch (item.type) {
-															case "action": {
-																return (
-																	<NavMenuItem
-																		key={id}
-																		className="h-11 flex items-center"
-																		onAction={item.onAction}
-																		onClick={handleMobileMenuToggle}
-																	>
-																		{item.label}
-																	</NavMenuItem>
-																);
+																case "link": {
+																	return (
+																		<NavMenuItem
+																			key={id}
+																			className="h-11 flex items-center"
+																			href={item.href}
+																			onClick={handleMobileMenuToggle}
+																			target={item.target}
+																		>
+																			{item.label}
+																		</NavMenuItem>
+																	);
+																}
+
+																case "separator": {
+																	return <NavMenuSeparator key={id} />;
+																}
 															}
+														})}
+												</NavMenu>
+											</DisclosurePanel>
+										</Disclosure>
+									</li>
+								);
+							}
 
-															case "link": {
-																return (
-																	<NavMenuItem
-																		key={id}
-																		className="h-11 flex items-center"
-																		href={item.href}
-																		onClick={handleMobileMenuToggle}
-																		target={item.target}
-																	>
-																		{item.label}
-																	</NavMenuItem>
-																);
-															}
-
-															case "separator": {
-																return <NavMenuSeparator key={id} />;
-															}
-														}
-													})}
-											</NavMenu>
-										</DisclosurePanel>
-									</Disclosure>
-								</li>
-							);
+							case "action":
+							case "separator": {
+								return null;
+							}
 						}
-
-						case "separator": {
-							return <li key={id}></li>;
-						}
-					}
-				})}
+					})}
+				</ul>
 			</DisclosureGroup>
 			<Link
-				className="w-full py-4! px-6! font-heading uppercase text-regular h-fit border-t border-t-gray-100"
+				className="w-full py-4! px-6! font-heading text-regular h-fit"
 				href={localizeHref("/search", locale)}
 				onClick={handleMobileMenuToggle}
 
@@ -110,8 +109,8 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 			>
 				{t("Suche")}
 			</Link>
-			<div className="w-full border-t border-t-gray-100 px-6 py-4">
-				<LocaleSwitcher label={localeSwitcherLabel} variant="color-bg" />
+			<div className="w-full px-6 py-4">
+				<LocaleSwitcher label={localeSwitcherLabel} variant="primary" />
 			</div>
 		</div>
 	);
