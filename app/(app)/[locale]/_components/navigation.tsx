@@ -45,7 +45,7 @@ export function Navigation(props: Readonly<NavigationProps>): ReactNode {
 					<span className="sr-only">{home.label}</span>
 					<Image
 						alt=""
-						className="xl:w-50"
+						className="lg:block-10 block-9 inline-auto"
 						decoding="auto"
 						fetchPriority="high"
 						loading="eager"
