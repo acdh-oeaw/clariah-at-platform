@@ -4,6 +4,7 @@ import { getExtracted, getLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 
 import { Navigation } from "#/app/(app)/[locale]/_components/navigation.tsx";
+import { pageColumnClassName } from "#/app/(app)/[locale]/_components/page-column";
 import { cachedNavigation } from "#/lib/data/api-cache";
 import { convertNavigationMenu, localizeHref } from "#/lib/navigation/convert.ts";
 import type { NavigationConfig, NavigationLink } from "#/lib/navigation/navigation.ts";
@@ -29,7 +30,7 @@ export async function Header(): Promise<ReactNode> {
 
 	return (
 		<header className={cn("z-10 bg-white")}>
-			<div className="container flex-1 gap-x-12 py-4 px-8">
+			<div className={cn(pageColumnClassName, "flex-1 gap-x-12 py-4")}>
 				<Navigation
 					drawerCloseLabel={t("Schließen")}
 					drawerOpenLabel={t("Menu öffnen")}

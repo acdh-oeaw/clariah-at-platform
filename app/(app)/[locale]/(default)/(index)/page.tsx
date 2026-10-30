@@ -5,6 +5,7 @@ import { type ReactNode, Suspense } from "react";
 
 import { FeaturedSection } from "#/app/(app)/[locale]/(default)/(index)/_components/featured-section";
 import { HeroSection } from "#/app/(app)/[locale]/(default)/(index)/_components/hero-section";
+import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
 import { Main } from "#/components/main";
 import { cachedSiteMetadata } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";
@@ -26,11 +27,11 @@ export default async function IndexPage(): Promise<ReactNode> {
 					<h1 className="text-h1">{siteMetadata.title}</h1>
 					<p className="text-3xl max-w-3xl">{siteMetadata.description}</p>
 				</HeroSection>
-				<div className="flex flex-col gap-y-16 md:py-16 px-4 py-8 container max-w-7xl">
+				<PageContent className="flex flex-col gap-y-16">
 					<FeaturedSection title={t("News")} entityType="news" />
 					<FeaturedSection title={t("Events")} entityType="events" />
 					<FeaturedSection title={t("Projekte")} entityType="projects" />
-				</div>
+				</PageContent>
 			</Suspense>
 		</Main>
 	);

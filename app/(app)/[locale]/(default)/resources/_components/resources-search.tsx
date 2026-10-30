@@ -4,11 +4,11 @@ import { useExtracted } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { searchResultListClassName } from "#/app/(app)/[locale]/(default)/_components/search-result-card.tsx";
 import { SearchView, type SearchViewParams } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
+import { ResourceResultCard } from "#/app/(app)/[locale]/(default)/resources/_components/resource-result-card";
 import { searchParams } from "#/app/(app)/[locale]/(default)/resources/search-params.ts";
 import { SearchFacetFilter } from "#/app/(app)/[locale]/(default)/search/_components/facet-filter.tsx";
-import { Link } from "#/components/link.tsx";
-import { Badge } from "#/components/ui/badge.tsx";
 import type { ResourceDocument, ResourceType } from "#/lib/search/collections/resources.ts";
 import { getSearchService } from "#/lib/search/service.ts";
 import type { SearchOutcome, SearchParams, SelectedFacets } from "#/lib/search/use-search.ts";
@@ -31,26 +31,8 @@ function toSearchViewParams(raw: { q: string; type?: ResourceType | undefined; p
 	return { facets, page: raw.page, query: raw.q };
 }
 
-// Unlike website content, a resource's link points at an external platform (Zenodo, HAL, DARIAH-Campus, ...), not a
-// route on this site — so no `localizeHref` here, unlike `website-search.tsx`'s `renderItem`.
 function renderItem(document: ResourceDocument): ReactNode {
-	const href = document.source_url ?? document.links[0];
-	const meta = [document.authors?.join(", "), document.year]
-		.filter((value) => value != null && value !== "")
-		.join(" · ");
-
-	return (
-		<div className="flex flex-col gap-y-3 bg-white p-8 rounded-sm shadow-card">
-			<Badge className="inline" intent="primary">
-				{document.type}
-			</Badge>
-			<h2 className="text-h3 font-strong text-text-strong">
-				{href != null && href !== "" ? <Link href={href}>{document.label}</Link> : document.label}
-			</h2>
-			<p className="text-small text-text-weak">{meta}</p>
-			<p className="line-clamp-3 text-regular">{document.description}</p>
-		</div>
-	);
+	return <ResourceResultCard document={document} />;
 }
 
 // No `locale` filter, unlike website content: resources aren't per-locale, so every resource shows regardless of the
@@ -142,7 +124,7 @@ export function ResourcesSearch(): ReactNode {
 			params={params}
 			renderFacets={renderFacets}
 			renderItem={renderItem}
-			resultsClassName="flex flex-col gap-y-6"
+			resultsClassName={searchResultListClassName}
 			search={search}
 		/>
 	);

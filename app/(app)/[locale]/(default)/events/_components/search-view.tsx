@@ -98,9 +98,7 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 				}}
 				role="search"
 			>
-				<label className="font-strong text-text-strong" htmlFor={inputId}>
-					{t("Events filtern")}
-				</label>
+				<label htmlFor={inputId}>{t("Events filtern")}</label>
 				<div className="flex gap-x-2">
 					<input
 						className="min-w-0 flex-1 border border-stroke-weak bg-white px-4 py-2.5 text-regular"
@@ -212,7 +210,7 @@ function SearchResults<Document extends { id: string }>(props: Readonly<SearchRe
 
 	return (
 		<section className="flex flex-col gap-y-8">
-			<h2 className="text-h2 font-strong text-text-strong">{section.title}</h2>
+			<h2 className="text-h2">{section.title}</h2>
 
 			{state.status === "error" ? <p role="alert">{t("Suche derzeit nicht verfügbar.")}</p> : null}
 
@@ -227,7 +225,7 @@ function SearchResults<Document extends { id: string }>(props: Readonly<SearchRe
 						{groups.map((group, index) => (
 							// Labels can repeat, e.g. an ungrouped run on either side of a group, so the index keeps keys unique.
 							<Fragment key={`${String(index)}:${group.label ?? ""}`}>
-								{group.label != null ? <h3 className="text-h3 font-strong text-text-strong">{group.label}</h3> : null}
+								{group.label != null ? <h3 className="text-h3">{group.label}</h3> : null}
 								<ul className={resultsClassName} role="list">
 									{group.documents.map((document) => (
 										<li key={document.id} className="flex flex-col gap-y-1">

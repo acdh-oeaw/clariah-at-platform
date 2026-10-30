@@ -4,6 +4,7 @@ import { locale } from "next/root-params";
 import { type ReactNode, Suspense } from "react";
 
 import { EventsSearch } from "#/app/(app)/[locale]/(default)/events/_components/events-search.tsx";
+import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { isValidLocale } from "#/lib/i18n/locales";
 
@@ -18,11 +19,11 @@ export default async function EventsPage(): Promise<ReactNode> {
 
 	return (
 		<PageLayout title={t("Events")}>
-			<div className="md:py-16 px-4 py-8 container max-w-7xl">
+			<PageContent>
 				<Suspense>
 					<EventsSearchSection />
 				</Suspense>
-			</div>
+			</PageContent>
 		</PageLayout>
 	);
 }

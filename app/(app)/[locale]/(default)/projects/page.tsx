@@ -5,6 +5,7 @@ import { type ReactNode, Suspense } from "react";
 
 import { ProjectsSearch } from "#/app/(app)/[locale]/(default)/projects/_components/projects-search.tsx";
 import { searchParams } from "#/app/(app)/[locale]/(default)/projects/search-params.ts";
+import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { isValidLocale } from "#/lib/i18n/locales";
 
@@ -15,11 +16,11 @@ export default async function ProjectPage(props: Readonly<ProjectPageProps>): Pr
 
 	return (
 		<PageLayout title={t("Projekte")}>
-			<div className="md:py-16 px-4 py-8 container max-w-7xl">
+			<PageContent>
 				<Suspense>
 					<ProjectsSearchSection searchParams={props.searchParams} />
 				</Suspense>
-			</div>
+			</PageContent>
 		</PageLayout>
 	);
 }

@@ -32,7 +32,7 @@ export function Navigation(props: Readonly<NavigationProps>): ReactNode {
 
 	return (
 		<Fragment>
-			<nav aria-label={label} className="justify-between container px-4 max-w-7xl flex items-center">
+			<nav aria-label={label} className="justify-between flex items-center">
 				<Link
 					className="py-0!"
 					href={home.href}
@@ -45,7 +45,7 @@ export function Navigation(props: Readonly<NavigationProps>): ReactNode {
 					<span className="sr-only">{home.label}</span>
 					<Image
 						alt=""
-						className="w-35.5 xl:w-50 xl:h-15"
+						className="xl:w-50"
 						decoding="auto"
 						fetchPriority="high"
 						loading="eager"

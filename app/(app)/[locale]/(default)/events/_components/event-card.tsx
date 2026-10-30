@@ -110,7 +110,7 @@ export function EventCard(props: CardProps): ReactNode {
 				) : null}
 				{/* `min-w-0`: lets a long title wrap instead of overflowing the card. */}
 				<div className="flex min-w-0 flex-col gap-y-2">
-					<Heading className="text-h3 font-strong text-pretty wrap-break-word hyphens-auto text-text-strong sm:py-3">
+					<Heading className="text-h3 text-pretty wrap-break-word hyphens-auto sm:py-3">
 						{link != null && link !== "" ? <Link href={link}>{title}</Link> : title}
 					</Heading>
 					{summary != null && summary !== "" ? <p className="line-clamp-3 text-text-weak">{summary}</p> : null}

@@ -1,6 +1,8 @@
+import { cn } from "@acdh-oeaw/style-variants";
 import type { ReactNode } from "react";
 
 import { Main } from "#/app/(app)/[locale]/_components/main";
+import { pageColumnClassName } from "#/app/(app)/[locale]/_components/page-column";
 
 interface PageLayoutProps {
 	children: ReactNode;
@@ -18,7 +20,9 @@ export function PageLayout(props: Readonly<PageLayoutProps>): ReactNode {
 	return (
 		<Main className="flex flex-col gap-y-12 bg-primary-100">
 			<div className="bg-primary-1000 px-28 py-4">
-				<TitleElement className="flex relative items-end text-h2 text-white">{title}</TitleElement>
+				<TitleElement className={cn(pageColumnClassName, "relative flex items-end text-h2 text-white")}>
+					{title}
+				</TitleElement>
 			</div>
 			{children}
 		</Main>

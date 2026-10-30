@@ -4,12 +4,15 @@ import { useExtracted } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type ReactNode, useCallback } from "react";
 
+import {
+	SearchResultCard,
+	searchResultListClassName,
+} from "#/app/(app)/[locale]/(default)/_components/search-result-card";
 import { SearchView, type SearchViewParams } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
+import { ResourceResultCard } from "#/app/(app)/[locale]/(default)/resources/_components/resource-result-card";
 import { searchParams } from "#/app/(app)/[locale]/(default)/search-params.ts";
 import { SearchFacetFilter } from "#/app/(app)/[locale]/(default)/search/_components/facet-filter.tsx";
 import { useFacetLabel } from "#/app/(app)/[locale]/(default)/search/_components/facet-labels";
-import { Link } from "#/components/link.tsx";
-import { Badge } from "#/components/ui/badge.tsx";
 import type { IntlLocale } from "#/lib/i18n/locales.ts";
 import { localizeHref } from "#/lib/navigation/convert.ts";
 import type { ResourceDocument, WebsiteDocument } from "#/lib/search/index.ts";
@@ -118,41 +121,16 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 			const document = item.document;
 			// `document.link` is root-relative and locale-less, like `EntityRef.href` from the CMS API — prefix it the same way.
 			return (
-				<div className="flex flex-col gap-y-3 bg-white p-8 rounded-sm shadow-card">
-					<Badge className="inline" intent="primary">
-						{document.type}
-					</Badge>
-					<h2 className="text-h3 font-strong text-text-strong">
-						{document.link != null && document.link !== "" ? (
-							<Link href={localizeHref(document.link, locale)}>{document.label}</Link>
-						) : (
-							document.label
-						)}
-					</h2>
-					<p className="line-clamp-3 text-regular">{document.description}</p>
-				</div>
+				<SearchResultCard
+					description={document.description}
+					href={document.link != null && document.link !== "" ? localizeHref(document.link, locale) : null}
+					title={document.label}
+					type={document.type}
+				/>
 			);
 		}
 
-		const document = item.document;
-		// A resource's link points at an external platform (Zenodo, HAL, DARIAH-Campus, ...), not a route on this site.
-		const href = document.source_url ?? document.links[0];
-		const meta = [document.authors?.join(", "), document.year]
-			.filter((value) => value != null && value !== "")
-			.join(" · ");
-
-		return (
-			<div className="flex flex-col gap-y-3 bg-white p-8 rounded-sm shadow-card">
-				<Badge className="inline" intent="primary">
-					{document.type}
-				</Badge>
-				<h2 className="text-h3 font-strong text-text-strong">
-					{href != null && href !== "" ? <Link href={href}>{document.label}</Link> : document.label}
-				</h2>
-				<p className="text-small text-text-weak">{meta}</p>
-				<p className="line-clamp-3 text-regular">{document.description}</p>
-			</div>
-		);
+		return <ResourceResultCard document={item.document} />;
 	}
 
 	// Depends on `locale`, so it stays referentially stable across re-renders unless the page's own locale changes.
@@ -263,7 +241,7 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 			params={params}
 			renderFacets={renderFacets}
 			renderItem={renderItem}
-			resultsClassName="flex flex-col gap-y-12"
+			resultsClassName={searchResultListClassName}
 			search={search}
 		/>
 	);

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { ApiImage } from "#/components/api-image.tsx";
+import { DetailCard } from "#/app/(app)/[locale]/_components/detail-card";
 import { ContentBlocks } from "#/components/content-blocks.tsx";
 import type { NewsItem as NewsItemProps } from "#/lib/data/api-client.ts";
 
@@ -8,21 +8,8 @@ export function NewsItem(props: NewsItemProps): ReactNode {
 	const { content, image, title } = props;
 
 	return (
-		<section className="container">
-			<div className="rounded-md shadow-card flex flex-col md:mb-16 container bg-white max-w-7xl">
-				<ApiImage
-					className="rounded-t-md w-full max-h-100 object-cover"
-					fetchPriority="high"
-					image={image}
-					loading="eager"
-					preload={true}
-				/>
-				<div className="p-16">
-					<h1 className="text-h1">{title}</h1>
-
-					<ContentBlocks blocks={content} />
-				</div>
-			</div>
-		</section>
+		<DetailCard image={image} title={title}>
+			<ContentBlocks blocks={content} />
+		</DetailCard>
 	);
 }
