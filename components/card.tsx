@@ -31,7 +31,7 @@ export function Card(props: CardProps): ReactNode {
 			)}
 			<div className="flex flex-col gap-y-6 p-8">
 				<div className="flex flex-col gap-y-2">
-					<h3 className="text-h3 py-3 font-strong text-text-strong">{title}</h3>
+					<h3 className="text-h3 py-3">{title}</h3>
 					<p className="text-text-weak line-clamp-3">{summary}</p>
 				</div>
 			</div>

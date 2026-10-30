@@ -15,16 +15,16 @@ msgid "m8oC-I"
 msgstr "Join Mailing List"
 
 #: app/(app)/[locale]/_components/footer.tsx
-msgid "vh8ILm"
-msgstr "Stay up to date about Digital Humanities (DH) activities in Austria: Members of the DHA list do not only receive information about events, open calls & much more, but are also eligible to send out upcoming activities from the Austrian DH landscape to members of this list."
-
-#: app/(app)/[locale]/_components/footer.tsx
 msgid "rh5NHJ"
 msgstr "DHA Email List Subscription"
 
 #: app/(app)/[locale]/_components/footer.tsx
 msgid "j9gZd-"
 msgstr "Funded by"
+
+#: app/(app)/[locale]/_components/footer.tsx
+msgid "g4BNS3"
+msgstr "Federal Ministry Women, Science and Research Republic of Austria"
 
 #: app/(app)/[locale]/_components/header.tsx
 msgid "RI9V2a"
@@ -103,20 +103,6 @@ msgstr "Events"
 #: app/(app)/[locale]/(default)/projects/page.tsx
 msgid "x9x-dX"
 msgstr "Projects"
-
-#: app/(app)/[locale]/(default)/events/_components/event.tsx
-#: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "hUC3XM"
-msgstr "Start"
-
-#: app/(app)/[locale]/(default)/events/_components/event.tsx
-#: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "8ZB71y"
-msgstr "End"
-
-#: app/(app)/[locale]/(default)/events/_components/event.tsx
-msgid "TZgWxf"
-msgstr ""
 
 #: app/(app)/[locale]/(default)/events/_components/events-search.tsx
 msgid "0Mtnts"
@@ -211,6 +197,14 @@ msgstr "Affiliated Organisations"
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 msgid "6Aln8l"
 msgstr "Affiliated Persons"
+
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "hUC3XM"
+msgstr "Start"
+
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "8ZB71y"
+msgstr "End"
 
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx

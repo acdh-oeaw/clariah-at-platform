@@ -34,6 +34,11 @@ export const buttonStyles = styles({
 				"hover:border-primary-600 hover:bg-primary-600 hover:text-white",
 				"focus:outline-0 focus-visible:ring-2 focus-visible:ring-offset-3",
 			),
+			"outline-white": cn(
+				"rounded-md border-2 border-white font-bold text-white inline-fit *:px-4.5 *:py-0.5",
+				"hover:bg-white hover:text-primary-1000",
+				"focus:outline-0 focus-visible:ring-2 focus-visible:ring-offset-3",
+			),
 			tertiary: cn(
 				"text-white outline-2 outline-white inline-62.75 *:px-4.5 *:py-0.5",
 				"hover:bg-white",
