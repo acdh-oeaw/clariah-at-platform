@@ -19,7 +19,7 @@ export function PageLayout(props: Readonly<PageLayoutProps>): ReactNode {
 
 	return (
 		<Main className="flex flex-col gap-y-12 bg-primary-100">
-			<div className="bg-primary-1000 px-28 py-4">
+			<div className="bg-primary-1000 py-4">
 				<TitleElement className={cn(pageColumnClassName, "relative flex items-end text-h2 text-white")}>
 					{title}
 				</TitleElement>

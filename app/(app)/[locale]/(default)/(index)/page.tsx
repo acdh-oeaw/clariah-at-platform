@@ -5,8 +5,8 @@ import { type ReactNode, Suspense } from "react";
 
 import { FeaturedSection } from "#/app/(app)/[locale]/(default)/(index)/_components/featured-section";
 import { HeroSection } from "#/app/(app)/[locale]/(default)/(index)/_components/hero-section";
+import { Main } from "#/app/(app)/[locale]/_components/main";
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
-import { Main } from "#/components/main";
 import { cachedSiteMetadata } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";
 

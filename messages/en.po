@@ -8,7 +8,7 @@ msgstr ""
 
 #: app/(app)/[locale]/_components/footer.tsx
 msgid "TCmfGw"
-msgstr ""
+msgstr "More Informationen"
 
 #: app/(app)/[locale]/_components/footer.tsx
 msgid "m8oC-I"
@@ -49,10 +49,6 @@ msgid "se6p67"
 msgstr "Language"
 
 #: app/(app)/[locale]/(default)/_components/pagination.tsx
-msgid "ZumCw2"
-msgstr ""
-
-#: app/(app)/[locale]/(default)/_components/pagination.tsx
 msgid "9Q3pmW"
 msgstr ""
 
@@ -80,6 +76,14 @@ msgstr "No results found."
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
 msgid "qcAbB2"
 msgstr "{total} Search results"
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+msgid "8V2q0t"
+msgstr "Pagination top"
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+msgid "gW44fG"
+msgstr "Pagination bottom"
 
 #: app/(app)/[locale]/(default)/(index)/_components/featured-section.tsx
 msgid "K3ZDoV"

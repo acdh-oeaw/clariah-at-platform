@@ -47,6 +47,7 @@ export function getPaginationRange(
 }
 
 interface PaginationProps {
+	label: string;
 	page: number;
 	totalPages: number;
 	/** The page changes instantly client-side — `onPress` below, not the real navigation `href` provides. */
@@ -70,7 +71,7 @@ const pageButtonStyles = cn(
 );
 
 export function Pagination(props: Readonly<PaginationProps>): ReactNode {
-	const { getHref, onChange, page, siblingCount = 1, totalPages } = props;
+	const { getHref, label, onChange, page, siblingCount = 1, totalPages } = props;
 	const t = useExtracted();
 
 	if (totalPages <= 1) {
@@ -105,7 +106,7 @@ export function Pagination(props: Readonly<PaginationProps>): ReactNode {
 	const pageItems = getPaginationRange(page, totalPages, siblingCount);
 
 	return (
-		<nav aria-label={t("Seitennavigation")}>
+		<nav aria-label={label}>
 			<ul className="flex items-center gap-x-6 md:justify-end" role="list">
 				{page > 1 ? (
 					<li>

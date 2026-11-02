@@ -177,10 +177,11 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 			{state.outcome != null && state.outcome.items.length > 0 ? (
 				<div className="flex flex-col gap-y-8">
 					<div>
-						<h2 className="text-2xl">
+						<h2 className="text-2xl mb-4">
 							{t("{total} Suchergebnisse", { total: format.number(state.outcome.pagination.total) })}
 						</h2>
 						<Pagination
+							label={t("Seitennavigation oben")}
 							getHref={(targetPage) => getHref({ ...params, page: targetPage })}
 							onChange={(targetPage) => {
 								onParamsChange({ ...params, page: targetPage });
@@ -202,6 +203,7 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 					</ul>
 
 					<Pagination
+						label={t("Seitennavigation unten")}
 						getHref={(targetPage) => getHref({ ...params, page: targetPage })}
 						onChange={(targetPage) => {
 							onParamsChange({ ...params, page: targetPage });
