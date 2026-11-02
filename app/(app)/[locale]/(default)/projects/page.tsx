@@ -7,18 +7,29 @@ import { ProjectsSearch } from "#/app/(app)/[locale]/(default)/projects/_compone
 import { searchParams } from "#/app/(app)/[locale]/(default)/projects/search-params.ts";
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
+import { ContentBlocks } from "#/components/content-blocks";
+import { cachedPage } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";
 
 interface ProjectPageProps extends PageProps<"/[locale]/projects"> {}
 
 export default async function ProjectPage(props: Readonly<ProjectPageProps>): Promise<ReactNode> {
 	const t = await getExtracted();
+	const currentLocale = await locale();
+	if (!isValidLocale(currentLocale)) {
+		notFound();
+	}
+	const pageName = currentLocale === "de-AT" ? "projekte" : "projects";
+	const page = await cachedPage(pageName, currentLocale);
 
 	return (
 		<PageLayout title={t("Projekte")}>
 			<PageContent>
 				<Suspense>
-					<ProjectsSearchSection searchParams={props.searchParams} />
+					<div className="flex flex-col gap-y-8">
+						<div className="max-w-prose">{page?.content && <ContentBlocks blocks={page.content} />}</div>
+						<ProjectsSearchSection searchParams={props.searchParams} />
+					</div>
 				</Suspense>
 			</PageContent>
 		</PageLayout>
