@@ -71,6 +71,7 @@ export function NewsSearch(props: Readonly<NewsSearchProps>): ReactNode {
 		async (searchParameters: SearchParams): Promise<SearchOutcome<WebsiteDocument> | null> => {
 			const result = await getSearchService().collections.website.search({
 				...searchParameters,
+				sortBy: [{ field: "source_updated_at", direction: "desc" }],
 				filters: [
 					{ operator: "equals", field: "type", value: "news-item" },
 					{ operator: "equals", field: "locale", value: locale },
