@@ -115,16 +115,17 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 					</Button>
 				</div>
 			</form>
-
-			{sections.map((section) => (
-				<SearchResults<Document>
-					key={section.id}
-					query={query}
-					renderItem={renderItem}
-					resultsClassName={resultsClassName}
-					section={section}
-				/>
-			))}
+			<div className="flex flex-col gap-y-20">
+				{sections.map((section) => (
+					<SearchResults<Document>
+						key={section.id}
+						query={query}
+						renderItem={renderItem}
+						resultsClassName={resultsClassName}
+						section={section}
+					/>
+				))}
+			</div>
 		</div>
 	);
 }
