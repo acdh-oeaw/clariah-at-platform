@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Link } from "#/components/link";
+import { TableOfContentsList } from "#/components/table-of-contents-list.tsx";
 import { collectHeadings, identifyHeadings } from "#/lib/rich-text.ts";
 
 interface TableOfContentsProps {
@@ -9,18 +9,16 @@ interface TableOfContentsProps {
 	className?: string;
 }
 
-/** Indents a subsection's entry under its section's, matching the levels `lib/rich-text-extensions.ts` allows. */
-const indentClassName: Record<number, string> = {
-	2: "",
-	3: "ps-4",
-};
-
+/** Headings past this level still render (and still get an anchor) - they just don't clutter the list. */
 const maxLevel = 3;
 
 /**
  * Ids are derived here with the same {@link identifyHeadings} pass `ContentBlocks` runs over the same `blocks`, so an
  * entry's link always resolves to the heading actually rendered - not a slug computed independently, which would
  * disagree the moment two headings share text (see `identifyHeadings`'s collision suffixing).
+ *
+ * Stays a server component, so only the headings - not the whole `blocks` array - are sent to the client list, which
+ * tracks the section currently being read.
  */
 export function TableOfContents(props: Readonly<TableOfContentsProps>): ReactNode {
 	const { blocks, className } = props;
@@ -33,13 +31,7 @@ export function TableOfContents(props: Readonly<TableOfContentsProps>): ReactNod
 
 	return (
 		<div className={className}>
-			<ol className="flex flex-col gap-y-2">
-				{headings.map((heading) => (
-					<li className={indentClassName[heading.level]} key={heading.id}>
-						<Link href={`#${heading.id}`}>{heading.text}</Link>
-					</li>
-				))}
-			</ol>
+			<TableOfContentsList headings={headings} />
 		</div>
 	);
 }
