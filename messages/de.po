@@ -216,6 +216,18 @@ msgid "GfQtQD"
 msgstr "Förderprogramm"
 
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
+msgid "Y6xNTw"
+msgstr "Laufend"
+
+#: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
+msgid "PF2-8B"
+msgstr "Abgeschlossen"
+
+#: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
+msgid "6BVFDW"
+msgstr "Projektstatus"
+
+#: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
 msgid "LIsWz1"
 msgstr "Projekte filtern"
 
