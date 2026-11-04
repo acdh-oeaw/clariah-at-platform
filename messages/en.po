@@ -112,6 +112,16 @@ msgstr "Projects"
 msgid "vHX8jY"
 msgstr "Consortium"
 
+#: app/(app)/[locale]/(default)/events/_components/event.tsx
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "hUC3XM"
+msgstr "Start"
+
+#: app/(app)/[locale]/(default)/events/_components/event.tsx
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "8ZB71y"
+msgstr "End"
+
 #: app/(app)/[locale]/(default)/events/_components/events-search.tsx
 msgid "0Mtnts"
 msgstr "Upcoming events"
@@ -149,6 +159,10 @@ msgstr "Imprint"
 #: app/(app)/[locale]/(default)/layout.tsx
 msgid "DBsIRX"
 msgstr "Skip to main content"
+
+#: app/(app)/[locale]/(default)/news/_components/news-item.tsx
+msgid "woPHUz"
+msgstr "Published"
 
 #: app/(app)/[locale]/(default)/news/_components/news-search.tsx
 msgid "9QD4qH"
@@ -205,14 +219,6 @@ msgstr "Affiliated Organisations"
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 msgid "6Aln8l"
 msgstr "Affiliated Persons"
-
-#: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "hUC3XM"
-msgstr "Start"
-
-#: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "8ZB71y"
-msgstr "End"
 
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx

@@ -127,7 +127,7 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 					}
 				: null;
 
-		return <Card image={image} link={link} summary={document.description} title={document.label} />;
+		return <Card image={image} link={link} summary={document.summary} title={document.label} />;
 	}
 
 	// Depends on `locale` and `today` only, so it stays referentially stable across re-renders.

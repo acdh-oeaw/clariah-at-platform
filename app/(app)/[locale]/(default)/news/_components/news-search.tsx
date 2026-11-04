@@ -63,7 +63,7 @@ export function NewsSearch(props: Readonly<NewsSearchProps>): ReactNode {
 					}
 				: null;
 
-		return <Card image={image} link={link} summary={document.description} title={document.label} />;
+		return <Card image={image} link={link} summary={document.summary} title={document.label} />;
 	}
 
 	// Depends on `locale`, so it stays referentially stable across re-renders unless the page's own locale changes.

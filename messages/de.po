@@ -112,6 +112,16 @@ msgstr "Projekte"
 msgid "vHX8jY"
 msgstr "Konsortium"
 
+#: app/(app)/[locale]/(default)/events/_components/event.tsx
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "hUC3XM"
+msgstr "Beginn"
+
+#: app/(app)/[locale]/(default)/events/_components/event.tsx
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgid "8ZB71y"
+msgstr "Ende"
+
 #: app/(app)/[locale]/(default)/events/_components/events-search.tsx
 msgid "0Mtnts"
 msgstr "Kommende Events"
@@ -149,6 +159,10 @@ msgstr "Impressum"
 #: app/(app)/[locale]/(default)/layout.tsx
 msgid "DBsIRX"
 msgstr "Zum Hauptinhalt springen"
+
+#: app/(app)/[locale]/(default)/news/_components/news-item.tsx
+msgid "woPHUz"
+msgstr "Veröffentlicht am"
 
 #: app/(app)/[locale]/(default)/news/_components/news-search.tsx
 msgid "9QD4qH"
@@ -205,14 +219,6 @@ msgstr "Beteiligte Organisationen"
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 msgid "6Aln8l"
 msgstr "Beteiligte Personen"
-
-#: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "hUC3XM"
-msgstr "Beginn"
-
-#: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "8ZB71y"
-msgstr "Ende"
 
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx

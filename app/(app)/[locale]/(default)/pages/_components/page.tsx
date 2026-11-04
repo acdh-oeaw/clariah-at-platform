@@ -10,7 +10,7 @@ export function Page(props: PageProps): ReactNode {
 
 	return (
 		<DetailCard image={image} title={title}>
-			<div className="mt-8 flex flex-col gap-x-12 gap-y-8 lg:flex-row lg:items-start">
+			<div className="mt-12 flex flex-col gap-x-12 gap-y-8 lg:flex-row lg:items-start">
 				<ContentBlocks blocks={content} className="flex-1 min-w-0 max-w-prose" />
 				{showTableOfContents && (
 					<TableOfContents

@@ -136,7 +136,7 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 				<div className="flex gap-x-2">
 					<input
 						aria-label={label}
-						className="min-w-0 flex-1 border border-stroke-weak bg-white px-4 py-2.5 text-regular"
+						className="min-w-0 flex-1 border rounded-md border-stroke-weak bg-white px-4 py-2.5 text-regular"
 						name="q"
 						onChange={(event) => {
 							setInput(event.currentTarget.value);

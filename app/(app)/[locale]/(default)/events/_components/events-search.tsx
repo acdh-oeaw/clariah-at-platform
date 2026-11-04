@@ -79,7 +79,7 @@ export function EventsSearch(props: EventsSearchProps): ReactNode {
 				image={image}
 				headingLevel={context.headingLevel}
 				link={link}
-				summary={document.description}
+				summary={document.summary}
 				title={document.label}
 			/>
 		);
