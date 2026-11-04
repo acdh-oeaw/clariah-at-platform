@@ -17,7 +17,7 @@ export function Card(props: CardProps): ReactNode {
 	const { image, link, title, summary } = props;
 	const t = useExtracted();
 	return (
-		<article className="grid h-full grid-rows-[14rem_1fr_auto] overflow-hidden rounded-md bg-white shadow-card">
+		<article className="grid group relative h-full grid-rows-[14rem_1fr_auto] overflow-hidden rounded-md bg-white shadow-card">
 			{image && (
 				<ApiImage
 					alt=""
@@ -31,13 +31,13 @@ export function Card(props: CardProps): ReactNode {
 			)}
 			<div className="flex flex-col gap-y-6 p-8">
 				<div className="flex flex-col gap-y-2">
-					<h3 className="text-h3 py-3">{title}</h3>
+					<h3 className="text-h3 pb-3">{title}</h3>
 					<p className="text-text-weak line-clamp-3">{summary}</p>
 				</div>
 			</div>
 			<LinkButton
-				className="w-full justify-between bg-primary-200 px-8 py-4"
-				endIcon={<ArrowRightIcon />}
+				className="after:absolute after:inset-0 after:z-20 w-full justify-between hover:bg-primary-500 hover:text-white bg-primary-200 px-8 py-4"
+				endIcon={<ArrowRightIcon className="group-hover:translate-x-1.5 ease-in-out transition-transform" />}
 				href={link}
 				variant="unstyled"
 			>

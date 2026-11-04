@@ -257,8 +257,8 @@ msgid "xTeBn_"
 msgstr "Typ"
 
 #: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
-msgid "wnypiT"
-msgstr "Resourcen durchsuchen"
+msgid "6M7vT8"
+msgstr "Ressourcen durchsuchen"
 
 #: app/(app)/[locale]/(default)/resources/page.tsx
 msgid "aOOcfk"

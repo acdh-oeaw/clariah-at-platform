@@ -3,7 +3,7 @@
 import cn from "clsx/lite";
 import { SearchIcon } from "lucide-react";
 import { useExtracted, useFormatter } from "next-intl";
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useEffect, useId, useState } from "react";
 
 import { Pagination } from "#/app/(app)/[locale]/(default)/_components/pagination";
 import { Button } from "#/components/ui/button";
@@ -123,6 +123,7 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 	});
 
 	const isLoading = state.status === "loading";
+	const inputId = useId();
 
 	return (
 		<div className={className}>
@@ -133,6 +134,9 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 				}}
 				role="search"
 			>
+				<label className="sr-only" htmlFor={inputId}>
+					{label}
+				</label>
 				<div className="flex gap-x-2">
 					<input
 						aria-label={label}

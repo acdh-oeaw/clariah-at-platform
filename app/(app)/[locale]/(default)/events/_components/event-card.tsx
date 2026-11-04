@@ -75,7 +75,7 @@ export function EventCard(props: CardProps): ReactNode {
 	}
 
 	return (
-		<article className="flex h-full flex-col overflow-hidden rounded-md bg-white shadow-card sm:flex-row sm:items-center">
+		<article className="relative flex h-full flex-col overflow-hidden rounded-md bg-white shadow-card sm:flex-row sm:items-center">
 			{/* Narrow screens get a one-line date above the title; from `sm` up, a calendar sheet beside it. */}
 			<div className="flex min-w-0 flex-1 flex-col items-start gap-4 p-5 sm:flex-row sm:items-center sm:gap-8 sm:p-8">
 				{start != null ? (
@@ -111,7 +111,13 @@ export function EventCard(props: CardProps): ReactNode {
 				{/* `min-w-0`: lets a long title wrap instead of overflowing the card. */}
 				<div className="flex min-w-0 flex-col gap-y-2">
 					<Heading className="text-h3 text-pretty wrap-break-word hyphens-auto sm:py-3">
-						{link != null && link !== "" ? <Link href={link}>{title}</Link> : title}
+						{link != null && link !== "" ? (
+							<Link className="after:absolute after:inset-0 after:z-20" href={link}>
+								{title}
+							</Link>
+						) : (
+							title
+						)}
 					</Heading>
 					{summary != null && summary !== "" ? <p className="line-clamp-3 text-text-weak">{summary}</p> : null}
 				</div>

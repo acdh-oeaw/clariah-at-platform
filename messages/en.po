@@ -166,7 +166,7 @@ msgstr "Published"
 
 #: app/(app)/[locale]/(default)/news/_components/news-search.tsx
 msgid "9QD4qH"
-msgstr ""
+msgstr "Filter news"
 
 #: app/(app)/[locale]/(default)/pages/[slug]/page.tsx
 msgid "mt510S"
@@ -257,8 +257,8 @@ msgid "xTeBn_"
 msgstr "Type"
 
 #: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
-msgid "wnypiT"
-msgstr ""
+msgid "6M7vT8"
+msgstr "Filter resources"
 
 #: app/(app)/[locale]/(default)/resources/page.tsx
 msgid "aOOcfk"

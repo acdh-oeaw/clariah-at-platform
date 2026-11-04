@@ -162,7 +162,7 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 
 			<Popover
 				className={cn(
-					"rounded-lg border bg-white shadow-lg outline-none inline-[min(100vw-2rem,20rem)]",
+					"rounded-lg border bg-white shadow-lg outline-none inline-[min(100vw-2rem,22rem)]",
 					"entering:animate-in entering:duration-150 entering:ease-out entering:fade-in",
 					"exiting:animate-out exiting:duration-100 exiting:ease-in exiting:fade-out",
 				)}

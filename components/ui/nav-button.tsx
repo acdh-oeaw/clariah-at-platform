@@ -39,6 +39,7 @@ export function NavButton(props: Readonly<NavButtonProps>): ReactNode {
 				"hover:bg-white",
 				"data-focus-visible:outline-none",
 				"aria-expanded:bg-white",
+				"aria-[current=page]:font-bold",
 				className,
 			)}
 			data-active={active || undefined}

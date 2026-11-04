@@ -20,13 +20,23 @@ export function SearchResultCard(props: Readonly<SearchResultCardProps>): ReactN
 	const { description, href, meta, title, type } = props;
 
 	return (
-		<div className="flex flex-col gap-y-3 rounded-sm bg-white p-8 shadow-card">
-			<Badge className="inline" intent="primary">
-				{type}
-			</Badge>
-			<h2 className="text-h3">{href != null && href !== "" ? <Link href={href}>{title}</Link> : title}</h2>
-			{meta != null && meta !== "" ? <p className="text-small text-text-weak">{meta}</p> : null}
-			{description != null && description !== "" ? <p className="line-clamp-3 text-regular">{description}</p> : null}
+		<div className="rounded-sm relative bg-white p-8 shadow-card">
+			<div className="max-w-5xl flex flex-col gap-y-3">
+				<Badge className="inline" intent="primary">
+					{type}
+				</Badge>
+				<h2 className="text-h3">
+					{href != null && href !== "" ? (
+						<Link className="after:absolute after:inset-0 after:z-20" href={href}>
+							{title}
+						</Link>
+					) : (
+						title
+					)}
+				</h2>
+				{meta != null && meta !== "" ? <p className="text-small text-text-weak">{meta}</p> : null}
+				{description != null && description !== "" ? <p className="line-clamp-3 text-regular">{description}</p> : null}
+			</div>{" "}
 		</div>
 	);
 }

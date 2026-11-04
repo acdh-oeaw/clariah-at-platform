@@ -98,7 +98,9 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 				}}
 				role="search"
 			>
-				<label htmlFor={inputId}>{t("Events filtern")}</label>
+				<label className="sr-only" htmlFor={inputId}>
+					{t("Events filtern")}
+				</label>
 				<div className="flex gap-x-2">
 					<input
 						className="min-w-0 flex-1 border rounded-md border-stroke-weak bg-white px-4 py-2.5 text-regular"
