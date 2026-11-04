@@ -4,7 +4,9 @@ import { getExtracted } from "next-intl/server";
 import type { ReactNode } from "react";
 
 import { HtmlDocument } from "#/app/(app)/_components/html-document.tsx";
+import { MatomoAnalytics } from "#/app/(app)/_components/matomo-analytics";
 import { NotFoundState } from "#/app/(app)/_components/not-found-state";
+import { env } from "#/configs/env.config.ts";
 
 export async function generateMetadata(): Promise<Metadata> {
 	const t = await getExtracted();
@@ -39,6 +41,9 @@ export default function GlobalNotFoundPage(): ReactNode {
 					logoLabel={t("Startseite")}
 					title={t("Seite nicht gefunden")}
 				/>
+				{env.NEXT_PUBLIC_APP_MATOMO_ID != null && env.NEXT_PUBLIC_APP_MATOMO_BASE_URL != null ? (
+					<MatomoAnalytics baseUrl={env.NEXT_PUBLIC_APP_MATOMO_BASE_URL} id={env.NEXT_PUBLIC_APP_MATOMO_ID} />
+				) : null}
 			</body>
 		</HtmlDocument>
 	);
