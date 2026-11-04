@@ -168,8 +168,8 @@ function renderHeadingNode(
 	const id = typeof attrs?.id === "string" && attrs.id !== "" ? attrs.id : undefined;
 
 	const Element = `h${String(level)}` as "h2" | "h3" | "h4";
-
-	return <Element id={id}>{props.children}</Element>;
+	// hardcoding the id is a temp fix we need because a qr-code pointed to this heading on the old clariah-at website
+	return <Element id={id === "events-2024-and-2025" ? "events-2024--2025" : id}>{props.children}</Element>;
 }
 
 /**
