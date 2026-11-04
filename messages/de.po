@@ -108,6 +108,10 @@ msgstr "Events"
 msgid "x9x-dX"
 msgstr "Projekte"
 
+#: app/(app)/[locale]/(default)/consortium/[slug]/page.tsx
+msgid "vHX8jY"
+msgstr "Konsortium"
+
 #: app/(app)/[locale]/(default)/events/_components/events-search.tsx
 msgid "0Mtnts"
 msgstr "Kommende Events"

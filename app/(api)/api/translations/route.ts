@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-import { cachedEvent, cachedNewsItem, cachedPage, cachedProject } from "#/lib/data/api-cache.ts";
+import { cachedEvent, cachedInstitution, cachedNewsItem, cachedPage, cachedProject } from "#/lib/data/api-cache.ts";
 import { type EntityRouteType, isEntityRouteType } from "#/lib/i18n/entity-routes.ts";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
 
@@ -26,6 +26,9 @@ function getTranslatedEntity(type: EntityRouteType, slug: string, locale: string
 		}
 		case "pages": {
 			return cachedPage(slug, locale);
+		}
+		case "institutions": {
+			return cachedInstitution(slug, locale);
 		}
 	}
 }

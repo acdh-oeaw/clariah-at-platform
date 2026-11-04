@@ -27,9 +27,11 @@ import {
 	getImpactCaseStudies,
 	getImpactCaseStudyBySlug,
 	getImpactCaseStudySlugs,
+	getInstitutionBySlug,
 	getMemberOrPartnerBySlug,
 	getMemberOrPartnerSlugs,
 	getMembersAndPartners,
+	getNationalConsortiumBySlug,
 	getNavigation,
 	getNews,
 	getNewsItemBySlug,
@@ -204,7 +206,7 @@ export async function cachedFeaturedEntities(locale: string): Promise<ApiRespons
 	return getFeaturedEntities({ query: { locale } });
 }
 
-/** For `app/sitemap.ts`. `href`s are locale-less — prefix every locale. */
+/** For `app/sitemap.ts`. `href`s already carry their locale segment — prepend only the origin. */
 export async function cachedSitemap(): Promise<ApiResponse<"getSitemap">> {
 	"use cache";
 	cacheLife("hours");
@@ -477,6 +479,46 @@ export async function cachedMemberOrPartner(
 	return nullOn404(getMemberOrPartnerBySlug(slug, { query: { locale } }));
 }
 
+/**
+ * E.g. a national consortium's member (see `staticSlugs.nationalConsortiumMembers`). The api tags institutions as
+ * "members-partners", so `relatedTags` adds `entities:country`, which that webhook tag expires.
+ */
+export async function cachedInstitution(
+	slug: string,
+	locale: string,
+): Promise<ApiResponse<"getInstitutionBySlug"> | null> {
+	"use cache";
+	cacheLife("days");
+	cacheTag(...detailTags("institution", slug), ...relatedTags("getInstitutionBySlug"));
+
+	return nullOn404(getInstitutionBySlug(slug, { query: { locale } }));
+}
+
+export async function cachedNationalConsortium(
+	slug: string,
+	locale: string,
+): Promise<ApiResponse<"getNationalConsortiumBySlug"> | null> {
+	"use cache";
+	cacheLife("days");
+	cacheTag(...detailTags("national_consortium", slug), ...relatedTags("getNationalConsortiumBySlug"));
+
+	return nullOn404(getNationalConsortiumBySlug(slug, { query: { locale } }));
+}
+
+/**
+ * Whether an institution belongs to a national consortium - the request-time counterpart of
+ * `staticSlugs.nationalConsortiumMembers`, so a member page can 404 for any other institution's slug.
+ */
+export async function isNationalConsortiumMember(
+	consortiumSlug: string,
+	institutionSlug: string,
+	locale: string,
+): Promise<boolean> {
+	const consortium = await cachedNationalConsortium(consortiumSlug, locale);
+
+	return consortium?.members.some((member) => member.slug === institutionSlug) ?? false;
+}
+
 export async function cachedSpotlightArticle(
 	slug: string,
 	locale: string,
@@ -532,12 +574,26 @@ async function collectSlugs<T extends { entity: { slug: string } }>(
 	});
 }
 
+/** The member institutions of one national consortium, which only come with its detail response. */
+async function collectNationalConsortiumMemberSlugs(
+	consortiumSlug: string,
+	locale?: string,
+): Promise<Array<{ slug: string }>> {
+	const consortium = await getNationalConsortiumBySlug(consortiumSlug, { query: { locale } });
+
+	return consortium.members.map((member) => {
+		return { slug: member.slug };
+	});
+}
+
 export const staticSlugs = {
 	documentsPolicies: (locale?: string) => collectSlugs(getDocumentOrPolicySlugs, locale),
 	events: (locale?: string) => collectSlugs(getEventSlugs, locale),
 	fundingCalls: (locale?: string) => collectSlugs(getFundingCallSlugs, locale),
 	impactCaseStudies: (locale?: string) => collectSlugs(getImpactCaseStudySlugs, locale),
 	membersPartners: (locale?: string) => collectSlugs(getMemberOrPartnerSlugs, locale),
+	nationalConsortiumMembers: (consortiumSlug: string, locale?: string) =>
+		collectNationalConsortiumMemberSlugs(consortiumSlug, locale),
 	news: (locale?: string) => collectSlugs(getNewsItemSlugs, locale),
 	opportunities: (locale?: string) => collectSlugs(getOpportunitySlugs, locale),
 	pages: (locale?: string) => collectSlugs(getPageSlugs, locale),

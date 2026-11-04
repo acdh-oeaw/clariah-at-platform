@@ -9,6 +9,7 @@ const entityRoutes = [
 	{ type: "events", base: "/events/", pattern: /^\/events\/[^/]+$/ },
 	{ type: "projects", base: "/projects/", pattern: /^\/projects\/[^/]+$/ },
 	{ type: "pages", base: "/pages/", pattern: /^\/pages\/[^/]+$/ },
+	{ type: "institutions", base: "/consortium/", pattern: /^\/consortium\/[^/]+$/ },
 ] as const;
 
 export type EntityRouteType = (typeof entityRoutes)[number]["type"];
