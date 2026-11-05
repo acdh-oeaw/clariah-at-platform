@@ -9,7 +9,7 @@ export function Main(props: Readonly<MainProps>): ReactNode {
 	const { children, className, ...rest } = props;
 
 	return (
-		<main {...rest} className={cn("outline-hidden", className)} tabIndex={-1}>
+		<main {...rest} className={cn("flex-1 outline-hidden", className)} tabIndex={-1}>
 			{children}
 		</main>
 	);
