@@ -9,7 +9,9 @@ export function Member(props: InstitutionProps): ReactNode {
 
 	return (
 		<DetailCard className="max-inline-measure" image={null} title={name}>
-			<ContentBlocks blocks={description} />
+			<div className="mt-12">
+				<ContentBlocks blocks={description} />
+			</div>
 		</DetailCard>
 	);
 }

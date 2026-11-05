@@ -127,15 +127,11 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 							}}
 						>
 							{/**
-							 * Both copies share one grid cell, which is sized by the hidden bold one. So turning an entry bold does not widen it -
-							 * and in the narrow sidebar column, re-wrap it and shift every entry below.
+							 * No hidden bold copy reserving the bold width: in the narrow sidebar column, an entry which only just fits on one line
+							 * wraps onto two in bold, so the reserved copy left an empty line under it at all times. Only the current entry may
+							 * re-wrap now, and only while it is current.
 							 */}
-							<span className="grid">
-								<span aria-hidden={true} className="invisible col-start-1 row-start-1 font-bold">
-									{heading.text}
-								</span>
-								<span className={cn("col-start-1 row-start-1", isActive && "font-bold")}>{heading.text}</span>
-							</span>
+							<span className={cn(isActive && "font-bold")}>{heading.text}</span>
 						</a>
 					</li>
 				);

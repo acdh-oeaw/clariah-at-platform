@@ -15,7 +15,7 @@ export function Page(props: PageProps): ReactNode {
 				{showTableOfContents && (
 					<TableOfContents
 						blocks={content}
-						className="lg:sticky lg:top-8 lg:w-64 lg:shrink-0 lg:border-l-2 lg:ps-8 lg:border-primary-300"
+						className="lg:sticky lg:top-8 lg:w-68 lg:shrink-0 lg:border-l-2 lg:ps-8 lg:border-primary-300"
 					/>
 				)}
 			</div>
