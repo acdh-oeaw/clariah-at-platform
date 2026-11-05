@@ -55,8 +55,9 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 	const [activeId, setActiveId] = useState<string | null>(null);
 	/**
 	 * The entry just navigated to, which stays current until the page is scrolled by hand. Jumping to a heading leaves it
-	 * at the top of the viewport, where a short section lets the next heading cross the activation line as well - and near
-	 * the end of the page the heading cannot reach the top at all, so the bottom-of-page rule would pick the last entry.
+	 * at the top of the viewport, where a short section lets the next heading cross the activation line as well - and
+	 * near the end of the page the heading cannot reach the top at all, so the bottom-of-page rule would pick the last
+	 * entry.
 	 */
 	const pinnedIdRef = useRef<string | null>(null);
 	/**
@@ -115,8 +116,8 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 				return (
 					<li className={indentClassName[heading.level]} key={heading.id}>
 						{/**
-						 * A plain anchor, not `Link`: `next/link` treats a second click on the hash the url already has as a
-						 * navigation to the same url and does not scroll again, while the browser always jumps to the heading.
+						 * A plain anchor, not `Link`: `next/link` treats a second click on the hash the url already has as a navigation to the
+						 * same url and does not scroll again, while the browser always jumps to the heading.
 						 */}
 						<a
 							aria-current={isActive ? "location" : undefined}
@@ -130,9 +131,9 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 							}}
 						>
 							{/**
-							 * No hidden bold copy reserving the bold width: in the narrow sidebar column, an entry which only just
-							 * fits on one line wraps onto two in bold, so the reserved copy left an empty line under it at all times.
-							 * Only the current entry may re-wrap now, and only while it is current.
+							 * No hidden bold copy reserving the bold width: in the narrow sidebar column, an entry which only just fits on one line
+							 * wraps onto two in bold, so the reserved copy left an empty line under it at all times. Only the current entry may
+							 * re-wrap now, and only while it is current.
 							 */}
 							<span className={cn(isActive && "font-bold")}>{heading.text}</span>
 						</a>
