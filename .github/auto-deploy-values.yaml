@@ -21,7 +21,7 @@ ingress:
   path: "/"
   className: "traefik"
   annotations:
-    # nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 livenessProbe:
   path: /health
   initialDelaySeconds: 15
