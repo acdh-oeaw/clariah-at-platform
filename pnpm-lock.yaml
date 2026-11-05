@@ -339,7 +339,7 @@ importers:
         version: 4.13.0
       axe-playwright:
         specifier: ^2.2.2
-        version: 2.2.2(playwright@1.63.0)
+        version: 2.2.2(playwright@1.64.1)
       eslint-plugin-better-tailwindcss:
         specifier: ^4.7.0
         version: 4.7.0(eslint@10.9.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.79.0(oxlint-tsgolint@7.0.2001))(tailwindcss@4.3.3)(typescript@7.0.2)
@@ -368,8 +368,8 @@ importers:
         specifier: ^7.0.2001
         version: 7.0.2001
       playwright:
-        specifier: ^1.63.0
-        version: 1.63.0
+        specifier: ^1.64.0
+        version: 1.64.1
       po-parser:
         specifier: ^2.2.0
         version: 2.2.0
@@ -3099,11 +3099,6 @@ packages:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
-  playwright-core@1.63.0:
-    resolution: {integrity: sha512-rYCsBF/M5HjUch52bbtVONEFjv6Xu8sm8h72dNlR5bzIE1fvC/bxgspzkjSfU+MweEMmPM8KJebG6nnyxo5mCg==}
-    engines: {node: '>=20'}
-    hasBin: true
-
   playwright-core@1.64.1:
     resolution: {integrity: sha512-BC4s8y6SEVA6Q1rSxZTto8hI1KUI3xXlHGZgvGqP4IqPdI/a6FX9H29IDNz7vKo9l21b6LfYosScPL6M3xxyDQ==}
     engines: {node: '>=20'}
@@ -3111,11 +3106,6 @@ packages:
 
   playwright-core@1.65.0-alpha-2026-10-30:
     resolution: {integrity: sha512-LPMw8B/HRQKMcJeXTqWSrkB/AfCKKmbDQMbu0p7zg8MgibOWaKMjZWR/StAtrQkOxvOmZEju1o1TnPgdoOCwrg==}
-    engines: {node: '>=20'}
-    hasBin: true
-
-  playwright@1.63.0:
-    resolution: {integrity: sha512-+7ziBLidS4NaNCdt57SUDT+wYmmd5fmiQejUic/kb+YsYSCPyOOE9sebzMjNmQrsnNpDJqd4WHvV/8lfKfUDUg==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -4763,14 +4753,14 @@ snapshots:
       axe-core: 4.13.0
       mustache: 4.2.0
 
-  axe-playwright@2.2.2(playwright@1.63.0):
+  axe-playwright@2.2.2(playwright@1.64.1):
     dependencies:
       '@types/junit-report-builder': 3.0.2
       axe-core: 4.13.0
       axe-html-reporter: 2.2.11(axe-core@4.13.0)
       junit-report-builder: 5.1.2
       picocolors: 1.1.1
-      playwright: 1.63.0
+      playwright: 1.64.1
 
   axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2):
     dependencies:
@@ -5638,15 +5628,9 @@ snapshots:
 
   picomatch@4.0.7: {}
 
-  playwright-core@1.63.0: {}
-
   playwright-core@1.64.1: {}
 
   playwright-core@1.65.0-alpha-2026-10-30: {}
-
-  playwright@1.63.0:
-    dependencies:
-      playwright-core: 1.63.0
 
   playwright@1.64.1:
     dependencies:
