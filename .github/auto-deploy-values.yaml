@@ -19,7 +19,7 @@ service:
 ingress:
   enabled: true
   path: "/"
-  className: "rke2-ingress-nginx-migration"
+  className: "traefik"
   annotations:
     # nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
 livenessProbe:
