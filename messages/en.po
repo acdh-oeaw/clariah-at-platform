@@ -403,8 +403,8 @@ msgid "Seite nicht gefunden"
 msgstr "Page not found"
 
 #: components/card.tsx
-msgctxt "iwRrPy"
-msgid "mehr lesen"
+msgctxt "-DNRtH"
+msgid "Weiterlesen"
 msgstr "Read more"
 
 #: components/rich-text.tsx

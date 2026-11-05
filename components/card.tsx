@@ -44,7 +44,9 @@ export function Card(props: CardProps): ReactNode {
 				href={link}
 				variant="unstyled"
 			>
-				{t("mehr lesen")}
+				{t("Weiterlesen")}
+				{/* Text rather than `aria-labelledby`: lighthouse reads the rendered text, and the name must start with the label. */}
+				<span className="sr-only"> {title}</span>
 			</LinkButton>
 		</article>
 	);
