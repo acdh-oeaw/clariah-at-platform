@@ -4,7 +4,11 @@ import { useExtracted } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type ReactNode, useCallback } from "react";
 
-import { SearchView, type SearchViewParams } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
+import {
+	SearchView,
+	type SearchViewParams,
+	eagerResultCount,
+} from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
 import { searchParams } from "#/app/(app)/[locale]/(default)/news/search-params.ts";
 import { Card } from "#/components/card";
 import { getAssetImageUrl } from "#/lib/data/api-client";
@@ -50,7 +54,7 @@ export function NewsSearch(props: Readonly<NewsSearchProps>): ReactNode {
 	}
 
 	// `document.link` is root-relative and locale-less, like `EntityRef.href` from the CMS API — prefix it the same way.
-	function renderItem(document: WebsiteDocument): ReactNode {
+	function renderItem(document: WebsiteDocument, index: number): ReactNode {
 		const link = document.link != null && document.link !== "" ? localizeHref(document.link, locale) : undefined;
 		const image =
 			document.image_key !== ""
@@ -63,7 +67,15 @@ export function NewsSearch(props: Readonly<NewsSearchProps>): ReactNode {
 					}
 				: null;
 
-		return <Card image={image} link={link} summary={document.summary} title={document.label} />;
+		return (
+			<Card
+				image={image}
+				link={link}
+				preload={index < eagerResultCount}
+				summary={document.summary}
+				title={document.label}
+			/>
+		);
 	}
 
 	// Depends on `locale`, so it stays referentially stable across re-renders unless the page's own locale changes.

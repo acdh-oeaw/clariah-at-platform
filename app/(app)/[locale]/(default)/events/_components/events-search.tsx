@@ -79,6 +79,7 @@ export function EventsSearch(props: EventsSearchProps): ReactNode {
 				image={image}
 				headingLevel={context.headingLevel}
 				link={link}
+				preload={context.isFirst}
 				summary={document.summary}
 				title={document.label}
 			/>

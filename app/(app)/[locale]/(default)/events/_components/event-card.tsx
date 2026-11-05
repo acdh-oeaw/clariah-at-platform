@@ -31,12 +31,14 @@ interface CardProps {
 	title: string;
 	summary: string | null;
 	link?: string;
+	/** For the first card only: the image may be the largest contentful paint (lcp) element. */
+	preload?: boolean;
 	/** 4 when the card sits below a group heading, e.g. a year. */
 	headingLevel?: 3 | 4;
 }
 
 export function EventCard(props: CardProps): ReactNode {
-	const { duration, image, headingLevel = 3, link, title, summary } = props;
+	const { duration, image, headingLevel = 3, link, preload = false, title, summary } = props;
 
 	const Heading = headingLevel === 4 ? "h4" : "h3";
 
@@ -134,7 +136,14 @@ export function EventCard(props: CardProps): ReactNode {
 				)}
 			>
 				{image != null ? (
-					<ApiImage alt="" className="object-cover" fill={true} image={image} sizes="(min-width: 40rem) 12rem, 100vw" />
+					<ApiImage
+						alt=""
+						className="object-cover"
+						fill={true}
+						image={image}
+						preload={preload}
+						sizes="(min-width: 40rem) 12rem, 100vw"
+					/>
 				) : (
 					<CalendarDaysIcon
 						aria-hidden={true}
