@@ -11,10 +11,12 @@ interface CardProps {
 	title: string;
 	summary: string | null;
 	link?: string;
+	/** For cards in the first row only: the image may be the largest contentful paint (lcp) element. */
+	preload?: boolean;
 }
 
 export function Card(props: CardProps): ReactNode {
-	const { image, link, title, summary } = props;
+	const { image, link, preload = false, title, summary } = props;
 	const t = useExtracted();
 	return (
 		<article className="grid group relative h-full grid-rows-[14rem_1fr_auto] overflow-hidden rounded-md bg-white shadow-card">
@@ -23,9 +25,10 @@ export function Card(props: CardProps): ReactNode {
 					alt=""
 					className="size-full border-b border-stroke-weak object-cover"
 					height={300}
-					/** Preload image because it's the largest contentful paint (lcp) element. */
-					preload={true}
+					preload={preload}
 					image={image}
+					/** One column up to `46rem`, two of at most `31rem` up to `68rem`, then three of at most `24rem`. */
+					sizes="(min-width: 68rem) 24rem, (min-width: 46rem) 31rem, calc(100vw - 2rem)"
 					width={400}
 				/>
 			)}
@@ -41,7 +44,9 @@ export function Card(props: CardProps): ReactNode {
 				href={link}
 				variant="unstyled"
 			>
-				{t("mehr lesen")}
+				{t("Weiterlesen")}
+				{/* Text rather than `aria-labelledby`: lighthouse reads the rendered text, and the name must start with the label. */}
+				<span className="sr-only"> {title}</span>
 			</LinkButton>
 		</article>
 	);

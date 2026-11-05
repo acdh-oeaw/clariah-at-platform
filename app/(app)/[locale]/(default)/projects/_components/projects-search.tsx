@@ -4,7 +4,11 @@ import { useExtracted } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type ReactNode, useCallback, useState } from "react";
 
-import { SearchView, type SearchViewParams } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
+import {
+	SearchView,
+	type SearchViewParams,
+	eagerResultCount,
+} from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
 import { useFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels";
 import {
 	type ProjectStatus,
@@ -113,7 +117,7 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 	}
 
 	// `document.link` is root-relative and locale-less, like `EntityRef.href` from the CMS API — prefix it the same way.
-	function renderItem(document: WebsiteDocument): ReactNode {
+	function renderItem(document: WebsiteDocument, index: number): ReactNode {
 		const link = document.link != null && document.link !== "" ? localizeHref(document.link, locale) : undefined;
 
 		const image =
@@ -127,7 +131,15 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 					}
 				: null;
 
-		return <Card image={image} link={link} summary={document.summary} title={document.label} />;
+		return (
+			<Card
+				image={image}
+				link={link}
+				preload={index < eagerResultCount}
+				summary={document.summary}
+				title={document.label}
+			/>
+		);
 	}
 
 	// Depends on `locale` and `today` only, so it stays referentially stable across re-renders.

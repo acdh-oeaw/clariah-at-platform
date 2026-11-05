@@ -51,6 +51,8 @@ export interface SearchViewSection<Document extends { id: string }> {
 export interface RenderItemContext {
 	/** One level below the group heading, if the result has one, so the outline stays intact. */
 	headingLevel: 3 | 4;
+	/** The first result of its section, whose image should not be lazy loaded. */
+	isFirst: boolean;
 }
 
 interface SearchViewProps<Document extends { id: string }> {
@@ -212,7 +214,8 @@ function SearchResults<Document extends { id: string }>(props: Readonly<SearchRe
 	const isLoading = state.status === "loading";
 
 	return (
-		<section className="flex flex-col gap-y-8">
+		/** Holds the footer below the fold until the first results are in, see the shared `SearchView`. */
+		<section className={cn("flex flex-col gap-y-8", isLoading && documents.length === 0 && "min-block-svh")}>
 			<h2 className="text-h2">{section.title}</h2>
 
 			{state.status === "error" ? <p role="alert">{t("Suche derzeit nicht verfügbar.")}</p> : null}
@@ -232,7 +235,10 @@ function SearchResults<Document extends { id: string }>(props: Readonly<SearchRe
 								<ul className={resultsClassName} role="list">
 									{group.documents.map((document) => (
 										<li key={document.id} className="flex flex-col gap-y-1">
-											{renderItem(document, { headingLevel: group.label != null ? 4 : 3 })}
+											{renderItem(document, {
+												headingLevel: group.label != null ? 4 : 3,
+												isFirst: document === documents[0],
+											})}
 										</li>
 									))}
 								</ul>

@@ -14,6 +14,9 @@ const matchAll = "*";
 const resultsPerPage = 25;
 const debounceMilliseconds = 250;
 
+/** Results which can be in the first row of the widest grid, and whose images should therefore not be lazy loaded. */
+export const eagerResultCount = 3;
+
 function useDebouncedValue<T>(value: T, delay: number): T {
 	const [debounced, setDebounced] = useState(value);
 
@@ -52,7 +55,7 @@ interface SearchViewProps<Document extends { id: string }> {
 	getHref: (params: SearchViewParams) => string;
 	/** Must be referentially stable across renders, e.g. a `useCallback` if it closes over the current locale. */
 	search: (params: SearchParams) => Promise<SearchOutcome<Document> | null>;
-	renderItem: (document: Document) => ReactNode;
+	renderItem: (document: Document, index: number) => ReactNode;
 	/** Wraps the form and the results. Defaults to a simple vertical stack. */
 	className?: string;
 	/** Wraps the results `<ul>`. Defaults to a card grid; pass a vertical stack for a plain text-result list instead. */
@@ -126,7 +129,11 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 	const inputId = useId();
 
 	return (
-		<div className={className}>
+		/**
+		 * Holds the footer below the fold until the first results are in, as `DetailFallback` does before this component
+		 * has mounted. Otherwise it flashes up under the form, and is then pushed down again.
+		 */
+		<div className={cn(className, isLoading && state.outcome == null && "min-block-svh")}>
 			<form
 				className="flex flex-col gap-y-2"
 				onSubmit={(event) => {
@@ -199,9 +206,9 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 						className={cn(resultsClassName, isLoading && "opacity-60 transition-opacity")}
 						role="list"
 					>
-						{state.outcome.items.map(({ document }) => (
+						{state.outcome.items.map(({ document }, index) => (
 							<li key={document.id} className="flex flex-col gap-y-1">
-								{renderItem(document)}
+								{renderItem(document, index)}
 							</li>
 						))}
 					</ul>
