@@ -3,6 +3,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 import { env } from "#/configs/env.config.ts";
 import { imageQuality } from "#/configs/image.config.ts";
+import { redirects } from "#/configs/redirects.config.ts";
 
 /** @see {@link https://github.com/adobe/react-spectrum/pull/10462} */
 const reactAriaPackages = [
@@ -52,6 +53,9 @@ const config: NextConfig = {
 	},
 	partialPrefetching: true,
 	reactCompiler: true,
+	redirects() {
+		return Promise.resolve(redirects);
+	},
 	turbopack: {
 		rules: {
 			[reactAriaLocales]: {
