@@ -128,4 +128,5 @@ jobs:
       APP_ROOT: "/"
       SERVICE_ID: "${{ vars.SERVICE_ID }}"
       PUBLIC_URL: "${{ needs.vars.outputs.public_url }}"
+      do_not_generate_additional_host_names: "true"
       default_port: "3000"
