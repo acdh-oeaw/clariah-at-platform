@@ -4,345 +4,420 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: next-intl\n"
-"X-Crowdin-SourceKey: msgstr\n"
+"X-Message-Key: msgctxt\n"
 
 #: app/(app)/[locale]/_components/detail-fallback.tsx
-msgid "15jBNa"
+msgctxt "15jBNa"
+msgid "Wird geladen…"
 msgstr "Loading…"
 
 #: app/(app)/[locale]/_components/footer.tsx
-msgid "TCmfGw"
+msgctxt "TCmfGw"
+msgid "Weitere Informationen"
 msgstr "More Informationen"
 
 #: app/(app)/[locale]/_components/footer.tsx
-msgid "m8oC-I"
+msgctxt "m8oC-I"
+msgid "Mailingliste beitreten"
 msgstr "Join Mailing List"
 
 #: app/(app)/[locale]/_components/footer.tsx
-msgid "rh5NHJ"
+msgctxt "rh5NHJ"
+msgid "Digital Humanities Austria E-Mail-Liste"
 msgstr "DHA Email List Subscription"
 
 #: app/(app)/[locale]/_components/footer.tsx
-msgid "j9gZd-"
+msgctxt "j9gZd-"
+msgid "Gefördert von"
 msgstr "Funded by"
 
 #: app/(app)/[locale]/_components/footer.tsx
-msgid "g4BNS3"
+msgctxt "g4BNS3"
+msgid "Bundesministerium für Frauen, Wissenschaft und Forschung"
 msgstr "Federal Ministry Women, Science and Research Republic of Austria"
 
 #: app/(app)/[locale]/_components/header.tsx
-msgid "RI9V2a"
+msgctxt "RI9V2a"
+msgid "Hauptinhalt"
 msgstr "Main content"
 
 #: app/(app)/[locale]/_components/header.tsx
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
-msgid "dhPnn6"
+msgctxt "dhPnn6"
+msgid "Startseite"
 msgstr "Homepage"
 
 #: app/(app)/[locale]/_components/header.tsx
-msgid "45F_7Z"
+msgctxt "45F_7Z"
+msgid "Schließen"
 msgstr "Close"
 
 #: app/(app)/[locale]/_components/header.tsx
-msgid "MX7Sye"
+msgctxt "MX7Sye"
+msgid "Menu öffnen"
 msgstr "Open menu"
 
 #: app/(app)/[locale]/_components/header.tsx
-msgid "se6p67"
+msgctxt "se6p67"
+msgid "Sprache"
 msgstr "Language"
 
 #: app/(app)/[locale]/(default)/_components/pagination.tsx
-msgid "9Q3pmW"
-msgstr ""
+msgctxt "9Q3pmW"
+msgid "Vorherige Seite"
+msgstr "Previous Page"
 
 #: app/(app)/[locale]/(default)/_components/pagination.tsx
-msgid "ZIstZx"
-msgstr ""
+msgctxt "ZIstZx"
+msgid "Page {page}"
+msgstr "Page {page}"
 
 #: app/(app)/[locale]/(default)/_components/pagination.tsx
-msgid "ha5T3x"
+msgctxt "ha5T3x"
+msgid "Nächste Seite"
+msgstr "Next page"
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+msgctxt "dsIkSc"
+msgid "Suchen"
+msgstr "Search"
+
+#: app/(app)/[locale]/(default)/_components/search-view.tsx
+msgctxt "3DsMZ3"
+msgid "Die Suche ist derzeit nicht verfügbar."
 msgstr ""
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
-msgid "dsIkSc"
-msgstr "Search"
+#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
+#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
+msgctxt "UkmHx2"
+msgid "Keine Ergebnisse."
+msgstr "No results."
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "U290Kk"
-msgstr "Suche derzeit nicht verfügbar."
-
-#: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "V5JQj-"
-msgstr "No results found."
-
-#: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "qcAbB2"
+msgctxt "qcAbB2"
+msgid "{total} Suchergebnisse"
 msgstr "{total} Search results"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "8V2q0t"
+msgctxt "8V2q0t"
+msgid "Seitennavigation oben"
 msgstr "Pagination top"
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
-msgid "gW44fG"
+msgctxt "gW44fG"
+msgid "Seitennavigation unten"
 msgstr "Pagination bottom"
 
 #: app/(app)/[locale]/(default)/(index)/_components/featured-section.tsx
-msgid "K3ZDoV"
+msgctxt "K3ZDoV"
+msgid "Alle Artikel anzeigen"
 msgstr "View all articles"
 
 #: app/(app)/[locale]/(default)/(index)/page.tsx
 #: app/(app)/[locale]/(default)/news/[slug]/page.tsx
 #: app/(app)/[locale]/(default)/news/page.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
-msgid "NZyhSX"
+msgctxt "NZyhSX"
+msgid "News"
 msgstr "News"
 
 #: app/(app)/[locale]/(default)/(index)/page.tsx
 #: app/(app)/[locale]/(default)/events/[slug]/page.tsx
 #: app/(app)/[locale]/(default)/events/page.tsx
-msgid "ZvKSfJ"
+msgctxt "ZvKSfJ"
+msgid "Events"
 msgstr "Events"
 
 #: app/(app)/[locale]/(default)/(index)/page.tsx
 #: app/(app)/[locale]/(default)/projects/[slug]/page.tsx
 #: app/(app)/[locale]/(default)/projects/page.tsx
-msgid "x9x-dX"
+msgctxt "x9x-dX"
+msgid "Projekte"
 msgstr "Projects"
 
 #: app/(app)/[locale]/(default)/consortium/[slug]/page.tsx
-msgid "vHX8jY"
+msgctxt "vHX8jY"
+msgid "Konsortium"
 msgstr "Consortium"
 
 #: app/(app)/[locale]/(default)/events/_components/event.tsx
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "hUC3XM"
+msgctxt "hUC3XM"
+msgid "Beginn"
 msgstr "Start"
 
 #: app/(app)/[locale]/(default)/events/_components/event.tsx
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "8ZB71y"
+msgctxt "8ZB71y"
+msgid "Ende"
 msgstr "End"
 
 #: app/(app)/[locale]/(default)/events/_components/events-search.tsx
-msgid "0Mtnts"
+msgctxt "0Mtnts"
+msgid "Kommende Events"
 msgstr "Upcoming events"
 
 #: app/(app)/[locale]/(default)/events/_components/events-search.tsx
-msgid "3C0-hX"
+msgctxt "3C0-hX"
+msgid "Vergangene Events"
 msgstr "Past events"
 
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
-msgid "6dsmkY"
+msgctxt "6dsmkY"
+msgid "Events filtern"
 msgstr "Filter events"
 
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
-msgid "t6uDQZ"
+msgctxt "t6uDQZ"
+msgid "Suche derzeit nicht verfügbar."
 msgstr "Search currently unavailable."
 
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
-#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
-#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
-msgid "UkmHx2"
-msgstr "No results."
-
-#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
-msgid "PlIcwy"
+msgctxt "PlIcwy"
+msgid "Weitere Ergebnisse konnten nicht geladen werden."
 msgstr "More results could not be loaded."
 
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
-msgid "Tyzzqd"
+msgctxt "Tyzzqd"
+msgid "Mehr laden"
 msgstr "Load more"
 
 #: app/(app)/[locale]/(default)/imprint/page.tsx
-msgid "cBXYMi"
+msgctxt "cBXYMi"
+msgid "Impressum"
 msgstr "Imprint"
 
 #: app/(app)/[locale]/(default)/layout.tsx
-msgid "DBsIRX"
+msgctxt "DBsIRX"
+msgid "Zum Hauptinhalt springen"
 msgstr "Skip to main content"
 
 #: app/(app)/[locale]/(default)/news/_components/news-item.tsx
-msgid "woPHUz"
+msgctxt "woPHUz"
+msgid "Veröffentlicht am"
 msgstr "Published"
 
 #: app/(app)/[locale]/(default)/news/_components/news-search.tsx
-msgid "9QD4qH"
+msgctxt "9QD4qH"
+msgid "Aktuelles durchsuchen"
 msgstr "Filter news"
 
 #: app/(app)/[locale]/(default)/pages/[slug]/page.tsx
-msgid "mt510S"
+msgctxt "mt510S"
+msgid "Infos"
 msgstr "Infos"
 
 #: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
-msgid "_ErBVb"
+msgctxt "_ErBVb"
+msgid "Go!Digital 1.0"
 msgstr "Go!Digital 1.0"
 
 #: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
-msgid "NdYKJi"
+msgctxt "NdYKJi"
+msgid "Go!Digital 2.0"
 msgstr "Go!Digital 2.0"
 
 #: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
-msgid "vx7WLn"
+msgctxt "vx7WLn"
+msgid "Go!Digital 3.0"
 msgstr "Go!Digital 3.0"
 
 #: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
-msgid "jjVZVR"
+msgctxt "jjVZVR"
+msgid "Go!digital Next Generation"
 msgstr "Go!digital Next Generation"
 
 #: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
-msgid "z0kyzm"
+msgctxt "z0kyzm"
+msgid "CLARIAH-AT Projektförderung 2022"
 msgstr "CLARIAH-AT Project Funding 2022"
 
 #: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
-msgid "4Hqet1"
+msgctxt "4Hqet1"
+msgid "CLARIAH-AT Projektförderung 2024"
 msgstr "CLARIAH-AT Project Funding 2024"
 
 #: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
-msgid "JlRoSH"
+msgctxt "JlRoSH"
+msgid "CLARIAH-AT Projektförderung 2025"
 msgstr "CLARIAH-AT Project Funding 2025"
 
 #: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
-msgid "PjYJev"
+msgctxt "PjYJev"
+msgid "CLARIAH-AT Projektförderung 2026"
 msgstr "CLARIAH-AT Project Funding 2026"
 
 #: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
-msgid "abJS9_"
+msgctxt "abJS9_"
+msgid "DH Langzeitprojekte zum kulturellen Erbe"
 msgstr "DH Long-Term Projects on Cultural Heritage"
 
 #: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
-msgid "iwL9SY"
+msgctxt "iwL9SY"
+msgid "Sonstiges"
 msgstr "Other"
 
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "g8HIH0"
+msgctxt "g8HIH0"
+msgid "Beteiligte Organisationen"
 msgstr "Affiliated Organisations"
 
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
-msgid "6Aln8l"
+msgctxt "6Aln8l"
+msgid "Beteiligte Personen"
 msgstr "Affiliated Persons"
 
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
-msgid "GfQtQD"
+msgctxt "GfQtQD"
+msgid "Förderprogramm"
 msgstr "Funding Call"
 
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
-msgid "Y6xNTw"
+msgctxt "Y6xNTw"
+msgid "Laufend"
 msgstr "Ongoing"
 
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
-msgid "PF2-8B"
+msgctxt "PF2-8B"
+msgid "Abgeschlossen"
 msgstr "Completed"
 
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
-msgid "6BVFDW"
+msgctxt "6BVFDW"
+msgid "Projektstatus"
 msgstr "Status"
 
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
-msgid "LIsWz1"
+msgctxt "LIsWz1"
+msgid "Projekte filtern"
 msgstr "Filter Projects"
 
 #: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
-msgid "am5jN9"
+msgctxt "am5jN9"
+msgid "Filter {label}"
 msgstr "Filter {label}"
 
 #: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
-msgid "JIdm6T"
+msgctxt "JIdm6T"
+msgid "Filter…"
 msgstr "Filter…"
 
 #: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
 #: app/(app)/[locale]/(default)/search/_components/website-search.tsx
-msgid "xTeBn_"
+msgctxt "xTeBn_"
+msgid "Typ"
 msgstr "Type"
 
 #: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
-msgid "6M7vT8"
+msgctxt "6M7vT8"
+msgid "Ressourcen durchsuchen"
 msgstr "Filter resources"
 
 #: app/(app)/[locale]/(default)/resources/page.tsx
-msgid "aOOcfk"
+msgctxt "aOOcfk"
+msgid "Ressourcen"
 msgstr "Resources"
 
 #: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
-msgid "fz2AhZ"
+msgctxt "fz2AhZ"
+msgid "Projekt"
 msgstr "Project"
 
 #: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
-msgid "m1czzY"
+msgctxt "m1czzY"
+msgid "Event"
 msgstr "Event"
 
 #: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
-msgid "0sDAwe"
+msgctxt "0sDAwe"
+msgid "Seite"
 msgstr "Page"
 
 #: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
-msgid "r3c0KI"
+msgctxt "r3c0KI"
+msgid "Publikation"
 msgstr "Publication"
 
 #: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
-msgid "r3C4x_"
+msgctxt "r3C4x_"
+msgid "Software"
 msgstr "Software"
 
 #: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
-msgid "n7yYXG"
+msgctxt "n7yYXG"
+msgid "Service"
 msgstr "Service"
 
 #: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
-msgid "vkvyOV"
+msgctxt "vkvyOV"
+msgid "Training Material"
 msgstr "Training Material"
 
 #: app/(app)/[locale]/(default)/search/_components/website-search.tsx
-msgid "fuRekU"
+msgctxt "fuRekU"
+msgid "Website durchsuchen"
 msgstr "Search website"
 
 #: app/(app)/[locale]/(default)/search/page.tsx
 #: components/navigation-desktop.tsx
 #: components/navigation-mobile.tsx
-msgid "qi41lO"
+msgctxt "qi41lO"
+msgid "Suche"
 msgstr "Search"
 
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
-msgid "QRccCM"
+msgctxt "QRccCM"
+msgid "Page not found"
 msgstr "Page not found"
 
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
-msgid "IbI6Uw"
+msgctxt "IbI6Uw"
+msgid "Fehler 404"
 msgstr "Error 404"
 
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
-msgid "gifeZv"
+msgctxt "gifeZv"
+msgid "Die aufgerufene Seite konnte nicht gefunden werden. Sie wurde möglicherweise verschoben, umbenannt oder hat nie existiert."
 msgstr "The requested page could not be found. It may have been moved, renamed, or never existed."
 
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
-msgid "m-qkrg"
+msgctxt "m-qkrg"
+msgid "Zurück zur Startseite"
 msgstr "Back to homepage"
 
 #: app/(app)/[locale]/not-found.tsx
 #: app/global-not-found.tsx
-msgid "Xnd9v7"
+msgctxt "Xnd9v7"
+msgid "Seite nicht gefunden"
 msgstr "Page not found"
 
 #: components/card.tsx
-msgid "iwRrPy"
+msgctxt "iwRrPy"
+msgid "mehr lesen"
 msgstr "Read more"
 
 #: components/rich-text.tsx
-msgid "4ioeud"
-msgstr ""
+msgctxt "4ioeud"
+msgid "Footnote {number}"
+msgstr "Footnote {number}"
 
 #: components/rich-text.tsx
-msgid "t1Ql7Y"
-msgstr ""
+msgctxt "t1Ql7Y"
+msgid "Footnotes"
+msgstr "Footnotes"
 
 #: components/rich-text.tsx
-msgid "TiPYmy"
-msgstr ""
+msgctxt "TiPYmy"
+msgid "Back to footnote {number} in the text"
+msgstr "Back to footnote {number} in the text"

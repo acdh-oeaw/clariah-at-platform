@@ -174,9 +174,9 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 				</div>
 			) : null}
 
-			{state.status === "error" ? <p role="alert">{t("Search is currently unavailable.")}</p> : null}
+			{state.status === "error" ? <p role="alert">{t("Die Suche ist derzeit nicht verfügbar.")}</p> : null}
 
-			{state.status === "success" && state.outcome.items.length === 0 ? <p>{t("No results found.")}</p> : null}
+			{state.status === "success" && state.outcome.items.length === 0 ? <p>{t("Keine Ergebnisse.")}</p> : null}
 
 			{state.outcome != null && state.outcome.items.length > 0 ? (
 				<div className="flex flex-col gap-y-8">

@@ -9,8 +9,15 @@ async function main() {
 
 	const json = {};
 
+	/**
+	 * The catalogs follow the gettext layout next-intl writes since amannn/next-intl#2393: the message key is in
+	 * `msgctxt`, and `msgid` holds the source text. The header entry has neither, and is skipped.
+	 */
 	for (const message of result.messages ?? []) {
-		set(json, message.msgctxt != null ? [message.msgctxt, message.msgid] : message.msgid, message.msgstr);
+		if (message.msgctxt == null || message.msgctxt === "") {
+			continue;
+		}
+		set(json, message.msgctxt, message.msgstr);
 	}
 
 	await writeFile("./messages/en.json", `${JSON.stringify(json, null, 2)}\n`);
