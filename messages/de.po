@@ -6,6 +6,10 @@ msgstr ""
 "X-Generator: next-intl\n"
 "X-Crowdin-SourceKey: msgstr\n"
 
+#: app/(app)/[locale]/_components/detail-fallback.tsx
+msgid "15jBNa"
+msgstr "Wird geladen…"
+
 #: app/(app)/[locale]/_components/footer.tsx
 msgid "TCmfGw"
 msgstr "Weitere Informationen"

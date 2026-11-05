@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { type ReactNode, Suspense } from "react";
 
 import { Page } from "#/app/(app)/[locale]/(default)/pages/_components/page";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedPage, staticSlugs } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
@@ -41,7 +42,7 @@ export default async function PagePage(props: Readonly<PagePageProps>): Promise<
 	const t = await getExtracted();
 	return (
 		<PageLayout title={t("Infos")} titleElement="p">
-			<Suspense fallback={<p>Loading</p>}>
+			<Suspense fallback={<DetailFallback />}>
 				<PageDetails params={props.params} />
 			</Suspense>
 		</PageLayout>

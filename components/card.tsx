@@ -36,7 +36,7 @@ export function Card(props: CardProps): ReactNode {
 				</div>
 			</div>
 			<LinkButton
-				className="after:absolute after:inset-0 after:z-20 w-full justify-between hover:bg-primary-500 hover:text-white bg-primary-200 px-8 py-4"
+				className="after:absolute after:inset-0 after:z-20 w-full justify-between group-hover:bg-primary-500 group-hover:text-white bg-primary-200 px-8 py-4"
 				endIcon={<ArrowRightIcon className="group-hover:translate-x-1.5 ease-in-out transition-transform" />}
 				href={link}
 				variant="unstyled"

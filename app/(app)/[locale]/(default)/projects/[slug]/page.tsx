@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { type ReactNode, Suspense } from "react";
 
 import { Project } from "#/app/(app)/[locale]/(default)/projects/_components/project";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedProject, staticSlugs } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";
@@ -40,7 +41,7 @@ export default async function ProjectPage(props: Readonly<ProjectPageProps>): Pr
 	const t = await getExtracted();
 	return (
 		<PageLayout title={t("Projekte")} titleElement="p">
-			<Suspense fallback={<p>Loading</p>}>
+			<Suspense fallback={<DetailFallback />}>
 				<ProjectDetails params={props.params} />
 			</Suspense>
 		</PageLayout>

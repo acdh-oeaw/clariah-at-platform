@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { type ReactNode, Suspense } from "react";
 
 import { Event } from "#/app/(app)/[locale]/(default)/events/_components/event";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedEvent, staticSlugs } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";
@@ -40,7 +41,7 @@ export default async function EventPage(props: Readonly<EventPageProps>): Promis
 	const t = await getExtracted();
 	return (
 		<PageLayout title={t("Events")} titleElement="p">
-			<Suspense fallback={<p>Loading</p>}>
+			<Suspense fallback={<DetailFallback />}>
 				<EventDetails params={props.params} />
 			</Suspense>
 		</PageLayout>

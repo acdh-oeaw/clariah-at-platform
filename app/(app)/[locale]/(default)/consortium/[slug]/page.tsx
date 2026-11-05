@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { type ReactNode, Suspense } from "react";
 
 import { Member } from "#/app/(app)/[locale]/(default)/consortium/_components/member";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedInstitution, isNationalConsortiumMember, staticSlugs } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";
@@ -40,7 +41,7 @@ export default async function MemberPage(props: Readonly<MemberPageProps>): Prom
 	const t = await getExtracted();
 	return (
 		<PageLayout title={t("Konsortium")} titleElement="p">
-			<Suspense fallback={<p>Loading</p>}>
+			<Suspense fallback={<DetailFallback />}>
 				<MemberDetails params={props.params} />
 			</Suspense>
 		</PageLayout>

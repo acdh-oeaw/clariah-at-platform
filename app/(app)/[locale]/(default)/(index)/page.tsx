@@ -5,6 +5,7 @@ import { type ReactNode, Suspense } from "react";
 
 import { FeaturedSection } from "#/app/(app)/[locale]/(default)/(index)/_components/featured-section";
 import { HeroSection } from "#/app/(app)/[locale]/(default)/(index)/_components/hero-section";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { Main } from "#/app/(app)/[locale]/_components/main";
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
 import { cachedSiteMetadata } from "#/lib/data/api-cache";
@@ -22,7 +23,7 @@ export default async function IndexPage(): Promise<ReactNode> {
 	const t = await getExtracted();
 	return (
 		<Main className="flex flex-col gap-y-12 bg-primary-100">
-			<Suspense>
+			<Suspense fallback={<DetailFallback />}>
 				<HeroSection className="bg-primary-1000">
 					<h1 className="text-h1">{siteMetadata.title}</h1>
 					<p className="text-3xl max-w-3xl">{siteMetadata.description}</p>
