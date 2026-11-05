@@ -20,6 +20,8 @@ const reactAriaLocales = `**/{${reactAriaPackages.join(",")}}/**/??-??.{js,cjs,m
 
 const config: NextConfig = {
 	cacheComponents: true,
+	/** Traefik compresses responses, see `.github/auto-deploy-values.yaml`. */
+	compress: false,
 	experimental: {
 		cachedNavigations: true,
 		globalNotFound: true,
