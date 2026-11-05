@@ -133,7 +133,6 @@ export function LocaleSwitcher(props: Readonly<LocaleSwitcherProps>): ReactNode 
 					<a
 						key={locale}
 						aria-current={isCurrent ? "true" : undefined}
-						aria-label={languageNames[locale]}
 						className={linkStyles({
 							/**
 							 * `font-bold` is constant, not conditional on `isCurrent`: bold and regular glyphs render at different
@@ -146,7 +145,11 @@ export function LocaleSwitcher(props: Readonly<LocaleSwitcherProps>): ReactNode 
 						href={href}
 						hrefLang={language}
 					>
-						<span lang={language}>{language.toUpperCase()}</span>
+						<span lang={language}>
+							{language.toUpperCase()}
+							{/* Text rather than `aria-label`: the name must contain the visible label (wcag 2.5.3, label in name). */}
+							<span className="sr-only"> {languageNames[locale]}</span>
+						</span>
 					</a>
 				);
 			})}
