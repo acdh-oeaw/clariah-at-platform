@@ -5,6 +5,7 @@ import { type ReactNode, Suspense } from "react";
 
 import { searchParams } from "#/app/(app)/[locale]/(default)/search-params";
 import { WebsiteSearch } from "#/app/(app)/[locale]/(default)/search/_components/website-search.tsx";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
@@ -21,7 +22,7 @@ export default async function SearchPage(props: Readonly<SearchPageProps>): Prom
 	return (
 		<PageLayout title={t("Suche")}>
 			<PageContent>
-				<Suspense>
+				<Suspense fallback={<DetailFallback />}>
 					<WebsiteSearchSection searchParams={props.searchParams} />
 				</Suspense>
 			</PageContent>

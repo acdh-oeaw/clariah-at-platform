@@ -4,6 +4,7 @@ import { locale } from "next/root-params";
 import { type ReactNode, Suspense } from "react";
 
 import { AcdhImprint } from "#/app/(app)/[locale]/(default)/imprint/_components/acdh-imprint";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
@@ -18,7 +19,7 @@ export default async function ImprintPage(): Promise<ReactNode> {
 	return (
 		<PageLayout title={t("Impressum")}>
 			<PageContent>
-				<Suspense>
+				<Suspense fallback={<DetailFallback />}>
 					<AcdhImprint locale={currentLocale} />
 				</Suspense>
 			</PageContent>

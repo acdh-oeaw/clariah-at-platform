@@ -4,6 +4,7 @@ import { locale } from "next/root-params";
 import { type ReactNode, Suspense } from "react";
 
 import { ResourcesSearch } from "#/app/(app)/[locale]/(default)/resources/_components/resources-search";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { ContentBlocks } from "#/components/content-blocks";
@@ -21,7 +22,7 @@ export default async function ResourcesPage(): Promise<ReactNode> {
 	return (
 		<PageLayout title={t("Ressourcen")}>
 			<PageContent>
-				<Suspense>
+				<Suspense fallback={<DetailFallback />}>
 					<div className="flex flex-col gap-y-8">
 						<div className="max-w-prose">{page?.content && <ContentBlocks blocks={page.content} />}</div>
 						<ResourcesSearchSection />

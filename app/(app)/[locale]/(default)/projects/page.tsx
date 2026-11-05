@@ -5,6 +5,7 @@ import { type ReactNode, Suspense } from "react";
 
 import { ProjectsSearch } from "#/app/(app)/[locale]/(default)/projects/_components/projects-search.tsx";
 import { searchParams } from "#/app/(app)/[locale]/(default)/projects/search-params.ts";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { ContentBlocks } from "#/components/content-blocks";
@@ -25,7 +26,7 @@ export default async function ProjectPage(props: Readonly<ProjectPageProps>): Pr
 	return (
 		<PageLayout title={t("Projekte")}>
 			<PageContent>
-				<Suspense>
+				<Suspense fallback={<DetailFallback />}>
 					<div className="flex flex-col gap-y-8">
 						<div className="max-w-prose">{page?.content && <ContentBlocks blocks={page.content} />}</div>
 						<ProjectsSearchSection searchParams={props.searchParams} />
