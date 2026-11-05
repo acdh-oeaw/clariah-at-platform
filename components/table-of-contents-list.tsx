@@ -55,25 +55,27 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 	const [activeId, setActiveId] = useState<string | null>(null);
 	/**
 	 * The entry just navigated to, which stays current until the page is scrolled by hand. Jumping to a heading leaves it
-	 * at the top of the viewport, where a short section lets the next heading cross the activation line as well - and
-	 * near the end of the page the heading cannot reach the top at all, so the bottom-of-page rule would pick the last
-	 * entry.
+	 * at the top of the viewport, where a short section lets the next heading cross the activation line as well - and near
+	 * the end of the page the heading cannot reach the top at all, so the bottom-of-page rule would pick the last entry.
 	 */
 	const pinnedIdRef = useRef<string | null>(null);
+	/**
+	 * The pending animation frame, `0` when none is: the active entry is recomputed at most once per frame, however many
+	 * scroll events arrive in between. A ref, not a `let` in the effect, which the scroll listener would reassign after
+	 * render - something the compiler's immutability rule does not allow.
+	 */
+	const frameRef = useRef(0);
 
 	useEffect(() => {
 		const ids = headings.map((heading) => heading.id);
-		/** Recomputed at most once per frame, however many scroll events arrive in between. */
-		let frame = 0;
-
 		function update(): void {
-			frame = 0;
+			frameRef.current = 0;
 			setActiveId(pinnedIdRef.current ?? getActiveId(ids));
 		}
 
 		function schedule(): void {
-			if (frame === 0) {
-				frame = requestAnimationFrame(update);
+			if (frameRef.current === 0) {
+				frameRef.current = requestAnimationFrame(update);
 			}
 		}
 
@@ -95,7 +97,8 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 		}
 
 		return () => {
-			cancelAnimationFrame(frame);
+			cancelAnimationFrame(frameRef.current);
+			frameRef.current = 0;
 			window.removeEventListener("scroll", schedule);
 			window.removeEventListener("resize", schedule);
 			for (const type of userScrollEvents) {
@@ -112,8 +115,8 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 				return (
 					<li className={indentClassName[heading.level]} key={heading.id}>
 						{/**
-						 * A plain anchor, not `Link`: `next/link` treats a second click on the hash the url already has as a navigation to the
-						 * same url and does not scroll again, while the browser always jumps to the heading.
+						 * A plain anchor, not `Link`: `next/link` treats a second click on the hash the url already has as a
+						 * navigation to the same url and does not scroll again, while the browser always jumps to the heading.
 						 */}
 						<a
 							aria-current={isActive ? "location" : undefined}
@@ -127,9 +130,9 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 							}}
 						>
 							{/**
-							 * No hidden bold copy reserving the bold width: in the narrow sidebar column, an entry which only just fits on one line
-							 * wraps onto two in bold, so the reserved copy left an empty line under it at all times. Only the current entry may
-							 * re-wrap now, and only while it is current.
+							 * No hidden bold copy reserving the bold width: in the narrow sidebar column, an entry which only just
+							 * fits on one line wraps onto two in bold, so the reserved copy left an empty line under it at all times.
+							 * Only the current entry may re-wrap now, and only while it is current.
 							 */}
 							<span className={cn(isActive && "font-bold")}>{heading.text}</span>
 						</a>
