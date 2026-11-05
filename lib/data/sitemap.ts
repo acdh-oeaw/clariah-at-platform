@@ -11,10 +11,7 @@ import { localizeHref } from "#/lib/navigation/convert.ts";
  * Listing pages which no content document backs, so the api's sitemap leaves them out (see `getSitemap` in
  * `lib/openapi/types.ts`). `/search` is left out on purpose: result pages are not worth indexing.
  */
-const staticPathnames = ["/", "/events", "/imprint", "/news", "/projects", "/resources"] as const;
-
-/** Entity types the api lists urls for, but which have no detail page on this website (yet). */
-const excludedEntityTypes: ReadonlySet<SitemapEntry["type"]> = new Set(["persons"]);
+const staticPathnames = ["/", "/events", "/imprint", "/news"] as const;
 
 function toAbsoluteUrl(pathname: string): string {
 	return String(createUrl({ baseUrl: env.NEXT_PUBLIC_APP_BASE_URL, pathname }));
@@ -67,18 +64,16 @@ export async function getSitemapEntries(): Promise<MetadataRoute.Sitemap> {
 
 	return [
 		...getStaticEntries(),
-		...data
-			.filter((entry) => !excludedEntityTypes.has(entry.type))
-			.map((entry) => {
-				const languages = Object.fromEntries(
-					entry.alternates.map((alternate) => [alternate.locale, toAbsoluteUrl(toPublicPathname(alternate))] as const),
-				);
+		...data.map((entry) => {
+			const languages = Object.fromEntries(
+				entry.alternates.map((alternate) => [alternate.locale, toAbsoluteUrl(toPublicPathname(alternate))] as const),
+			);
 
-				return {
-					lastModified: entry.lastModified,
-					url: toAbsoluteUrl(toPublicPathname(entry)),
-					alternates: { languages },
-				};
-			}),
+			return {
+				lastModified: entry.lastModified,
+				url: toAbsoluteUrl(toPublicPathname(entry)),
+				alternates: { languages },
+			};
+		}),
 	];
 }
