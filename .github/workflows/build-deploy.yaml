@@ -102,6 +102,7 @@ jobs:
           build-args: |
             "NEXT_PUBLIC_API_BASE_URL=${{ vars.NEXT_PUBLIC_API_BASE_URL }}"
             "NEXT_PUBLIC_APP_BASE_URL=${{ needs.vars.outputs.public_url }}"
+            "NEXT_PUBLIC_APP_BOTS=${{ vars.NEXT_PUBLIC_APP_BOTS }}"
             "NEXT_PUBLIC_API_OPENAPI_PATHNAME=${{ vars.NEXT_PUBLIC_API_OPENAPI_PATHNAME }}"
             "NEXT_PUBLIC_APP_IMPRINT_SERVICE_BASE_URL=${{ vars.NEXT_PUBLIC_APP_IMPRINT_SERVICE_BASE_URL }}"
             "NEXT_PUBLIC_APP_MATOMO_BASE_URL=${{ vars.NEXT_PUBLIC_APP_MATOMO_BASE_URL }}"
