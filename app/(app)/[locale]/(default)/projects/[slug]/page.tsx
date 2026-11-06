@@ -7,8 +7,7 @@ import { Project } from "#/app/(app)/[locale]/(default)/projects/_components/pro
 import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedProject, staticSlugs } from "#/lib/data/api-cache";
-import { isValidLocale } from "#/lib/i18n/locales";
-import { localizeHref } from "#/lib/navigation/convert";
+import { createMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
 
 interface ProjectPageProps extends PageProps<"/[locale]/projects/[slug]"> {}
 
@@ -24,17 +23,13 @@ export async function generateMetadata(props: Readonly<ProjectPageProps>): Promi
 		return {};
 	}
 
-	const languages: Record<string, string> = {};
-
-	for (const translation of item.translations) {
-		if (!isValidLocale(translation.locale)) {
-			continue;
-		}
-
-		languages[translation.locale] = localizeHref(`/projects/${translation.slug}`, translation.locale);
-	}
-
-	return { alternates: { languages } };
+	return createMetadata({
+		pathname: `/projects/${slug}`,
+		title: item.name,
+		description: item.summary,
+		image: item.image,
+		languages: getLanguageAlternates("/projects", item.translations),
+	});
 }
 
 export default async function ProjectPage(props: Readonly<ProjectPageProps>): Promise<ReactNode> {

@@ -7,8 +7,7 @@ import { Member } from "#/app/(app)/[locale]/(default)/consortium/_components/me
 import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedInstitution, isNationalConsortiumMember, staticSlugs } from "#/lib/data/api-cache";
-import { isValidLocale } from "#/lib/i18n/locales";
-import { localizeHref } from "#/lib/navigation/convert";
+import { createMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
 
 interface MemberPageProps extends PageProps<"/[locale]/consortium/[slug]"> {}
 
@@ -24,17 +23,11 @@ export async function generateMetadata(props: Readonly<MemberPageProps>): Promis
 		return {};
 	}
 
-	const languages: Record<string, string> = {};
-
-	for (const translation of item.translations) {
-		if (!isValidLocale(translation.locale)) {
-			continue;
-		}
-
-		languages[translation.locale] = localizeHref(`/consortium/${translation.slug}`, translation.locale);
-	}
-
-	return { alternates: { languages } };
+	return createMetadata({
+		pathname: `/consortium/${slug}`,
+		title: item.name,
+		languages: getLanguageAlternates("/consortium", item.translations),
+	});
 }
 
 export default async function MemberPage(props: Readonly<MemberPageProps>): Promise<ReactNode> {

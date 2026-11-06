@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { getExtracted } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { type ReactNode, Suspense } from "react";
+import { Fragment, type ReactNode, Suspense } from "react";
 
 import { NewsItem } from "#/app/(app)/[locale]/(default)/news/_components/news-item";
 import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
+import { JsonLd } from "#/components/json-ld.tsx";
 import { cachedNewsItem, staticSlugs } from "#/lib/data/api-cache";
-import { isValidLocale } from "#/lib/i18n/locales";
-import { localizeHref } from "#/lib/navigation/convert";
+import { createNewsArticle } from "#/lib/json-ld.ts";
+import { createMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
 
 interface NewsItemPageProps extends PageProps<"/[locale]/news/[slug]"> {}
 
@@ -24,17 +25,14 @@ export async function generateMetadata(props: Readonly<NewsItemPageProps>): Prom
 		return {};
 	}
 
-	const languages: Record<string, string> = {};
-
-	for (const translation of item.translations) {
-		if (!isValidLocale(translation.locale)) {
-			continue;
-		}
-
-		languages[translation.locale] = localizeHref(`/news/${translation.slug}`, translation.locale);
-	}
-
-	return { alternates: { languages } };
+	return createMetadata({
+		pathname: `/news/${slug}`,
+		title: item.title,
+		description: item.summary,
+		image: item.image,
+		languages: getLanguageAlternates("/news", item.translations),
+		openGraph: { type: "article", publishedTime: item.publishedAt },
+	});
 }
 
 export default async function NewsItemPage(props: Readonly<NewsItemPageProps>): Promise<ReactNode> {
@@ -54,5 +52,10 @@ async function NewsItemDetails({ params }: { params: NewsItemPageProps["params"]
 	if (item == null) {
 		notFound();
 	}
-	return <NewsItem {...item} />;
+	return (
+		<Fragment>
+			<JsonLd item={await createNewsArticle(`/news/${slug}`, item)} />
+			<NewsItem {...item} />
+		</Fragment>
+	);
 }

@@ -1,4 +1,5 @@
-import { getExtracted } from "next-intl/server";
+import type { Metadata } from "next";
+import { getExtracted, getLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { locale } from "next/root-params";
 import { type ReactNode, Suspense } from "react";
@@ -8,8 +9,24 @@ import { HeroSection } from "#/app/(app)/[locale]/(default)/(index)/_components/
 import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { Main } from "#/app/(app)/[locale]/_components/main";
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
+import { JsonLd } from "#/components/json-ld.tsx";
 import { cachedSiteMetadata } from "#/lib/data/api-cache";
 import { isValidLocale } from "#/lib/i18n/locales";
+import { createOrganization, createWebSite } from "#/lib/json-ld.ts";
+import { createMetadata } from "#/lib/metadata.ts";
+
+export async function generateMetadata(): Promise<Metadata> {
+	const site = await cachedSiteMetadata(await getLocale());
+
+	return createMetadata({
+		pathname: "/",
+		title: { absolute: site.title },
+		openGraph: {
+			...(site.ogTitle != null ? { title: site.ogTitle } : {}),
+			...(site.ogDescription != null ? { description: site.ogDescription.trim() } : {}),
+		},
+	});
+}
 
 // No props needed: the locale comes from `i18n/request.ts`, which reads it via
 // `next/root-params`. No `params`, no `setRequestLocale`.
@@ -23,6 +40,8 @@ export default async function IndexPage(): Promise<ReactNode> {
 	const t = await getExtracted();
 	return (
 		<Main className="flex flex-col gap-y-12 bg-primary-100">
+			<JsonLd item={createOrganization(siteMetadata)} />
+			<JsonLd item={createWebSite(siteMetadata)} />
 			<Suspense fallback={<DetailFallback />}>
 				<HeroSection className="bg-primary-1000">
 					<h1 className="text-h1">{siteMetadata.title}</h1>
