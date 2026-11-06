@@ -13,7 +13,7 @@ service:
   enabled: true
   name: "web"
   url: "$public_url"
-  # Redirected to `www.clariah.at` by the app, see `configs/redirects.config.ts`.
+  # Gets the apex domain onto the certificate and into the ingress rules, so it can be redirected to `www.` over https.
   additionalHosts:
     - "clariah.at"
   type: ClusterIP
@@ -25,7 +25,8 @@ ingress:
   className: "traefik"
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.ingress.kubernetes.io/router.middlewares: kube-system-compress@kubernetescrd
+    # `redirect-to-www` adds `www.` to every host of this ingress, so it must only list the apex and `www.` hosts.
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-redirect-to-www@kubernetescrd,kube-system-compress@kubernetescrd
 livenessProbe:
   path: /health
   initialDelaySeconds: 15

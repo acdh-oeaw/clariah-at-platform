@@ -3,13 +3,6 @@ import type { NextConfig } from "next";
 type Redirects = Awaited<ReturnType<NonNullable<NextConfig["redirects"]>>>;
 
 export const redirects: Redirects = [
-	/** `www.clariah.at` is the public url, so the apex domain is only routed here to be redirected to it. */
-	{
-		source: "/:path*",
-		has: [{ type: "host", value: "clariah.at" }],
-		destination: "https://www.clariah.at/:path*",
-		permanent: true,
-	},
 	/** Redirects for urls from the previous clariah.at website. */
 	{
 		/**
