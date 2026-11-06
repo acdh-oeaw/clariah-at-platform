@@ -2,12 +2,13 @@ import { useExtracted, useFormatter } from "next-intl";
 import type { ReactNode } from "react";
 
 import { useFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels";
+import { SocialMediaLinks } from "#/app/(app)/[locale]/(default)/projects/_components/social-media";
 import { DetailCard } from "#/app/(app)/[locale]/_components/detail-card";
 import { ContentBlocks } from "#/components/content-blocks.tsx";
 import type { Project as ProjectProps } from "#/lib/data/api-client.ts";
 
 export function Project(props: ProjectProps): ReactNode {
-	const { call, description, image, name, duration, partners, affiliatedPersons } = props;
+	const { call, description, image, name, duration, socialMedia, partners, affiliatedPersons } = props;
 	const t = useExtracted();
 	const format = useFormatter();
 	const getLabel = useFacetLabel();
@@ -15,7 +16,13 @@ export function Project(props: ProjectProps): ReactNode {
 	return (
 		<DetailCard image={image} title={name}>
 			<div className="mt-12 flex flex-col-reverse gap-x-20 gap-y-8 lg:flex-row lg:items-start">
-				<ContentBlocks blocks={description} className="flex-1 min-w-0 max-w-prose" />
+				<div className="flex-1 min-w-0 max-w-prose">
+					<ContentBlocks blocks={description} />
+					<section className="mt-8 flex flex-col gap-y-4">
+						<h2 className="text-xl font-bold mb-3">{t("Links")}</h2>
+						<SocialMediaLinks links={socialMedia} />
+					</section>
+				</div>
 				<div className="lg:sticky lg:top-8 lg:w-75 lg:shrink-0 lg:border-l-2 lg:ps-8 lg:border-primary-300">
 					<dl className="flex flex-col gap-y-4">
 						{partners.length > 0 && (
