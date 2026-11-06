@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getExtracted } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { type ReactNode, Suspense } from "react";
+import { Fragment, type ReactNode, Suspense } from "react";
 
 import { NewsItem } from "#/app/(app)/[locale]/(default)/news/_components/news-item";
 import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
@@ -53,9 +53,9 @@ async function NewsItemDetails({ params }: { params: NewsItemPageProps["params"]
 		notFound();
 	}
 	return (
-		<>
+		<Fragment>
 			<JsonLd item={await createNewsArticle(`/news/${slug}`, item)} />
 			<NewsItem {...item} />
-		</>
+		</Fragment>
 	);
 }

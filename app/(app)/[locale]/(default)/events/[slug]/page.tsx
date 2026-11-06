@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getExtracted } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { type ReactNode, Suspense } from "react";
+import { Fragment, type ReactNode, Suspense } from "react";
 
 import { Event } from "#/app/(app)/[locale]/(default)/events/_components/event";
 import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
@@ -54,9 +54,9 @@ async function EventDetails({ params }: { params: EventPageProps["params"] }): P
 	const jsonLd = await createEvent(`/events/${slug}`, item);
 
 	return (
-		<>
+		<Fragment>
 			{jsonLd != null ? <JsonLd item={jsonLd} /> : null}
 			<Event {...item} />
-		</>
+		</Fragment>
 	);
 }
