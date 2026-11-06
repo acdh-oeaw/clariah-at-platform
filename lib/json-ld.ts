@@ -34,7 +34,7 @@ function toOrganizationRef(site: SiteMetadata): Organization {
 }
 
 /** Not in the api, so they are fixed here. */
-const organizationEmail = "info@clariah.at";
+const organizationEmail = "office@clariah.at";
 const organizationProfiles = ["https://www.linkedin.com/company/clariah-at/"];
 
 export function createOrganization(site: SiteMetadata): WithContext<Organization> {
