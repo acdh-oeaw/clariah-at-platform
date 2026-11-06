@@ -149,6 +149,7 @@ export async function createEvent(pathname: string, item: EventItem): Promise<Wi
 		...(image != null ? { image } : {}),
 		startDate: toEventDate(start, item.isFullDay),
 		...(end != null ? { endDate: toEventDate(end, item.isFullDay) } : {}),
+		eventStatus: "https://schema.org/EventScheduled",
 		inLanguage: locale,
 		...toEventLocation(item, url),
 		...(item.website != null ? { sameAs: item.website } : {}),
