@@ -45,7 +45,7 @@ export function createOrganization(site: SiteMetadata): WithContext<Organization
 		name: site.title,
 		description: site.description.trim(),
 		url: toAbsoluteUrl("/"),
-		logo: toAbsoluteUrl("/android-chrome-512x512.png"),
+		logo: toAbsoluteUrl("/assets/images/logo-clariah.svg"),
 		email: organizationEmail,
 		sameAs: organizationProfiles,
 	};
