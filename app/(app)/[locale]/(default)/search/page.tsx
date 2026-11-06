@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getExtracted } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { locale } from "next/root-params";
@@ -9,8 +10,15 @@ import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
+import { createMetadata } from "#/lib/metadata.ts";
 
 interface SearchPageProps extends PageProps<"/[locale]/search"> {}
+
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getExtracted();
+
+	return createMetadata({ pathname: "/search", title: t("Suche"), noindex: true });
+}
 
 export default async function SearchPage(props: Readonly<SearchPageProps>): Promise<ReactNode> {
 	const t = await getExtracted();
