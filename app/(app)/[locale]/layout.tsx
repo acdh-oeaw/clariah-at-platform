@@ -13,6 +13,7 @@ import { AlternateLinks } from "#/components/alternate-links";
 import { env } from "#/configs/env.config.ts";
 import { cachedSiteMetadata } from "#/lib/data/api-cache";
 import { routing } from "#/lib/i18n/routing.ts";
+import { createOpenGraph } from "#/lib/metadata.ts";
 
 export { viewport } from "#/app/(app)/_lib/viewport.config.ts";
 
@@ -24,21 +25,22 @@ export function generateStaticParams(): Array<Awaited<LocaleLayoutProps["params"
 	});
 }
 
-export async function generateMetadata(): Promise<Promise<Metadata>> {
+export async function generateMetadata(): Promise<Metadata> {
 	const locale = await getLocale();
 
-	const siteMetadata = await cachedSiteMetadata(locale);
+	const [site, openGraph] = await Promise.all([cachedSiteMetadata(locale), createOpenGraph()]);
+
 	return {
 		metadataBase: createUrl({ baseUrl: env.NEXT_PUBLIC_APP_BASE_URL }),
-		title: siteMetadata.title,
-		description: siteMetadata.description,
-		openGraph: {
-			title: siteMetadata.ogTitle ?? siteMetadata.title,
-			description: siteMetadata.ogDescription ?? siteMetadata.description,
-			images: siteMetadata.ogImage
-				? [{ url: siteMetadata.ogImage.url, alt: siteMetadata.ogImage.alt ?? undefined }]
-				: undefined,
-		},
+		title: { default: site.title, template: `%s | ${site.title}` },
+		description: site.description.trim(),
+		/** No `title`, `description` or `url`, so each page's own fill them in. */
+		openGraph,
+		/** Title, description and image are carried over from `openGraph`. */
+		twitter: { card: "summary_large_image" },
+		...(env.NEXT_PUBLIC_APP_GOOGLE_SITE_VERIFICATION != null
+			? { verification: { google: env.NEXT_PUBLIC_APP_GOOGLE_SITE_VERIFICATION } }
+			: {}),
 	};
 }
 

@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { getExtracted } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { type ReactNode, Suspense } from "react";
+import { Fragment, type ReactNode, Suspense } from "react";
 
 import { Event } from "#/app/(app)/[locale]/(default)/events/_components/event";
 import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
+import { JsonLd } from "#/components/json-ld.tsx";
 import { cachedEvent, staticSlugs } from "#/lib/data/api-cache";
-import { isValidLocale } from "#/lib/i18n/locales";
-import { localizeHref } from "#/lib/navigation/convert";
+import { createEvent } from "#/lib/json-ld.ts";
+import { createMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
 
 interface EventPageProps extends PageProps<"/[locale]/events/[slug]"> {}
 
@@ -24,17 +25,13 @@ export async function generateMetadata(props: Readonly<EventPageProps>): Promise
 		return {};
 	}
 
-	const languages: Record<string, string> = {};
-
-	for (const translation of item.translations) {
-		if (!isValidLocale(translation.locale)) {
-			continue;
-		}
-
-		languages[translation.locale] = localizeHref(`/events/${translation.slug}`, translation.locale);
-	}
-
-	return { alternates: { languages } };
+	return createMetadata({
+		pathname: `/events/${slug}`,
+		title: item.title,
+		description: item.summary,
+		image: item.image,
+		languages: getLanguageAlternates("/events", item.translations),
+	});
 }
 
 export default async function EventPage(props: Readonly<EventPageProps>): Promise<ReactNode> {
@@ -54,5 +51,12 @@ async function EventDetails({ params }: { params: EventPageProps["params"] }): P
 	if (item == null) {
 		notFound();
 	}
-	return <Event {...item} />;
+	const jsonLd = await createEvent(`/events/${slug}`, item);
+
+	return (
+		<Fragment>
+			{jsonLd != null ? <JsonLd item={jsonLd} /> : null}
+			<Event {...item} />
+		</Fragment>
+	);
 }
