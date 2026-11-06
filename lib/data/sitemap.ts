@@ -36,13 +36,18 @@ function toPublicPathname(link: Pick<SitemapEntry, "href" | "locale">): string {
 
 /**
  * Static routes share one pathname across locales, so their translations are listed as `alternates.languages` the same
- * way the api's entries are. No `lastModified`: nothing records when a listing page last changed.
+ * way the api's entries are, and the homepage has the root as `x-default`, which redirects by language, as
+ * `AlternateLinks` lists it. No `lastModified`: nothing records when a listing page last changed.
  */
 function getStaticEntries(): MetadataRoute.Sitemap {
 	return staticPathnames.flatMap((pathname) => {
-		const languages = Object.fromEntries(
+		const languages: Record<string, string> = Object.fromEntries(
 			locales.map((locale) => [locale, toAbsoluteUrl(localizeHref(pathname, locale))] as const),
 		);
+
+		if (pathname === "/") {
+			languages["x-default"] = toAbsoluteUrl("/");
+		}
 
 		return locales.map((locale) => {
 			return { url: toAbsoluteUrl(localizeHref(pathname, locale)), alternates: { languages } };
