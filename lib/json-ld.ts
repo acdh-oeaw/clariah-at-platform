@@ -33,6 +33,10 @@ function toOrganizationRef(site: SiteMetadata): Organization {
 	return { "@type": "Organization", "@id": organizationId, name: site.title, url: toAbsoluteUrl("/") };
 }
 
+/** Not in the api, so they are fixed here. */
+const organizationEmail = "info@clariah.at";
+const organizationProfiles = ["https://www.linkedin.com/company/clariah-at/"];
+
 export function createOrganization(site: SiteMetadata): WithContext<Organization> {
 	return {
 		"@context": "https://schema.org",
@@ -42,6 +46,8 @@ export function createOrganization(site: SiteMetadata): WithContext<Organization
 		description: site.description.trim(),
 		url: toAbsoluteUrl("/"),
 		logo: toAbsoluteUrl("/android-chrome-512x512.png"),
+		email: organizationEmail,
+		sameAs: organizationProfiles,
 	};
 }
 
