@@ -132,11 +132,17 @@ function toEventLocation(item: EventItem, pageUrl: string): Pick<Event & object,
 	return { eventAttendanceMode, ...(location.length > 0 ? { location } : {}) };
 }
 
-export async function createEvent(pathname: string, item: EventItem): Promise<WithContext<Event>> {
+/** Search engines reject an event without a location, so one whose venue is unknown has no structured data. */
+export async function createEvent(pathname: string, item: EventItem): Promise<WithContext<Event> | null> {
 	const locale = await getLocale();
 
 	const url = toAbsoluteUrl(localizeHref(pathname, locale));
 	const image = toImageUrl(item.image);
+	const attendance = toEventLocation(item, url);
+
+	if (attendance.location == null) {
+		return null;
+	}
 
 	const { start, end } = item.duration;
 
@@ -151,7 +157,7 @@ export async function createEvent(pathname: string, item: EventItem): Promise<Wi
 		...(end != null ? { endDate: toEventDate(end, item.isFullDay) } : {}),
 		eventStatus: "https://schema.org/EventScheduled",
 		inLanguage: locale,
-		...toEventLocation(item, url),
+		...attendance,
 		...(item.website != null ? { sameAs: item.website } : {}),
 	};
 }

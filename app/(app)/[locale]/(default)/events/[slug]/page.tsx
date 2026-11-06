@@ -51,9 +51,11 @@ async function EventDetails({ params }: { params: EventPageProps["params"] }): P
 	if (item == null) {
 		notFound();
 	}
+	const jsonLd = await createEvent(`/events/${slug}`, item);
+
 	return (
 		<>
-			<JsonLd item={await createEvent(`/events/${slug}`, item)} />
+			{jsonLd != null ? <JsonLd item={jsonLd} /> : null}
 			<Event {...item} />
 		</>
 	);
