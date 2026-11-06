@@ -3,7 +3,7 @@
 	"pre-commit": {
 		"commands": {
 			"oxlint": {
-				"run": "oxlint --fix --report-unused-disable-directives --type-aware --type-check {staged_files}",
+				"run": "oxlint --no-error-on-unmatched-pattern --fix --report-unused-disable-directives --type-aware --type-check {staged_files}",
 				"stage_fixed": true
 			},
 			"stylelint": {
