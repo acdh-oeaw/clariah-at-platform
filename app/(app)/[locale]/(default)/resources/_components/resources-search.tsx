@@ -15,18 +15,18 @@ import type { SearchOutcome, SearchParams, SelectedFacets } from "#/lib/search/u
 
 const facetField = "type";
 
-function toRawSearchParams(params: SearchViewParams): { q: string; type: ResourceType | undefined; page: number } {
+function toRawSearchParams(params: SearchViewParams): { q: string; type: Array<ResourceType>; page: number } {
 	return {
 		q: params.query,
 		page: params.page,
-		type: params.facets[facetField]?.[0] as ResourceType | undefined,
+		type: [...(params.facets[facetField] ?? [])] as Array<ResourceType>,
 	};
 }
 
-function toSearchViewParams(raw: { q: string; type?: ResourceType | undefined; page: number }): SearchViewParams {
+function toSearchViewParams(raw: { q: string; type: Array<ResourceType>; page: number }): SearchViewParams {
 	const facets: SelectedFacets = {};
-	if (raw.type != null) {
-		facets[facetField] = [raw.type];
+	if (raw.type.length > 0) {
+		facets[facetField] = raw.type;
 	}
 	return { facets, page: raw.page, query: raw.q };
 }

@@ -1,17 +1,18 @@
 import * as v from "valibot";
 
-import { defineSearchParams } from "#/lib/navigation/search-params.ts";
+import { defineSearchParams, repeatedSearchParam } from "#/lib/navigation/search-params.ts";
 
 export const projectStatuses = ["ongoing", "completed"] as const;
 export type ProjectStatus = (typeof projectStatuses)[number];
 /**
- * `q` is the free-text query, `project_call` narrows results to one funding call (the facet field's own name, not
- * translated — see `lib/search/collections/website.ts`); a missing `project_call` searches every call.
+ * `q` is the free-text query, `project_call` narrows results to the given funding calls, repeated as
+ * `?project_call=a&project_call=b` (the facet field's own name, not translated — see
+ * `lib/search/collections/website.ts`); a missing `project_call` searches every call.
  */
 export const searchParams = defineSearchParams(
 	v.object({
 		q: v.optional(v.pipe(v.string(), v.trim(), v.maxLength(200)), ""),
-		project_call: v.optional(v.pipe(v.string(), v.trim(), v.nonEmpty())),
+		project_call: repeatedSearchParam(v.pipe(v.string(), v.trim(), v.nonEmpty())),
 		project_status: v.optional(v.picklist(projectStatuses)),
 		page: v.optional(v.pipe(v.string(), v.regex(/^\d+$/), v.toNumber(), v.safeInteger(), v.minValue(1)), "1"),
 	}),
@@ -19,7 +20,7 @@ export const searchParams = defineSearchParams(
 		stringify: ({ q, project_call, project_status, page }) => {
 			return {
 				q: q.length > 0 ? q : undefined,
-				project_call,
+				project_call: project_call.length > 0 ? project_call : undefined,
 				project_status,
 				page: page === 1 ? undefined : String(page),
 			};
