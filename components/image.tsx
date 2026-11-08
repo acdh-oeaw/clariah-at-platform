@@ -24,9 +24,11 @@ interface ApiImageProps extends Omit<ImageProps, "alt" | "src"> {
 	/** Overrides the alt text the api records for the asset; pass `""` to mark it decorative. */
 	alt?: string;
 	image: ImageAsset;
+	/** Required: without it, phones download the desktop rendition. */
+	sizes: string;
 }
 
-/** An image served by the api's variant endpoint. Pass `sizes`, or phones download the desktop rendition. */
+/** An image served by the api's variant endpoint. */
 export function ApiImage(props: Readonly<ApiImageProps>): ReactNode {
 	const { alt, image, ...rest } = props;
 

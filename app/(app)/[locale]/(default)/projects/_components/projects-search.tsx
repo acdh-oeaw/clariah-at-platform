@@ -135,7 +135,8 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 			<Card
 				image={image}
 				link={link}
-				preload={index < eagerResultCount}
+				fetchPriority={index === 0 ? "high" : undefined}
+				loading={index < eagerResultCount ? "eager" : undefined}
 				summary={document.summary}
 				title={document.label}
 			/>

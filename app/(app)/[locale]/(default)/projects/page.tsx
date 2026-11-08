@@ -9,6 +9,7 @@ import { ProjectsSearch } from "#/app/(app)/[locale]/(default)/projects/_compone
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content.tsx";
 import { PageIntro } from "#/app/(app)/[locale]/_components/page-intro.tsx";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout.tsx";
+import { SearchPreconnect } from "#/components/preconnect.tsx";
 import { cachedPage } from "#/lib/data/api-cache.ts";
 import { type IntlLocale, isValidLocale } from "#/lib/i18n/locales.ts";
 import { createMetadata } from "#/lib/metadata.ts";
@@ -46,6 +47,7 @@ export default async function ProjectPage(): Promise<ReactNode> {
 			<PageContent>
 				<div className="flex flex-col gap-y-8">
 					{page?.content && <PageIntro blocks={page.content} />}
+					<SearchPreconnect />
 					<Suspense fallback={<SearchFallback label={t("Projekte filtern")} />}>
 						<ProjectsSearch locale={currentLocale} />
 					</Suspense>

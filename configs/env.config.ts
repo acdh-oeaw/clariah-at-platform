@@ -16,6 +16,8 @@ const validate = define({
 		NEXT_PUBLIC_APP_MATOMO_BASE_URL: v.optional(v.pipe(v.string(), v.url(), v.transform(addTrailingSlash))),
 		NEXT_PUBLIC_APP_MATOMO_ID: v.optional(v.pipe(v.string(), v.toNumber(), v.integer(), v.minValue(1))),
 		NEXT_PUBLIC_APP_SERVICE_ID: v.pipe(v.string(), v.toNumber(), v.integer(), v.minValue(1)),
+		/** Where the api's image-variant endpoint redirects to. Only used to open the connection early. */
+		NEXT_PUBLIC_IMGPROXY_BASE_URL: v.optional(v.pipe(v.string(), v.url(), v.transform(removeTrailingSlash))),
 		NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME_RESOURCES: v.pipe(v.string(), v.nonEmpty()),
 		NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME_WEBSITE: v.pipe(v.string(), v.nonEmpty()),
 		NEXT_PUBLIC_TYPESENSE_HOST: v.pipe(v.string(), v.nonEmpty()),
@@ -52,6 +54,7 @@ export const env = validate({
 		NEXT_PUBLIC_APP_MATOMO_BASE_URL: process.env.NEXT_PUBLIC_APP_MATOMO_BASE_URL,
 		NEXT_PUBLIC_APP_MATOMO_ID: process.env.NEXT_PUBLIC_APP_MATOMO_ID,
 		NEXT_PUBLIC_APP_SERVICE_ID: process.env.NEXT_PUBLIC_APP_SERVICE_ID,
+		NEXT_PUBLIC_IMGPROXY_BASE_URL: process.env.NEXT_PUBLIC_IMGPROXY_BASE_URL,
 		NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME_RESOURCES: process.env.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME_RESOURCES,
 		NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME_WEBSITE: process.env.NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME_WEBSITE,
 		NEXT_PUBLIC_TYPESENSE_HOST: process.env.NEXT_PUBLIC_TYPESENSE_HOST,
