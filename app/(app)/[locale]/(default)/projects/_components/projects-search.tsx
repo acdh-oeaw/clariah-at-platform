@@ -1,7 +1,7 @@
 "use client";
 
 import { useExtracted } from "next-intl";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { notFound, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type ReactNode, useCallback, useState } from "react";
 
 import {
@@ -91,7 +91,11 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 	 * need manual syncing. `router.replace` below already updates the url; `useSearchParams` reactively reflects that on
 	 * the very next render, so there is nothing else to keep in sync by hand.
 	 */
-	const params = toSearchViewParams(searchParams.parse(rawSearchParams));
+	const parsedSearchParams = searchParams.safeParse(rawSearchParams);
+	if (!parsedSearchParams.success) {
+		notFound();
+	}
+	const params = toSearchViewParams(parsedSearchParams.output);
 
 	function getHref(nextParams: SearchViewParams): string {
 		const { query } = searchParams.encode(toRawSearchParams(nextParams));

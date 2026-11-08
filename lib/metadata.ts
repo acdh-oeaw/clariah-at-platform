@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { Metadata } from "next";
-import { getLocale } from "next-intl/server";
+import { getExtracted, getLocale } from "next-intl/server";
 
 import { cachedSiteMetadata } from "#/lib/data/api-cache.ts";
 import { type IntlLocale, isValidLocale, locales } from "#/lib/i18n/locales.ts";
@@ -48,6 +48,13 @@ function toOpenGraphImage(image: ImageAsset): OpenGraphImage | null {
 	const url = toImageUrl(image);
 
 	return url != null ? { url, alt: image.alt ?? undefined } : null;
+}
+
+/** For a page whose content does not exist. The html has its title by the time `notFound()` is thrown. */
+export async function createNotFoundMetadata(): Promise<Metadata> {
+	const t = await getExtracted();
+
+	return { title: t("Seite nicht gefunden") };
 }
 
 /**

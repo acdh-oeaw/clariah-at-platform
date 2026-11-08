@@ -56,11 +56,12 @@ type LinkStyleProps = GetVariantProps<typeof linkStyles>;
 export interface LinkProps
 	extends
 		LinkStyleProps,
-		Pick<NextLinkProps, "prefetch" | "replace" | "scroll" | "shallow">,
-		Omit<AriaLinkProps, "elementType" | "href" | "routerOptions" | "slot">,
+		Pick<NextLinkProps, "prefetch" | "replace" | "scroll">,
+		Omit<AriaLinkProps, "className" | "elementType" | "href" | "render" | "routerOptions" | "slot">,
 		Pick<ComponentProps<"a">, "aria-current" | "id"> {
 	href?: Exclude<NextLinkProps["href"], UrlObject>;
 	children?: ReactNode;
+	className?: string;
 	withDefaultLeftIcon?: boolean;
 	withDefaultRightIcon?: boolean;
 	startIcon?: ReactNode;
@@ -72,6 +73,10 @@ export function Link(props: Readonly<LinkProps>): ReactNode {
 		children,
 		className,
 		variant,
+		hrefLang,
+		prefetch,
+		replace,
+		scroll,
 		startIcon,
 		endIcon,
 		withDefaultLeftIcon = false,
@@ -87,7 +92,8 @@ export function Link(props: Readonly<LinkProps>): ReactNode {
 			className={(renderProps) => linkStyles({ ...renderProps, className, variant })}
 			render={(domProps, renderProps) => {
 				if ("href" in domProps && domProps.href && !renderProps.isDisabled) {
-					return <NextLink {...domProps} />;
+					/** `domProps` only holds what react aria forwards, which leaves out these props. */
+					return <NextLink {...domProps} hrefLang={hrefLang} prefetch={prefetch} replace={replace} scroll={scroll} />;
 				}
 
 				return (

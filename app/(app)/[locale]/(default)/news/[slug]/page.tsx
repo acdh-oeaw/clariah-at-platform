@@ -9,9 +9,15 @@ import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { JsonLd } from "#/components/json-ld.tsx";
 import { cachedNewsItem, staticSlugs } from "#/lib/data/api-cache";
 import { createNewsArticle } from "#/lib/json-ld.ts";
-import { createMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
+import { createMetadata, createNotFoundMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
 
 interface NewsItemPageProps extends PageProps<"/[locale]/news/[slug]"> {}
+
+/**
+ * A link's prefetch of this page is served from static output, never rendered per request. Every slug known at build
+ * time is prerendered; for one that is not, the prefetch holds the fallback.
+ */
+export const ensureStatic = "prefetch";
 
 export function generateStaticParams({ params }: { params: { locale: string } }): Promise<Array<{ slug: string }>> {
 	return staticSlugs.news(params.locale);
@@ -22,7 +28,7 @@ export async function generateMetadata(props: Readonly<NewsItemPageProps>): Prom
 	const item = await cachedNewsItem(slug, locale);
 
 	if (item == null) {
-		return {};
+		return createNotFoundMetadata();
 	}
 
 	return createMetadata({

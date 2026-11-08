@@ -1,46 +1,23 @@
-import type { Metadata } from "next";
-import { useExtracted } from "next-intl";
-import { getExtracted } from "next-intl/server";
 import type { ReactNode } from "react";
 
+import { Providers } from "#/app/(app)/[locale]/_components/providers.tsx";
+import { SiteShell } from "#/app/(app)/[locale]/_components/site-shell.tsx";
 import { HtmlDocument } from "#/app/(app)/_components/html-document.tsx";
 import { MatomoAnalytics } from "#/app/(app)/_components/matomo-analytics";
 import { NotFoundState } from "#/app/(app)/_components/not-found-state";
 import { env } from "#/configs/env.config.ts";
+import { defaultLocale } from "#/lib/i18n/locales.ts";
 
-export async function generateMetadata(): Promise<Metadata> {
-	const t = await getExtracted();
-
-	const metadata: Metadata = {
-		title: [t("Page not found")].join(" | "),
-		/**
-		 * Automatically set by next.js.
-		 *
-		 * @see {@link https://nextjs.org/docs/app/api-reference/functions/not-found}
-		 */
-		// robots: {
-		// 	index: false,
-		// },
-	};
-
-	return metadata;
-}
-
+/** For urls which match no route. This is one static page without a locale segment, so it uses the default locale. */
 export default function GlobalNotFoundPage(): ReactNode {
-	const t = useExtracted();
 	return (
-		<HtmlDocument locale="en-GB">
+		<HtmlDocument locale={defaultLocale}>
 			<body>
-				<NotFoundState
-					codeLabel={t("Fehler 404")}
-					description={t(
-						"Die aufgerufene Seite konnte nicht gefunden werden. Sie wurde möglicherweise verschoben, umbenannt oder hat nie existiert.",
-					)}
-					homeHref="/"
-					homeLabel={t("Zurück zur Startseite")}
-					logoLabel={t("Startseite")}
-					title={t("Seite nicht gefunden")}
-				/>
+				<Providers>
+					<SiteShell>
+						<NotFoundState />
+					</SiteShell>
+				</Providers>
 				{env.NEXT_PUBLIC_APP_MATOMO_ID != null && env.NEXT_PUBLIC_APP_MATOMO_BASE_URL != null ? (
 					<MatomoAnalytics baseUrl={env.NEXT_PUBLIC_APP_MATOMO_BASE_URL} id={env.NEXT_PUBLIC_APP_MATOMO_ID} />
 				) : null}

@@ -20,6 +20,19 @@ const reactAriaLocales = `**/{${reactAriaPackages.join(",")}}/**/??-??.{js,cjs,m
 
 const config: NextConfig = {
 	cacheComponents: true,
+	/**
+	 * Api data is invalidated on demand by the revalidation webhook, so entries are long-lived. The daily background
+	 * refresh is only a safety net for a lost webhook, and `stale` stays at the 5 minutes an entry needs to be part of
+	 * the app shell. `expire` is shorter than the data needs, because the cache is local to the pod: it limits how old a
+	 * copy from the image can be after a restart. Use a shorter profile for data no webhook covers.
+	 */
+	cacheLife: {
+		content: {
+			stale: 300,
+			revalidate: 86_400,
+			expire: 604_800,
+		},
+	},
 	/** Traefik compresses responses, see `.github/auto-deploy-values.yaml`. */
 	compress: false,
 	experimental: {

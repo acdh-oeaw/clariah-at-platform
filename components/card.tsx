@@ -2,8 +2,8 @@ import { ArrowRightIcon } from "lucide-react";
 import { useExtracted } from "next-intl";
 import type { ReactNode } from "react";
 
+import { CardLink } from "#/components/card-link.tsx";
 import { ApiImage } from "#/components/image.tsx";
-import { LinkButton } from "#/components/ui/button";
 import type { ImageAsset } from "#/lib/images/variants.ts";
 
 interface CardProps {
@@ -38,7 +38,7 @@ export function Card(props: CardProps): ReactNode {
 					<p className="text-text-weak line-clamp-3">{summary}</p>
 				</div>
 			</div>
-			<LinkButton
+			<CardLink
 				className="after:absolute after:inset-0 after:z-20 w-full justify-between group-hover:bg-primary-500 group-hover:text-white bg-primary-200 px-8 py-4"
 				endIcon={<ArrowRightIcon className="group-hover:translate-x-1.5 ease-in-out transition-transform" />}
 				href={link}
@@ -47,7 +47,7 @@ export function Card(props: CardProps): ReactNode {
 				{t("Weiterlesen")}
 				{/* Text rather than `aria-labelledby`: lighthouse reads the rendered text, and the name must start with the label. */}
 				<span className="sr-only"> {title}</span>
-			</LinkButton>
+			</CardLink>
 		</article>
 	);
 }

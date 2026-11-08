@@ -7,9 +7,15 @@ import { Member } from "#/app/(app)/[locale]/(default)/consortium/_components/me
 import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
 import { cachedInstitution, isNationalConsortiumMember, staticSlugs } from "#/lib/data/api-cache";
-import { createMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
+import { createMetadata, createNotFoundMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
 
 interface MemberPageProps extends PageProps<"/[locale]/consortium/[slug]"> {}
+
+/**
+ * A link's prefetch of this page is served from static output, never rendered per request. Every slug known at build
+ * time is prerendered; for one that is not, the prefetch holds the fallback.
+ */
+export const ensureStatic = "prefetch";
 
 export function generateStaticParams({ params }: { params: { locale: string } }): Promise<Array<{ slug: string }>> {
 	return staticSlugs.nationalConsortiumMembers("clariah-at", params.locale);
@@ -20,7 +26,7 @@ export async function generateMetadata(props: Readonly<MemberPageProps>): Promis
 	const item = await cachedInstitution(slug, locale);
 
 	if (item == null) {
-		return {};
+		return createNotFoundMetadata();
 	}
 
 	return createMetadata({

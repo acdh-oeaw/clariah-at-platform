@@ -1,12 +1,11 @@
 "use client";
 
 import cn from "clsx/lite";
-import { SearchIcon } from "lucide-react";
 import { useExtracted, useFormatter } from "next-intl";
-import { type ReactNode, useEffect, useId, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 
 import { Pagination } from "#/app/(app)/[locale]/(default)/_components/pagination";
-import { Button } from "#/components/ui/button";
+import { SearchForm } from "#/app/(app)/[locale]/(default)/_components/search-form";
 import { type SearchOutcome, type SearchParams, type SelectedFacets, useSearch } from "#/lib/search/use-search.ts";
 
 /** Typesense's match-all query. */
@@ -126,7 +125,6 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 	});
 
 	const isLoading = state.status === "loading";
-	const inputId = useId();
 
 	return (
 		/**
@@ -134,32 +132,7 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 		 * has mounted. Otherwise it flashes up under the form, and is then pushed down again.
 		 */
 		<div className={cn(className, isLoading && state.outcome == null && "min-block-svh")}>
-			<form
-				className="flex flex-col gap-y-2"
-				onSubmit={(event) => {
-					event.preventDefault();
-				}}
-				role="search"
-			>
-				<label className="sr-only" htmlFor={inputId}>
-					{label}
-				</label>
-				<div className="flex gap-x-2">
-					<input
-						aria-label={label}
-						className="min-w-0 flex-1 border rounded-md border-stroke-weak bg-white px-4 py-2.5 text-regular"
-						name="q"
-						onChange={(event) => {
-							setInput(event.currentTarget.value);
-						}}
-						type="search"
-						value={input}
-					/>
-					<Button startIcon={<SearchIcon aria-hidden={true} />} type="submit" variant="outline">
-						{t("Suchen")}
-					</Button>
-				</div>
-			</form>
+			<SearchForm label={label} onChange={setInput} value={input} />
 
 			{renderFacets != null ? (
 				// `self-start`: the outer column's children stretch to full width by default (the form, results and

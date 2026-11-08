@@ -1,6 +1,7 @@
 "use client";
 
 import { useExtracted } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { type ReactNode, useCallback, useState } from "react";
 
 import { EventCard } from "#/app/(app)/[locale]/(default)/events/_components/event-card";
@@ -50,6 +51,13 @@ export function EventsSearch(props: EventsSearchProps): ReactNode {
 	const { locale } = props;
 
 	const t = useExtracted();
+
+	/**
+	 * Has to stay above the clock read below. The url is unknown when prerendering, so this suspends, and the clock is
+	 * never reached. Reading the clock during a prerender aborts it, along with everything still pending, like the
+	 * footer.
+	 */
+	const rawSearchParams = useSearchParams();
 
 	/**
 	 * Start of the current UTC day. Event dates are UTC days (midnight timestamps), so an event ending — or, without an
@@ -159,6 +167,7 @@ export function EventsSearch(props: EventsSearchProps): ReactNode {
 
 	return (
 		<SearchView<WebsiteDocument>
+			initialQuery={rawSearchParams.get("q") ?? ""}
 			renderItem={renderItem}
 			resultsClassName="grid gap-y-12"
 			sections={[

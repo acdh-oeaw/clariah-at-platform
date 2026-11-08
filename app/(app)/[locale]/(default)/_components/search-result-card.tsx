@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Link } from "#/components/link.tsx";
+import { IntentLink } from "#/components/intent-link.tsx";
 import { Badge } from "#/components/ui/badge.tsx";
 
 interface SearchResultCardProps {
@@ -27,9 +27,9 @@ export function SearchResultCard(props: Readonly<SearchResultCardProps>): ReactN
 				</Badge>
 				<h2 className="text-h3">
 					{href != null && href !== "" ? (
-						<Link className="after:absolute after:inset-0 after:z-20" href={href}>
+						<IntentLink className="after:absolute after:inset-0 after:z-20" href={href}>
 							{title}
-						</Link>
+						</IntentLink>
 					) : (
 						title
 					)}

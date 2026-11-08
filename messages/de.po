@@ -6,10 +6,57 @@ msgstr ""
 "X-Generator: next-intl\n"
 "X-Message-Key: msgctxt\n"
 
+#: app/(app)/_components/not-found-state.tsx
+#: lib/metadata.ts
+msgctxt "Xnd9v7"
+msgid "Seite nicht gefunden"
+msgstr "Seite nicht gefunden"
+
+#: app/(app)/_components/not-found-state.tsx
+msgctxt "IbI6Uw"
+msgid "Fehler 404"
+msgstr "Fehler 404"
+
+#: app/(app)/_components/not-found-state.tsx
+msgctxt "gifeZv"
+msgid "Die aufgerufene Seite konnte nicht gefunden werden. Sie wurde möglicherweise verschoben, umbenannt oder hat nie existiert."
+msgstr "Die aufgerufene Seite konnte nicht gefunden werden. Sie wurde möglicherweise verschoben, umbenannt oder hat nie existiert."
+
 #: app/(app)/[locale]/_components/detail-fallback.tsx
+#: app/(app)/[locale]/(default)/_components/search-form.tsx
 msgctxt "15jBNa"
 msgid "Wird geladen…"
 msgstr "Wird geladen…"
+
+#: app/(app)/[locale]/_components/error-state.tsx
+msgctxt "Ri8YWq"
+msgid "Seite konnte nicht geladen werden"
+msgstr "Seite konnte nicht geladen werden"
+
+#: app/(app)/[locale]/_components/error-state.tsx
+msgctxt "ApEf_j"
+msgid "Fehler {digest}"
+msgstr "Fehler {digest}"
+
+#: app/(app)/[locale]/_components/error-state.tsx
+msgctxt "CtGJZ3"
+msgid "Fehler"
+msgstr "Fehler"
+
+#: app/(app)/[locale]/_components/error-state.tsx
+msgctxt "24ESgY"
+msgid "Beim Laden dieser Seite ist ein Problem aufgetreten. Bitte versuchen Sie es in einem Moment noch einmal."
+msgstr "Beim Laden dieser Seite ist ein Problem aufgetreten. Bitte versuchen Sie es in einem Moment noch einmal."
+
+#: app/(app)/[locale]/_components/error-state.tsx
+msgctxt "ntg_tl"
+msgid "Erneut versuchen"
+msgstr "Erneut versuchen"
+
+#: app/(app)/[locale]/_components/error-state.tsx
+msgctxt "m-qkrg"
+msgid "Zurück zur Startseite"
+msgstr "Zurück zur Startseite"
 
 #: app/(app)/[locale]/_components/footer.tsx
 msgctxt "TCmfGw"
@@ -42,8 +89,6 @@ msgid "Hauptinhalt"
 msgstr "Hauptinhalt"
 
 #: app/(app)/[locale]/_components/header.tsx
-#: app/(app)/[locale]/not-found.tsx
-#: app/global-not-found.tsx
 msgctxt "dhPnn6"
 msgid "Startseite"
 msgstr "Startseite"
@@ -63,6 +108,11 @@ msgctxt "se6p67"
 msgid "Sprache"
 msgstr "Sprache"
 
+#: app/(app)/[locale]/_components/site-shell.tsx
+msgctxt "DBsIRX"
+msgid "Zum Hauptinhalt springen"
+msgstr "Zum Hauptinhalt springen"
+
 #: app/(app)/[locale]/(default)/_components/pagination.tsx
 msgctxt "9Q3pmW"
 msgid "Vorherige Seite"
@@ -78,8 +128,7 @@ msgctxt "ha5T3x"
 msgid "Nächste Seite"
 msgstr "Nächste Seite"
 
-#: app/(app)/[locale]/(default)/_components/search-view.tsx
-#: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+#: app/(app)/[locale]/(default)/_components/search-form.tsx
 msgctxt "dsIkSc"
 msgid "Suchen"
 msgstr "Suchen"
@@ -167,6 +216,7 @@ msgid "Vergangene Events"
 msgstr "Vergangene Events"
 
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
+#: app/(app)/[locale]/(default)/events/page.tsx
 msgctxt "6dsmkY"
 msgid "Events filtern"
 msgstr "Events filtern"
@@ -191,17 +241,13 @@ msgctxt "cBXYMi"
 msgid "Impressum"
 msgstr "Impressum"
 
-#: app/(app)/[locale]/(default)/layout.tsx
-msgctxt "DBsIRX"
-msgid "Zum Hauptinhalt springen"
-msgstr "Zum Hauptinhalt springen"
-
 #: app/(app)/[locale]/(default)/news/_components/news-item.tsx
 msgctxt "woPHUz"
 msgid "Veröffentlicht am"
 msgstr "Veröffentlicht am"
 
 #: app/(app)/[locale]/(default)/news/_components/news-search.tsx
+#: app/(app)/[locale]/(default)/news/page.tsx
 msgctxt "9QD4qH"
 msgid "Aktuelles durchsuchen"
 msgstr "Aktuelles durchsuchen"
@@ -293,6 +339,7 @@ msgid "Projektstatus"
 msgstr "Projektstatus"
 
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
+#: app/(app)/[locale]/(default)/projects/page.tsx
 msgctxt "LIsWz1"
 msgid "Projekte filtern"
 msgstr "Projekte filtern"
@@ -316,6 +363,7 @@ msgid "Typ"
 msgstr "Typ"
 
 #: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
+#: app/(app)/[locale]/(default)/resources/page.tsx
 msgctxt "6M7vT8"
 msgid "Ressourcen durchsuchen"
 msgstr "Ressourcen durchsuchen"
@@ -361,6 +409,7 @@ msgid "Training Material"
 msgstr "Training Material"
 
 #: app/(app)/[locale]/(default)/search/_components/website-search.tsx
+#: app/(app)/[locale]/(default)/search/page.tsx
 msgctxt "fuRekU"
 msgid "Website durchsuchen"
 msgstr "Website durchsuchen"
@@ -371,36 +420,6 @@ msgstr "Website durchsuchen"
 msgctxt "qi41lO"
 msgid "Suche"
 msgstr "Suche"
-
-#: app/(app)/[locale]/not-found.tsx
-#: app/global-not-found.tsx
-msgctxt "QRccCM"
-msgid "Page not found"
-msgstr "Page not found"
-
-#: app/(app)/[locale]/not-found.tsx
-#: app/global-not-found.tsx
-msgctxt "IbI6Uw"
-msgid "Fehler 404"
-msgstr "Fehler 404"
-
-#: app/(app)/[locale]/not-found.tsx
-#: app/global-not-found.tsx
-msgctxt "gifeZv"
-msgid "Die aufgerufene Seite konnte nicht gefunden werden. Sie wurde möglicherweise verschoben, umbenannt oder hat nie existiert."
-msgstr "Die aufgerufene Seite konnte nicht gefunden werden. Sie wurde möglicherweise verschoben, umbenannt oder hat nie existiert."
-
-#: app/(app)/[locale]/not-found.tsx
-#: app/global-not-found.tsx
-msgctxt "m-qkrg"
-msgid "Zurück zur Startseite"
-msgstr "Zurück zur Startseite"
-
-#: app/(app)/[locale]/not-found.tsx
-#: app/global-not-found.tsx
-msgctxt "Xnd9v7"
-msgid "Seite nicht gefunden"
-msgstr "Seite nicht gefunden"
 
 #: components/card.tsx
 msgctxt "-DNRtH"
