@@ -58,9 +58,8 @@ interface PaginationProps {
 	siblingCount?: number;
 }
 
-/** `inline-flex` on the button itself, or its icons sit off-centre vertically. */
 const pageButtonStyles = cn(
-	"items-center justify-center rounded-sm border border-primary-1000 font-bold text-primary-1000 tabular-nums has-[svg]:inline-flex",
+	"touch-area inline-flex items-center justify-center rounded-sm border border-primary-1000 font-bold text-primary-1000 tabular-nums block-10 inline-10",
 	"hover:bg-primary-100",
 	"disabled:border-primary-1000 disabled:bg-primary-1000 disabled:text-white",
 );
@@ -97,7 +96,7 @@ export function Pagination(props: Readonly<PaginationProps>): ReactNode {
 
 	return (
 		<nav aria-label={label}>
-			<ul className="flex items-center gap-x-6 md:justify-end" role="list">
+			<ul className="flex items-center gap-x-2.5 md:justify-end" role="list">
 				{page > 1 ? (
 					<li>
 						{renderLink(
@@ -109,7 +108,7 @@ export function Pagination(props: Readonly<PaginationProps>): ReactNode {
 				) : null}
 				{pageItems.map((item, index) =>
 					item === "ellipsis" ? (
-						<li key={`ellipsis-${String(index)}`} aria-hidden="true" className="px-2 text-text-weak">
+						<li key={`ellipsis-${String(index)}`} aria-hidden="true" className="text-text-weak">
 							…
 						</li>
 					) : (

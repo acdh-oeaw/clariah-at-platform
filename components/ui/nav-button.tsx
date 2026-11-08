@@ -38,7 +38,7 @@ export function NavButton(props: Readonly<NavButtonProps>): ReactNode {
 				"group flex cursor-pointer items-center gap-1 border-[3px] border-transparent bg-transparent p-1.25 [&>svg]:block-5 [&>svg]:inline-5",
 				"hover:bg-white",
 				"aria-expanded:bg-white",
-				"aria-[current=page]:font-bold",
+				"aria-[current=page]:underline aria-[current=page]:underline-offset-[24%]",
 				className,
 			)}
 			data-active={active || undefined}

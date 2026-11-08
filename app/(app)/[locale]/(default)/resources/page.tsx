@@ -7,8 +7,8 @@ import { type ReactNode, Suspense } from "react";
 import { SearchFallback } from "#/app/(app)/[locale]/(default)/_components/search-form.tsx";
 import { ResourcesSearch } from "#/app/(app)/[locale]/(default)/resources/_components/resources-search.tsx";
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content.tsx";
+import { PageIntro } from "#/app/(app)/[locale]/_components/page-intro.tsx";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout.tsx";
-import { ContentBlocks } from "#/components/content-blocks.tsx";
 import { cachedPage } from "#/lib/data/api-cache.ts";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
 import { createMetadata } from "#/lib/metadata.ts";
@@ -40,7 +40,7 @@ export default async function ResourcesPage(): Promise<ReactNode> {
 		<PageLayout title={t("Ressourcen")}>
 			<PageContent>
 				<div className="flex flex-col gap-y-8">
-					<div className="max-w-prose">{page?.content && <ContentBlocks blocks={page.content} />}</div>
+					{page?.content && <PageIntro blocks={page.content} />}
 					<Suspense fallback={<SearchFallback label={t("Ressourcen durchsuchen")} />}>
 						<ResourcesSearchSection />
 					</Suspense>

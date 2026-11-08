@@ -22,7 +22,7 @@ export function DetailCard(props: Readonly<DetailCardProps>): ReactNode {
 
 	return (
 		<section className={pageColumnClassName}>
-			<div className="flex flex-col rounded-md bg-white shadow-card md:mb-16">
+			<div className="flex flex-col rounded-md bg-white shadow-card mb-8 md:mb-16">
 				{image != null ? (
 					<ApiImage
 						className="max-h-100 w-full rounded-t-md object-cover"
@@ -34,8 +34,8 @@ export function DetailCard(props: Readonly<DetailCardProps>): ReactNode {
 						sizes="(min-width: 40rem) min(calc(100vw - 4rem), 76rem), calc(100vw - 2rem)"
 					/>
 				) : null}
-				<div className={cn("p-16", className)}>
-					<h1 className="text-h1">{title}</h1>
+				<div className={cn("flex flex-col gap-y-8 px-6 py-8 sm:p-10 md:gap-y-12 lg:p-16", className)}>
+					<h1 className="text-h2 md:text-h1">{title}</h1>
 					{children}
 				</div>
 			</div>

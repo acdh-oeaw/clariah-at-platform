@@ -1,5 +1,5 @@
 import NextImage, { type ImageProps as NextImageProps } from "next/image";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 import { sourceWidthParam } from "#/configs/image.config.ts";
 import { apiImageLoader } from "#/lib/images/loader.ts";
@@ -43,7 +43,7 @@ export function ApiImage(props: Readonly<ApiImageProps>): ReactNode {
 			const { className, fetchPriority, loading, preload, style } = rest;
 
 			return (
-				<>
+				<Fragment>
 					{/* `react-dom`'s `preload` emits nothing when called from a server component. */}
 					{preload === true ? <link as="image" fetchPriority={fetchPriority} href={src} rel="preload" /> : null}
 					{/* oxlint-disable-next-line next/no-img-element -- `next/image` cannot render this one. */}
@@ -56,7 +56,7 @@ export function ApiImage(props: Readonly<ApiImageProps>): ReactNode {
 						src={src}
 						style={style}
 					/>
-				</>
+				</Fragment>
 			);
 		}
 

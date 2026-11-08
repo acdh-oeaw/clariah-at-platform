@@ -248,6 +248,10 @@ interface RichTextContentProps {
 	className?: string;
 }
 
+/** `max-inline-none`: the surrounding column sets the measure, so text and blocks share one width. */
+export const richTextClassName =
+	"leading-reading prose prose-lg max-inline-none prose-h2:mbs-14 prose-a:font-medium prose-a:hover:decoration-2";
+
 export function RichTextContent(props: Readonly<RichTextContentProps>): ReactNode {
 	const { content, className } = props;
 
@@ -256,13 +260,7 @@ export function RichTextContent(props: Readonly<RichTextContentProps>): ReactNod
 	}
 
 	return (
-		/** `max-inline-none`: the surrounding column sets the measure, so text and blocks share one width. */
-		<div
-			className={cn(
-				"leading-reading prose prose-lg max-inline-none prose-h2:mbs-14 prose-a:font-medium prose-a:hover:decoration-2",
-				className,
-			)}
-		>
+		<div className={cn(richTextClassName, className)}>
 			{renderToReactElement({
 				content: content as JSONContent,
 				extensions,

@@ -34,13 +34,14 @@ export function Navigation(props: Readonly<NavigationProps>): ReactNode {
 		<Fragment>
 			<nav aria-label={label} className="justify-between flex items-center">
 				<Link
-					className="py-0!"
+					className="flex outline-offset-4"
 					href={home.href}
 					onClick={() => {
 						if (isMobileMenuOpen) {
 							handleMobileMenuToggle();
 						}
 					}}
+					variant="unstyled"
 				>
 					<span className="sr-only">{home.label}</span>
 					<Image

@@ -2,7 +2,7 @@ import { SearchIcon } from "lucide-react";
 import { useExtracted, useLocale } from "next-intl";
 import type { ReactNode } from "react";
 
-import { LocaleSwitcher } from "#/app/(app)/[locale]/_components/locale-swticher.tsx";
+import { LocaleSwitcher } from "#/app/(app)/[locale]/_components/locale-switcher.tsx";
 import { Link } from "#/components/link.tsx";
 import { NavButton } from "#/components/ui/nav-button.tsx";
 import { NavMenu, NavMenuItem, NavMenuItems, NavMenuSeparator } from "#/components/ui/nav-menu.tsx";
@@ -91,7 +91,9 @@ export function NavigationDesktop(props: Readonly<NavigationDesktopProps>): Reac
 			<Link
 				href={localizeHref("/search", locale)}
 				aria-label={t("Suche")}
+				className="flex rounded-sm p-1.5 transition-colors duration-200 ease-in-out hover:bg-primary-100"
 				startIcon={<SearchIcon aria-hidden={true} className="size-6" />}
+				variant="unstyled"
 			/>
 			<LocaleSwitcher label={localeSwitcherLabel} />
 		</div>

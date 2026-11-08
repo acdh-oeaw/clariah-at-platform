@@ -5,7 +5,7 @@ import { locale } from "next/root-params";
 import type { ReactNode } from "react";
 
 import { AcdhImprint } from "#/app/(app)/[locale]/(default)/imprint/_components/acdh-imprint.tsx";
-import { PageContent } from "#/app/(app)/[locale]/_components/page-content.tsx";
+import { DetailCard } from "#/app/(app)/[locale]/_components/detail-card.tsx";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout.tsx";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
 import { createMetadata } from "#/lib/metadata.ts";
@@ -27,10 +27,12 @@ export default async function ImprintPage(): Promise<ReactNode> {
 	}
 
 	return (
-		<PageLayout title={t("Impressum")}>
-			<PageContent>
-				<AcdhImprint locale={currentLocale} />
-			</PageContent>
+		<PageLayout title={t("Infos")} titleElement="p">
+			<DetailCard image={null} title={t("Impressum")}>
+				<div className="max-w-prose [&>*>:first-child]:mbs-0">
+					<AcdhImprint locale={currentLocale} />
+				</div>
+			</DetailCard>
 		</PageLayout>
 	);
 }

@@ -3,7 +3,7 @@
 import cn from "clsx/lite";
 import { CheckIcon, ChevronDownIcon } from "lucide-react";
 import { useExtracted, useFormatter } from "next-intl";
-import { type ReactNode, useMemo, useState } from "react";
+import { Fragment, type ReactNode, useMemo, useState } from "react";
 import { useCollator, useFilter } from "react-aria";
 import {
 	Autocomplete,
@@ -147,7 +147,7 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 
 			<Popover
 				className={cn(
-					"rounded-lg border bg-white shadow-lg inline-[min(100vw-2rem,22rem)]",
+					"rounded-md border bg-white shadow-lg inline-[min(100vw-2rem,22rem)]",
 					"entering:animate-in entering:duration-150 entering:ease-out entering:fade-in",
 					"exiting:animate-out exiting:duration-100 exiting:ease-in exiting:fade-out",
 				)}
@@ -161,7 +161,7 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 							<SearchField autoFocus={true}>
 								<Label className="sr-only">{t("Filter {label}", { label })}</Label>
 								<Input
-									className="rounded-md border border-stroke-weak px-3 py-1.5 text-small inline-full"
+									className="rounded-md border border-stroke-strong px-3 py-1.5 text-small inline-full"
 									placeholder={t("Filter…")}
 								/>
 							</SearchField>
@@ -172,7 +172,7 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 								aria-label={label}
 								/** Without a filter input to hold it, focus belongs to the list itself. */
 								autoFocus={!isFilterable}
-								className="block overflow-y-auto max-block-72"
+								className="block overflow-y-auto max-block-80"
 								/** Escape closes the popover rather than clearing the selection. */
 								escapeKeyBehavior="none"
 								items={items}
@@ -195,11 +195,13 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 											const description = getDescription?.(item.value);
 
 											return (
-												<>
-													<span className="pointer-events-none mbs-0.5 flex shrink-0 items-center justify-center self-start rounded-xs border border-stroke-weak block-4 inline-4 group-selected:border-primary-1000 group-selected:bg-primary-1000">
-														{isSelected ? (
-															<CheckIcon aria-hidden={true} className="text-white block-3 inline-3" />
-														) : null}
+												<Fragment>
+													<span className="flex shrink-0 items-center block-[1lh]">
+														<span className="pointer-events-none flex items-center justify-center rounded-xs border border-stroke-strong block-4 inline-4 group-selected:border-primary-1000 group-selected:bg-primary-1000">
+															{isSelected ? (
+																<CheckIcon aria-hidden={true} className="text-white block-3 inline-3" />
+															) : null}
+														</span>
 													</span>
 													<span className="grid grow gap-y-0.5">
 														<span className="flex items-baseline gap-x-2">
@@ -212,7 +214,7 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 															<span className="line-clamp-3 text-xs text-text-weak">{description}</span>
 														)}
 													</span>
-												</>
+												</Fragment>
 											);
 										}}
 									</ListBoxItem>

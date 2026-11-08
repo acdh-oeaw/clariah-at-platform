@@ -21,11 +21,11 @@ export function PageContent(props: Readonly<PageContentProps>): ReactNode {
 
 	if (width === "narrow") {
 		return (
-			<div className={cn(pageColumnClassName, "py-8 md:py-16")}>
+			<div className={cn(pageColumnClassName, "pbe-8 md:pbe-16")}>
 				<div className={cn("max-inline-6xl", className)}>{children}</div>
 			</div>
 		);
 	}
 
-	return <div className={cn(pageColumnClassName, "py-8 md:py-16", className)}>{children}</div>;
+	return <div className={cn(pageColumnClassName, "pbe-8 md:pbe-16", className)}>{children}</div>;
 }
