@@ -15,7 +15,7 @@ export function Project(props: ProjectProps): ReactNode {
 
 	return (
 		<DetailCard image={image} title={name}>
-			<div className="mt-12 flex flex-col-reverse gap-x-20 gap-y-8 lg:flex-row lg:items-start">
+			<div className="flex flex-col-reverse gap-x-20 gap-y-8 lg:flex-row lg:items-start">
 				<div className="flex-1 min-w-0 max-w-prose">
 					<ContentBlocks blocks={description} />
 					{socialMedia.length > 0 && (

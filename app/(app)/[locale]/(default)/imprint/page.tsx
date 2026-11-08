@@ -29,7 +29,7 @@ export default async function ImprintPage(): Promise<ReactNode> {
 	return (
 		<PageLayout title={t("Infos")} titleElement="p">
 			<DetailCard image={null} title={t("Impressum")}>
-				<div className="mt-12 max-w-prose [&>*>:first-child]:mbs-0">
+				<div className="max-w-prose [&>*>:first-child]:mbs-0">
 					<AcdhImprint locale={currentLocale} />
 				</div>
 			</DetailCard>

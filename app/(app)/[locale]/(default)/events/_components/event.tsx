@@ -12,7 +12,7 @@ export function Event(props: EventProps): ReactNode {
 
 	return (
 		<DetailCard image={image} title={title}>
-			<div className="mt-12 flex flex-col-reverse gap-x-20 gap-y-8 lg:flex-row lg:items-start">
+			<div className="flex flex-col-reverse gap-x-20 gap-y-8 lg:flex-row lg:items-start">
 				<ContentBlocks blocks={content} className="flex-1 min-w-0 max-w-prose" />
 				<div className="lg:sticky lg:top-8 lg:w-75 lg:shrink-0 lg:border-l-2 lg:ps-8 lg:border-primary-300">
 					<dl className="flex flex-col gap-y-4">
