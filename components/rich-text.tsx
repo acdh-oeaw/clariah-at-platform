@@ -2,10 +2,13 @@ import type { GetVariantProps } from "@acdh-oeaw/style-variants";
 import type { JSONContent } from "@tiptap/core";
 import { renderToReactElement } from "@tiptap/static-renderer/pm/react";
 import cn from "clsx/lite";
-import { useExtracted as useTranslations } from "next-intl";
+import { useLocale, useExtracted as useTranslations } from "next-intl";
+import NextLink from "next/link";
 import { Fragment, type ReactNode, useId } from "react";
 
 import { LinkButton, type buttonStyles } from "#/components/ui/button.tsx";
+import { isValidLocale } from "#/lib/i18n/locales.ts";
+import { localizeHref } from "#/lib/navigation/convert.ts";
 import { createRichTextExtensions } from "#/lib/rich-text-extensions.ts";
 import { collectFootnotes, identifyHeadings, isEmptyRichTextDocument, numberFootnotes } from "#/lib/rich-text.ts";
 
@@ -45,23 +48,36 @@ function formatPlaceholderValue(attrs: Record<string, unknown> | null | undefine
 	return null;
 }
 
-/** A link whose target the api could not resolve has no `href`, and renders as plain text. */
-function renderLinkMark(
+/**
+ * A link whose target the api could not resolve has no `href`, and renders as plain text. Entity links resolve to
+ * locale-less paths, in the locale named by `entity.locale`, which falls back to the default locale for a target
+ * without a translation.
+ */
+function LinkMark(
 	props: Readonly<{
 		mark: { attrs?: Record<string, unknown> | null };
 		children?: ReactNode | Array<ReactNode>;
 	}>,
 ): ReactNode {
 	const href = props.mark.attrs?.href;
+	const entity = props.mark.attrs?.entity;
+
+	const currentLocale = useLocale();
 
 	if (typeof href !== "string" || href === "") {
 		return props.children ?? null;
 	}
 
+	if (href.startsWith("/") && !href.startsWith("//")) {
+		const locale = isRecord(entity) && isValidLocale(entity.locale) ? entity.locale : currentLocale;
+
+		return <NextLink href={localizeHref(href, locale)}>{props.children}</NextLink>;
+	}
+
 	return <a href={href}>{props.children}</a>;
 }
 
-const markMapping = { link: renderLinkMark };
+const markMapping = { link: LinkMark };
 
 /** Renders a `{ doc > paragraph }` value (a footnote's note, a caption) without the paragraph. */
 function renderInlineRichText(content: unknown): ReactNode {

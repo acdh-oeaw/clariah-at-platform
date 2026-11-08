@@ -25,7 +25,7 @@ export function DetailCard(props: Readonly<DetailCardProps>): ReactNode {
 			<div className="flex flex-col rounded-md bg-white shadow-card mb-8 md:mb-16">
 				{image != null ? (
 					<ApiImage
-						className="max-h-100 w-full rounded-t-md object-cover"
+						className="aspect-[2/1] max-h-100 w-full rounded-t-md border-b border-stroke-weak object-cover"
 						fetchPriority="high"
 						image={image}
 						loading="eager"
