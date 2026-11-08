@@ -1,5 +1,3 @@
-// https://github.com/DARIAH-ERIC/dariah-website/blob/5d13d2fc81efa9ee1cef7c139ff32ed30f681cd6/lib/analytics/matomo.ts
-
 declare global {
 	interface Window {
 		_paq?: Array<Array<unknown>>;

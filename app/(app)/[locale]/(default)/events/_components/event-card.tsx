@@ -4,7 +4,7 @@ import { useFormatter } from "next-intl";
 import type { ReactNode } from "react";
 
 import { ApiImage } from "#/components/image.tsx";
-import { Link } from "#/components/link.tsx";
+import { IntentLink } from "#/components/intent-link.tsx";
 import type { ImageAsset } from "#/lib/images/variants.ts";
 
 /** Event dates are stored as UTC timestamps, so they are formatted in UTC, not in the viewer's time zone. */
@@ -114,9 +114,9 @@ export function EventCard(props: CardProps): ReactNode {
 				<div className="flex min-w-0 flex-col gap-y-2">
 					<Heading className="text-h3 text-pretty wrap-break-word hyphens-auto sm:py-3">
 						{link != null && link !== "" ? (
-							<Link className="after:absolute after:inset-0 after:z-20" href={link}>
+							<IntentLink className="after:absolute after:inset-0 after:z-20" href={link}>
 								{title}
-							</Link>
+							</IntentLink>
 						) : (
 							title
 						)}
@@ -124,11 +124,7 @@ export function EventCard(props: CardProps): ReactNode {
 					{summary != null && summary !== "" ? <p className="line-clamp-3 text-text-weak">{summary}</p> : null}
 				</div>
 			</div>
-			{/*
-			 * The box sets the size, never the image: it fills the box and is cropped to it (`fill` + `object-cover`), so every
-			 * card is the same shape whatever the source's dimensions. A banner on top on narrow screens, a thumbnail on the
-			 * right from `sm` up. Kept, as a placeholder, for events without an image, so titles still line up across cards.
-			 */}
+			{/* Also rendered without an image, so titles line up across cards. */}
 			<div
 				className={cn(
 					"relative order-first aspect-video shrink-0 overflow-hidden bg-primary-200 inline-full",

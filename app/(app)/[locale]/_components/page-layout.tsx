@@ -1,8 +1,8 @@
 import { cn } from "@acdh-oeaw/style-variants";
 import type { ReactNode } from "react";
 
-import { Main } from "#/app/(app)/[locale]/_components/main";
-import { pageColumnClassName } from "#/app/(app)/[locale]/_components/page-column";
+import { Main } from "#/app/(app)/[locale]/_components/main.tsx";
+import { pageColumnClassName } from "#/app/(app)/[locale]/_components/page-column.ts";
 
 interface PageLayoutProps {
 	children: ReactNode;

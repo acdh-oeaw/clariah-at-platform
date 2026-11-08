@@ -1,12 +1,12 @@
 "use client";
 
 import { useExtracted } from "next-intl";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { notFound, usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { ReactNode } from "react";
 
 import { searchResultListClassName } from "#/app/(app)/[locale]/(default)/_components/search-result-card.tsx";
 import { SearchView, type SearchViewParams } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
-import { ResourceResultCard } from "#/app/(app)/[locale]/(default)/resources/_components/resource-result-card";
+import { ResourceResultCard } from "#/app/(app)/[locale]/(default)/resources/_components/resource-result-card.tsx";
 import { searchParams } from "#/app/(app)/[locale]/(default)/resources/search-params.ts";
 import { SearchFacetFilter } from "#/app/(app)/[locale]/(default)/search/_components/facet-filter.tsx";
 import type { ResourceDocument, ResourceType } from "#/lib/search/collections/resources.ts";
@@ -35,8 +35,7 @@ function renderItem(document: ResourceDocument): ReactNode {
 	return <ResourceResultCard document={document} />;
 }
 
-// No `locale` filter, unlike website content: resources aren't per-locale, so every resource shows regardless of the
-// page's language — same choice made for the resources half of the combined `/search`.
+// No `locale` filter: resources are not per locale.
 async function search(params: SearchParams): Promise<SearchOutcome<ResourceDocument> | null> {
 	const result = await getSearchService().collections.resources.search({
 		query: params.query,
@@ -56,7 +55,7 @@ async function search(params: SearchParams): Promise<SearchOutcome<ResourceDocum
 			Object.entries(result.value.facets).map(([field, facet]) => [
 				field,
 				{
-					values: (facet?.values ?? []).map(({ count, highlighted, value }) => {
+					values: facet.values.map(({ count, highlighted, value }) => {
 						return { count, highlighted, value };
 					}),
 				},
@@ -74,12 +73,11 @@ export function ResourcesSearch(): ReactNode {
 	const router = useRouter();
 	const rawSearchParams = useSearchParams();
 
-	/**
-	 * No local state: `params` is derived fresh from the url on every render, not mirrored into a `useState` that would
-	 * need manual syncing. `router.replace` below already updates the url; `useSearchParams` reactively reflects that on
-	 * the very next render, so there is nothing else to keep in sync by hand.
-	 */
-	const params = toSearchViewParams(searchParams.parse(rawSearchParams));
+	const parsedSearchParams = searchParams.safeParse(rawSearchParams);
+	if (!parsedSearchParams.success) {
+		notFound();
+	}
+	const params = toSearchViewParams(parsedSearchParams.output);
 
 	function getHref(nextParams: SearchViewParams): string {
 		const { query } = searchParams.encode(toRawSearchParams(nextParams));

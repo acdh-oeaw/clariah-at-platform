@@ -3,7 +3,7 @@
 import cn from "clsx/lite";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 
-import { linkStyles } from "#/components/link";
+import { linkStyles } from "#/components/link.tsx";
 import type { RichTextHeading } from "#/lib/rich-text.ts";
 
 interface TableOfContentsListProps {
@@ -36,7 +36,7 @@ function getActiveId(ids: ReadonlyArray<string>): string | null {
 	let activeId: string | null = null;
 
 	for (const id of ids) {
-		const element = document.getElementById(id);
+		const element = document.querySelector(`#${id}`);
 		if (element == null) {
 			continue;
 		}
@@ -60,11 +60,7 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 	 * entry.
 	 */
 	const pinnedIdRef = useRef<string | null>(null);
-	/**
-	 * The pending animation frame, `0` when none is: the active entry is recomputed at most once per frame, however many
-	 * scroll events arrive in between. A ref, not a `let` in the effect, which the scroll listener would reassign after
-	 * render - something the compiler's immutability rule does not allow.
-	 */
+	/** The pending animation frame, `0` when none is: the active entry is recomputed at most once per frame. */
 	const frameRef = useRef(0);
 
 	useEffect(() => {
@@ -121,8 +117,7 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 						 */}
 						<a
 							aria-current={isActive ? "location" : undefined}
-							// `block`, so the padding spaces the entries apart - on an inline anchor it takes up no room. `py-1!`
-							// overrides the variant's own `py-2`, which spaced them too far apart.
+
 							className={linkStyles({ className: "block py-1!", variant: "primary" })}
 							href={`#${heading.id}`}
 							onClick={() => {
@@ -130,11 +125,6 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 								setActiveId(heading.id);
 							}}
 						>
-							{/**
-							 * No hidden bold copy reserving the bold width: in the narrow sidebar column, an entry which only just fits on one line
-							 * wraps onto two in bold, so the reserved copy left an empty line under it at all times. Only the current entry may
-							 * re-wrap now, and only while it is current.
-							 */}
 							<span className={cn(isActive && "font-bold")}>{heading.text}</span>
 						</a>
 					</li>

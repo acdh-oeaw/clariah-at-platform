@@ -1,5 +1,3 @@
-// https://github.com/DARIAH-ERIC/dariah-website/blob/5d13d2fc81efa9ee1cef7c139ff32ed30f681cd6/app/(app)/_components/matomo-analytics.tsx
-
 "use client";
 
 import { usePathname } from "next/navigation";

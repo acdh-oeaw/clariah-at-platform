@@ -31,10 +31,9 @@ export function Disclosure({ children, ...props }: Readonly<DisclosureProps>): R
 
 export interface DisclosureHeaderProps {
 	children?: React.ReactNode;
-	variant?: "color-bg" | "white-bg";
 }
 
-export function DisclosureHeader({ children, variant = "color-bg" }: Readonly<DisclosureHeaderProps>): ReactNode {
+export function DisclosureHeader({ children }: Readonly<DisclosureHeaderProps>): ReactNode {
 	const { isExpanded } = use(DisclosureStateContext)!;
 	return (
 		<Button
@@ -42,7 +41,7 @@ export function DisclosureHeader({ children, variant = "color-bg" }: Readonly<Di
 			data-expanded={isExpanded || undefined}
 			endIcon={isExpanded ? <ChevronUpIcon className="size-6" /> : <ChevronDownIcon className="size-6" />}
 			slot="trigger"
-			variant={variant === "color-bg" ? "disclosure-color-bg" : "disclosure-white-bg"}
+			variant="disclosure"
 		>
 			<span className="max-w-[90%] line-clamp-1 text-left">{children}</span>
 		</Button>

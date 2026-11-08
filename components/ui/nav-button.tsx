@@ -37,7 +37,6 @@ export function NavButton(props: Readonly<NavButtonProps>): ReactNode {
 			className={cn(
 				"group flex cursor-pointer items-center gap-1 border-[3px] border-transparent bg-transparent p-1.25 [&>svg]:block-5 [&>svg]:inline-5",
 				"hover:bg-white",
-				"data-focus-visible:outline-none",
 				"aria-expanded:bg-white",
 				"aria-[current=page]:font-bold",
 				className,

@@ -1,9 +1,9 @@
 import { useExtracted, useFormatter } from "next-intl";
 import type { ReactNode } from "react";
 
-import { useFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels";
-import { SocialMediaLinks } from "#/app/(app)/[locale]/(default)/projects/_components/social-media";
-import { DetailCard } from "#/app/(app)/[locale]/_components/detail-card";
+import { useFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels.ts";
+import { SocialMediaLinks } from "#/app/(app)/[locale]/(default)/projects/_components/social-media.tsx";
+import { DetailCard } from "#/app/(app)/[locale]/_components/detail-card.tsx";
 import { ContentBlocks } from "#/components/content-blocks.tsx";
 import type { Project as ProjectProps } from "#/lib/data/api-client.ts";
 

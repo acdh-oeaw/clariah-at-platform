@@ -56,7 +56,7 @@ export function Navigation(props: Readonly<NavigationProps>): ReactNode {
 
 				<NavigationDesktop localeSwitcherLabel={localeSwitcherLabel} navigation={menuNavigation} />
 				<IconButton
-					className="-my-3 -ml-3 xl:hidden"
+					className="-my-3 -ml-3 lg:hidden"
 					label={isMobileMenuOpen ? drawerCloseLabel : drawerOpenLabel}
 					onPress={handleMobileMenuToggle}
 				>

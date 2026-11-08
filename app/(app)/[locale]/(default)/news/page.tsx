@@ -4,12 +4,15 @@ import { notFound } from "next/navigation";
 import { locale } from "next/root-params";
 import { type ReactNode, Suspense } from "react";
 
-import { NewsSearch } from "#/app/(app)/[locale]/(default)/news/_components/news-search";
-import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
-import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
-import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
-import { isValidLocale } from "#/lib/i18n/locales";
+import { SearchFallback } from "#/app/(app)/[locale]/(default)/_components/search-form.tsx";
+import { NewsSearch } from "#/app/(app)/[locale]/(default)/news/_components/news-search.tsx";
+import { PageContent } from "#/app/(app)/[locale]/_components/page-content.tsx";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout.tsx";
+import { isValidLocale } from "#/lib/i18n/locales.ts";
 import { createMetadata } from "#/lib/metadata.ts";
+
+/** The whole page is static, for initial loads and navigations alike: the build fails if that changes. */
+export const ensureStatic = "navigation";
 
 export async function generateMetadata(): Promise<Metadata> {
 	const t = await getExtracted();
@@ -29,7 +32,7 @@ export default async function NewsPage(): Promise<ReactNode> {
 	return (
 		<PageLayout title={t("News")}>
 			<PageContent>
-				<Suspense fallback={<DetailFallback />}>
+				<Suspense fallback={<SearchFallback label={t("Aktuelles durchsuchen")} />}>
 					<NewsSearchSection />
 				</Suspense>
 			</PageContent>

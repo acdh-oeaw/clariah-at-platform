@@ -1,4 +1,3 @@
-// https://github.com/DARIAH-ERIC/dariah-website/blob/0fd80334661a12445a6ca6d84a98a4227e226ac7/lib/navigation/search-params.ts
 import * as v from "valibot";
 
 declare const encodedSearchParamsBrand: unique symbol;

@@ -4,13 +4,13 @@ import { ChevronRightIcon, MailIcon } from "lucide-react";
 import { getExtracted, getLocale } from "next-intl/server";
 import { type ComponentProps, Fragment, type ReactNode } from "react";
 
-import { pageColumnClassName } from "#/app/(app)/[locale]/_components/page-column";
-import { Image } from "#/components/image";
+import { pageColumnClassName } from "#/app/(app)/[locale]/_components/page-column.ts";
+import { Image } from "#/components/image.tsx";
 import { Link } from "#/components/link.tsx";
-import { NavLink } from "#/components/nav-link";
-import { LinkButton } from "#/components/ui/button";
-import { cachedNavigation } from "#/lib/data/api-cache";
-import { localizeHref } from "#/lib/navigation/convert";
+import { NavLink } from "#/components/nav-link.tsx";
+import { LinkButton } from "#/components/ui/button.tsx";
+import { cachedNavigation } from "#/lib/data/api-cache.ts";
+import { localizeHref } from "#/lib/navigation/convert.ts";
 import funderLogoDE from "#/public/assets/images/BMFWF_Logo_srgb.svg";
 import logo from "#/public/assets/images/CLARIAH-AT_Logo_long_white.svg";
 import funderLogo from "#/public/assets/images/logo-bmfwf.svg";
@@ -32,7 +32,7 @@ export async function Footer(props: Readonly<FooterProps>): Promise<ReactNode> {
 	return (
 		<footer {...rest} className={cn("z-9", className)}>
 			<div className={"flex flex-col"}>
-				<section className="bg-primary-1000 py-12 text-white">
+				<section className="bg-primary-1000 py-12 text-white focus-outline-inverse">
 					<div className={cn(pageColumnClassName, "flex flex-col gap-y-4")}>
 						<Image alt="" width={200} src={logo} className="pb-4" />
 						<h2 className="font-bold">{t("Mailingliste beitreten")}</h2>

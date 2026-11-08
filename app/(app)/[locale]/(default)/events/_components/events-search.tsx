@@ -1,13 +1,14 @@
 "use client";
 
 import { useExtracted } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { type ReactNode, useCallback, useState } from "react";
 
-import { EventCard } from "#/app/(app)/[locale]/(default)/events/_components/event-card";
+import { EventCard } from "#/app/(app)/[locale]/(default)/events/_components/event-card.tsx";
 import { type RenderItemContext, SearchView } from "#/app/(app)/[locale]/(default)/events/_components/search-view.tsx";
-import { getAssetImageUrl } from "#/lib/data/api-client";
+import { getAssetImageUrl } from "#/lib/data/api-client.ts";
 import type { IntlLocale } from "#/lib/i18n/locales.ts";
-import { localizeHref } from "#/lib/navigation/convert";
+import { localizeHref } from "#/lib/navigation/convert.ts";
 import type { WebsiteFilterField } from "#/lib/search/collections/website.ts";
 import type { SearchFilter } from "#/lib/search/filters.ts";
 import type { WebsiteDocument } from "#/lib/search/index.ts";
@@ -52,9 +53,17 @@ export function EventsSearch(props: EventsSearchProps): ReactNode {
 	const t = useExtracted();
 
 	/**
+	 * Has to stay above the clock read below. The url is unknown when prerendering, so this suspends, and the clock is
+	 * never reached. Reading the clock during a prerender aborts it, along with everything still pending, like the
+	 * footer.
+	 */
+	const rawSearchParams = useSearchParams();
+
+	/**
 	 * Start of the current UTC day. Event dates are UTC days (midnight timestamps), so an event ending — or, without an
 	 * end, taking place — today still counts as upcoming. Fixed on mount, so both sections split at the same instant.
 	 */
+	// oxlint-disable-next-line react/hook-use-state -- set once on mount, never updated
 	const [today] = useState(() => {
 		const date = new Date();
 		return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
@@ -159,6 +168,7 @@ export function EventsSearch(props: EventsSearchProps): ReactNode {
 
 	return (
 		<SearchView<WebsiteDocument>
+			initialQuery={rawSearchParams.get("q") ?? ""}
 			renderItem={renderItem}
 			resultsClassName="grid gap-y-12"
 			sections={[

@@ -1,5 +1,5 @@
-import { env } from "#/configs/env.config";
-import type { components, operations } from "#/lib/openapi/types";
+import { env } from "#/configs/env.config.ts";
+import type { components, operations } from "#/lib/openapi/types.ts";
 
 /* -------------------------------------------------------------------------- */
 /* Configuration                                                              */
@@ -372,7 +372,7 @@ export function getAssetImageUrl(
 		.join("/");
 	const version = options.version ?? "v1";
 
-	// No width means "give me the largest rendition" — every call site omits it today.
+	// No width means the largest rendition.
 	return getImageUrl(
 		`${resolveBaseUrl(options.baseUrl)}/api/v1/assets/${key}/image/${version}`,
 		options.width ?? largestImageWidth,
@@ -630,10 +630,7 @@ export async function fetchAll<T>(
 	let offset = 0;
 
 	for (let page = 0; page < maxPages; page++) {
-		// Sequential on purpose: `offset` for the next request depends on this response's `limit`, and whether there even
-		// is a next page depends on its `total` — neither is known before this request resolves, so the pages cannot be
-		// requested in parallel with `Promise.all`.
-		// oxlint-disable-next-line no-await-in-loop
+		// oxlint-disable-next-line no-await-in-loop -- The next offset depends on this response.
 		const response = await endpointFn({
 			...requestOptions,
 			query: { ...query, limit: pageSize, offset },

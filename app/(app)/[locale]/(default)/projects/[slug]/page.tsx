@@ -3,13 +3,19 @@ import { getExtracted } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { type ReactNode, Suspense } from "react";
 
-import { Project } from "#/app/(app)/[locale]/(default)/projects/_components/project";
-import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
-import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
-import { cachedProject, staticSlugs } from "#/lib/data/api-cache";
-import { createMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
+import { Project } from "#/app/(app)/[locale]/(default)/projects/_components/project.tsx";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback.tsx";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout.tsx";
+import { cachedProject, staticSlugs } from "#/lib/data/api-cache.ts";
+import { createMetadata, createNotFoundMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
 
 interface ProjectPageProps extends PageProps<"/[locale]/projects/[slug]"> {}
+
+/**
+ * A link's prefetch of this page is served from static output, never rendered per request. Every slug known at build
+ * time is prerendered; for one that is not, the prefetch holds the fallback.
+ */
+export const ensureStatic = "prefetch";
 
 export function generateStaticParams({ params }: { params: { locale: string } }): Promise<Array<{ slug: string }>> {
 	return staticSlugs.projects(params.locale);
@@ -20,7 +26,7 @@ export async function generateMetadata(props: Readonly<ProjectPageProps>): Promi
 	const item = await cachedProject(slug, locale);
 
 	if (item == null) {
-		return {};
+		return createNotFoundMetadata();
 	}
 
 	return createMetadata({

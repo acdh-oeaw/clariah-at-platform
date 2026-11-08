@@ -15,10 +15,7 @@ export const websiteCollection = defineCollection({
 		{ name: "id", type: "string", index: false },
 		{ name: "source", type: "string", index: true, facet: true },
 		{ name: "source_id", type: "string", index: false },
-		// The knowledge-base document (entity) a document was derived from. Indexed so incremental
-		// sync can enumerate every document belonging to an entity — an entity may own more than one
-		// (e.g. an institution has one document per country it is located in). Only set on entity
-		// documents; resource documents have no knowledge-base entity behind them.
+		// The cms entity a document was derived from. An entity may have more than one document.
 		{ name: "entity_id", type: "string", index: true, optional: true },
 		{ name: "source_updated_at", type: "int64", index: true, optional: true, sort: true },
 		{ name: "imported_at", type: "int64", index: false },

@@ -1,39 +1,22 @@
-import { type GetVariantProps, styles } from "@acdh-oeaw/style-variants";
+import cn from "clsx/lite";
 import type { ComponentPropsWithRef, ReactNode } from "react";
 
 /** A static label. For something the user can select or remove, use a tag instead. */
-const badgeStyles = styles({
-	base: [
-		"inline-flex items-center gap-x-1.5 py-0.5 text-xs/5 font-medium inline-fit forced-colors:outline",
-		"*:data-[slot=icon]:shrink-0 *:data-[slot=icon]:block-3 *:data-[slot=icon]:inline-3",
-	],
-	variants: {
-		intent: {
-			primary: "bg-primary-1000 text-white",
-			outline: "text-black inset-ring inset-ring-gray-300",
-		},
-		isCircle: {
-			true: "rounded-full px-2",
-			false: "rounded-sm px-1.5",
-		},
-	},
-	defaults: {
-		intent: "primary",
-		isCircle: true,
-	},
-});
+const badgeClassName = cn(
+	/** Forced colors drop the background, which the border then stands in for. Outlines are only for focus. */
+	"inline-flex items-center gap-x-1.5 rounded-full bg-primary-1000 px-2 py-0.5 text-xs/5 font-medium text-white inline-fit forced-colors:border",
+	"*:data-[slot=icon]:shrink-0 *:data-[slot=icon]:block-3 *:data-[slot=icon]:inline-3",
+);
 
-type BadgeStyleProps = GetVariantProps<typeof badgeStyles>;
-
-interface BadgeProps extends Omit<ComponentPropsWithRef<"span">, "children">, BadgeStyleProps {
+interface BadgeProps extends Omit<ComponentPropsWithRef<"span">, "children"> {
 	children: ReactNode;
 }
 
 export function Badge(props: Readonly<BadgeProps>): ReactNode {
-	const { children, className, intent, isCircle, ...rest } = props;
+	const { children, className, ...rest } = props;
 
 	return (
-		<span {...rest} className={badgeStyles({ className, intent, isCircle })}>
+		<span {...rest} className={cn(badgeClassName, className)}>
 			{children}
 		</span>
 	);

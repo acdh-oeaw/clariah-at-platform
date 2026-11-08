@@ -53,11 +53,8 @@ export type SearchFacetsConfig<C extends SearchableCollection> = Partial<
 /**
  * A join onto a collection which this one references.
  *
- * The join is always emitted into `filter_by`, falling back to `id:*` when there is nothing to filter on. That is the
- * documented left-join idiom, and it is also load-bearing: typesense 30.0 crashes outright — the process dies, taking
- * the data directory's in-memory state with it — on a `facet_by` over a collection which is not joined in `filter_by`.
- * Establishing the join through `include_fields` alone is not enough. Routing every join through the filter is what
- * makes that unreachable from this API.
+ * The join is always emitted into `filter_by`, falling back to `id:*` when there is nothing to filter on: typesense
+ * 30.0 crashes on a `facet_by` over a collection which is not joined in `filter_by`.
  */
 export interface SearchJoin<C extends SearchableCollection> {
 	/** The `collection` key of the reference declared on the searched collection. Resolves to its runtime name. */
@@ -70,11 +67,7 @@ export interface SearchJoin<C extends SearchableCollection> {
 	include?: ReadonlyArray<CollectionQueryableFieldName<C>>;
 }
 
-/**
- * A {@link SearchJoin} with its field names widened, as stored in the search params. Build one with {@link defineJoin},
- * which checks them against the joined collection first — the names cannot stay narrow here, because the sortable and
- * facetable names of an unknown collection are `never`.
- */
+/** A {@link SearchJoin} with its field names widened. Build one with {@link defineJoin}, which checks them. */
 export interface AnySearchJoin {
 	key: string;
 	collection: SearchableCollection;
@@ -157,11 +150,7 @@ export type SearchHighlight<T> = T extends boolean | number | string
 export interface SearchItem<Document> {
 	document: Document;
 	highlight: SearchHighlight<Document>;
-	/**
-	 * The documents a join pulled in, keyed by the join key. Typesense nests them in the hit under the runtime name of
-	 * the joined collection, which is an environment-dependent detail; this is the same data under a stable key. Narrow
-	 * it with the joined collection's own document type.
-	 */
+	/** The documents a join pulled in, keyed by the join key rather than the collection's runtime name. */
 	joined: Record<string, unknown>;
 }
 
@@ -177,11 +166,8 @@ export interface SearchResult<Document, FacetField extends string = string> {
 	pagination: SearchPagination;
 	facets: Partial<Record<FacetField, SearchFacet>>;
 	/**
-	 * Counts for facets on joined collections, keyed `<join key>.<field>`.
-	 *
-	 * These count documents of the _referenced_ collection, where an ordinary facet counts hits. Three books by two
-	 * Austrian authors give a count of 2 for `AT`, while selecting `AT` returns three hits. A facet widget which shows
-	 * the count as "how many results this adds" has to account for that; typesense offers no way to count hits instead.
+	 * Counts for facets on joined collections, keyed `<join key>.<field>`. These count documents of the referenced
+	 * collection, not hits.
 	 */
 	joinedFacets: Partial<Record<string, SearchFacet>>;
 }
@@ -543,11 +529,7 @@ export function createFacetValuesRequest<
 		q: query,
 		query_by: resolveQueryBy(collection, queryBy),
 		page: 1,
-		/**
-		 * A response carrying `facet_query` comes back with an empty `hits` array, while `found` still reports the full
-		 * number of matches. That response cannot also drive a result list, which is why searching facet values is a
-		 * request of its own instead of a parameter of the main search, and why discarding its hits is deliberate.
-		 */
+		/** A response carrying `facet_query` has an empty `hits` array, so this is a request of its own. */
 		per_page: 0,
 		facet_by: [createFacetByExpression(facet, params.facets?.[facet])],
 		facet_query: `${facet}:${facetQuery}`,
@@ -617,9 +599,8 @@ function toFacets<Document extends DocumentSchema, FacetField extends string>(
 }
 
 /**
- * Walks the `highlight` tree of a hit, which mirrors the document and carries `{ matched_tokens, snippet }` at each
- * matched value. The flat `highlights` array next to it is not an alternative: it omits array fields, which carry
- * `snippets` rather than a `snippet`, and it is empty altogether whenever the match is in a nested field.
+ * Walks the `highlight` tree of a hit, which mirrors the document. The flat `highlights` array omits array and nested
+ * fields.
  */
 function toHighlight(value: unknown): unknown {
 	if (Array.isArray(value)) {

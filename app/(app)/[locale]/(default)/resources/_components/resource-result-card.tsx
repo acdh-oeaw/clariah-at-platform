@@ -9,7 +9,7 @@ interface ResourceResultCardProps {
 
 /**
  * Shared by `/resources` and the resources half of the combined `/search`. Unlike website content, a resource's link
- * points at an external platform (Zenodo, HAL, DARIAH-Campus, ...), not a route on this site — so no `localizeHref`.
+ * points at an external platform (Zenodo, HAL, ...), not a route on this site — so no `localizeHref`.
  */
 export function ResourceResultCard(props: Readonly<ResourceResultCardProps>): ReactNode {
 	const { document } = props;

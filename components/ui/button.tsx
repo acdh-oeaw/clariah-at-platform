@@ -19,82 +19,26 @@ export const buttonStyles = styles({
 	],
 	variants: {
 		variant: {
-			primary: cn(
-				"bg-white font-bold outline-2 inline-58.75 *:px-4.5 *:py-2.5",
-				"hover:text-white hover:outline-white",
-				"focus:bg-white focus:*:outline-2",
-			),
+			/** Frames are borders: outlines are only for the focus indicator, see `styles/index.css`. */
+			primary: cn("border-2 bg-white font-bold inline-58.75 *:px-4.5 *:py-2.5", "hover:border-white hover:text-white"),
 			secondary: cn(
-				"font-bold text-primary-1000 outline-2 outline-white *:px-4.5 *:py-0.5",
+				"border-2 border-white font-bold text-primary-1000 *:px-4.5 *:py-0.5",
 				"hover:bg-primary-600 hover:text-white",
-				"focus:text-white focus:outline-white focus:*:outline-2 focus:*:outline-white",
 			),
 			outline: cn(
 				"rounded-md border-2 border-primary-1000 font-bold text-primary-1000 inline-fit *:px-4.5 *:py-0.5",
 				"hover:border-primary-600 hover:bg-primary-600 hover:text-white",
-				"focus:outline-0 focus-visible:ring-2 focus-visible:ring-offset-3",
 			),
 			"outline-white": cn(
 				"rounded-md border-2 border-white font-bold text-white inline-fit *:px-4.5 *:py-0.5",
 				"hover:bg-white hover:text-primary-1000",
-				"focus:outline-0 focus-visible:ring-2 focus-visible:ring-offset-3",
 			),
-			tertiary: cn(
-				"text-white outline-2 outline-white inline-62.75 *:px-4.5 *:py-0.5",
-				"hover:bg-white",
-				"focus:text-white focus:outline-white focus:*:outline-2 focus:*:outline-white",
-			),
-			"color-bg": cn(
-				"bg-white outline-2 inline-58.75 *:px-4.5 *:py-2.5",
-				"hover:text-white hover:outline-white",
-				"focus:text-white focus:outline-white focus:*:outline-2 focus:*:outline-white",
-			),
-			"icon-button": cn(
-				"p-2.5 *:p-0!",
-				"hover:bg-primary-100",
-				"focus:outline-3",
-				"pressed:outline-none pressed:[&_svg]:fill-black",
-				"disabled:text-gray-400",
-			),
-			"icon-button-color-bg": cn(
-				"bg-transparent p-0! text-white *:p-0",
-				"hover:bg-white",
-				"focus:bg-transparent focus:text-white focus:outline-white",
-				"disabled:text-gray-400",
-			),
-			"link-primary": cn(
-				"gap-2 py-2 font-semibold",
-				"inline-fit hover:underline hover:decoration-[10%] hover:underline-offset-[24%]",
-				"focus-visible:underline focus-visible:decoration-[3px] focus-visible:underline-offset-[24%] focus-visible:[&>svg]:fill-black",
-				"focus-visible:outline-none",
-			),
-			"disclosure-white-bg": cn(
-				"gap-2 bg-transparent px-2 py-4 text-gray-900 max-inline-screen [&_svg]:fill-gray-900",
+			/** Disclosures span their scroll container, which would clip an outline drawn outside of them. */
+			disclosure: cn(
+				"gap-2 bg-transparent px-2 py-4 text-gray-900 -outline-offset-2 max-inline-screen [&_svg]:fill-gray-900",
 				"hover:underline",
-				"focus-visible:underline focus-visible:decoration-[3px]",
-				"focus-visible:outline-none",
 				"data-expanded:bg-gray-200 data-expanded:font-medium data-expanded:text-black",
 			),
-			"disclosure-color-bg": cn(
-				"gap-2 bg-transparent px-6! py-4! text-white [&_svg]:fill-white",
-				"hover:underline",
-				"focus-visible:underline focus-visible:decoration-[3px]",
-				"focus-visible:outline-none",
-				"data-expanded:bg-gray-200 data-expanded:font-medium data-expanded:text-black",
-			),
-			"select-button": cn(
-				"cursor-pointer rounded-none bg-transparent px-5 py-1 font-normal uppercase",
-				"data-focused:outline-3",
-				"pressed:bg-transparent pressed:outline-none",
-				"active:bg-transparent active:outline-none",
-			),
-			"carousel-button": cn(
-				"px-0 py-3 md:p-3 [&_svg]:fill-white [&_svg]:block-10 [&_svg]:inline-10",
-				"hover:bg-white",
-				"focus:outline-2 focus:outline-white focus:[&_svg]:fill-white",
-				"",
-			),
-			quiet: "border-transparent bg-transparent text-neutral-800 hover:bg-neutral-200 pressed:bg-neutral-300",
 			unstyled: "",
 		},
 	},
@@ -137,9 +81,9 @@ export function Button(props: Readonly<ButtonProps>): ReactNode {
 			)}
 		>
 			<span>
-				{variant !== "icon-button" && startIcon}
+				{startIcon}
 				{renderProps.children}
-				{variant !== "icon-button" && endIcon}
+				{endIcon}
 			</span>
 		</AriaButton>
 	);
@@ -161,9 +105,9 @@ export function LinkButton(props: Readonly<LinkButtonProps>): ReactNode {
 	return (
 		<Link aria-labelledby={labelId} {...rest} className={buttonStyles({ className, variant })} variant="unstyled">
 			<span id={labelId}>
-				{variant !== "icon-button" && startIcon}
+				{startIcon}
 				{children}
-				{variant !== "icon-button" && endIcon}
+				{endIcon}
 			</span>
 		</Link>
 	);

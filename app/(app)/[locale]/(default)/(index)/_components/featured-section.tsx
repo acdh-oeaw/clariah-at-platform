@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import { locale } from "next/root-params";
 import type { ReactNode } from "react";
 
-import { Card } from "#/components/card";
-import { LinkButton } from "#/components/ui/button";
-import { cachedFeaturedEntities } from "#/lib/data/api-cache";
+import { Card } from "#/components/card.tsx";
+import { LinkButton } from "#/components/ui/button.tsx";
+import { cachedFeaturedEntities } from "#/lib/data/api-cache.ts";
 import type { EntityType } from "#/lib/data/api-client.ts";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
 import { localizeHref } from "#/lib/navigation/convert.ts";

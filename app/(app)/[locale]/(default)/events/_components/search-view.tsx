@@ -1,11 +1,10 @@
 "use client";
 
 import cn from "clsx/lite";
-import { SearchIcon } from "lucide-react";
 import { useExtracted } from "next-intl";
-import { useSearchParams } from "next/navigation";
-import { Fragment, type ReactNode, useEffect, useId, useState } from "react";
+import { Fragment, type ReactNode, useEffect, useState } from "react";
 
+import { SearchForm } from "#/app/(app)/[locale]/(default)/_components/search-form.tsx";
 import { Button } from "#/components/ui/button.tsx";
 import { type SearchOutcome, type SearchParams, useSearch } from "#/lib/search/use-search.ts";
 
@@ -56,6 +55,8 @@ export interface RenderItemContext {
 }
 
 interface SearchViewProps<Document extends { id: string }> {
+	/** The query from the url. Only read on mount: from then on the input owns the query, and writes it back to the url. */
+	initialQuery: string;
 	/** Each section runs its own search for the shared query, and loads more results independently. */
 	sections: ReadonlyArray<SearchViewSection<Document>>;
 	renderItem: (document: Document, context: RenderItemContext) => ReactNode;
@@ -69,14 +70,18 @@ const defaultClassName = "flex flex-col gap-y-8";
 const defaultResultsClassName = "mt-12 grid grid-cols-[repeat(auto-fill,minmax(min(100%,20rem),1fr))] gap-8";
 
 export function SearchView<Document extends { id: string }>(props: Readonly<SearchViewProps<Document>>): ReactNode {
-	const { className = defaultClassName, renderItem, resultsClassName = defaultResultsClassName, sections } = props;
+	const {
+		className = defaultClassName,
+		initialQuery,
+		renderItem,
+		resultsClassName = defaultResultsClassName,
+		sections,
+	} = props;
 
 	const t = useExtracted();
-	const searchParams = useSearchParams();
 
-	const [input, setInput] = useState(() => searchParams.get("q") ?? "");
+	const [input, setInput] = useState(initialQuery);
 	const [query, flushQuery] = useDebouncedValue(input.trim(), debounceMilliseconds);
-	const inputId = useId();
 
 	/** Keep the address bar shareable. Next syncs `history.replaceState` with `useSearchParams`. */
 	useEffect(() => {
@@ -91,34 +96,8 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 
 	return (
 		<div className={className}>
-			<form
-				className="flex flex-col gap-y-2"
-				onSubmit={(event) => {
-					event.preventDefault();
-					// Results already update while typing; submitting just skips the wait.
-					flushQuery();
-				}}
-				role="search"
-			>
-				<label className="sr-only" htmlFor={inputId}>
-					{t("Events filtern")}
-				</label>
-				<div className="flex gap-x-2">
-					<input
-						className="min-w-0 flex-1 border rounded-md border-stroke-weak bg-white px-4 py-2.5 text-regular"
-						id={inputId}
-						name="q"
-						onChange={(event) => {
-							setInput(event.currentTarget.value);
-						}}
-						type="search"
-						value={input}
-					/>
-					<Button startIcon={<SearchIcon aria-hidden={true} />} type="submit" variant="outline">
-						{t("Suchen")}
-					</Button>
-				</div>
-			</form>
+			{/* Results already update while typing; submitting just skips the wait. */}
+			<SearchForm label={t("Events filtern")} onChange={setInput} onSubmit={flushQuery} value={input} />
 			<div className="flex flex-col gap-y-20">
 				{sections.map((section) => (
 					<SearchResults<Document>

@@ -12,7 +12,7 @@ import {
 	TwitterIcon,
 	WebsiteIcon,
 	YouTubeIcon,
-} from "#/lib/social-media/social-media-icons";
+} from "#/lib/social-media/social-media-icons.tsx";
 
 export const config = {
 	bluesky: { icon: BlueskyIcon },

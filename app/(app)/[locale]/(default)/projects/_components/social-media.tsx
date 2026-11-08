@@ -2,7 +2,7 @@ import { useExtracted } from "next-intl";
 import type { ReactNode } from "react";
 
 import type { Schemas } from "#/lib/data/api-client.ts";
-import { WebsiteIcon } from "#/lib/social-media/social-media-icons";
+import { WebsiteIcon } from "#/lib/social-media/social-media-icons.tsx";
 import { config } from "#/lib/social-media/social-media.config.ts";
 
 type SocialMediaType = Schemas["ProjectSocialMedia"]["type"];

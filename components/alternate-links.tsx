@@ -15,15 +15,7 @@ function toAbsoluteUrl(pathname: string): string {
 	return String(createUrl({ baseUrl: env.NEXT_PUBLIC_APP_BASE_URL, pathname }));
 }
 
-/**
- * Renders locale alternate links as `<link>` tags (hoisted into `<head>` by React) instead of the `Link` response
- * header next-intl's middleware would otherwise set — disabled via `alternateLinks: false` in `routing.ts`. See the
- * comment there for why: a still-open Next.js bug repeatedly appends a full duplicate set of header-based alternate
- * links after every Cache Components revalidation, eventually growing the response header large enough to 502 behind a
- * reverse proxy.
- *
- * @see {@link https://github.com/vercel/next.js/issues/94945}
- */
+/** Instead of next-intl's `Link` response header, see `alternateLinks: false` in `lib/i18n/routing.ts`. */
 export function AlternateLinks(): ReactNode {
 	const currentLocale = useLocale();
 	const pathname = usePathname();

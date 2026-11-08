@@ -1,7 +1,3 @@
-// Adapted from https://github.com/DARIAH-ERIC/dariah-campus/blob/main/app/(app)/(default)/search/_components/search-facet-filter.tsx
-// Original reads its state from a shared search context; this one takes it as props instead, so it plugs into
-// `SearchView`'s `renderFacets` render-prop (see `search-view.tsx`), which hands each field its own slice of state.
-
 "use client";
 
 import cn from "clsx/lite";
@@ -84,10 +80,7 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 	const t = useExtracted();
 	const format = useFormatter();
 	const collator = useCollator({ sensitivity: "base", usage: "sort" });
-	/**
-	 * Selected values are pinned to the top, but only as of the moment the popover was opened, so the list does not
-	 * reorder underneath the pointer or the keyboard cursor while values are being toggled.
-	 */
+	/** Selected values are pinned to the top as of opening the popover, so the list does not reorder while toggling. */
 	const [pinned, setPinned] = useState<ReadonlySet<string>>(new Set());
 	const items = useMemo(() => {
 		const itemsByValue = new Map<string, FacetItem>(
@@ -115,10 +108,7 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 		});
 	}, [collator, facet, getLabel, isLoading, pinned, selected]);
 	const isFilterable = items.length > maxUnfilteredFacetValues;
-	/**
-	 * Only the visible rows are mounted, because a facet can run to a few hundred values. Rows carrying a description
-	 * vary in height and have to be measured, the rest are uniform and can be placed outright.
-	 */
+	/** Virtualized, because a facet can have hundreds of values. Rows with a description vary in height. */
 	const layoutOptions = useMemo(
 		() =>
 			getDescription == null
@@ -138,16 +128,11 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 			<Button
 				className={cn(
 					"flex items-center gap-x-2 rounded-full border px-4 py-2 text-small whitespace-nowrap transition",
-					"focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-1000",
 					selected.length > 0 ? "border-primary-1000" : "bg-white hover:border-black",
 				)}
 			>
 				<span>{label}</span>
-				{/**
-				 * The badge keeps its space when there is nothing to count, so selecting a value does not resize the trigger and shove
-				 * its neighbours along the row. `visibility: hidden` already hides it from assistive technology, `aria-hidden` says so
-				 * outright.
-				 */}
+				{/* Keeps its space when empty, so selecting a value does not resize the trigger. */}
 				<span
 					aria-hidden={selected.length === 0 || undefined}
 					className={cn(
@@ -162,20 +147,21 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 
 			<Popover
 				className={cn(
-					"rounded-lg border bg-white shadow-lg outline-none inline-[min(100vw-2rem,22rem)]",
+					"rounded-lg border bg-white shadow-lg inline-[min(100vw-2rem,22rem)]",
 					"entering:animate-in entering:duration-150 entering:ease-out entering:fade-in",
 					"exiting:animate-out exiting:duration-100 exiting:ease-in exiting:fade-out",
 				)}
 				placement="bottom start"
 			>
-				<Dialog aria-label={label} className="grid gap-y-2 p-2 outline-none">
+				{/* Only focused programmatically. `outline-hidden` keeps an outline in forced colors mode. */}
+				<Dialog aria-label={label} className="grid gap-y-2 p-2 outline-hidden">
 					<Filterable
 						isFilterable={isFilterable}
 						renderFilter={() => (
 							<SearchField autoFocus={true}>
 								<Label className="sr-only">{t("Filter {label}", { label })}</Label>
 								<Input
-									className="rounded-md border border-stroke-weak px-3 py-1.5 text-small inline-full focus:outline-none focus-visible:outline-2 focus-visible:outline-primary-1000 focus-visible:outline-offset-2"
+									className="rounded-md border border-stroke-weak px-3 py-1.5 text-small inline-full"
 									placeholder={t("Filter…")}
 								/>
 							</SearchField>
@@ -186,8 +172,8 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 								aria-label={label}
 								/** Without a filter input to hold it, focus belongs to the list itself. */
 								autoFocus={!isFilterable}
-								className="block overflow-y-auto outline-none max-block-72"
-								/** Escape belongs to the popover here - without this it would clear the refinement instead of closing. */
+								className="block overflow-y-auto max-block-72"
+								/** Escape closes the popover rather than clearing the selection. */
 								escapeKeyBehavior="none"
 								items={items}
 								onSelectionChange={(keys) => {
@@ -201,7 +187,7 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 							>
 								{(item: FacetItem) => (
 									<ListBoxItem
-										className="group flex cursor-pointer items-start gap-x-2 rounded-sm px-2 py-1.5 text-small outline-none hover:bg-primary-100 focus:bg-primary-100"
+										className="group flex cursor-pointer items-start gap-x-2 rounded-sm px-2 py-1.5 text-small -outline-offset-2 hover:bg-primary-100 focus:bg-primary-100"
 										id={item.value}
 										textValue={getLabel(item.value)}
 									>

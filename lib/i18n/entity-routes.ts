@@ -1,8 +1,6 @@
 /**
- * Entity detail routes whose own `translations` (locale -> real slug) make the naive same-slug-every-locale assumption
- * `AlternateLinks`/`LocaleSwitcher` otherwise fall back to actually wrong. Extend this array as more entity types get
- * the same treatment; `app/(api)/api/translations/route.ts` has the matching fetch side (its own switch dispatches
- * `type` to the right `cachedXxx` function).
+ * Entity detail routes whose slug differs per locale. `app/(api)/api/translations/route.ts` fetches the translated
+ * slugs.
  */
 const entityRoutes = [
 	{ type: "news", base: "/news/", pattern: /^\/news\/[^/]+$/ },

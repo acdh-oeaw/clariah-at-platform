@@ -7,11 +7,13 @@ import { getLocale } from "next-intl/server";
 import { type ReactNode, Suspense } from "react";
 
 import { Providers } from "#/app/(app)/[locale]/_components/providers.tsx";
+import { HistoryScrollAnchoringFix } from "#/app/(app)/_components/history-scroll-anchoring-fix.tsx";
 import { HtmlDocument } from "#/app/(app)/_components/html-document.tsx";
-import { MatomoAnalytics } from "#/app/(app)/_components/matomo-analytics";
-import { AlternateLinks } from "#/components/alternate-links";
+import { MatomoAnalytics } from "#/app/(app)/_components/matomo-analytics.tsx";
+import { ReloadOnBfcacheRestore } from "#/app/(app)/_components/reload-on-bfcache-restore.tsx";
+import { AlternateLinks } from "#/components/alternate-links.tsx";
 import { env } from "#/configs/env.config.ts";
-import { cachedSiteMetadata } from "#/lib/data/api-cache";
+import { cachedSiteMetadata } from "#/lib/data/api-cache.ts";
 import { routing } from "#/lib/i18n/routing.ts";
 import { createOpenGraph } from "#/lib/metadata.ts";
 
@@ -58,6 +60,8 @@ export default function LocaleLayout(props: Readonly<LocaleLayoutProps>): ReactN
 					</Suspense>
 					{children}
 				</Providers>
+				<HistoryScrollAnchoringFix />
+				<ReloadOnBfcacheRestore />
 				{env.NEXT_PUBLIC_APP_MATOMO_ID != null && env.NEXT_PUBLIC_APP_MATOMO_BASE_URL != null ? (
 					<MatomoAnalytics baseUrl={env.NEXT_PUBLIC_APP_MATOMO_BASE_URL} id={env.NEXT_PUBLIC_APP_MATOMO_ID} />
 				) : null}
