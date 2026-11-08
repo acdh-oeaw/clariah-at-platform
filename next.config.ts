@@ -46,7 +46,7 @@ const config: NextConfig = {
 		 * The widths the api's image-variant endpoint accepts. The two narrower than any viewport go in `imageSizes`, so a
 		 * full-width image is not offered a 320px candidate.
 		 */
-		deviceSizes: [640, 960, 1280, 1600, 2048, 2560, 3200, 3840],
+		deviceSizes: [640, 800, 960, 1280, 1600, 2048, 2560, 3200, 3840],
 		imageSizes: [320, 480],
 		qualities: [imageQuality],
 	},

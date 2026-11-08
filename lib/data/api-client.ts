@@ -310,7 +310,7 @@ export type ImageAspectRatio = NonNullable<ImageQuery["ar"]>;
 
 /** Widths the image-variant endpoint accepts; anything else is a 400. */
 export const imageWidths = [
-	320, 480, 640, 960, 1280, 1600, 2048, 2560, 3200, 3840,
+	320, 480, 640, 800, 960, 1280, 1600, 2048, 2560, 3200, 3840,
 ] as const satisfies ReadonlyArray<ImageWidth>;
 
 const largestImageWidth: ImageWidth = 3840;
