@@ -4,8 +4,8 @@ import cn from "clsx/lite";
 import { useExtracted, useFormatter } from "next-intl";
 import { type ReactNode, useEffect, useState } from "react";
 
-import { Pagination } from "#/app/(app)/[locale]/(default)/_components/pagination";
-import { SearchForm } from "#/app/(app)/[locale]/(default)/_components/search-form";
+import { Pagination } from "#/app/(app)/[locale]/(default)/_components/pagination.tsx";
+import { SearchForm } from "#/app/(app)/[locale]/(default)/_components/search-form.tsx";
 import { type SearchOutcome, type SearchParams, type SelectedFacets, useSearch } from "#/lib/search/use-search.ts";
 
 /** Typesense's match-all query. */
@@ -32,7 +32,7 @@ function useDebouncedValue<T>(value: T, delay: number): T {
 	return debounced;
 }
 
-/** The part of a search's state that belongs in the url — owned by the caller, not `SearchView` itself. */
+/** The part of a search's state that belongs in the url, owned by the caller. */
 export interface SearchViewParams {
 	query: string;
 	page: number;
@@ -40,31 +40,22 @@ export interface SearchViewParams {
 }
 
 interface SearchViewProps<Document extends { id: string }> {
-	/** Accessible name for the search input, e.g. "Search website" — each page's own wording. */
+	/** Accessible name for the search input. */
 	label: string;
-	/** The committed params this search is currently showing results for — the caller's url-encoded state. */
+
 	params: SearchViewParams;
-	/**
-	 * Called whenever the user's action should change the url: typing (debounced, resets `page` to 1), picking a facet
-	 * (resets `page` to 1), or clicking a `Pagination` link. `SearchView` never touches the url itself — the caller
-	 * re-encodes `params` with its own page-specific codec and pushes it.
-	 */
+	/** Called when the url should change. `SearchView` never touches the url itself. */
 	onParamsChange: (params: SearchViewParams) => void;
-	/** A real, shareable url for `params` — used for `Pagination`'s links only (so they're right-clickable). */
+	/** For `Pagination`'s links. */
 	getHref: (params: SearchViewParams) => string;
 	/** Must be referentially stable across renders, e.g. a `useCallback` if it closes over the current locale. */
 	search: (params: SearchParams) => Promise<SearchOutcome<Document> | null>;
 	renderItem: (document: Document, index: number) => ReactNode;
-	/** Wraps the form and the results. Defaults to a simple vertical stack. */
+
 	className?: string;
-	/** Wraps the results `<ul>`. Defaults to a card grid; pass a vertical stack for a plain text-result list instead. */
+
 	resultsClassName?: string;
-	/**
-	 * Renders a facet UI (checkboxes, a filter sidebar, ...) between the form and the results. Omit for a page with no
-	 * faceting. `facets` is `undefined` until the first response arrives, and absent from the response entirely unless
-	 * `search` itself requests counts for at least one field — the caller decides which fields matter, `SearchView` just
-	 * carries whatever it's given.
-	 */
+	/** `facets` is `undefined` until the first response arrives. */
 	renderFacets?: (params: {
 		facets: SearchOutcome<Document>["facets"];
 		selected: SelectedFacets;
@@ -91,14 +82,9 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 	const t = useExtracted();
 	const format = useFormatter();
 
-	/** A local draft so typing feels instant; debounced before it becomes part of `params` (and the url). */
+	/** A local draft so typing feels instant, debounced before it reaches the url. */
 	const [input, setInput] = useState(params.query);
-	/**
-	 * The committed query this draft was last reset from. When `params.query` changes from outside (browser back/forward,
-	 * or a facet/page change elsewhere resetting it) and doesn't match, the draft snaps to it — adjusted here during
-	 * render rather than in an effect, so it takes effect in the same render instead of a second one. A no-op when it's
-	 * our own debounced value flowing back through the caller.
-	 */
+	/** Resets the draft when `params.query` changes from outside, e.g. on back/forward navigation. */
 	const [syncedQuery, setSyncedQuery] = useState(params.query);
 	if (params.query !== syncedQuery) {
 		setSyncedQuery(params.query);
@@ -111,8 +97,6 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 		if (debouncedInput !== params.query) {
 			onParamsChange({ facets: params.facets, page: 1, query: debouncedInput });
 		}
-		// `params.facets`/`params.query` are read, not just depended on for re-triggering: the guard above already
-		// makes this a no-op whenever they (not `debouncedInput`) are what changed, so listing them is honest, not risky.
 	}, [debouncedInput, onParamsChange, params.facets, params.query]);
 
 	const isBrowsing = params.query === "";
@@ -127,16 +111,11 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 	const isLoading = state.status === "loading";
 
 	return (
-		/**
-		 * Holds the footer below the fold until the first results are in, as `DetailFallback` does before this component
-		 * has mounted. Otherwise it flashes up under the form, and is then pushed down again.
-		 */
+		/** Keeps the footer below the fold until the first results are in. */
 		<div className={cn(className, isLoading && state.outcome == null && "min-block-svh")}>
 			<SearchForm label={label} onChange={setInput} value={input} />
 
 			{renderFacets != null ? (
-				// `self-start`: the outer column's children stretch to full width by default (the form, results and
-				// pagination all want that), but the facets slot should size to its own content instead.
 				<div className="self-start">
 					{renderFacets({
 						facets: state.outcome?.facets,

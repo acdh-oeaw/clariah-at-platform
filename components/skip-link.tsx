@@ -7,7 +7,18 @@ export function SkipLink(props: Readonly<LinkProps>): ReactNode {
 	const { children, className, href, ...rest } = props;
 
 	return (
-		<Link {...rest} className={cn("absolute z-0 focus:z-9", className)} href={href}>
+		<Link
+			{...rest}
+			/**
+			 * Hidden until focused, then above the header, and far enough from the corner of the viewport for the focus
+			 * outline to show in full.
+			 */
+			className={cn(
+				"sr-only focus:not-sr-only focus:absolute focus:inset-s-4 focus:inset-bs-4 focus:z-20 focus:bg-white focus:px-4",
+				className,
+			)}
+			href={href}
+		>
 			{children}
 		</Link>
 	);

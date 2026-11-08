@@ -22,9 +22,7 @@ export function SearchResultCard(props: Readonly<SearchResultCardProps>): ReactN
 	return (
 		<div className="rounded-sm relative bg-white p-8 shadow-card">
 			<div className="max-w-5xl flex flex-col gap-y-3">
-				<Badge className="inline" intent="primary">
-					{type}
-				</Badge>
+				<Badge className="inline">{type}</Badge>
 				<h2 className="text-h3">
 					{href != null && href !== "" ? (
 						<IntentLink className="after:absolute after:inset-0 after:z-20" href={href}>

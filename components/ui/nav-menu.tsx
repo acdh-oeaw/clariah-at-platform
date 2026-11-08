@@ -136,12 +136,8 @@ export function NavMenu(props: Readonly<NavMenuProps>): ReactNode {
 	const { focusWithinProps } = useFocusWithin({
 		onBlurWithin(event) {
 			/**
-			 * Pressing another menu's toggle button moves focus away on pointer down, but that menu only opens when the press
-			 * completes. Closing right away would leave no menu open while the pointer is held down, which reads as lag. Keep
-			 * this menu open instead, and let `useInteractOutside` close it when the click completes.
-			 *
-			 * Moving focus to another toggle button with the keyboard closes immediately, as there is no click which would
-			 * eventually close this menu.
+			 * Pressing another menu's toggle button moves focus on pointer down, but that menu only opens on click. Stay open
+			 * until then, so no gap appears; `useInteractOutside` closes this menu on the click.
 			 */
 			if (
 				isPointerDownRef.current &&
@@ -156,13 +152,10 @@ export function NavMenu(props: Readonly<NavMenuProps>): ReactNode {
 	});
 
 	/**
-	 * Position the menu below its toggle button, and shift it back into view when it would otherwise overflow the
-	 * viewport. Also closes the menu when a scrollable ancestor of the toggle button - including the page itself - is
-	 * scrolled.
+	 * Keeps the menu in the viewport, and closes it on scroll.
 	 *
-	 * Note that this must run in the component which renders the `Disclosure`, not in the one which renders the panel:
-	 * react-aria measures the panel in a layout effect, and effects of child components run first, i.e. before the
-	 * `Disclosure` unhides the panel.
+	 * Must run in the component which renders the `Disclosure`, not the panel: child effects run before the `Disclosure`
+	 * unhides the panel, so it could not be measured.
 	 */
 	useOverlayPosition({
 		containerPadding: 16,
@@ -204,11 +197,7 @@ export function NavMenu(props: Readonly<NavMenuProps>): ReactNode {
 			<div ref={ref} {...focusWithinProps}>
 				<AriaDisclosure
 					{...rest}
-					/**
-					 * Deliberately _not_ a containing block for the menu: react-aria clamps the menu to the boundary element (the
-					 * document) as if the containing block was aligned with it, so a containing block which is offset from the
-					 * document origin shifts the whole allowed region by that offset.
-					 */
+					/** Not a containing block for the menu: react-aria would misplace it by the containing block's offset. */
 					className={className}
 					isExpanded={isExpanded}
 					onExpandedChange={(isExpanded) => {
@@ -237,10 +226,7 @@ export function NavMenuItems(props: Readonly<NavMenuItemsProps>): ReactNode {
 			{...rest}
 			ref={navMenu?.panelRef}
 			className={cn(
-				/**
-				 * Position and max height are set by `useOverlayPosition` in `NavMenu`. Until it has measured, the menu falls
-				 * back to its static position, i.e. directly below the toggle button.
-				 */
+				/** Position and max height are set by `useOverlayPosition` in `NavMenu`. */
 				"absolute z-20 overflow-auto border border-black/10 bg-white shadow-2xl inline-max",
 				className,
 			)}
@@ -254,8 +240,9 @@ export function NavMenuItems(props: Readonly<NavMenuItemsProps>): ReactNode {
 
 const navMenuItemStyles = cn(
 	"cursor-pointer rounded-none bg-transparent px-5 py-1 font-normal",
-	"data-focus-visible:outline-3",
-	"pressed:bg-transparent pressed:outline-none",
+	/** The items span the menu, whose scroll container would clip an outline drawn outside of them. */
+	"-outline-offset-2",
+	"pressed:bg-transparent",
 );
 
 export interface NavMenuItemProps {
@@ -277,32 +264,31 @@ export function NavMenuItem(props: Readonly<NavMenuItemProps>): ReactNode {
 		navMenu?.close();
 	};
 
+	/** A list item of the list which `NavMenuItems`, or the mobile navigation, renders around the items. */
 	return (
-		<ul>
-			<li>
-				{href != null ? (
-					<NavLink
-						className={cn(navMenuItemStyles, className)}
-						href={href}
-						onClick={onSelect}
-						target={target}
-						variant="unstyled"
-					>
-						{children}
-					</NavLink>
-				) : (
-					<AriaButton
-						className={cn(navMenuItemStyles, "text-start inline-full", className)}
-						onPress={() => {
-							onAction?.();
-							onSelect();
-						}}
-					>
-						{children}
-					</AriaButton>
-				)}
-			</li>
-		</ul>
+		<li>
+			{href != null ? (
+				<NavLink
+					className={cn(navMenuItemStyles, className)}
+					href={href}
+					onClick={onSelect}
+					target={target}
+					variant="unstyled"
+				>
+					{children}
+				</NavLink>
+			) : (
+				<AriaButton
+					className={cn(navMenuItemStyles, "text-start inline-full", className)}
+					onPress={() => {
+						onAction?.();
+						onSelect();
+					}}
+				>
+					{children}
+				</AriaButton>
+			)}
+		</li>
 	);
 }
 

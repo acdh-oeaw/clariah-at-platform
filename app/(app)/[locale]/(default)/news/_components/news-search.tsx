@@ -10,8 +10,8 @@ import {
 	eagerResultCount,
 } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
 import { searchParams } from "#/app/(app)/[locale]/(default)/news/search-params.ts";
-import { Card } from "#/components/card";
-import { getAssetImageUrl } from "#/lib/data/api-client";
+import { Card } from "#/components/card.tsx";
+import { getAssetImageUrl } from "#/lib/data/api-client.ts";
 import type { IntlLocale } from "#/lib/i18n/locales.ts";
 import { localizeHref } from "#/lib/navigation/convert.ts";
 import type { WebsiteDocument } from "#/lib/search/index.ts";
@@ -37,11 +37,6 @@ export function NewsSearch(props: Readonly<NewsSearchProps>): ReactNode {
 	const router = useRouter();
 	const rawSearchParams = useSearchParams();
 
-	/**
-	 * No local state: `params` is derived fresh from the url on every render, not mirrored into a `useState` that would
-	 * need manual syncing. `router.replace` below already updates the url; `useSearchParams` reactively reflects that on
-	 * the very next render, so there is nothing else to keep in sync by hand.
-	 */
 	const parsedSearchParams = searchParams.safeParse(rawSearchParams);
 	if (!parsedSearchParams.success) {
 		notFound();

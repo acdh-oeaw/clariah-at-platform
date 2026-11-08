@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { DetailCard } from "#/app/(app)/[locale]/_components/detail-card";
+import { DetailCard } from "#/app/(app)/[locale]/_components/detail-card.tsx";
 import { ContentBlocks } from "#/components/content-blocks.tsx";
 import type { Institution as InstitutionProps } from "#/lib/data/api-client.ts";
 

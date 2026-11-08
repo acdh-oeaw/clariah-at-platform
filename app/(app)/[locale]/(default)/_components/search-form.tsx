@@ -4,10 +4,10 @@ import { SearchIcon } from "lucide-react";
 import { useExtracted } from "next-intl";
 import { type ReactNode, useId } from "react";
 
-import { Button } from "#/components/ui/button";
+import { Button } from "#/components/ui/button.tsx";
 
 interface SearchFormProps {
-	/** Accessible name for the search input, e.g. "Search website" — each page's own wording. */
+	/** Accessible name for the search input. */
 	label: string;
 	/** Omit for a read-only input. */
 	onChange?: (value: string) => void;

@@ -1,7 +1,7 @@
 import { useExtracted } from "next-intl";
 import { Fragment, type ReactNode } from "react";
 
-import { Footer } from "#/app/(app)/[locale]/_components/footer";
+import { Footer } from "#/app/(app)/[locale]/_components/footer.tsx";
 import { Header } from "#/app/(app)/[locale]/_components/header.tsx";
 import { mainContentId } from "#/app/(app)/[locale]/_components/main.tsx";
 import { SkipLink } from "#/components/skip-link.tsx";

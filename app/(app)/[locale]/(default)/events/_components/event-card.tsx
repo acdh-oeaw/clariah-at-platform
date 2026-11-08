@@ -124,11 +124,7 @@ export function EventCard(props: CardProps): ReactNode {
 					{summary != null && summary !== "" ? <p className="line-clamp-3 text-text-weak">{summary}</p> : null}
 				</div>
 			</div>
-			{/*
-			 * The box sets the size, never the image: it fills the box and is cropped to it (`fill` + `object-cover`), so every
-			 * card is the same shape whatever the source's dimensions. A banner on top on narrow screens, a thumbnail on the
-			 * right from `sm` up. Kept, as a placeholder, for events without an image, so titles still line up across cards.
-			 */}
+			{/* Also rendered without an image, so titles line up across cards. */}
 			<div
 				className={cn(
 					"relative order-first aspect-video shrink-0 overflow-hidden bg-primary-200 inline-full",

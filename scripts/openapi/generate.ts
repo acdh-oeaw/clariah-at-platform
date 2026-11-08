@@ -65,13 +65,8 @@ function isJsonOperation(operation: OpenApiOperation): boolean {
 }
 
 /**
- * The api declares a `CacheTag` enum — every slice of data it serves — plus `x-cache-tags` on each operation: the
- * entity-type tags that operation's response transitively depends on, including embedded/joined data from other entity
- * types (e.g. a person's response embeds their governance-body affiliations). The `revalidate` webhook delivers exactly
- * this `CacheTag` vocabulary too (see `CacheTag`'s own description in the spec). `openapi-typescript` carries the
- * enum's _type_ into `lib/openapi/types.ts`, but not a runtime value, and it drops vendor extensions like
- * `x-cache-tags` entirely — so both are fetched and written out here instead, consumed by `lib/data/api-cache.ts`
- * (tagging cached responses) and `app/(api)/api/revalidate/route.ts` (validating the webhook payload).
+ * The api's `CacheTag` enum, and each operation's `x-cache-tags`: the entity types its response depends on.
+ * `openapi-typescript` generates no runtime value for the enum, and drops vendor extensions.
  */
 async function generateCacheTags(url: URL): Promise<void> {
 	const response = await fetch(url);

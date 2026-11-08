@@ -7,12 +7,12 @@ import { type ReactNode, useCallback } from "react";
 import {
 	SearchResultCard,
 	searchResultListClassName,
-} from "#/app/(app)/[locale]/(default)/_components/search-result-card";
+} from "#/app/(app)/[locale]/(default)/_components/search-result-card.tsx";
 import { SearchView, type SearchViewParams } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
-import { ResourceResultCard } from "#/app/(app)/[locale]/(default)/resources/_components/resource-result-card";
+import { ResourceResultCard } from "#/app/(app)/[locale]/(default)/resources/_components/resource-result-card.tsx";
 import { searchParams } from "#/app/(app)/[locale]/(default)/search-params.ts";
 import { SearchFacetFilter } from "#/app/(app)/[locale]/(default)/search/_components/facet-filter.tsx";
-import { useFacetLabel } from "#/app/(app)/[locale]/(default)/search/_components/facet-labels";
+import { useFacetLabel } from "#/app/(app)/[locale]/(default)/search/_components/facet-labels.ts";
 import type { IntlLocale } from "#/lib/i18n/locales.ts";
 import { localizeHref } from "#/lib/navigation/convert.ts";
 import type { ResourceDocument, WebsiteDocument } from "#/lib/search/index.ts";
@@ -62,12 +62,7 @@ function interleave<A, B>(a: ReadonlyArray<A>, b: ReadonlyArray<B>): Array<A | B
 	return result;
 }
 
-/**
- * `SearchViewParams.facets[facetField]` is multi-select (the facet UI is checkboxes), but `search-params.ts`'s `type`
- * is a single value — the url has room for one. Only the first selected type round-trips through the url and survives a
- * reload; further ones stay selected in memory until the next full navigation. Flagging this rather than silently
- * dropping the rest: worth deciding whether the url schema should become an array, or the facet UI single-select.
- */
+/** TODO: The facet UI is multi-select, but the url holds a single `type`, so only the first selected type is kept. */
 function toRawSearchParams(params: SearchViewParams): {
 	q: string;
 	type: WebsiteDocument["type"] | undefined;
@@ -100,11 +95,6 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 	const router = useRouter();
 	const rawSearchParams = useSearchParams();
 
-	/**
-	 * No local state: `params` is derived fresh from the url on every render, not mirrored into a `useState` that would
-	 * need manual syncing. `router.replace` below already updates the url; `useSearchParams` reactively reflects that on
-	 * the very next render, so there is nothing else to keep in sync by hand.
-	 */
 	const parsedSearchParams = searchParams.safeParse(rawSearchParams);
 	if (!parsedSearchParams.success) {
 		notFound();

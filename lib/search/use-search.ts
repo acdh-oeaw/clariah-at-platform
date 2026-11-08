@@ -48,9 +48,8 @@ export function useSearch<Document>(params: UseSearchParams<Document>): SearchSt
 
 	useEffect(() => {
 		/**
-		 * A slower, older response must not overwrite the current one. Held in an object, not a bare `let`: the flag is
-		 * flipped by the cleanup below while this effect's own async body is suspended on `await`, which a type checker
-		 * cannot see — narrowing a plain boolean here would make it look permanently `false` and the check "unnecessary".
+		 * A slower, older response must not overwrite the current one. An object, so the type checker does not narrow the
+		 * flag the cleanup flips.
 		 */
 		const stale = { current: false };
 

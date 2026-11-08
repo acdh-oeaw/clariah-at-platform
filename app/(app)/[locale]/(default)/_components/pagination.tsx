@@ -5,7 +5,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import { useExtracted } from "next-intl";
 import type { ReactNode } from "react";
 
-import { LinkButton } from "#/components/ui/button";
+import { LinkButton } from "#/components/ui/button.tsx";
 
 type PaginationItem = number | "ellipsis";
 
@@ -50,20 +50,15 @@ interface PaginationProps {
 	label: string;
 	page: number;
 	totalPages: number;
-	/** The page changes instantly client-side — `onPress` below, not the real navigation `href` provides. */
+
 	onChange: (page: number) => void;
-	/** A real, shareable url for a given page — so each link is right-clickable, bookmarkable and crawlable. */
+
 	getHref: (page: number) => string;
 	/** How many pages to show on each side of the current page. */
 	siblingCount?: number;
 }
 
-/**
- * `buttonStyles`' base only sets `inline-flex`/centering on the button's _children_ (`*:inline-flex ...`), not on the
- * button element itself — which stays `display: inline` (the browser default for an `<a>`). An inline element positions
- * its flex-child span via ordinary baseline alignment, not flex centering, which is what made the arrow icons sit
- * slightly off vertically. Making the button itself `inline-flex` fixes that at the source.
- */
+/** `inline-flex` on the button itself, or its icons sit off-centre vertically. */
 const pageButtonStyles = cn(
 	"items-center justify-center rounded-sm border border-primary-1000 font-bold text-primary-1000 tabular-nums has-[svg]:inline-flex",
 	"hover:bg-primary-100",
@@ -78,11 +73,6 @@ export function Pagination(props: Readonly<PaginationProps>): ReactNode {
 		return null;
 	}
 
-	/**
-	 * The current page is `isDisabled` — `LinkButton` then renders a plain, unlinked `<span>` instead of an anchor, same
-	 * as every other disabled-but-present page it owns (prev/next at either end are left out of the list entirely
-	 * instead, rather than shown disabled).
-	 */
 	function renderLink(targetPage: number, label: ReactNode, ariaLabel?: string): ReactNode {
 		const isCurrent = targetPage === page;
 

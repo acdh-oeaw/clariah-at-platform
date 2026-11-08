@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
-import { DetailCard } from "#/app/(app)/[locale]/_components/detail-card";
+import { DetailCard } from "#/app/(app)/[locale]/_components/detail-card.tsx";
 import { ContentBlocks } from "#/components/content-blocks.tsx";
-import { TableOfContents } from "#/components/table-of-contents";
+import { TableOfContents } from "#/components/table-of-contents.tsx";
 import type { Page as PageProps } from "#/lib/data/api-client.ts";
 
 export function Page(props: PageProps): ReactNode {

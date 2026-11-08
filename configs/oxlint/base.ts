@@ -385,7 +385,7 @@ const config = defineConfig({
 		"no-void": "off",
 		"unicode-bom": "off",
 
-		"import/extensions": "off",
+		"import/extensions": ["error", "always", { ignorePackages: true }],
 		"import/no-amd": "off",
 		"import/no-commonjs": "off",
 		"import/no-cycle": "off",

@@ -3,10 +3,10 @@ import { getExtracted } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { type ReactNode, Suspense } from "react";
 
-import { Member } from "#/app/(app)/[locale]/(default)/consortium/_components/member";
-import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
-import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
-import { cachedInstitution, isNationalConsortiumMember, staticSlugs } from "#/lib/data/api-cache";
+import { Member } from "#/app/(app)/[locale]/(default)/consortium/_components/member.tsx";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback.tsx";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout.tsx";
+import { cachedInstitution, isNationalConsortiumMember, staticSlugs } from "#/lib/data/api-cache.ts";
 import { createMetadata, createNotFoundMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
 
 interface MemberPageProps extends PageProps<"/[locale]/consortium/[slug]"> {}

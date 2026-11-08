@@ -5,13 +5,8 @@ import { type EntityRouteType, isEntityRouteType } from "#/lib/i18n/entity-route
 import { isValidLocale } from "#/lib/i18n/locales.ts";
 
 /**
- * Lets `LocaleSwitcher` (a client component, with no access to server-cached data) resolve the real, per-locale slug
- * for an entity detail route, instead of its naive same-slug-every-locale fallback. Hits the same `"use cache"`-backed
- * functions the page itself uses, so a cache hit here costs nothing extra — this data changes only when the CMS does,
- * via the same webhook that revalidates everything else.
- *
- * "projects" uses `cachedProject` (`getProjectBySlug`), not `cachedDariahProject` — unverified against the actual page,
- * which isn't visible from here; swap it if the real `/projects/[slug]` page uses the other one.
+ * Lets `LocaleSwitcher` resolve the translated slugs of an entity detail route. Uses the same cached functions as the
+ * pages.
  */
 function getTranslatedEntity(type: EntityRouteType, slug: string, locale: string) {
 	switch (type) {

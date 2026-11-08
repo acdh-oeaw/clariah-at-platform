@@ -21,7 +21,7 @@ export function NavigationDesktop(props: Readonly<NavigationDesktopProps>): Reac
 	const t = useExtracted();
 
 	return (
-		<div className="hidden flex-wrap items-center justify-end gap-6 xl:flex 2xl:gap-22">
+		<div className="hidden flex-wrap items-center justify-end gap-6 lg:flex 2xl:gap-22">
 			<ul className="flex flex-wrap items-center justify-end gap-x-6" role="list">
 				{Object.entries(navigation).map(([id, item]) => {
 					switch (item.type) {

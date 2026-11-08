@@ -4,10 +4,9 @@ import type { ReactNode } from "react";
 import { LocaleSwitcher } from "#/app/(app)/[locale]/_components/locale-swticher.tsx";
 import { Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel } from "#/components/disclosure.tsx";
 import { Link } from "#/components/link.tsx";
-import { NavMenu, NavMenuSeparator } from "#/components/navigation.tsx";
-import { NavMenuItem } from "#/components/ui/nav-menu.tsx";
+import { NavMenuItem, NavMenuSeparator } from "#/components/ui/nav-menu.tsx";
 import { localizeHref } from "#/lib/navigation/convert.ts";
-import type { NavigationConfig } from "#/lib/navigation/navigation";
+import type { NavigationConfig } from "#/lib/navigation/navigation.ts";
 
 interface NavigationMobileProps {
 	navigation: NavigationConfig;
@@ -22,7 +21,8 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 	const t = useExtracted();
 
 	return (
-		<div className="overflow-y-auto bg-white fixed top-16 bottom-0 inset-x-0 z-10 flex flex-col w-screen xl:hidden">
+		/** Full-width items inset their focus outline, which the scroll container would otherwise clip at the sides. */
+		<div className="overflow-y-auto bg-white fixed top-16 bottom-0 inset-x-0 z-10 flex flex-col w-screen lg:hidden">
 			<DisclosureGroup>
 				<ul role="list" className="flex flex-col gap-y-4 w-full pt-8">
 					{Object.entries(navigation).map(([id, item]) => {
@@ -31,7 +31,7 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 								return (
 									<li key={id}>
 										<Link
-											className="w-full py-4! px-6! font-heading text-regular h-fit"
+											className="w-full py-4! px-6! font-heading text-regular -outline-offset-2 h-fit"
 											href={item.href}
 											onClick={handleMobileMenuToggle}
 											target={item.target}
@@ -48,8 +48,9 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 									<li key={id}>
 										<Disclosure>
 											<DisclosureHeader>{item.label}</DisclosureHeader>
+											{/* The panel is already a group named by its header button. */}
 											<DisclosurePanel>
-												<NavMenu aria-labelledby={item.label}>
+												<ul role="list">
 													{item.children &&
 														Object.entries(item.children).map(([id, item]) => {
 															switch (item.type) {
@@ -85,7 +86,7 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 																}
 															}
 														})}
-												</NavMenu>
+												</ul>
 											</DisclosurePanel>
 										</Disclosure>
 									</li>
@@ -101,7 +102,7 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 				</ul>
 			</DisclosureGroup>
 			<Link
-				className="w-full py-4! px-6! font-heading text-regular h-fit"
+				className="w-full py-4! px-6! font-heading text-regular -outline-offset-2 h-fit"
 				href={localizeHref("/search", locale)}
 				onClick={handleMobileMenuToggle}
 
@@ -110,7 +111,7 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 				{t("Suche")}
 			</Link>
 			<div className="w-full px-6 py-4">
-				<LocaleSwitcher label={localeSwitcherLabel} variant="primary" />
+				<LocaleSwitcher label={localeSwitcherLabel} />
 			</div>
 		</div>
 	);

@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import { Providers } from "#/app/(app)/[locale]/_components/providers.tsx";
 import { SiteShell } from "#/app/(app)/[locale]/_components/site-shell.tsx";
 import { HtmlDocument } from "#/app/(app)/_components/html-document.tsx";
-import { MatomoAnalytics } from "#/app/(app)/_components/matomo-analytics";
-import { NotFoundState } from "#/app/(app)/_components/not-found-state";
+import { MatomoAnalytics } from "#/app/(app)/_components/matomo-analytics.tsx";
+import { NotFoundState } from "#/app/(app)/_components/not-found-state.tsx";
 import { env } from "#/configs/env.config.ts";
 import { defaultLocale } from "#/lib/i18n/locales.ts";
 

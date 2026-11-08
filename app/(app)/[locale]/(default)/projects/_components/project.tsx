@@ -1,8 +1,8 @@
 import { useExtracted, useFormatter } from "next-intl";
 import type { ReactNode } from "react";
 
-import { useFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels";
-import { DetailCard } from "#/app/(app)/[locale]/_components/detail-card";
+import { useFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels.ts";
+import { DetailCard } from "#/app/(app)/[locale]/_components/detail-card.tsx";
 import { ContentBlocks } from "#/components/content-blocks.tsx";
 import type { Project as ProjectProps } from "#/lib/data/api-client.ts";
 

@@ -19,7 +19,8 @@ export function Card(props: CardProps): ReactNode {
 	const { image, link, preload = false, title, summary } = props;
 	const t = useExtracted();
 	return (
-		<article className="grid group relative h-full grid-rows-[14rem_1fr_auto] overflow-hidden rounded-md bg-white shadow-card">
+		/** The link covers the whole card, which clips it, so the card shows the focus outline in place of the link. */
+		<article className="grid group relative h-full grid-rows-[14rem_1fr_auto] overflow-hidden rounded-md bg-white shadow-card has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus-outline">
 			{image && (
 				<ApiImage
 					alt=""
@@ -38,8 +39,9 @@ export function Card(props: CardProps): ReactNode {
 					<p className="text-text-weak line-clamp-3">{summary}</p>
 				</div>
 			</div>
+			{/* `outline-none` rather than `outline-hidden`: the card's outline stands in for this one in forced colors mode too. */}
 			<CardLink
-				className="after:absolute after:inset-0 after:z-20 w-full justify-between group-hover:bg-primary-500 group-hover:text-white bg-primary-200 px-8 py-4"
+				className="outline-none after:absolute after:inset-0 after:z-20 w-full justify-between group-hover:bg-primary-500 group-hover:text-white bg-primary-200 px-8 py-4"
 				endIcon={<ArrowRightIcon className="group-hover:translate-x-1.5 ease-in-out transition-transform" />}
 				href={link}
 				variant="unstyled"

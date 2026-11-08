@@ -4,7 +4,7 @@ import cn from "clsx/lite";
 import { useExtracted } from "next-intl";
 import { Fragment, type ReactNode, useEffect, useState } from "react";
 
-import { SearchForm } from "#/app/(app)/[locale]/(default)/_components/search-form";
+import { SearchForm } from "#/app/(app)/[locale]/(default)/_components/search-form.tsx";
 import { Button } from "#/components/ui/button.tsx";
 import { type SearchOutcome, type SearchParams, useSearch } from "#/lib/search/use-search.ts";
 

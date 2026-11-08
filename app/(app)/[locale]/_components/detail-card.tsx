@@ -2,7 +2,7 @@ import cn from "clsx/lite";
 import type { ComponentProps, ReactNode } from "react";
 
 import { pageColumnClassName } from "#/app/(app)/[locale]/_components/page-column.ts";
-import { ApiImage } from "#/components/api-image.tsx";
+import { ApiImage } from "#/components/image.tsx";
 
 interface DetailCardProps {
 	children: ReactNode;

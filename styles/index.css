@@ -114,7 +114,7 @@
 	--color-background-base: var(--color-white);
 	--color-text-strong: var(--color-black);
 	--color-stroke-strong: var(--color-black);
-	--color-focus-outline: var(--color-black);
+	--color-focus-outline: var(--color-primary-1000);
 }
 
 @theme {
@@ -151,6 +151,16 @@
 
 	:target {
 		scroll-margin-block: 2rlh;
+	}
+
+	/**
+	 * One focus indicator for every focusable element. React Aria marks keyboard focus with `data-focus-visible`, which
+	 * also covers its virtual focus, e.g. the options of a list box whose search field holds the actual focus.
+	 */
+	:focus-visible,
+	[data-focus-visible] {
+		outline: 2px solid var(--color-focus-outline);
+		outline-offset: 2px;
 	}
 
 	h1,
@@ -214,13 +224,9 @@
 	max-inline-size: var(--container-measure);
 }
 
-@utility focus-visible-outline {
-	outline: transparent none 2px;
-
-	&:is(:focus-visible, [data-focus-visible]) {
-		outline: 2px solid var(--color-focus-outline);
-		outline-offset: 2px;
-	}
+/** For dark backgrounds, e.g. `bg-primary-1000`, which the focus outline would not stand out against. */
+@utility focus-outline-inverse {
+	--color-focus-outline: var(--color-white);
 }
 
 @utility scrollbar-hidden {

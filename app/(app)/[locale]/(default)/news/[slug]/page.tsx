@@ -3,11 +3,11 @@ import { getExtracted } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Fragment, type ReactNode, Suspense } from "react";
 
-import { NewsItem } from "#/app/(app)/[locale]/(default)/news/_components/news-item";
-import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
-import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
+import { NewsItem } from "#/app/(app)/[locale]/(default)/news/_components/news-item.tsx";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback.tsx";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout.tsx";
 import { JsonLd } from "#/components/json-ld.tsx";
-import { cachedNewsItem, staticSlugs } from "#/lib/data/api-cache";
+import { cachedNewsItem, staticSlugs } from "#/lib/data/api-cache.ts";
 import { createNewsArticle } from "#/lib/json-ld.ts";
 import { createMetadata, createNotFoundMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
 

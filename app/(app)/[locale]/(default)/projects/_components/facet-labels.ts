@@ -1,12 +1,6 @@
 import { useExtracted } from "next-intl";
 
-/**
- * Named `use*`, not `get*`: it calls `useExtracted()` internally, and React Compiler decides whether a function may
- * call hooks — and whether it's safe to auto-memoize and sometimes skip re-invoking — from this naming convention
- * alone. A `get*` name told it this was a plain, skippable function; skipping it also skipped `useExtracted`'s own
- * internal hooks on that render, which is what was behind the "changed size between renders" / "fewer hooks than
- * expected" errors.
- */
+/** Named `use*`, because it calls `useExtracted()`: React Compiler may skip calling a `get*` function. */
 export function useFacetLabel(): (status: string) => string {
 	const t = useExtracted();
 	return (value: string) => {

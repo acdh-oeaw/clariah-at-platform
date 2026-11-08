@@ -4,11 +4,11 @@ import { useExtracted } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { type ReactNode, useCallback, useState } from "react";
 
-import { EventCard } from "#/app/(app)/[locale]/(default)/events/_components/event-card";
+import { EventCard } from "#/app/(app)/[locale]/(default)/events/_components/event-card.tsx";
 import { type RenderItemContext, SearchView } from "#/app/(app)/[locale]/(default)/events/_components/search-view.tsx";
-import { getAssetImageUrl } from "#/lib/data/api-client";
+import { getAssetImageUrl } from "#/lib/data/api-client.ts";
 import type { IntlLocale } from "#/lib/i18n/locales.ts";
-import { localizeHref } from "#/lib/navigation/convert";
+import { localizeHref } from "#/lib/navigation/convert.ts";
 import type { WebsiteFilterField } from "#/lib/search/collections/website.ts";
 import type { SearchFilter } from "#/lib/search/filters.ts";
 import type { WebsiteDocument } from "#/lib/search/index.ts";

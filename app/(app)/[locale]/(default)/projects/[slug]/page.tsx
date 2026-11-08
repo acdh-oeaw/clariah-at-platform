@@ -3,10 +3,10 @@ import { getExtracted } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { type ReactNode, Suspense } from "react";
 
-import { Project } from "#/app/(app)/[locale]/(default)/projects/_components/project";
-import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback";
-import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
-import { cachedProject, staticSlugs } from "#/lib/data/api-cache";
+import { Project } from "#/app/(app)/[locale]/(default)/projects/_components/project.tsx";
+import { DetailFallback } from "#/app/(app)/[locale]/_components/detail-fallback.tsx";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout.tsx";
+import { cachedProject, staticSlugs } from "#/lib/data/api-cache.ts";
 import { createMetadata, createNotFoundMetadata, getLanguageAlternates } from "#/lib/metadata.ts";
 
 interface ProjectPageProps extends PageProps<"/[locale]/projects/[slug]"> {}

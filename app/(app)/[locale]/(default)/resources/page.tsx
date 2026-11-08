@@ -4,13 +4,13 @@ import { notFound } from "next/navigation";
 import { locale } from "next/root-params";
 import { type ReactNode, Suspense } from "react";
 
-import { SearchFallback } from "#/app/(app)/[locale]/(default)/_components/search-form";
-import { ResourcesSearch } from "#/app/(app)/[locale]/(default)/resources/_components/resources-search";
-import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
-import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
-import { ContentBlocks } from "#/components/content-blocks";
-import { cachedPage } from "#/lib/data/api-cache";
-import { isValidLocale } from "#/lib/i18n/locales";
+import { SearchFallback } from "#/app/(app)/[locale]/(default)/_components/search-form.tsx";
+import { ResourcesSearch } from "#/app/(app)/[locale]/(default)/resources/_components/resources-search.tsx";
+import { PageContent } from "#/app/(app)/[locale]/_components/page-content.tsx";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout.tsx";
+import { ContentBlocks } from "#/components/content-blocks.tsx";
+import { cachedPage } from "#/lib/data/api-cache.ts";
+import { isValidLocale } from "#/lib/i18n/locales.ts";
 import { createMetadata } from "#/lib/metadata.ts";
 
 /** The whole page is static, for initial loads and navigations alike: the build fails if that changes. */

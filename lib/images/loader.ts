@@ -6,8 +6,7 @@ import { sourceWidthParam } from "#/configs/image.config.ts";
 import { createImageVariantUrl } from "#/lib/images/variants.ts";
 
 /**
- * The `loader` for images rendered by the api's variant endpoint, passed per instance by `ApiImage` (both the
- * client-safe one in `./image.tsx` and the server-only one in `./api-image.tsx`).
+ * The `loader` for images rendered by the api's variant endpoint, passed per instance by `ApiImage`.
  *
  * Deliberately not registered as `images.loaderFile`: a site-wide custom loader makes next answer every `/_next/image`
  * request with a 404, which would take the built-in optimizer away from static imports and `/public` files too — see

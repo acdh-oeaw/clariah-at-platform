@@ -9,17 +9,17 @@ import {
 	type SearchViewParams,
 	eagerResultCount,
 } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
-import { useFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels";
+import { useFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels.ts";
 import {
 	type ProjectStatus,
 	projectStatuses,
 	searchParams,
 } from "#/app/(app)/[locale]/(default)/projects/search-params.ts";
 import { SearchFacetFilter } from "#/app/(app)/[locale]/(default)/search/_components/facet-filter.tsx";
-import { Card } from "#/components/card";
-import { getAssetImageUrl } from "#/lib/data/api-client";
+import { Card } from "#/components/card.tsx";
+import { getAssetImageUrl } from "#/lib/data/api-client.ts";
 import type { IntlLocale } from "#/lib/i18n/locales.ts";
-import { localizeHref } from "#/lib/navigation/convert";
+import { localizeHref } from "#/lib/navigation/convert.ts";
 import type { WebsiteFilterField } from "#/lib/search/collections/website.ts";
 import type { SearchFilter } from "#/lib/search/filters.ts";
 import type { WebsiteDocument } from "#/lib/search/index.ts";
@@ -87,11 +87,6 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 		return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
 	});
 
-	/**
-	 * No local state: `params` is derived fresh from the url on every render, not mirrored into a `useState` that would
-	 * need manual syncing. `router.replace` below already updates the url; `useSearchParams` reactively reflects that on
-	 * the very next render, so there is nothing else to keep in sync by hand.
-	 */
 	const parsedSearchParams = searchParams.safeParse(rawSearchParams);
 	if (!parsedSearchParams.success) {
 		notFound();

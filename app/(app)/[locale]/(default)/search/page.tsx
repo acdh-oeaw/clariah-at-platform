@@ -4,10 +4,10 @@ import { notFound } from "next/navigation";
 import { locale } from "next/root-params";
 import { type ReactNode, Suspense } from "react";
 
-import { SearchFallback } from "#/app/(app)/[locale]/(default)/_components/search-form";
+import { SearchFallback } from "#/app/(app)/[locale]/(default)/_components/search-form.tsx";
 import { WebsiteSearch } from "#/app/(app)/[locale]/(default)/search/_components/website-search.tsx";
-import { PageContent } from "#/app/(app)/[locale]/_components/page-content";
-import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout";
+import { PageContent } from "#/app/(app)/[locale]/_components/page-content.tsx";
+import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout.tsx";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
 import { createMetadata } from "#/lib/metadata.ts";
 

@@ -4,8 +4,8 @@ import { getExtracted, getLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 
 import { Navigation } from "#/app/(app)/[locale]/_components/navigation.tsx";
-import { pageColumnClassName } from "#/app/(app)/[locale]/_components/page-column";
-import { cachedNavigation } from "#/lib/data/api-cache";
+import { pageColumnClassName } from "#/app/(app)/[locale]/_components/page-column.ts";
+import { cachedNavigation } from "#/lib/data/api-cache.ts";
 import { convertNavigationMenu, localizeHref } from "#/lib/navigation/convert.ts";
 import type { NavigationConfig, NavigationLink } from "#/lib/navigation/navigation.ts";
 

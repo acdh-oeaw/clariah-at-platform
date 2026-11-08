@@ -62,9 +62,6 @@ import { operationCacheTags } from "#/lib/openapi/cache-tags.ts";
 /**
  * Cached read layer. Requires `cacheComponents: true` in next.config.ts.
  *
- * Every function declares its return type from `ApiResponse<"operationId">`, so the cached layer cannot drift from the
- * generated schema.
- *
  * Rules for everything below:
  *
  * - Arguments are the cache key, so they must be serializable. Never thread `RequestOptions` (AbortSignal, Headers)
@@ -82,8 +79,8 @@ import { operationCacheTags } from "#/lib/openapi/cache-tags.ts";
 /* -------------------------------------------------------------------------- */
 
 /**
- * Three levels per entity type: - `collection` — list endpoints for that type - `entities` — every detail entry of that
- * type - `entity` — one detail entry so a single edit expires its lists and its own page, not every page of the type.
+ * Three levels per entity type: `collection` (list endpoints), `entities` (every detail entry) and `entity` (one detail
+ * entry), so a single edit expires its lists and its own page, not every page of the type.
  */
 export const tags = {
 	collection: (type: EntityType): string => `collection:${type}`,
@@ -105,11 +102,8 @@ function detailTags(type: EntityType, slug: string): [string, string] {
 }
 
 /**
- * Maps the api's own `CacheTag` vocabulary (see `lib/openapi/cache-tags.ts`) to the `EntityType` `expireByCacheTag`
- * below expires for it — also what the `revalidate` webhook's payload validates against, so
- * `app/(api)/api/revalidate/route.ts` calls `expireByCacheTag` directly instead of keeping a second copy of this
- * mapping. "members-partners" isn't its own entity type here: `cachedMembersAndPartners`/`cachedMemberOrPartner` both
- * tag under `collection:country`/`entities:country`.
+ * Maps the api's `CacheTag` values (see `lib/openapi/cache-tags.ts`) to the `EntityType` to expire. "members-partners"
+ * is tagged as `country`.
  */
 const entityTypeByCacheTag: Partial<Record<CacheTag, EntityType>> = {
 	"documents-policies": "documents_policies",
@@ -137,11 +131,8 @@ const standaloneTagsByCacheTag: Partial<Record<CacheTag, string>> = {
 };
 
 /**
- * Resolves an operation's `x-cache-tags` — the api's own declaration of every entity type its response transitively
- * depends on, including embedded/joined data (e.g. a person's response embeds governance-body and working-group
- * affiliations) — into this app's own cache tags. Pass the result to `cacheTag()` alongside a function's own
- * `detailTags`/`collection` tag: this only adds the dependencies the api declares beyond the entity's own type, it
- * carries no slug-level granularity of its own.
+ * The cache tags for every entity type an operation's response embeds, from its `x-cache-tags`. Use alongside a
+ * function's own `detailTags`/`collection` tag.
  */
 function relatedTags(operationId: JsonOperationId): ReadonlyArray<string> {
 	return operationCacheTags[operationId].flatMap((apiCacheTag) => {
@@ -612,9 +603,8 @@ const featuredEntityTypes = new Set<EntityType>(["news", "opportunities", "fundi
 const statisticsEntityTypes = new Set<EntityType>(["country", "institution", "working_group"]);
 
 /**
- * Expires immediately, so the next visitor waits for fresh data. With stale-while-revalidate that visitor would get the
- * old entry, and on a low-traffic site the next visitor is often the editor checking their change. In a Server Action
- * where the user must see their own write immediately, use `updateTag` instead.
+ * Expires immediately rather than stale-while-revalidate: on a low-traffic site the next visitor is often the editor
+ * checking their change.
  */
 export function expire(tag: string): void {
 	revalidateTag(tag, { expire: 0 });
@@ -643,11 +633,7 @@ export function revalidateEntity(type: EntityType, slug?: string): void {
 	}
 }
 
-/**
- * Call from the CMS webhook route handler, passing one of the api's own `CacheTag` values (see
- * `lib/openapi/cache-tags.ts`) — the single source of truth this and `relatedTags` both resolve against, so the
- * webhook's invalidation and a cached response's own tags can never drift apart.
- */
+/** Call from the CMS webhook route handler, passing one of the api's `CacheTag` values. */
 export function expireByCacheTag(apiCacheTag: CacheTag): void {
 	const entityType = entityTypeByCacheTag[apiCacheTag];
 	if (entityType != null) {

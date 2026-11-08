@@ -140,7 +140,6 @@ msgstr "Search is currently unavailable."
 
 #: app/(app)/[locale]/(default)/_components/search-view.tsx
 #: app/(app)/[locale]/(default)/events/_components/search-view.tsx
-#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
 msgctxt "UkmHx2"
 msgid "Keine Ergebnisse."
@@ -344,18 +343,6 @@ msgctxt "LIsWz1"
 msgid "Projekte filtern"
 msgstr "Filter Projects"
 
-#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
-#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
-msgctxt "am5jN9"
-msgid "Filter {label}"
-msgstr "Filter {label}"
-
-#: app/(app)/[locale]/(default)/resources/_components/facet-filter.tsx
-#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
-msgctxt "JIdm6T"
-msgid "Filter…"
-msgstr "Filter…"
-
 #: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
 #: app/(app)/[locale]/(default)/search/_components/website-search.tsx
 msgctxt "xTeBn_"
@@ -372,6 +359,16 @@ msgstr "Filter resources"
 msgctxt "aOOcfk"
 msgid "Ressourcen"
 msgstr "Resources"
+
+#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
+msgctxt "am5jN9"
+msgid "Filter {label}"
+msgstr "Filter {label}"
+
+#: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
+msgctxt "JIdm6T"
+msgid "Filter…"
+msgstr "Filter…"
 
 #: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
 msgctxt "fz2AhZ"
@@ -425,6 +422,16 @@ msgstr "Search"
 msgctxt "-DNRtH"
 msgid "Weiterlesen"
 msgstr "Read more"
+
+#: components/content-blocks.tsx
+msgctxt "xY3cU4"
+msgid "Eingebetteter Inhalt"
+msgstr "Embedded content"
+
+#: components/content-blocks.tsx
+msgctxt "5489bn"
+msgid "Hinweis"
+msgstr "Note"
 
 #: components/rich-text.tsx
 msgctxt "4ioeud"
