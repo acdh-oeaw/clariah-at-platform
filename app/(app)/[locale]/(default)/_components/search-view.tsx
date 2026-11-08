@@ -6,6 +6,8 @@ import { type ReactNode, useEffect, useState } from "react";
 
 import { Pagination } from "#/app/(app)/[locale]/(default)/_components/pagination.tsx";
 import { SearchForm } from "#/app/(app)/[locale]/(default)/_components/search-form.tsx";
+import { SearchTracker } from "#/app/(app)/[locale]/(default)/_components/search-tracker.tsx";
+import type { SearchPage, SearchState as TrackedSearchState } from "#/lib/analytics/search.ts";
 import { type SearchOutcome, type SearchParams, type SelectedFacets, useSearch } from "#/lib/search/use-search.ts";
 
 /** Typesense's match-all query. */
@@ -39,9 +41,24 @@ export interface SearchViewParams {
 	facets: SelectedFacets;
 }
 
+/**
+ * The selected facet values the results know about, so a url's made-up values are not tracked: a selected value which
+ * matches anything is among the facet's values.
+ */
+function getKnownFacets(selected: SelectedFacets, facets: SearchOutcome<unknown>["facets"]): SelectedFacets {
+	return Object.fromEntries(
+		Object.entries(selected).map(([field, values]) => {
+			const known = new Set(facets?.[field]?.values.map((item) => item.value));
+			return [field, values.filter((value) => known.has(value))];
+		}),
+	);
+}
+
 interface SearchViewProps<Document extends { id: string }> {
 	/** Accessible name for the search input. */
 	label: string;
+	/** Identifies the page in Matomo's reports, see `SearchTracker`. */
+	name: SearchPage;
 
 	params: SearchViewParams;
 	/** Called when the url should change. `SearchView` never touches the url itself. */
@@ -71,6 +88,7 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 		className = defaultClassName,
 		getHref,
 		label,
+		name,
 		onParamsChange,
 		params,
 		renderFacets,
@@ -110,10 +128,21 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 
 	const isLoading = state.status === "loading";
 
+	const trackedState: TrackedSearchState | null =
+		state.status === "success"
+			? {
+					keyword: params.query,
+					filters: getKnownFacets(params.facets, state.outcome.facets),
+					page: params.page,
+					count: state.outcome.pagination.total,
+				}
+			: null;
+
 	return (
 		/** Keeps the footer below the fold until the first results are in. */
 		<div className={cn(className, isLoading && state.outcome == null && "min-block-svh")}>
 			<SearchForm label={label} onChange={setInput} value={input} />
+			<SearchTracker name={name} state={trackedState} />
 
 			{renderFacets != null ? (
 				<div className="self-start">

@@ -5,6 +5,7 @@ import { useExtracted } from "next-intl";
 import { Fragment, type ReactNode, useEffect, useState } from "react";
 
 import { SearchForm } from "#/app/(app)/[locale]/(default)/_components/search-form.tsx";
+import { SearchTracker } from "#/app/(app)/[locale]/(default)/_components/search-tracker.tsx";
 import { Button } from "#/components/ui/button.tsx";
 import { type SearchOutcome, type SearchParams, useSearch } from "#/lib/search/use-search.ts";
 
@@ -83,6 +84,21 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 	const [input, setInput] = useState(initialQuery);
 	const [query, flushQuery] = useDebouncedValue(input.trim(), debounceMilliseconds);
 
+	/** Each section's number of results, and the query they are for, so searches are tracked with the total of all. */
+	const [totals, setTotals] = useState<Readonly<Record<string, { query: string; total: number }>>>({});
+	const isCounted = sections.every((section) => totals[section.id]?.query === query);
+	const count = sections.reduce((sum, section) => sum + (totals[section.id]?.total ?? 0), 0);
+
+	function setTotal(sectionId: string, sectionQuery: string, total: number): void {
+		setTotals((current) => {
+			const previous = current[sectionId];
+			if (previous?.query === sectionQuery && previous.total === total) {
+				return current;
+			}
+			return { ...current, [sectionId]: { query: sectionQuery, total } };
+		});
+	}
+
 	/** Keep the address bar shareable. Next syncs `history.replaceState` with `useSearchParams`. */
 	useEffect(() => {
 		const params = new URLSearchParams();
@@ -98,10 +114,14 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 		<div className={className}>
 			{/* Results already update while typing; submitting just skips the wait. */}
 			<SearchForm label={t("Events filtern")} onChange={setInput} onSubmit={flushQuery} value={input} />
+			<SearchTracker name="events" state={isCounted ? { keyword: query, filters: {}, page: 1, count } : null} />
 			<div className="flex flex-col gap-y-20">
 				{sections.map((section) => (
 					<SearchResults<Document>
 						key={section.id}
+						onTotal={(sectionQuery, total) => {
+							setTotal(section.id, sectionQuery, total);
+						}}
 						query={query}
 						renderItem={renderItem}
 						resultsClassName={resultsClassName}
@@ -115,6 +135,8 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 
 interface SearchResultsProps<Document extends { id: string }> {
 	query: string;
+	/** Called with the number of results once they are in for the query. */
+	onTotal: (query: string, total: number) => void;
 	section: SearchViewSection<Document>;
 	renderItem: (document: Document, context: RenderItemContext) => ReactNode;
 	resultsClassName: string;
@@ -134,7 +156,7 @@ interface ResultGroup<Document> {
 }
 
 function SearchResults<Document extends { id: string }>(props: Readonly<SearchResultsProps<Document>>): ReactNode {
-	const { query, renderItem, resultsClassName, section } = props;
+	const { onTotal, query, renderItem, resultsClassName, section } = props;
 
 	const t = useExtracted();
 
@@ -142,6 +164,13 @@ function SearchResults<Document extends { id: string }>(props: Readonly<SearchRe
 
 	/** The first page goes through `useSearch`, which keeps the previous results on screen while a new query loads. */
 	const state = useSearch({ query: searchQuery, page: 1, perPage: section.perPage, search: section.search });
+
+	const total = state.status === "success" ? state.outcome.pagination.total : null;
+	useEffect(() => {
+		if (total != null) {
+			onTotal(query, total);
+		}
+	}, [onTotal, query, total]);
 
 	const [more, setMore] = useState<MoreResults<Document>>({ query, pages: [], status: "idle" });
 	const morePages = more.query === query ? more.pages : [];

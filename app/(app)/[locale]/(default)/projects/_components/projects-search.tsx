@@ -9,7 +9,7 @@ import {
 	type SearchViewParams,
 	eagerResultCount,
 } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
-import { useFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels.ts";
+import { useFacetLabel, useStatusLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels.ts";
 import {
 	type ProjectStatus,
 	projectStatuses,
@@ -72,6 +72,7 @@ function toSearchViewParams(raw: {
 export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode {
 	const { locale } = props;
 	const getLabel = useFacetLabel();
+	const getStatusLabel = useStatusLabel();
 	const t = useExtracted();
 	const pathname = usePathname();
 	const router = useRouter();
@@ -100,20 +101,6 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 
 	function onParamsChange(nextParams: SearchViewParams): void {
 		router.replace(getHref(nextParams), { scroll: false });
-	}
-
-	function getStatusLabel(value: string): string {
-		switch (toProjectStatus(value)) {
-			case "ongoing": {
-				return t("Laufend");
-			}
-			case "completed": {
-				return t("Abgeschlossen");
-			}
-			case undefined: {
-				return value;
-			}
-		}
 	}
 
 	// `document.link` is root-relative and locale-less, like `EntityRef.href` from the CMS API — prefix it the same way.
@@ -246,6 +233,7 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 		<SearchView<WebsiteDocument>
 			getHref={getHref}
 			label={t("Projekte filtern")}
+			name="projects"
 			onParamsChange={onParamsChange}
 			params={params}
 			renderFacets={renderFacets}

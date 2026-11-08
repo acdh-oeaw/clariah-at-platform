@@ -166,6 +166,7 @@ msgid "Alle Artikel anzeigen"
 msgstr "Alle Artikel anzeigen"
 
 #: app/(app)/[locale]/(default)/(index)/page.tsx
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
 #: app/(app)/[locale]/(default)/news/[slug]/page.tsx
 #: app/(app)/[locale]/(default)/news/page.tsx
 #: app/(app)/[locale]/(default)/search/_components/facet-labels.ts
@@ -174,6 +175,7 @@ msgid "News"
 msgstr "News"
 
 #: app/(app)/[locale]/(default)/(index)/page.tsx
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
 #: app/(app)/[locale]/(default)/events/[slug]/page.tsx
 #: app/(app)/[locale]/(default)/events/page.tsx
 msgctxt "ZvKSfJ"
@@ -181,11 +183,222 @@ msgid "Events"
 msgstr "Events"
 
 #: app/(app)/[locale]/(default)/(index)/page.tsx
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
 #: app/(app)/[locale]/(default)/projects/[slug]/page.tsx
 #: app/(app)/[locale]/(default)/projects/page.tsx
 msgctxt "x9x-dX"
 msgid "Projekte"
 msgstr "Projekte"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "MHNXkM"
+msgid "Suchen und Filter"
+msgstr "Suchen und Filter"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "ZQy1dP"
+msgid "Wie die Website-Suche und die Suchen und Filter der Listenseiten in den vergangenen {days} Tagen genutzt wurden. Suchbegriffe werden nur aufgeführt, wenn in mindestens {visits} Besuchen nach ihnen gesucht wurde."
+msgstr "Wie die Website-Suche und die Suchen und Filter der Listenseiten in den vergangenen {days} Tagen genutzt wurden. Suchbegriffe werden nur aufgeführt, wenn in mindestens {visits} Besuchen nach ihnen gesucht wurde."
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "10r_Dr"
+msgid "Bisher wurden keine Suchanfragen oder Filter erfasst."
+msgstr "Bisher wurden keine Suchanfragen oder Filter erfasst."
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "pycXAr"
+msgid "Website-Suche"
+msgstr "Website-Suche"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+#: app/(app)/[locale]/(default)/resources/page.tsx
+msgctxt "aOOcfk"
+msgid "Ressourcen"
+msgstr "Ressourcen"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "8GP13D"
+msgid "Suchanfragen"
+msgstr "Suchanfragen"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "MSSbZ0"
+msgid "Suchanfragen ohne Ergebnis"
+msgstr "Suchanfragen ohne Ergebnis"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "7MuK0V"
+msgid "Häufigste Suchbegriffe"
+msgstr "Häufigste Suchbegriffe"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "pGVsdO"
+msgid "Suchbegriff"
+msgstr "Suchbegriff"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "hlTfxM"
+msgid "Bisher wurde kein Begriff in mindestens {visits} Besuchen gesucht."
+msgstr "Bisher wurde kein Begriff in mindestens {visits} Besuchen gesucht."
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "osyyZx"
+msgid "Häufigste Filter"
+msgstr "Häufigste Filter"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "9Obw6C"
+msgid "Filter"
+msgstr "Filter"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "ejuFAr"
+msgid "Wert"
+msgstr "Wert"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "RhzQF6"
+msgid "Ausgewählt"
+msgstr "Ausgewählt"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "I1QzTb"
+msgid "Bisher wurde kein Filter verwendet."
+msgstr "Bisher wurde kein Filter verwendet."
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+#: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
+#: app/(app)/[locale]/(default)/search/_components/website-search.tsx
+msgctxt "xTeBn_"
+msgid "Typ"
+msgstr "Typ"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
+#: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
+msgctxt "GfQtQD"
+msgid "Förderprogramm"
+msgstr "Förderprogramm"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+#: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
+msgctxt "6BVFDW"
+msgid "Projektstatus"
+msgstr "Projektstatus"
+
+#: app/(app)/[locale]/(default)/analytics/_components/search-analytics.tsx
+msgctxt "OkZlJ4"
+msgid "Suchstatistik wird geladen …"
+msgstr "Suchstatistik wird geladen …"
+
+#: app/(app)/[locale]/(default)/analytics/_components/visits-chart.tsx
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "G-TqHS"
+msgid "Besuche"
+msgstr "Besuche"
+
+#: app/(app)/[locale]/(default)/analytics/_components/visits-chart.tsx
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "kAKJ1O"
+msgid "Eindeutige Besucher:innen"
+msgstr "Eindeutige Besucher:innen"
+
+#: app/(app)/[locale]/(default)/analytics/_components/visits-chart.tsx
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "_x7yBn"
+msgid "{month} (laufend)"
+msgstr "{month} (laufend)"
+
+#: app/(app)/[locale]/(default)/analytics/_components/visits-chart.tsx
+msgctxt "DQVCsT"
+msgid "Besuche: {count}"
+msgstr "Besuche: {count}"
+
+#: app/(app)/[locale]/(default)/analytics/_components/visits-chart.tsx
+msgctxt "cJmTv8"
+msgid "Eindeutige Besucher:innen: {count}"
+msgstr "Eindeutige Besucher:innen: {count}"
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "j1eYhE"
+msgid "Statistik"
+msgstr "Statistik"
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "SaGCYV"
+msgid "Besuche der CLARIAH-AT-Website pro Monat."
+msgstr "Besuche der CLARIAH-AT-Website pro Monat."
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "TZjtFb"
+msgid "Besuche der CLARIAH-AT-Website in den vergangenen {count} Monaten, gezählt von Matomo."
+msgstr "Besuche der CLARIAH-AT-Website in den vergangenen {count} Monaten, gezählt von Matomo."
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "FItZ7K"
+msgid "Für diese Website ist keine Statistik eingerichtet."
+msgstr "Für diese Website ist keine Statistik eingerichtet."
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "_UgcC1"
+msgid "{change} gegenüber {month}"
+msgstr "{change} gegenüber {month}"
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "IkZQCK"
+msgid "Besuche im {month}"
+msgstr "Besuche im {month}"
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "74EAfo"
+msgid "Eindeutige Besucher:innen im {month}"
+msgstr "Eindeutige Besucher:innen im {month}"
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "4nrz6Z"
+msgid "Pro Monat"
+msgstr "Pro Monat"
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "vOnZjs"
+msgid "Der {month} ist noch nicht abgeschlossen."
+msgstr "Der {month} ist noch nicht abgeschlossen."
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "lGnMPV"
+msgid "Monat"
+msgstr "Monat"
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "lZIQOt"
+msgid "k. A."
+msgstr "k. A."
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "M8LGmV"
+msgid "Über diese Zahlen"
+msgstr "Über diese Zahlen"
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "nv3qxV"
+msgid "Ein Besuch ist eine Folge von Seitenaufrufen ohne Pause von mehr als 30 Minuten. Die Website setzt keine Cookies, daher wird eine Person höchstens einen Tag lang an Browser und Netzwerk wiedererkannt: Wer an einem anderen Tag wiederkommt, zählt als weitere eindeutige Besucher:in. Eindeutige Besucher:innen pro Monat sind daher eine Obergrenze."
+msgstr "Ein Besuch ist eine Folge von Seitenaufrufen ohne Pause von mehr als 30 Minuten. Die Website setzt keine Cookies, daher wird eine Person höchstens einen Tag lang an Browser und Netzwerk wiedererkannt: Wer an einem anderen Tag wiederkommt, zählt als weitere eindeutige Besucher:in. Eindeutige Besucher:innen pro Monat sind daher eine Obergrenze."
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "NL5kOz"
+msgid "Suchen sind jene in der Website-Suche und auf den Listenseiten. Sie werden gezählt, sobald nicht mehr getippt wird, und erst ab dem Monat, in dem sie zum ersten Mal erfasst wurden: Frühere Monate zeigen k. A."
+msgstr "Suchen sind jene in der Website-Suche und auf den Listenseiten. Sie werden gezählt, sobald nicht mehr getippt wird, und erst ab dem Monat, in dem sie zum ersten Mal erfasst wurden: Frühere Monate zeigen k. A."
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "Evd9T2"
+msgid "Die Zahlen werden stündlich aktualisiert."
+msgstr "Die Zahlen werden stündlich aktualisiert."
+
+#: app/(app)/[locale]/(default)/analytics/page.tsx
+msgctxt "nRMNaf"
+msgid "Statistik wird geladen …"
+msgstr "Statistik wird geladen …"
 
 #: app/(app)/[locale]/(default)/consortium/[slug]/page.tsx
 msgctxt "vHX8jY"
@@ -307,6 +520,16 @@ msgctxt "iwL9SY"
 msgid "Sonstiges"
 msgstr "Sonstiges"
 
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgctxt "Y6xNTw"
+msgid "Laufend"
+msgstr "Laufend"
+
+#: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
+msgctxt "PF2-8B"
+msgid "Abgeschlossen"
+msgstr "Abgeschlossen"
+
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
 msgctxt "qCcwo3"
 msgid "Links"
@@ -322,27 +545,6 @@ msgctxt "6Aln8l"
 msgid "Beteiligte Personen"
 msgstr "Beteiligte Personen"
 
-#: app/(app)/[locale]/(default)/projects/_components/project.tsx
-#: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
-msgctxt "GfQtQD"
-msgid "Förderprogramm"
-msgstr "Förderprogramm"
-
-#: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
-msgctxt "Y6xNTw"
-msgid "Laufend"
-msgstr "Laufend"
-
-#: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
-msgctxt "PF2-8B"
-msgid "Abgeschlossen"
-msgstr "Abgeschlossen"
-
-#: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
-msgctxt "6BVFDW"
-msgid "Projektstatus"
-msgstr "Projektstatus"
-
 #: app/(app)/[locale]/(default)/projects/_components/projects-search.tsx
 #: app/(app)/[locale]/(default)/projects/page.tsx
 msgctxt "LIsWz1"
@@ -355,21 +557,10 @@ msgid "Website"
 msgstr "Website"
 
 #: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
-#: app/(app)/[locale]/(default)/search/_components/website-search.tsx
-msgctxt "xTeBn_"
-msgid "Typ"
-msgstr "Typ"
-
-#: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
 #: app/(app)/[locale]/(default)/resources/page.tsx
 msgctxt "6M7vT8"
 msgid "Ressourcen durchsuchen"
 msgstr "Ressourcen durchsuchen"
-
-#: app/(app)/[locale]/(default)/resources/page.tsx
-msgctxt "aOOcfk"
-msgid "Ressourcen"
-msgstr "Ressourcen"
 
 #: app/(app)/[locale]/(default)/search/_components/facet-filter.tsx
 msgctxt "am5jN9"

@@ -31,6 +31,12 @@ const validate = define({
 		API_ACCESS_TOKEN: v.optional(v.pipe(v.string(), v.nonEmpty())),
 		BUILD_MODE: v.optional(v.picklist(["export", "standalone"])),
 		CI: v.optional(v.pipe(v.unknown(), v.toBoolean())),
+		/**
+		 * A matomo auth token with `view` access to the site `NEXT_PUBLIC_APP_MATOMO_ID`, for the numbers at `/analytics`.
+		 * Use a dedicated user with view access only, since anything the token can read, the page could show. Without it,
+		 * the page says that analytics are not configured.
+		 */
+		MATOMO_API_TOKEN: v.optional(v.pipe(v.string(), v.nonEmpty())),
 		NEXT_RUNTIME: v.optional(v.picklist(["edge", "nodejs"])),
 		PORT: v.optional(v.pipe(v.string(), v.toNumber(), v.integer(), v.minValue(1))),
 		REVALIDATION_WEBHOOK_SECRET: v.optional(v.pipe(v.string(), v.nonEmpty())),
@@ -42,6 +48,7 @@ export const env = validate({
 		API_ACCESS_TOKEN: process.env.API_ACCESS_TOKEN,
 		BUILD_MODE: process.env.BUILD_MODE,
 		CI: process.env.CI,
+		MATOMO_API_TOKEN: process.env.MATOMO_API_TOKEN,
 		NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
 		NEXT_PUBLIC_API_OPENAPI_PATHNAME: process.env.NEXT_PUBLIC_API_OPENAPI_PATHNAME,
 		NEXT_PUBLIC_APP_BASE_URL: process.env.NEXT_PUBLIC_APP_BASE_URL,
