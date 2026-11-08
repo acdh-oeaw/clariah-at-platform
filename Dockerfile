@@ -1,29 +1,15 @@
-# syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1
 
-FROM oven/bun:1-alpine AS bun
-
-FROM node:24-alpine AS base
-# libc6-compat: sharp and other native addons expect glibc symbols musl doesn't provide.
-RUN apk add --no-cache libc6-compat
-COPY --from=bun /usr/local/bin/bun /usr/local/bin/bun
-# CI=true makes lefthook's postinstall skip itself (no .git in the build context).
-ENV CI="true" \
-	NEXT_TELEMETRY_DISABLED="1"
-
-FROM base AS deps
+FROM node:24-alpine AS deps
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-# Not corepack: reads the same `packageManager` field `pnpm/action-setup@v4` reads in CI.
-RUN npm install -g "pnpm@$(node -p "require('./package.json').packageManager.replace(/^pnpm@/, '')")" \
-	&& pnpm config set store-dir /pnpm/store \
-	&& pnpm config set ignore-scripts true
 COPY patches ./patches
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --ignore-scripts \
-	&& pnpm rebuild @parcel/watcher @swc/core lefthook \
-	&& ln -sf /usr/local/bin/bun node_modules/.bin/bun
+# pnpm also installs the bun runtime pinned in `pnpm-lock.yaml` (`engines.runtime`).
+# --ignore-scripts skips the root "prepare" script, which needs files not copied in yet.
+RUN npm install -g "pnpm@$(node -p "require('./package.json').packageManager.replace(/^pnpm@/, '')")" \
+	&& pnpm install --frozen-lockfile --ignore-scripts
 
 FROM deps AS builder
-WORKDIR /app
 COPY . .
 
 ARG NEXT_PUBLIC_API_BASE_URL
@@ -41,35 +27,32 @@ ARG NEXT_PUBLIC_TYPESENSE_PROTOCOL
 ARG NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME_RESOURCES
 ARG NEXT_PUBLIC_TYPESENSE_COLLECTION_NAME_WEBSITE
 ARG NEXT_PUBLIC_TYPESENSE_SEARCH_API_KEY
-ENV BUILD_MODE="standalone"
+ENV BUILD_MODE="standalone" \
+	NEXT_TELEMETRY_DISABLED="1"
 
 RUN pnpm run types:prepare && pnpm run generate:openapi
+# BuildKit secret, not ARG, so it never lands in `docker history`.
+RUN --mount=type=secret,id=API_ACCESS_TOKEN,env=API_ACCESS_TOKEN,required=false \
+	pnpm run build
 
-# BuildKit secret, not ARG, so it never lands in `docker history`. required=false: build-deploy.yml doesn't
-# supply it yet.
-RUN --mount=type=secret,id=API_ACCESS_TOKEN,required=false \
-	sh -c '\
-	if [ -f /run/secrets/API_ACCESS_TOKEN ]; then \
-	export API_ACCESS_TOKEN="$(cat /run/secrets/API_ACCESS_TOKEN)"; \
-	fi; \
-	pnpm run build \
-	'
-
-FROM node:24-alpine AS runner
+FROM alpine:3.24 AS runner
 WORKDIR /app
 
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libgcc libstdc++ \
+	&& adduser -D -u 1000 bun
+# Same bun binary the app was built with, so the version stays pinned by `pnpm-lock.yaml` alone.
+COPY --from=builder /app/node_modules/bun/bun /usr/local/bin/bun
 
-USER node
+ENV NODE_ENV="production" \
+	NEXT_TELEMETRY_DISABLED="1"
 
-COPY --from=builder --chown=node:node /app/next.config.ts ./
-COPY --from=builder --chown=node:node /app/public ./public
+USER bun
+
 # standalone output traces node_modules but omits .next/static and public.
-COPY --from=builder --chown=node:node /app/.next/standalone ./
-COPY --from=builder --chown=node:node /app/.next/static ./.next/static
-
-ENV NODE_ENV="production"
+COPY --from=builder --chown=bun:bun /app/.next/standalone ./
+COPY --from=builder --chown=bun:bun /app/.next/static ./.next/static
+COPY --from=builder --chown=bun:bun /app/public ./public
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+CMD ["bun", "server.js"]
