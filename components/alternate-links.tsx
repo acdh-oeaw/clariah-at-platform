@@ -15,7 +15,10 @@ function toAbsoluteUrl(pathname: string): string {
 	return String(createUrl({ baseUrl: env.NEXT_PUBLIC_APP_BASE_URL, pathname }));
 }
 
-/** Instead of next-intl's `Link` response header, see `alternateLinks: false` in `lib/i18n/routing.ts`. */
+/**
+ * Instead of next-intl's `Link` response header, see `alternateLinks: false` in `lib/i18n/routing.ts`. `x-default` is
+ * the locale-less path, which redirects by language.
+ */
 export function AlternateLinks(): ReactNode {
 	const currentLocale = useLocale();
 	const pathname = usePathname();
@@ -26,8 +29,6 @@ export function AlternateLinks(): ReactNode {
 		return null;
 	}
 
-	const isHomepage = suffix === "" || suffix === "/";
-
 	return (
 		<Fragment>
 			{locales.map((locale) => {
@@ -36,7 +37,7 @@ export function AlternateLinks(): ReactNode {
 
 				return <link key={locale} href={toAbsoluteUrl(href)} hrefLang={locale} rel="alternate" />;
 			})}
-			{isHomepage ? <link href={toAbsoluteUrl("/")} hrefLang="x-default" rel="alternate" /> : null}
+			<link href={toAbsoluteUrl(suffix === "" ? "/" : suffix)} hrefLang="x-default" rel="alternate" />
 		</Fragment>
 	);
 }

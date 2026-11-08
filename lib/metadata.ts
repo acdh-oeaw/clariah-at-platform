@@ -80,17 +80,27 @@ export async function createOpenGraph(openGraph: OpenGraph = {}): Promise<OpenGr
 	};
 }
 
-/** The translations of an entity as `alternates.languages`, for an entity whose pages live below `basePathname`. */
+/**
+ * The translations of an entity as `alternates.languages`, for an entity whose pages live below `basePathname`. When
+ * every locale shares one slug, the locale-less path, which redirects by language, is the `x-default`.
+ */
 export function getLanguageAlternates(
 	basePathname: string,
 	translations: ReadonlyArray<{ locale: string; slug: string }>,
 ): Record<string, string> {
 	const languages: Record<string, string> = {};
+	const slugs = new Set<string>();
 
 	for (const translation of translations) {
 		if (isValidLocale(translation.locale)) {
 			languages[translation.locale] = localizeHref(`${basePathname}/${translation.slug}`, translation.locale);
+			slugs.add(translation.slug);
 		}
+	}
+
+	const [slug] = slugs;
+	if (slug != null && slugs.size === 1 && Object.keys(languages).length === locales.length) {
+		languages["x-default"] = `${basePathname}/${slug}`;
 	}
 
 	return languages;
