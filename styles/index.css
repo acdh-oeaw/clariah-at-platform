@@ -114,6 +114,7 @@
 	--color-background-base: var(--color-white);
 	--color-text-strong: var(--color-black);
 	--color-stroke-strong: var(--color-black);
+	--color-stroke-weak: var(--color-primary-200);
 	--color-focus-outline: var(--color-primary-1000);
 }
 

@@ -240,6 +240,12 @@ msgctxt "cBXYMi"
 msgid "Impressum"
 msgstr "Imprint"
 
+#: app/(app)/[locale]/(default)/imprint/page.tsx
+#: app/(app)/[locale]/(default)/pages/[slug]/page.tsx
+msgctxt "mt510S"
+msgid "Infos"
+msgstr "Infos"
+
 #: app/(app)/[locale]/(default)/news/_components/news-item.tsx
 msgctxt "woPHUz"
 msgid "Veröffentlicht am"
@@ -250,11 +256,6 @@ msgstr "Published"
 msgctxt "9QD4qH"
 msgid "Aktuelles durchsuchen"
 msgstr "Filter news"
-
-#: app/(app)/[locale]/(default)/pages/[slug]/page.tsx
-msgctxt "mt510S"
-msgid "Infos"
-msgstr "Infos"
 
 #: app/(app)/[locale]/(default)/projects/_components/facet-labels.ts
 msgctxt "_ErBVb"

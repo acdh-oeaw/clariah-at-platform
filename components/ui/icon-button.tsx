@@ -1,5 +1,6 @@
 "use client";
 
+import cn from "clsx/lite";
 import { type ComponentPropsWithRef, Fragment, type ReactNode } from "react";
 import { composeRenderProps } from "react-aria-components";
 
@@ -10,10 +11,16 @@ interface IconButtonProps extends Omit<ComponentPropsWithRef<typeof Button>, "va
 }
 
 export function IconButton(props: Readonly<IconButtonProps>): ReactNode {
-	const { children, label, ...rest } = props;
+	const { children, className, label, ...rest } = props;
 
 	return (
-		<Button {...rest} variant="unstyled">
+		<Button
+			{...rest}
+			className={composeRenderProps(className, (className) =>
+				cn("touch-area inline-flex rounded-sm hover:bg-primary-100", className),
+			)}
+			variant="unstyled"
+		>
 			{composeRenderProps(children, (children) => (
 				<Fragment>
 					{children}

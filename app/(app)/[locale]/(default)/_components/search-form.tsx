@@ -35,7 +35,7 @@ export function SearchForm(props: Readonly<SearchFormProps>): ReactNode {
 			</label>
 			<div className="flex gap-x-2">
 				<input
-					className="min-w-0 flex-1 border rounded-md border-stroke-weak bg-white px-4 py-2.5 text-regular"
+					className="min-w-0 flex-1 border rounded-md border-stroke-strong bg-white px-4 py-2.5 text-regular"
 					id={inputId}
 					name="q"
 					onChange={(event) => {

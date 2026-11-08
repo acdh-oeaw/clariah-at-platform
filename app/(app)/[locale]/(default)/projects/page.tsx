@@ -45,7 +45,7 @@ export default async function ProjectPage(): Promise<ReactNode> {
 		<PageLayout title={t("Projekte")}>
 			<PageContent>
 				<div className="flex flex-col gap-y-8">
-					<div className="max-w-prose">{page?.content && <ContentBlocks blocks={page.content} />}</div>
+					{page?.content && <ContentBlocks blocks={page.content} className="max-w-prose" />}
 					<Suspense fallback={<SearchFallback label={t("Projekte filtern")} />}>
 						<ProjectsSearch locale={currentLocale} />
 					</Suspense>

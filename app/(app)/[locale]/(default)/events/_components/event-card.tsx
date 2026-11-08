@@ -1,7 +1,7 @@
 import cn from "clsx/lite";
 import { CalendarDaysIcon } from "lucide-react";
 import { useFormatter } from "next-intl";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 import { ApiImage } from "#/components/image.tsx";
 import { IntentLink } from "#/components/intent-link.tsx";
@@ -98,12 +98,12 @@ export function EventCard(props: CardProps): ReactNode {
 					>
 						{renderDate(start, "col-start-1")}
 						{shownEnd != null ? (
-							<>
+							<Fragment>
 								<span aria-hidden={true} className="col-start-2 row-start-2 text-2xl">
 									–
 								</span>
 								{renderDate(shownEnd, "col-start-3")}
-							</>
+							</Fragment>
 						) : null}
 						{isSameMonth ? (
 							<div className="col-span-full row-start-3 justify-self-center">{renderMonth(start)}</div>

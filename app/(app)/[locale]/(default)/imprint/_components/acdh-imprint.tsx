@@ -3,6 +3,7 @@ import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { richTextClassName } from "#/components/rich-text.tsx";
 import { env } from "#/configs/env.config.ts";
 import type { IntlLocale } from "#/lib/i18n/locales.ts";
 
@@ -53,5 +54,5 @@ export async function AcdhImprint(props: Readonly<AcdhImprintProps>): Promise<Re
 		notFound();
 	}
 
-	return <div className="prose p-8" dangerouslySetInnerHTML={{ __html: html }} />;
+	return <div className={richTextClassName} dangerouslySetInnerHTML={{ __html: html }} />;
 }

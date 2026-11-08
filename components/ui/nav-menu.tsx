@@ -227,7 +227,7 @@ export function NavMenuItems(props: Readonly<NavMenuItemsProps>): ReactNode {
 			ref={navMenu?.panelRef}
 			className={cn(
 				/** Position and max height are set by `useOverlayPosition` in `NavMenu`. */
-				"absolute z-20 overflow-auto border border-black/10 bg-white shadow-2xl inline-max",
+				"absolute z-20 overflow-auto rounded-md border border-black/10 bg-white shadow-2xl inline-max",
 				className,
 			)}
 		>

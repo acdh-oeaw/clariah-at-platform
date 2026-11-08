@@ -37,9 +37,11 @@ export function DisclosureHeader({ children }: Readonly<DisclosureHeaderProps>):
 	const { isExpanded } = use(DisclosureStateContext)!;
 	return (
 		<Button
-			className="w-full font-heading uppercase text-regular *:flex *:justify-between!"
+			className="w-full font-heading uppercase text-regular"
 			data-expanded={isExpanded || undefined}
-			endIcon={isExpanded ? <ChevronUpIcon className="size-6" /> : <ChevronDownIcon className="size-6" />}
+			endIcon={
+				isExpanded ? <ChevronUpIcon className="ms-auto size-6" /> : <ChevronDownIcon className="ms-auto size-6" />
+			}
 			slot="trigger"
 			variant="disclosure"
 		>

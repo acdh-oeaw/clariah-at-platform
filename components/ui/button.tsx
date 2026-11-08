@@ -20,9 +20,12 @@ export const buttonStyles = styles({
 	variants: {
 		variant: {
 			/** Frames are borders: outlines are only for the focus indicator, see `styles/index.css`. */
-			primary: cn("border-2 bg-white font-bold inline-58.75 *:px-4.5 *:py-2.5", "hover:border-white hover:text-white"),
+			primary: cn(
+				"rounded-md border-2 bg-white font-bold inline-58.75 *:px-4.5 *:py-2.5",
+				"hover:border-white hover:text-white",
+			),
 			secondary: cn(
-				"border-2 border-white font-bold text-primary-1000 *:px-4.5 *:py-0.5",
+				"rounded-md border-2 border-white font-bold text-primary-1000 *:px-4.5 *:py-0.5",
 				"hover:bg-primary-600 hover:text-white",
 			),
 			outline: cn(

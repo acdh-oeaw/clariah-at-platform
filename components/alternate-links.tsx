@@ -3,7 +3,7 @@
 import { createUrl } from "@acdh-oeaw/lib";
 import { useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 import { env } from "#/configs/env.config.ts";
 import { matchEntityRoute } from "#/lib/i18n/entity-routes.ts";
@@ -29,7 +29,7 @@ export function AlternateLinks(): ReactNode {
 	const isHomepage = suffix === "" || suffix === "/";
 
 	return (
-		<>
+		<Fragment>
 			{locales.map((locale) => {
 				const prefix = localePrefix.prefixes[locale];
 				const href = suffix === "" ? prefix : `${prefix}${suffix}`;
@@ -37,6 +37,6 @@ export function AlternateLinks(): ReactNode {
 				return <link key={locale} href={toAbsoluteUrl(href)} hrefLang={locale} rel="alternate" />;
 			})}
 			{isHomepage ? <link href={toAbsoluteUrl("/")} hrefLang="x-default" rel="alternate" /> : null}
-		</>
+		</Fragment>
 	);
 }

@@ -1,7 +1,7 @@
 import { useExtracted, useLocale } from "next-intl";
 import type { ReactNode } from "react";
 
-import { LocaleSwitcher } from "#/app/(app)/[locale]/_components/locale-swticher.tsx";
+import { LocaleSwitcher } from "#/app/(app)/[locale]/_components/locale-switcher.tsx";
 import { Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel } from "#/components/disclosure.tsx";
 import { Link } from "#/components/link.tsx";
 import { NavMenuItem, NavMenuSeparator } from "#/components/ui/nav-menu.tsx";
@@ -24,18 +24,18 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 		/** Full-width items inset their focus outline, which the scroll container would otherwise clip at the sides. */
 		<div className="overflow-y-auto bg-white fixed top-16 bottom-0 inset-x-0 z-10 flex flex-col w-screen lg:hidden">
 			<DisclosureGroup>
-				<ul role="list" className="flex flex-col gap-y-4 w-full pt-8">
+				<ul role="list" className="flex flex-col w-full pt-6">
 					{Object.entries(navigation).map(([id, item]) => {
 						switch (item.type) {
 							case "link": {
 								return (
 									<li key={id}>
 										<Link
-											className="w-full py-4! px-6! font-heading text-regular -outline-offset-2 h-fit"
+											className="px-6 py-2 font-heading text-regular -outline-offset-2"
 											href={item.href}
 											onClick={handleMobileMenuToggle}
 											target={item.target}
-											variant="primary"
+											variant="block"
 										>
 											{item.label}
 										</Link>
@@ -102,11 +102,11 @@ export function NavigationMobile(props: Readonly<NavigationMobileProps>): ReactN
 				</ul>
 			</DisclosureGroup>
 			<Link
-				className="w-full py-4! px-6! font-heading text-regular -outline-offset-2 h-fit"
+				className="px-6 py-4 font-heading text-regular -outline-offset-2"
 				href={localizeHref("/search", locale)}
 				onClick={handleMobileMenuToggle}
 
-				variant="primary"
+				variant="block"
 			>
 				{t("Suche")}
 			</Link>

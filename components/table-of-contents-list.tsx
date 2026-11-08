@@ -12,9 +12,14 @@ interface TableOfContentsListProps {
 
 /** Indents a subsection's entry under its section's. */
 const indentClassName: Record<number, string> = {
-	2: "",
-	3: "ps-4",
+	2: "ps-8",
+	3: "ps-12",
 };
+
+const activeClassName = cn(
+	"before:absolute before:inset-y-0 before:-inset-s-0.5 before:bg-primary-1000 before:inline-0.5",
+	"before:forced-color-adjust-none forced-colors:before:bg-[Highlight]",
+);
 
 /** A section counts as current once its heading has scrolled above this fraction of the viewport's height. */
 const activationLine = 0.25;
@@ -105,27 +110,29 @@ export function TableOfContentsList(props: Readonly<TableOfContentsListProps>): 
 	}, [headings]);
 
 	return (
-		<ul>
+		<ul className="border-s-2 border-primary-300">
 			{headings.map((heading) => {
 				const isActive = heading.id === activeId;
 
 				return (
-					<li className={indentClassName[heading.level]} key={heading.id}>
+					<li key={heading.id}>
 						{/**
 						 * A plain anchor, not `Link`: `next/link` treats a second click on the hash the url already has as a navigation to the
 						 * same url and does not scroll again, while the browser always jumps to the heading.
 						 */}
 						<a
 							aria-current={isActive ? "location" : undefined}
-
-							className={linkStyles({ className: "block py-1!", variant: "primary" })}
+							className={linkStyles({
+								className: cn("relative py-1", indentClassName[heading.level], isActive && activeClassName),
+								variant: "block",
+							})}
 							href={`#${heading.id}`}
 							onClick={() => {
 								pinnedIdRef.current = heading.id;
 								setActiveId(heading.id);
 							}}
 						>
-							<span className={cn(isActive && "font-bold")}>{heading.text}</span>
+							{heading.text}
 						</a>
 					</li>
 				);

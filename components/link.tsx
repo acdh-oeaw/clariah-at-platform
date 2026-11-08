@@ -8,11 +8,14 @@ import NextLink, { type LinkProps as NextLinkProps } from "next/link";
 import { type ComponentProps, type ElementType, Fragment, type ReactNode } from "react";
 import { Link as AriaLink, type LinkProps as AriaLinkProps } from "react-aria-components";
 
+const hoverUnderlineClassName = "hover:underline hover:decoration-[10%] hover:underline-offset-[24%]";
+
 export const linkStyles = styles({
 	base: [],
 	variants: {
 		variant: {
-			primary: cn("gap-2 py-2", "inline-fit hover:underline hover:decoration-[10%] hover:underline-offset-[24%]"),
+			primary: cn("gap-2 py-2", "inline-fit", hoverUnderlineClassName),
+			block: cn("block", hoverUnderlineClassName),
 			unstyled: "",
 		},
 	},

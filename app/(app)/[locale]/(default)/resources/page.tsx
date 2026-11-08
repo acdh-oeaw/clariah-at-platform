@@ -40,7 +40,7 @@ export default async function ResourcesPage(): Promise<ReactNode> {
 		<PageLayout title={t("Ressourcen")}>
 			<PageContent>
 				<div className="flex flex-col gap-y-8">
-					<div className="max-w-prose">{page?.content && <ContentBlocks blocks={page.content} />}</div>
+					{page?.content && <ContentBlocks blocks={page.content} className="max-w-prose" />}
 					<Suspense fallback={<SearchFallback label={t("Ressourcen durchsuchen")} />}>
 						<ResourcesSearchSection />
 					</Suspense>
