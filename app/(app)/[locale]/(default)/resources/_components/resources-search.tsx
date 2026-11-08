@@ -56,7 +56,7 @@ async function search(params: SearchParams): Promise<SearchOutcome<ResourceDocum
 			Object.entries(result.value.facets).map(([field, facet]) => [
 				field,
 				{
-					values: (facet?.values ?? []).map(({ count, highlighted, value }) => {
+					values: facet.values.map(({ count, highlighted, value }) => {
 						return { count, highlighted, value };
 					}),
 				},

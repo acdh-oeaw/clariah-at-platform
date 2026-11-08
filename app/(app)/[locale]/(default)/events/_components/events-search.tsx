@@ -63,6 +63,7 @@ export function EventsSearch(props: EventsSearchProps): ReactNode {
 	 * Start of the current UTC day. Event dates are UTC days (midnight timestamps), so an event ending — or, without an
 	 * end, taking place — today still counts as upcoming. Fixed on mount, so both sections split at the same instant.
 	 */
+	// oxlint-disable-next-line react/hook-use-state -- set once on mount, never updated
 	const [today] = useState(() => {
 		const date = new Date();
 		return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());

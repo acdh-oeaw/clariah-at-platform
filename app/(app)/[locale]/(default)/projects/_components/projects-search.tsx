@@ -81,6 +81,7 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 	 * Start of the current UTC day. Project dates are UTC days (midnight timestamps), so a project ending today still
 	 * counts as ongoing. Fixed on mount, so results and counts split at the same instant.
 	 */
+	// oxlint-disable-next-line react/hook-use-state -- set once on mount, never updated
 	const [today] = useState(() => {
 		const date = new Date();
 		return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
