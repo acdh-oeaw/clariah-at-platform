@@ -307,6 +307,11 @@ msgid "Sonstiges"
 msgstr "Other"
 
 #: app/(app)/[locale]/(default)/projects/_components/project.tsx
+msgctxt "qCcwo3"
+msgid "Links"
+msgstr "Links"
+
+#: app/(app)/[locale]/(default)/projects/_components/project.tsx
 msgctxt "g8HIH0"
 msgid "Beteiligte Organisationen"
 msgstr "Affiliated Organisations"
@@ -342,6 +347,11 @@ msgstr "Status"
 msgctxt "LIsWz1"
 msgid "Projekte filtern"
 msgstr "Filter Projects"
+
+#: app/(app)/[locale]/(default)/projects/_components/social-media.tsx
+msgctxt "JkLHGw"
+msgid "Website"
+msgstr "Website"
 
 #: app/(app)/[locale]/(default)/resources/_components/resources-search.tsx
 #: app/(app)/[locale]/(default)/search/_components/website-search.tsx
