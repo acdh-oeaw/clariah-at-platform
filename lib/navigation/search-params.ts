@@ -154,3 +154,22 @@ export function defineSearchParams<const Schema extends v.GenericSchema>(
 		schema,
 	};
 }
+
+/**
+ * A search parameter which may be repeated, e.g. `?type=a&type=b`, for multi-select filters. Accepts a single or
+ * repeated occurrence, ignores empty values (so `?type=` means "no filter"), removes duplicates, and defaults to an
+ * empty array. Pair it with a `stringify` which maps an empty array to `undefined`.
+ */
+export function repeatedSearchParam<const Item extends v.GenericSchema<string>>(
+	item: Item,
+): v.GenericSchema<ReadonlyArray<string> | string | undefined, Array<v.InferOutput<Item>>> {
+	return v.optional(
+		v.pipe(
+			v.union([v.string(), v.array(v.string())]),
+			v.transform((value) => (Array.isArray(value) ? value : [value]).filter((entry) => entry !== "")),
+			v.array(item),
+			v.transform((values) => Array.from(new Set(values))),
+		),
+		[],
+	);
+}

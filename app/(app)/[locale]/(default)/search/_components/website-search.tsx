@@ -10,7 +10,7 @@ import {
 } from "#/app/(app)/[locale]/(default)/_components/search-result-card.tsx";
 import { SearchView, type SearchViewParams } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
 import { ResourceResultCard } from "#/app/(app)/[locale]/(default)/resources/_components/resource-result-card.tsx";
-import { searchParams } from "#/app/(app)/[locale]/(default)/search-params.ts";
+import { type SearchType, searchParams } from "#/app/(app)/[locale]/(default)/search-params.ts";
 import { SearchFacetFilter } from "#/app/(app)/[locale]/(default)/search/_components/facet-filter.tsx";
 import { useFacetLabel } from "#/app/(app)/[locale]/(default)/search/_components/facet-labels.ts";
 import type { IntlLocale } from "#/lib/i18n/locales.ts";
@@ -62,27 +62,22 @@ function interleave<A, B>(a: ReadonlyArray<A>, b: ReadonlyArray<B>): Array<A | B
 	return result;
 }
 
-/** TODO: The facet UI is multi-select, but the url holds a single `type`, so only the first selected type is kept. */
 function toRawSearchParams(params: SearchViewParams): {
 	q: string;
-	type: WebsiteDocument["type"] | undefined;
+	type: Array<SearchType>;
 	page: number;
 } {
 	return {
 		q: params.query,
 		page: params.page,
-		type: params.facets[facetField]?.[0] as WebsiteDocument["type"] | undefined,
+		type: [...(params.facets[facetField] ?? [])] as Array<SearchType>,
 	};
 }
 
-function toSearchViewParams(raw: {
-	q: string;
-	type?: WebsiteDocument["type"] | undefined;
-	page: number;
-}): SearchViewParams {
+function toSearchViewParams(raw: { q: string; type: Array<SearchType>; page: number }): SearchViewParams {
 	const facets: SelectedFacets = {};
-	if (raw.type != null) {
-		facets[facetField] = [raw.type];
+	if (raw.type.length > 0) {
+		facets[facetField] = raw.type;
 	}
 	return { facets, page: raw.page, query: raw.q };
 }
