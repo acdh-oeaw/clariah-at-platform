@@ -823,7 +823,10 @@ const projects: Record<string, string> = {
 		"/en/projects/workshop-re-late-re-use-re-work-potentials-for-variant-and-intertextuality-analyses-in-the-digital-humanities",
 };
 
-/** Urls from the WordPress site before the previous website, which that website redirected as well. */
+/**
+ * Redirects carried over from `src/config/redirects.config.ts` in the previous Astro website
+ * (`acdh-oeaw/clariah-at-website`).
+ */
 const wordpress: Record<string, string> = {
 	"/about-clariah-at": "/en/pages/about-clariah-at",
 	"/acdh-ch-lecture-10-1": "/en/events/acdh-ch-lecture-10-1",
@@ -1017,3 +1020,4 @@ export const legacyRedirects: Redirects = Object.entries({
 }).map(([source, destination]) => {
 	return { source, destination, permanent: true };
 });
+
