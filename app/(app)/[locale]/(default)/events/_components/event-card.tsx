@@ -3,7 +3,7 @@ import { CalendarDaysIcon } from "lucide-react";
 import { useFormatter } from "next-intl";
 import { Fragment, type ReactNode } from "react";
 
-import { ApiImage } from "#/components/image.tsx";
+import { ApiImage, type ImageProps } from "#/components/image.tsx";
 import { IntentLink } from "#/components/intent-link.tsx";
 import type { ImageAsset } from "#/lib/images/variants.ts";
 
@@ -31,14 +31,15 @@ interface CardProps {
 	title: string;
 	summary: string | null;
 	link?: string;
-	/** For the first card only: the image may be the largest contentful paint (lcp) element. */
-	preload?: boolean;
+	/** For the first card only, whose image may be the largest contentful paint: `"eager"` and `"high"`. */
+	fetchPriority?: ImageProps["fetchPriority"];
+	loading?: ImageProps["loading"];
 	/** 4 when the card sits below a group heading, e.g. a year. */
 	headingLevel?: 3 | 4;
 }
 
 export function EventCard(props: CardProps): ReactNode {
-	const { duration, image, headingLevel = 3, link, preload = false, title, summary } = props;
+	const { duration, fetchPriority, image, headingLevel = 3, link, loading, title, summary } = props;
 
 	const Heading = headingLevel === 4 ? "h4" : "h3";
 
@@ -135,9 +136,10 @@ export function EventCard(props: CardProps): ReactNode {
 					<ApiImage
 						alt=""
 						className="object-cover"
+						fetchPriority={fetchPriority}
 						fill={true}
 						image={image}
-						preload={preload}
+						loading={loading}
 						sizes="(min-width: 40rem) 12rem, 100vw"
 					/>
 				) : (

@@ -70,7 +70,8 @@ export function NewsSearch(props: Readonly<NewsSearchProps>): ReactNode {
 			<Card
 				image={image}
 				link={link}
-				preload={index < eagerResultCount}
+				fetchPriority={index === 0 ? "high" : undefined}
+				loading={index < eagerResultCount ? "eager" : undefined}
 				summary={document.summary}
 				title={document.label}
 			/>

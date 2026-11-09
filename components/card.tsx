@@ -3,7 +3,7 @@ import { useExtracted } from "next-intl";
 import type { ReactNode } from "react";
 
 import { CardLink } from "#/components/card-link.tsx";
-import { ApiImage } from "#/components/image.tsx";
+import { ApiImage, type ImageProps } from "#/components/image.tsx";
 import type { ImageAsset } from "#/lib/images/variants.ts";
 
 interface CardProps {
@@ -11,12 +11,13 @@ interface CardProps {
 	title: string;
 	summary: string | null;
 	link?: string;
-	/** For cards in the first row only: the image may be the largest contentful paint (lcp) element. */
-	preload?: boolean;
+	/** For cards above the fold: `loading="eager"` for the first row, plus `fetchPriority="high"` for the first card. */
+	fetchPriority?: ImageProps["fetchPriority"];
+	loading?: ImageProps["loading"];
 }
 
 export function Card(props: CardProps): ReactNode {
-	const { image, link, preload = false, title, summary } = props;
+	const { fetchPriority, image, link, loading, title, summary } = props;
 	const t = useExtracted();
 	return (
 		/** The link covers the whole card, which clips it, so the card shows the focus outline in place of the link. */
@@ -25,9 +26,10 @@ export function Card(props: CardProps): ReactNode {
 				<ApiImage
 					alt=""
 					className="size-full border-b border-stroke-weak object-cover"
+					fetchPriority={fetchPriority}
 					height={300}
-					preload={preload}
 					image={image}
+					loading={loading}
 					/** One column up to `46rem`, two of at most `31rem` up to `68rem`, then three of at most `24rem`. */
 					sizes="(min-width: 68rem) 24rem, (min-width: 46rem) 31rem, calc(100vw - 2rem)"
 					width={400}

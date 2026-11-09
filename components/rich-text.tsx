@@ -159,10 +159,12 @@ function renderLeadInNode(props: Readonly<{ children?: ReactNode | Array<ReactNo
 	return <p className="lead-in">{props.children}</p>;
 }
 
-function renderButtonLinkNode(props: Readonly<{ node: { attrs?: Record<string, unknown> | null } }>): ReactNode {
+function ButtonLinkNode(props: Readonly<{ node: { attrs?: Record<string, unknown> | null } }>): ReactNode {
 	const attrs = props.node.attrs ?? null;
 	const href = attrs?.href;
 	const label = attrs?.label;
+
+	const locale = useLocale();
 
 	if (typeof href !== "string" || href === "" || typeof label !== "string" || label === "") {
 		return null;
@@ -170,7 +172,11 @@ function renderButtonLinkNode(props: Readonly<{ node: { attrs?: Record<string, u
 
 	return (
 		/** Overrides the button's `*:inline-full`, which would stretch it across the line. */
-		<LinkButton className="inline-flex [&>span]:inline-auto" href={href} variant={asButtonVariant(attrs?.variant)}>
+		<LinkButton
+			className="inline-flex [&>span]:inline-auto"
+			href={localizeHref(href, locale)}
+			variant={asButtonVariant(attrs?.variant)}
+		>
 			{label}
 		</LinkButton>
 	);
@@ -194,7 +200,7 @@ function renderTableNode(
 }
 
 const nodeMapping = {
-	buttonLink: renderButtonLinkNode,
+	buttonLink: ButtonLinkNode,
 	footnote: FootnoteNode,
 	heading: renderHeadingNode,
 	leadIn: renderLeadInNode,
