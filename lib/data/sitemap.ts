@@ -34,20 +34,32 @@ function toPublicPathname(link: Pick<SitemapEntry, "href" | "locale">): string {
 	return localizeHref(link.href.slice(segment.length) || "/", link.locale);
 }
 
+/** The locale-less pathname, when it is the same in every locale, e.g. for a listing page backed by a cms page. */
+function getSharedPathname(alternates: ReadonlyArray<Pick<SitemapEntry, "href" | "locale">>): string | null {
+	const pathnames = new Set(
+		alternates.map((alternate) => {
+			const segment = `/${alternate.locale}`;
+			if (alternate.href === segment) {
+				return "/";
+			}
+			return alternate.href.startsWith(`${segment}/`) ? alternate.href.slice(segment.length) : alternate.href;
+		}),
+	);
+
+	return alternates.length === locales.length && pathnames.size === 1 ? [...pathnames][0]! : null;
+}
+
 /**
  * Static routes share one pathname across locales, so their translations are listed as `alternates.languages` the same
- * way the api's entries are, and the homepage has the root as `x-default`, which redirects by language, as
- * `AlternateLinks` lists it. No `lastModified`: nothing records when a listing page last changed.
+ * way the api's entries are, with the locale-less path as `x-default`, which redirects by language, as `AlternateLinks`
+ * lists it. No `lastModified`: nothing records when a listing page last changed.
  */
 function getStaticEntries(): MetadataRoute.Sitemap {
 	return staticPathnames.flatMap((pathname) => {
-		const languages: Record<string, string> = Object.fromEntries(
-			locales.map((locale) => [locale, toAbsoluteUrl(localizeHref(pathname, locale))] as const),
-		);
-
-		if (pathname === "/") {
-			languages["x-default"] = toAbsoluteUrl("/");
-		}
+		const languages: Record<string, string> = {
+			...Object.fromEntries(locales.map((locale) => [locale, toAbsoluteUrl(localizeHref(pathname, locale))] as const)),
+			"x-default": toAbsoluteUrl(pathname),
+		};
 
 		return locales.map((locale) => {
 			return { url: toAbsoluteUrl(localizeHref(pathname, locale)), alternates: { languages } };
@@ -70,9 +82,14 @@ export async function getSitemapEntries(): Promise<MetadataRoute.Sitemap> {
 	return [
 		...getStaticEntries(),
 		...data.map((entry) => {
-			const languages = Object.fromEntries(
+			const languages: Record<string, string> = Object.fromEntries(
 				entry.alternates.map((alternate) => [alternate.locale, toAbsoluteUrl(toPublicPathname(alternate))] as const),
 			);
+
+			const sharedPathname = getSharedPathname(entry.alternates);
+			if (sharedPathname != null) {
+				languages["x-default"] = toAbsoluteUrl(sharedPathname);
+			}
 
 			return {
 				lastModified: entry.lastModified,

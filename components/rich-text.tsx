@@ -50,8 +50,8 @@ function formatPlaceholderValue(attrs: Record<string, unknown> | null | undefine
 
 /**
  * A link whose target the api could not resolve has no `href`, and renders as plain text. Entity links resolve to
- * locale-less paths, in the locale named by `entity.locale`, which falls back to the default locale for a target
- * without a translation.
+ * locale-less paths, in the locale named by `entity.locale`, which is the default locale for a target without a
+ * translation in the requested one. Without `entity.locale`, the path is in the current locale.
  */
 function LinkMark(
 	props: Readonly<{
@@ -159,18 +159,32 @@ function renderLeadInNode(props: Readonly<{ children?: ReactNode | Array<ReactNo
 	return <p className="lead-in">{props.children}</p>;
 }
 
-function renderButtonLinkNode(props: Readonly<{ node: { attrs?: Record<string, unknown> | null } }>): ReactNode {
+/**
+ * A button whose target the api could not resolve has no `href`, and renders nothing. Entity links resolve to
+ * locale-less paths, in the locale named by `entity.locale`, which is the default locale for a target without a
+ * translation in the requested one. Without `entity.locale`, the path is in the current locale.
+ */
+function ButtonLinkNode(props: Readonly<{ node: { attrs?: Record<string, unknown> | null } }>): ReactNode {
 	const attrs = props.node.attrs ?? null;
 	const href = attrs?.href;
 	const label = attrs?.label;
+	const entity = attrs?.entity;
+
+	const currentLocale = useLocale();
 
 	if (typeof href !== "string" || href === "" || typeof label !== "string" || label === "") {
 		return null;
 	}
 
+	const locale = isRecord(entity) && isValidLocale(entity.locale) ? entity.locale : currentLocale;
+
 	return (
 		/** Overrides the button's `*:inline-full`, which would stretch it across the line. */
-		<LinkButton className="[&>span]:inline-auto" href={href} variant={asButtonVariant(attrs?.variant)}>
+		<LinkButton
+			className="[&>span]:inline-auto"
+			href={localizeHref(href, locale)}
+			variant={asButtonVariant(attrs?.variant)}
+		>
 			{label}
 		</LinkButton>
 	);
@@ -194,7 +208,7 @@ function renderTableNode(
 }
 
 const nodeMapping = {
-	buttonLink: renderButtonLinkNode,
+	buttonLink: ButtonLinkNode,
 	footnote: FootnoteNode,
 	heading: renderHeadingNode,
 	leadIn: renderLeadInNode,

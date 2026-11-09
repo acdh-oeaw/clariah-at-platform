@@ -50,7 +50,6 @@ export function Navigation(props: Readonly<NavigationProps>): ReactNode {
 						decoding="auto"
 						fetchPriority="high"
 						loading="eager"
-						preload={true}
 						src={logo}
 					/>
 				</Link>

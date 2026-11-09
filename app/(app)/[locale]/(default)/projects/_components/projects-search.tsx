@@ -40,14 +40,14 @@ function toProjectStatus(value: string | undefined): ProjectStatus | undefined {
 
 function toRawSearchParams(params: SearchViewParams): {
 	q: string;
-	project_call: string | undefined;
+	project_call: Array<string>;
 	project_status: ProjectStatus | undefined;
 	page: number;
 } {
 	return {
 		q: params.query,
 		page: params.page,
-		project_call: params.facets[facetField]?.[0],
+		project_call: [...(params.facets[facetField] ?? [])],
 		// The statuses are mutually exclusive, so the most recently picked one replaces the previous one.
 		project_status: toProjectStatus(params.facets[statusField]?.at(-1)),
 	};
@@ -55,13 +55,13 @@ function toRawSearchParams(params: SearchViewParams): {
 
 function toSearchViewParams(raw: {
 	q: string;
-	project_call?: string | undefined;
+	project_call: Array<string>;
 	project_status?: ProjectStatus | undefined;
 	page: number;
 }): SearchViewParams {
 	const facets: SelectedFacets = {};
-	if (raw.project_call != null) {
-		facets[facetField] = [raw.project_call];
+	if (raw.project_call.length > 0) {
+		facets[facetField] = raw.project_call;
 	}
 	if (raw.project_status != null) {
 		facets[statusField] = [raw.project_status];
@@ -135,7 +135,8 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 			<Card
 				image={image}
 				link={link}
-				preload={index < eagerResultCount}
+				fetchPriority={index === 0 ? "high" : undefined}
+				loading={index < eagerResultCount ? "eager" : undefined}
 				summary={document.summary}
 				title={document.label}
 			/>

@@ -60,12 +60,14 @@ function isNarrowImage(image: BlockImage, layout: string): boolean {
  * On a phone the column is the viewport less the page's padding (`calc(100vw - 3rem)`): `100vw` would make high-density
  * screens pick a larger rendition than needed.
  */
-const imageLayoutSizes: Record<string, string> = {
+const defaultImageSizes = "(min-width: 48rem) 45rem, calc(100vw - 3rem)";
+
+const imageLayoutSizes: Record<string, string | undefined> = {
 	"float-start": "(min-width: 35rem) 18rem, calc(100vw - 3rem)",
 	"float-end": "(min-width: 35rem) 18rem, calc(100vw - 3rem)",
 	wide: "min(56rem, 92vw)",
 	full: "100vw",
-	default: "(min-width: 48rem) 45rem, calc(100vw - 3rem)",
+	default: defaultImageSizes,
 };
 
 function asLayout(value: unknown): string {
@@ -103,11 +105,7 @@ function ContentBlockView(props: Readonly<ContentBlockViewProps>): ReactNode {
 			return (
 				<figure className={isNarrowImage(image, layout) ? narrowImageClassName : imageLayoutClassName[layout]}>
 					{/* Not `inline-auto`: the figure is as wide as the image, so the image needs its width before it loads. */}
-					<ApiImage
-						className="ms-auto me-auto"
-						image={image}
-						sizes={imageLayoutSizes[layout] ?? imageLayoutSizes.default}
-					/>
+					<ApiImage className="ms-auto me-auto" image={image} sizes={imageLayoutSizes[layout] ?? defaultImageSizes} />
 					<Caption content={block.caption} license={image.license} />
 				</figure>
 			);

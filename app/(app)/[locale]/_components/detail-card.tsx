@@ -29,7 +29,6 @@ export function DetailCard(props: Readonly<DetailCardProps>): ReactNode {
 						fetchPriority="high"
 						image={image}
 						loading="eager"
-						preload={true}
 						/** The width of `pageColumnClassName`, without its padding. */
 						sizes="(min-width: 40rem) min(calc(100vw - 4rem), 76rem), calc(100vw - 2rem)"
 					/>
