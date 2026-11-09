@@ -179,9 +179,12 @@ function ButtonLinkNode(props: Readonly<{ node: { attrs?: Record<string, unknown
 	const locale = isRecord(entity) && isValidLocale(entity.locale) ? entity.locale : currentLocale;
 
 	return (
-		/** Overrides the button's `*:inline-full`, which would stretch it across the line. */
+		/**
+		 * Overrides the button's `*:inline-full`, which would stretch it across the line, and the underline which the
+		 * typography plugin gives every link in `prose`.
+		 */
 		<LinkButton
-			className="inline-flex [&>span]:inline-auto"
+			className="inline-flex no-underline [&>span]:inline-auto"
 			href={localizeHref(href, locale)}
 			variant={asButtonVariant(attrs?.variant)}
 		>
