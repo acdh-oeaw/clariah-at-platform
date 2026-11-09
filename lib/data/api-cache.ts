@@ -251,6 +251,15 @@ export async function cachedUpcomingEvents(
 	return getEvents({ query: { from, locale, limit, offset } });
 }
 
+/** Events regardless of date, in the api's default order, for consumers which sort them themselves. */
+export async function cachedEvents(locale: string, limit = 100, offset = 0): Promise<ApiResponse<"getEvents">> {
+	"use cache";
+	cacheLife("content");
+	cacheTag(tags.collection("events"), ...relatedTags("getEvents"));
+
+	return getEvents({ query: { locale, limit, offset } });
+}
+
 /** Past events, most recently started first. */
 export async function cachedPastEvents(
 	until: string,

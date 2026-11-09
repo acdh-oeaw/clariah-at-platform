@@ -5,11 +5,13 @@ import { getExtracted, getLocale } from "next-intl/server";
 import { type ComponentProps, Fragment, type ReactNode } from "react";
 
 import { pageColumnClassName } from "#/app/(app)/[locale]/_components/page-column.ts";
+import { FeedLink } from "#/components/feed-link.tsx";
 import { Image } from "#/components/image.tsx";
 import { Link } from "#/components/link.tsx";
 import { NavLink } from "#/components/nav-link.tsx";
 import { LinkButton } from "#/components/ui/button.tsx";
 import { cachedNavigation } from "#/lib/data/api-cache.ts";
+import { getFeedHref } from "#/lib/data/feed.ts";
 import { localizeHref } from "#/lib/navigation/convert.ts";
 import funderLogoDE from "#/public/assets/images/BMFWF_Logo_srgb.svg";
 import logo from "#/public/assets/images/CLARIAH-AT_Logo_long_white.svg";
@@ -79,6 +81,9 @@ export async function Footer(props: Readonly<FooterProps>): Promise<ReactNode> {
 									))}
 								</ul>
 							</nav>
+							<FeedLink className="mt-8" href={getFeedHref(locale)}>
+								{t("RSS-Feed")}
+							</FeedLink>
 						</div>
 						<div className="lg:justify-self-end">
 							<h2 className="font-bold">{t("Gefördert von")}</h2>

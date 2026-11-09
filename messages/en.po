@@ -74,6 +74,11 @@ msgid "Digital Humanities Austria E-Mail-Liste"
 msgstr "DHA Email List Subscription"
 
 #: app/(app)/[locale]/_components/footer.tsx
+msgctxt "8kHkWF"
+msgid "RSS-Feed"
+msgstr "RSS feed"
+
+#: app/(app)/[locale]/_components/footer.tsx
 msgctxt "j9gZd-"
 msgid "Gefördert von"
 msgstr "Funded by"
@@ -649,3 +654,8 @@ msgstr "Footnotes"
 msgctxt "TiPYmy"
 msgid "Back to footnote {number} in the text"
 msgstr "Back to footnote {number} in the text"
+
+#: lib/data/feed.ts
+msgctxt "34iXrd"
+msgid "{title}: Aktuelles und Veranstaltungen"
+msgstr "{title}: News and events"

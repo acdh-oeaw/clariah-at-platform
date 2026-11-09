@@ -22,4 +22,10 @@ export const redirects: Redirects = [
 		destination: "/:locale/pages/zu-ehren-thierry-declerck",
 		permanent: true,
 	},
+	{
+		/** The previous website linked its feed without a locale prefix, in its footer and `<head>`. */
+		source: "/feed.xml",
+		destination: "/de/feed.xml",
+		permanent: true,
+	},
 ];
