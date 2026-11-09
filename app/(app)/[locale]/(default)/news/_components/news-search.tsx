@@ -98,6 +98,7 @@ export function NewsSearch(props: Readonly<NewsSearchProps>): ReactNode {
 		<SearchView<WebsiteDocument>
 			getHref={getHref}
 			label={t("Aktuelles durchsuchen")}
+			name="news"
 			onParamsChange={onParamsChange}
 			params={params}
 			renderItem={renderItem}

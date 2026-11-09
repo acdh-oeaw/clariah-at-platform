@@ -1,5 +1,7 @@
 import { useExtracted } from "next-intl";
 
+import { projectStatuses } from "#/app/(app)/[locale]/(default)/projects/search-params.ts";
+
 /** Named `use*`, because it calls `useExtracted()`: React Compiler may skip calling a `get*` function. */
 export function useFacetLabel(): (status: string) => string {
 	const t = useExtracted();
@@ -36,6 +38,24 @@ export function useFacetLabel(): (status: string) => string {
 				return t("Sonstiges");
 			}
 			default: {
+				return value;
+			}
+		}
+	};
+}
+
+/** Shared by the projects page and the analytics page, which reports the statuses filtered by. */
+export function useStatusLabel(): (status: string) => string {
+	const t = useExtracted();
+	return (value: string) => {
+		switch (projectStatuses.find((projectStatus) => projectStatus === value)) {
+			case "ongoing": {
+				return t("Laufend");
+			}
+			case "completed": {
+				return t("Abgeschlossen");
+			}
+			case undefined: {
 				return value;
 			}
 		}

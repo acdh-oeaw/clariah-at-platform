@@ -226,6 +226,7 @@ export function WebsiteSearch(props: Readonly<WebsiteSearchProps>): ReactNode {
 		<SearchView<CombinedItem>
 			getHref={getHref}
 			label={t("Website durchsuchen")}
+			name="search"
 			onParamsChange={onParamsChange}
 			params={params}
 			renderFacets={renderFacets}

@@ -118,6 +118,7 @@ export function ResourcesSearch(): ReactNode {
 		<SearchView<ResourceDocument>
 			getHref={getHref}
 			label={t("Ressourcen durchsuchen")}
+			name="resources"
 			onParamsChange={onParamsChange}
 			params={params}
 			renderFacets={renderFacets}
