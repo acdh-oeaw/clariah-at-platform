@@ -175,9 +175,6 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 						<Pagination
 							label={t("Seitennavigation oben")}
 							getHref={(targetPage) => getHref({ ...params, page: targetPage })}
-							onChange={(targetPage) => {
-								onParamsChange({ ...params, page: targetPage });
-							}}
 							page={params.page}
 							totalPages={state.outcome.pagination.totalPages}
 						/>
@@ -197,9 +194,6 @@ export function SearchView<Document extends { id: string }>(props: Readonly<Sear
 					<Pagination
 						label={t("Seitennavigation unten")}
 						getHref={(targetPage) => getHref({ ...params, page: targetPage })}
-						onChange={(targetPage) => {
-							onParamsChange({ ...params, page: targetPage });
-						}}
 						page={params.page}
 						totalPages={state.outcome.pagination.totalPages}
 					/>
