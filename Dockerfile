@@ -10,6 +10,9 @@ RUN npm install -g "pnpm@$(node -p "require('./package.json').packageManager.rep
 	&& pnpm install --frozen-lockfile --ignore-scripts
 
 FROM deps AS builder
+# Dependencies are already installed from the lockfile. Prevent `pnpm run` from
+# reinstalling them and running the root dev-only `prepare` script.
+ENV pnpm_config_verify_deps_before_run="false"
 COPY . .
 
 ARG NEXT_PUBLIC_API_BASE_URL
