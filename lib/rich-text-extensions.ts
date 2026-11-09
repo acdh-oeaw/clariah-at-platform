@@ -4,12 +4,16 @@ import { Table } from "@tiptap/extension-table";
 import { TableKit } from "@tiptap/extension-table/kit";
 import { StarterKit } from "@tiptap/starter-kit";
 
-/** The api resolves every link to a plain `href`. Rendered by `components/rich-text.tsx`. */
+/**
+ * The api resolves every link to a plain `href`, and entity links also to `entity.locale`. Rendered by
+ * `components/rich-text.tsx`.
+ */
 const Link = Mark.create({
 	name: "link",
 
 	addAttributes() {
 		return {
+			entity: { default: null },
 			href: { default: null },
 		};
 	},
@@ -54,6 +58,7 @@ const ButtonLink = Node.create({
 
 	addAttributes() {
 		return {
+			entity: { default: null },
 			href: { default: null },
 			label: { default: null },
 			variant: { default: "primary" },
