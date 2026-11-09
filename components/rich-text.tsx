@@ -181,7 +181,7 @@ function ButtonLinkNode(props: Readonly<{ node: { attrs?: Record<string, unknown
 	return (
 		/** Overrides the button's `*:inline-full`, which would stretch it across the line. */
 		<LinkButton
-			className="[&>span]:inline-auto"
+			className="inline-flex [&>span]:inline-auto"
 			href={localizeHref(href, locale)}
 			variant={asButtonVariant(attrs?.variant)}
 		>
@@ -280,7 +280,7 @@ interface RichTextContentProps {
 
 /** `max-inline-none`: the surrounding column sets the measure, so text and blocks share one width. */
 export const richTextClassName =
-	"leading-reading prose prose-lg max-inline-none prose-h2:mbs-14 prose-a:font-medium prose-a:hover:decoration-2";
+	"leading-reading prose md:prose-lg max-inline-none prose-h2:mbs-10 md:prose-h2:mbs-14 prose-a:font-medium prose-a:hover:decoration-2 prose-headings:[&_a]:font-[inherit]";
 
 export function RichTextContent(props: Readonly<RichTextContentProps>): ReactNode {
 	const { content, className } = props;
