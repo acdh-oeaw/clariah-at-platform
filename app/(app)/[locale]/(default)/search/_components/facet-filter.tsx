@@ -64,13 +64,11 @@ interface SearchFacetFilterProps {
 	isLoading: boolean;
 	label: string;
 	onChange: (values: ReadonlyArray<string>) => void;
-	/** Replaces the popover's default width, e.g. for facets with long value labels. */
-	popoverClassName?: string | undefined;
 	selected: ReadonlyArray<string>;
 }
 
 export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): ReactNode {
-	const { facet, getDescription, getLabel, isLoading, label, onChange, popoverClassName, selected } = props;
+	const { facet, getDescription, getLabel, isLoading, label, onChange, selected } = props;
 
 	const t = useExtracted();
 	const format = useFormatter();
@@ -134,8 +132,8 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 
 			<Popover
 				className={cn(
-					"rounded-md border bg-white shadow-lg",
-					popoverClassName ?? "inline-[min(100vw-2rem,22rem)]",
+					/** As wide as the longest value, at least as wide as the trigger; longer labels wrap. */
+					"rounded-md border bg-white shadow-lg inline-max max-inline-[min(100vw-2rem,28rem)] min-inline-(--trigger-width)",
 					"entering:animate-in entering:duration-150 entering:ease-out entering:fade-in",
 					"exiting:animate-out exiting:duration-100 exiting:ease-in exiting:fade-out",
 				)}
