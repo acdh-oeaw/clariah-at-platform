@@ -51,8 +51,6 @@ interface PaginationProps {
 	page: number;
 	totalPages: number;
 
-	onChange: (page: number) => void;
-
 	getHref: (page: number) => string;
 	/** How many pages to show on each side of the current page. */
 	siblingCount?: number;
@@ -65,7 +63,7 @@ const pageButtonStyles = cn(
 );
 
 export function Pagination(props: Readonly<PaginationProps>): ReactNode {
-	const { getHref, label, onChange, page, siblingCount = 1, totalPages } = props;
+	const { getHref, label, page, siblingCount = 1, totalPages } = props;
 	const t = useExtracted();
 
 	if (totalPages <= 1) {
@@ -83,7 +81,6 @@ export function Pagination(props: Readonly<PaginationProps>): ReactNode {
 				href={getHref(targetPage)}
 				isDisabled={isCurrent}
 				onPress={() => {
-					onChange(targetPage);
 					/** Query-only navigation preserves scroll, but a new results page should start at the top. */
 					window.scrollTo({ top: 0, behavior: "instant" });
 				}}
