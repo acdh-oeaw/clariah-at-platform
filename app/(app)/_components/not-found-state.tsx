@@ -1,7 +1,8 @@
 import { useExtracted } from "next-intl";
-import { Fragment, type ReactNode } from "react";
+import { Fragment, type ReactNode, Suspense } from "react";
 
 import { mainContentId } from "#/app/(app)/[locale]/_components/main.tsx";
+import { NotFoundTracker } from "#/app/(app)/_components/not-found-tracker.tsx";
 import { StatusMessage, StatusState } from "#/app/(app)/_components/status-state.tsx";
 
 /** Sets the title itself, because `notFound()` can end up rendering this in the browser, past `generateMetadata`. */
@@ -22,6 +23,10 @@ export function NotFoundState(): ReactNode {
 					title={title}
 				/>
 			</StatusState>
+			{/* Reads the url, which is unknown when the page is prerendered. */}
+			<Suspense>
+				<NotFoundTracker />
+			</Suspense>
 		</Fragment>
 	);
 }

@@ -1,5 +1,5 @@
 /** The widths the api's image-variant endpoint accepts. It rejects any other width. */
-export const imageVariantWidths = [320, 480, 640, 960, 1280, 1600, 2048, 2560, 3200, 3840] as const;
+export const imageVariantWidths = [320, 480, 640, 800, 960, 1280, 1600, 2048, 2560, 3200, 3840] as const;
 
 /** The last rung, named so that clamping does not have to index into the tuple. */
 export const maxImageVariantWidth = 3840;

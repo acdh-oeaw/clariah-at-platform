@@ -9,7 +9,7 @@ import {
 	type SearchViewParams,
 	eagerResultCount,
 } from "#/app/(app)/[locale]/(default)/_components/search-view.tsx";
-import { useFacetLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels.ts";
+import { useFacetLabel, useStatusLabel } from "#/app/(app)/[locale]/(default)/projects/_components/facet-labels.ts";
 import {
 	type ProjectStatus,
 	projectStatuses,
@@ -40,14 +40,14 @@ function toProjectStatus(value: string | undefined): ProjectStatus | undefined {
 
 function toRawSearchParams(params: SearchViewParams): {
 	q: string;
-	project_call: string | undefined;
+	project_call: Array<string>;
 	project_status: ProjectStatus | undefined;
 	page: number;
 } {
 	return {
 		q: params.query,
 		page: params.page,
-		project_call: params.facets[facetField]?.[0],
+		project_call: [...(params.facets[facetField] ?? [])],
 		// The statuses are mutually exclusive, so the most recently picked one replaces the previous one.
 		project_status: toProjectStatus(params.facets[statusField]?.at(-1)),
 	};
@@ -55,13 +55,13 @@ function toRawSearchParams(params: SearchViewParams): {
 
 function toSearchViewParams(raw: {
 	q: string;
-	project_call?: string | undefined;
+	project_call: Array<string>;
 	project_status?: ProjectStatus | undefined;
 	page: number;
 }): SearchViewParams {
 	const facets: SelectedFacets = {};
-	if (raw.project_call != null) {
-		facets[facetField] = [raw.project_call];
+	if (raw.project_call.length > 0) {
+		facets[facetField] = raw.project_call;
 	}
 	if (raw.project_status != null) {
 		facets[statusField] = [raw.project_status];
@@ -72,6 +72,7 @@ function toSearchViewParams(raw: {
 export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode {
 	const { locale } = props;
 	const getLabel = useFacetLabel();
+	const getStatusLabel = useStatusLabel();
 	const t = useExtracted();
 	const pathname = usePathname();
 	const router = useRouter();
@@ -102,20 +103,6 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 		router.replace(getHref(nextParams), { scroll: false });
 	}
 
-	function getStatusLabel(value: string): string {
-		switch (toProjectStatus(value)) {
-			case "ongoing": {
-				return t("Laufend");
-			}
-			case "completed": {
-				return t("Abgeschlossen");
-			}
-			case undefined: {
-				return value;
-			}
-		}
-	}
-
 	// `document.link` is root-relative and locale-less, like `EntityRef.href` from the CMS API — prefix it the same way.
 	function renderItem(document: WebsiteDocument, index: number): ReactNode {
 		const link = document.link != null && document.link !== "" ? localizeHref(document.link, locale) : undefined;
@@ -135,7 +122,8 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 			<Card
 				image={image}
 				link={link}
-				preload={index < eagerResultCount}
+				fetchPriority={index === 0 ? "high" : undefined}
+				loading={index < eagerResultCount ? "eager" : undefined}
 				summary={document.summary}
 				title={document.label}
 			/>
@@ -246,6 +234,7 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 		<SearchView<WebsiteDocument>
 			getHref={getHref}
 			label={t("Projekte filtern")}
+			name="projects"
 			onParamsChange={onParamsChange}
 			params={params}
 			renderFacets={renderFacets}

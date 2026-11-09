@@ -2,10 +2,10 @@
 
 import { useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
-import { type ReactNode, Suspense, useEffect, useState } from "react";
+import { type ReactNode, Suspense } from "react";
 
 import { linkStyles } from "#/components/link.tsx";
-import { buildEntityRoutePath, matchEntityRoute } from "#/lib/i18n/entity-routes.ts";
+import { matchEntityRoute } from "#/lib/i18n/entity-routes.ts";
 import { type IntlLocale, getIntlLanguage, locales } from "#/lib/i18n/locales.ts";
 import { stripLocalePrefix } from "#/lib/i18n/pathname.ts";
 import { localePrefix } from "#/lib/i18n/routing.ts";
@@ -41,25 +41,18 @@ interface LocaleSwitcherProps {
 	label: string;
 }
 
-interface TranslationsResponse {
-	translations: Array<{ locale: string; slug: string }>;
-}
-
-function isTranslationsResponse(value: unknown): value is TranslationsResponse {
-	return (
-		typeof value === "object" &&
-		value !== null &&
-		"translations" in value &&
-		Array.isArray((value as TranslationsResponse).translations)
-	);
+interface LocaleLink {
+	href: string;
+	/** For links through the locale-switch redirect, which crawlers need not follow: hreflang comes from the metadata. */
+	rel?: "nofollow";
 }
 
 interface LocaleLinksProps extends LocaleSwitcherProps {
-	getHref: (locale: IntlLocale) => string;
+	getLink: (locale: IntlLocale) => LocaleLink;
 }
 
 function LocaleLinks(props: Readonly<LocaleLinksProps>): ReactNode {
-	const { getHref, label } = props;
+	const { getLink, label } = props;
 
 	const currentLocale = useLocale();
 
@@ -68,6 +61,7 @@ function LocaleLinks(props: Readonly<LocaleLinksProps>): ReactNode {
 			{locales.map((locale) => {
 				const isCurrent = locale === currentLocale;
 				const language = getIntlLanguage(locale);
+				const { href, rel } = getLink(locale);
 
 				/** A full page load: `<html lang>`, the messages and react-aria's localized strings are set once per document. */
 				return (
@@ -79,8 +73,9 @@ function LocaleLinks(props: Readonly<LocaleLinksProps>): ReactNode {
 							className: isCurrent ? "font-bold underline underline-offset-[24%]" : "font-bold",
 							variant: "primary",
 						})}
-						href={getHref(locale)}
+						href={href}
 						hrefLang={language}
+						rel={rel}
 					>
 						<span lang={language}>
 							{language.toUpperCase()}
@@ -94,8 +89,8 @@ function LocaleLinks(props: Readonly<LocaleLinksProps>): ReactNode {
 	);
 }
 
-function getLocaleHomeHref(locale: IntlLocale): string {
-	return localePrefix.prefixes[locale];
+function getLocaleHomeLink(locale: IntlLocale): LocaleLink {
+	return { href: localePrefix.prefixes[locale] };
 }
 
 function CurrentPageLocaleLinks(props: Readonly<LocaleSwitcherProps>): ReactNode {
@@ -104,66 +99,22 @@ function CurrentPageLocaleLinks(props: Readonly<LocaleSwitcherProps>): ReactNode
 
 	const suffix = stripLocalePrefix(pathname, currentLocale);
 	const match = suffix != null ? matchEntityRoute(suffix) : null;
-	const matchKey = match != null ? `${match.type}:${match.slug}:${currentLocale}` : null;
 
-	/**
-	 * Entity detail routes have a translated slug per locale. Keyed by route, so a stale fetch for the previous route no
-	 * longer applies.
-	 */
-	const [fetched, setFetched] = useState<{ key: string; paths: Record<string, string> } | null>(null);
-	const translatedPaths = fetched?.key === matchKey ? fetched.paths : null;
+	function getLink(locale: IntlLocale): LocaleLink {
+		/**
+		 * Entity detail routes have a translated slug per locale, which the redirect resolves on click, so the link is
+		 * right without javascript and without loading the translations into every page.
+		 */
+		if (match != null && locale !== currentLocale) {
+			const query = new URLSearchParams({ type: match.type, slug: match.slug, from: currentLocale, to: locale });
 
-	useEffect(() => {
-		/** Not the render-scope `match`, which is a new object on every render and would re-trigger the effect. */
-		const effectSuffix = stripLocalePrefix(pathname, currentLocale);
-		const effectMatch = effectSuffix != null ? matchEntityRoute(effectSuffix) : null;
-
-		if (effectMatch == null) {
-			return;
+			return { href: `/api/locale-switch?${query.toString()}`, rel: "nofollow" };
 		}
 
-		const controller = new AbortController();
-		const key = `${effectMatch.type}:${effectMatch.slug}:${currentLocale}`;
-		const query = new URLSearchParams({
-			type: effectMatch.type,
-			slug: effectMatch.slug,
-			locale: currentLocale,
-		});
-
-		fetch(`/api/translations?${query.toString()}`, { signal: controller.signal })
-			.then((response) => (response.ok ? response.json() : null))
-			.then((data: unknown) => {
-				if (!isTranslationsResponse(data)) {
-					return undefined;
-				}
-
-				const paths: Record<string, string> = {};
-				for (const translation of data.translations) {
-					paths[translation.locale] = buildEntityRoutePath(effectMatch.type, translation.slug);
-				}
-
-				setFetched({ key, paths });
-
-				return undefined;
-			})
-			.catch(() => {
-				// Aborted (route changed again) or a network error — the prefix-swap fallback still works.
-			});
-
-		return () => {
-			controller.abort();
-		};
-	}, [pathname, currentLocale]);
-
-	function getHref(locale: IntlLocale): string {
-		const translatedPath = translatedPaths?.[locale];
-
-		return translatedPath != null
-			? `${localePrefix.prefixes[locale]}${translatedPath}`
-			: getLocalizedPathname(pathname, currentLocale, locale);
+		return { href: getLocalizedPathname(pathname, currentLocale, locale) };
 	}
 
-	return <LocaleLinks {...props} getHref={getHref} />;
+	return <LocaleLinks {...props} getLink={getLink} />;
 }
 
 /**
@@ -173,7 +124,7 @@ function CurrentPageLocaleLinks(props: Readonly<LocaleSwitcherProps>): ReactNode
  */
 export function LocaleSwitcher(props: Readonly<LocaleSwitcherProps>): ReactNode {
 	return (
-		<Suspense fallback={<LocaleLinks {...props} getHref={getLocaleHomeHref} />}>
+		<Suspense fallback={<LocaleLinks {...props} getLink={getLocaleHomeLink} />}>
 			<CurrentPageLocaleLinks {...props} />
 		</Suspense>
 	);

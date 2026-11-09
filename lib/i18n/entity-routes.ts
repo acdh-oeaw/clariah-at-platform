@@ -1,6 +1,6 @@
 /**
- * Entity detail routes whose slug differs per locale. `app/(api)/api/translations/route.ts` fetches the translated
- * slugs.
+ * Entity detail routes whose slug differs per locale. The locale switcher links these through
+ * `app/(api)/api/locale-switch/route.ts`, which redirects to the translated slug.
  */
 const entityRoutes = [
 	{ type: "news", base: "/news/", pattern: /^\/news\/[^/]+$/ },
@@ -38,4 +38,11 @@ export function buildEntityRoutePath(type: EntityRouteType, slug: string): strin
 	const route = entityRoutes.find((candidate) => candidate.type === type);
 
 	return route == null ? `/${slug}` : `${route.base}${slug}`;
+}
+
+/** The section index an entity's detail pages live below, e.g. `/news`. */
+export function getEntitySectionPath(type: EntityRouteType): string {
+	const route = entityRoutes.find((candidate) => candidate.type === type);
+
+	return route == null ? "/" : route.base.slice(0, -1);
 }

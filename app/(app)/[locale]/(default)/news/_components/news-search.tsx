@@ -70,7 +70,8 @@ export function NewsSearch(props: Readonly<NewsSearchProps>): ReactNode {
 			<Card
 				image={image}
 				link={link}
-				preload={index < eagerResultCount}
+				fetchPriority={index === 0 ? "high" : undefined}
+				loading={index < eagerResultCount ? "eager" : undefined}
 				summary={document.summary}
 				title={document.label}
 			/>
@@ -97,6 +98,7 @@ export function NewsSearch(props: Readonly<NewsSearchProps>): ReactNode {
 		<SearchView<WebsiteDocument>
 			getHref={getHref}
 			label={t("Aktuelles durchsuchen")}
+			name="news"
 			onParamsChange={onParamsChange}
 			params={params}
 			renderItem={renderItem}
