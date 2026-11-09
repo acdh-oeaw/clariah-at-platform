@@ -308,7 +308,7 @@ function ContentBlockList(props: Readonly<ContentBlockListProps>): ReactNode {
 	));
 }
 
-/** The typography plugin's spacing around a figure in `prose-lg`. */
+/** The typography plugin's spacing around a figure, the same in `prose` and `prose-lg`. */
 const setApartClassName = "mbs-8 mbe-8";
 
 /** Whether a block is an image pulled aside for the text of the next block to wrap around. */
