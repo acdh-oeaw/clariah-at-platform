@@ -12,6 +12,7 @@ import { HtmlDocument } from "#/app/(app)/_components/html-document.tsx";
 import { MatomoAnalytics } from "#/app/(app)/_components/matomo-analytics.tsx";
 import { ReloadOnBfcacheRestore } from "#/app/(app)/_components/reload-on-bfcache-restore.tsx";
 import { AlternateLinks } from "#/components/alternate-links.tsx";
+import { FeedAlternateLink } from "#/components/feed-alternate-link.tsx";
 import { env } from "#/configs/env.config.ts";
 import { cachedSiteMetadata } from "#/lib/data/api-cache.ts";
 import { routing } from "#/lib/i18n/routing.ts";
@@ -57,6 +58,7 @@ export default function LocaleLayout(props: Readonly<LocaleLayoutProps>): ReactN
 				<Providers>
 					<Suspense>
 						<AlternateLinks />
+						<FeedAlternateLink />
 					</Suspense>
 					{children}
 				</Providers>
