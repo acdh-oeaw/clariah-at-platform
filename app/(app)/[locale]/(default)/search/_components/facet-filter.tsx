@@ -189,7 +189,7 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 													</span>
 												</span>
 												<span className="grid grow gap-y-0.5">
-													<span className="flex items-baseline gap-x-2">
+													<span className="flex items-baseline gap-x-6">
 														<span className="grow">{getLabel(item.value)}</span>
 														{item.count === undefined ? null : (
 															<span className="text-xs text-text-weak tabular-nums">{format.number(item.count)}</span>
