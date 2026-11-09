@@ -14,10 +14,8 @@ import {
 	Label,
 	ListBox,
 	ListBoxItem,
-	ListLayout,
 	Popover,
 	SearchField,
-	Virtualizer,
 } from "react-aria-components";
 
 import { maxUnfilteredFacetValues } from "#/configs/search.config.ts";
@@ -28,11 +26,6 @@ interface FacetItem {
 	count: number | undefined;
 	value: string;
 }
-
-/** Measured from the rendered rows: a bare label, and a label above a description clamped to three lines. */
-const rowSize = 32;
-const estimatedRowSizeWithDescription = 72;
-const rowGap = 2;
 
 interface FilterableProps {
 	children: ReactNode;
@@ -71,11 +64,13 @@ interface SearchFacetFilterProps {
 	isLoading: boolean;
 	label: string;
 	onChange: (values: ReadonlyArray<string>) => void;
+	/** Replaces the popover's default width, e.g. for facets with long value labels. */
+	popoverClassName?: string | undefined;
 	selected: ReadonlyArray<string>;
 }
 
 export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): ReactNode {
-	const { facet, getDescription, getLabel, isLoading, label, onChange, selected } = props;
+	const { facet, getDescription, getLabel, isLoading, label, onChange, popoverClassName, selected } = props;
 
 	const t = useExtracted();
 	const format = useFormatter();
@@ -108,14 +103,6 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 		});
 	}, [collator, facet, getLabel, isLoading, pinned, selected]);
 	const isFilterable = items.length > maxUnfilteredFacetValues;
-	/** Virtualized, because a facet can have hundreds of values. Rows with a description vary in height. */
-	const layoutOptions = useMemo(
-		() =>
-			getDescription == null
-				? { rowSize, gap: rowGap }
-				: { estimatedRowSize: estimatedRowSizeWithDescription, gap: rowGap },
-		[getDescription],
-	);
 
 	return (
 		<DialogTrigger
@@ -147,7 +134,8 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 
 			<Popover
 				className={cn(
-					"rounded-md border bg-white shadow-lg inline-[min(100vw-2rem,22rem)]",
+					"rounded-md border bg-white shadow-lg",
+					popoverClassName ?? "inline-[min(100vw-2rem,22rem)]",
 					"entering:animate-in entering:duration-150 entering:ease-out entering:fade-in",
 					"exiting:animate-out exiting:duration-100 exiting:ease-in exiting:fade-out",
 				)}
@@ -167,60 +155,58 @@ export function SearchFacetFilter(props: Readonly<SearchFacetFilterProps>): Reac
 							</SearchField>
 						)}
 					>
-						<Virtualizer layout={ListLayout} layoutOptions={layoutOptions}>
-							<ListBox
-								aria-label={label}
-								/** Without a filter input to hold it, focus belongs to the list itself. */
-								autoFocus={!isFilterable}
-								className="block overflow-y-auto max-block-80"
-								/** Escape closes the popover rather than clearing the selection. */
-								escapeKeyBehavior="none"
-								items={items}
-								onSelectionChange={(keys) => {
-									onChange(keys === "all" ? items.map((item) => item.value) : (Array.from(keys) as Array<string>));
-								}}
-								renderEmptyState={() => (
-									<div className="px-2 py-4 text-center text-small text-text-weak">{t("Keine Ergebnisse.")}</div>
-								)}
-								selectedKeys={new Set(selected)}
-								selectionMode="multiple"
-							>
-								{(item: FacetItem) => (
-									<ListBoxItem
-										className="group flex cursor-pointer items-start gap-x-2 rounded-sm px-2 py-1.5 text-small -outline-offset-2 hover:bg-primary-100 focus:bg-primary-100"
-										id={item.value}
-										textValue={getLabel(item.value)}
-									>
-										{({ isSelected }) => {
-											const description = getDescription?.(item.value);
+						<ListBox
+							aria-label={label}
+							/** Without a filter input to hold it, focus belongs to the list itself. */
+							autoFocus={!isFilterable}
+							className="grid gap-y-0.5 overflow-y-auto max-block-80"
+							/** Escape closes the popover rather than clearing the selection. */
+							escapeKeyBehavior="none"
+							items={items}
+							onSelectionChange={(keys) => {
+								onChange(keys === "all" ? items.map((item) => item.value) : (Array.from(keys) as Array<string>));
+							}}
+							renderEmptyState={() => (
+								<div className="px-2 py-4 text-center text-small text-text-weak">{t("Keine Ergebnisse.")}</div>
+							)}
+							selectedKeys={new Set(selected)}
+							selectionMode="multiple"
+						>
+							{(item: FacetItem) => (
+								<ListBoxItem
+									className="group flex cursor-pointer items-start gap-x-2 rounded-sm px-2 py-1.5 text-small -outline-offset-2 hover:bg-primary-100 focus:bg-primary-100"
+									id={item.value}
+									textValue={getLabel(item.value)}
+								>
+									{({ isSelected }) => {
+										const description = getDescription?.(item.value);
 
-											return (
-												<Fragment>
-													<span className="flex shrink-0 items-center block-[1lh]">
-														<span className="pointer-events-none flex items-center justify-center rounded-xs border border-stroke-strong block-4 inline-4 group-selected:border-primary-1000 group-selected:bg-primary-1000">
-															{isSelected ? (
-																<CheckIcon aria-hidden={true} className="text-white block-3 inline-3" />
-															) : null}
-														</span>
+										return (
+											<Fragment>
+												<span className="flex shrink-0 items-center block-[1lh]">
+													<span className="pointer-events-none flex items-center justify-center rounded-xs border border-stroke-strong block-4 inline-4 group-selected:border-primary-1000 group-selected:bg-primary-1000">
+														{isSelected ? (
+															<CheckIcon aria-hidden={true} className="text-white block-3 inline-3" />
+														) : null}
 													</span>
-													<span className="grid grow gap-y-0.5">
-														<span className="flex items-baseline gap-x-2">
-															<span className="grow">{getLabel(item.value)}</span>
-															{item.count === undefined ? null : (
-																<span className="text-xs text-text-weak tabular-nums">{format.number(item.count)}</span>
-															)}
-														</span>
-														{description == null || description === "" ? null : (
-															<span className="line-clamp-3 text-xs text-text-weak">{description}</span>
+												</span>
+												<span className="grid grow gap-y-0.5">
+													<span className="flex items-baseline gap-x-2">
+														<span className="grow">{getLabel(item.value)}</span>
+														{item.count === undefined ? null : (
+															<span className="text-xs text-text-weak tabular-nums">{format.number(item.count)}</span>
 														)}
 													</span>
-												</Fragment>
-											);
-										}}
-									</ListBoxItem>
-								)}
-							</ListBox>
-						</Virtualizer>
+													{description == null || description === "" ? null : (
+														<span className="line-clamp-3 text-xs text-text-weak">{description}</span>
+													)}
+												</span>
+											</Fragment>
+										);
+									}}
+								</ListBoxItem>
+							)}
+						</ListBox>
 					</Filterable>
 				</Dialog>
 			</Popover>

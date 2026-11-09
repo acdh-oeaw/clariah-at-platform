@@ -208,6 +208,7 @@ export function ProjectsSearch(props: Readonly<ProjectsSearchProps>): ReactNode 
 						onChange={(values) => {
 							onChange(facetField, values);
 						}}
+						popoverClassName="inline-[min(100vw-2rem,28rem)]"
 						selected={selected[facetField] ?? []}
 					/>
 				)}
