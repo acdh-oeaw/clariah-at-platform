@@ -1020,5 +1020,3 @@ export const legacyRedirects: Redirects = Object.entries({
 }).map(([source, destination]) => {
 	return { source, destination, permanent: true };
 });
-
-
