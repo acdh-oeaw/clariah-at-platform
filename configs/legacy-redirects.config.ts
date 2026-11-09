@@ -827,7 +827,7 @@ const projects: Record<string, string> = {
  * Redirects carried over from `src/config/redirects.config.ts` in the previous Astro website
  * (`acdh-oeaw/clariah-at-website`).
  */
-const wordpress: Record<string, string> = {
+const astroRedirects: Record<string, string> = {
 	"/about-clariah-at": "/en/pages/about-clariah-at",
 	"/acdh-ch-lecture-10-1": "/en/events/acdh-ch-lecture-10-1",
 	"/acdh-ch-lecture-10-2": "/en/events/acdh-ch-lecture-10-2",
@@ -1016,8 +1016,9 @@ export const legacyRedirects: Redirects = Object.entries({
 	...events,
 	...news,
 	...projects,
-	...wordpress,
+	...astroRedirects,
 }).map(([source, destination]) => {
 	return { source, destination, permanent: true };
 });
+
 
