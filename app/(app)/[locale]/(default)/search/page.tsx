@@ -8,6 +8,7 @@ import { SearchFallback } from "#/app/(app)/[locale]/(default)/_components/searc
 import { WebsiteSearch } from "#/app/(app)/[locale]/(default)/search/_components/website-search.tsx";
 import { PageContent } from "#/app/(app)/[locale]/_components/page-content.tsx";
 import { PageLayout } from "#/app/(app)/[locale]/_components/page-layout.tsx";
+import { SearchPreconnect } from "#/components/preconnect.tsx";
 import { isValidLocale } from "#/lib/i18n/locales.ts";
 import { createMetadata } from "#/lib/metadata.ts";
 
@@ -30,6 +31,7 @@ export default async function SearchPage(): Promise<ReactNode> {
 	return (
 		<PageLayout title={t("Suche")}>
 			<PageContent>
+				<SearchPreconnect />
 				<Suspense fallback={<SearchFallback label={t("Website durchsuchen")} />}>
 					<WebsiteSearch locale={currentLocale} />
 				</Suspense>
