@@ -84,6 +84,8 @@ export function Pagination(props: Readonly<PaginationProps>): ReactNode {
 				isDisabled={isCurrent}
 				onPress={() => {
 					onChange(targetPage);
+					/** Query-only navigation preserves scroll, but a new results page should start at the top. */
+					window.scrollTo({ top: 0, behavior: "instant" });
 				}}
 				variant="unstyled"
 			>
