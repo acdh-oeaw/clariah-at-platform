@@ -80,10 +80,6 @@ export function Pagination(props: Readonly<PaginationProps>): ReactNode {
 				className={pageButtonStyles}
 				href={getHref(targetPage)}
 				isDisabled={isCurrent}
-				onPress={() => {
-					/** Query-only navigation preserves scroll, but a new results page should start at the top. */
-					window.scrollTo({ top: 0, behavior: "instant" });
-				}}
 				variant="unstyled"
 			>
 				{label}
