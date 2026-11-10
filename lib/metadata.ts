@@ -3,10 +3,12 @@ import "server-only";
 import type { Metadata } from "next";
 import { getExtracted, getLocale } from "next-intl/server";
 
+import { openGraphImageSize } from "#/configs/image.config.ts";
 import { cachedSiteMetadata } from "#/lib/data/api-cache.ts";
 import { type IntlLocale, isValidLocale, locales } from "#/lib/i18n/locales.ts";
-import { type ImageAsset, createImageVariantUrl, isSvgImage } from "#/lib/images/variants.ts";
+import { type ImageAsset, createImageVariantUrl, isSvgImage, parseImageAssetUrl } from "#/lib/images/variants.ts";
 import { localizeHref } from "#/lib/navigation/convert.ts";
+import { createFullUrl } from "#/lib/navigation/create-full-url.ts";
 
 type OpenGraph = NonNullable<Metadata["openGraph"]>;
 type OpenGraphImage = Exclude<NonNullable<OpenGraph["images"]>, ReadonlyArray<unknown>>;
@@ -39,15 +41,31 @@ export function toDescription(text: string): string {
 	return `${(boundary > 0 ? cut.slice(0, boundary) : cut).replace(/[\s,.;:–—-]+$/u, "")}…`;
 }
 
-/** An api image for crawlers, which do not render svgs. */
+/** The same crawler-compatible rendition for link previews and structured data. */
 export function toImageUrl(image: ImageAsset): string | null {
-	return isSvgImage(image) ? null : createImageVariantUrl(image.srcUrl, openGraphImageWidth);
+	const asset = parseImageAssetUrl(image.srcUrl);
+
+	if (isSvgImage(image)) {
+		return asset != null
+			? String(
+					createFullUrl({ pathname: `/og-images/${asset.prefix}/${encodeURIComponent(asset.name)}/${asset.version}` }),
+				)
+			: null;
+	}
+
+	const url = new URL(createImageVariantUrl(image.srcUrl, openGraphImageWidth));
+	if (asset?.prefix === "images") {
+		url.searchParams.set("ar", "16x9");
+	}
+	return url.href;
 }
 
 function toOpenGraphImage(image: ImageAsset): OpenGraphImage | null {
 	const url = toImageUrl(image);
 
-	return url != null ? { url, alt: image.alt ?? undefined } : null;
+	return url != null
+		? { url, alt: image.alt ?? undefined, ...(isSvgImage(image) ? { ...openGraphImageSize, type: "image/png" } : {}) }
+		: null;
 }
 
 /** For a page whose content does not exist. The html has its title by the time `notFound()` is thrown. */

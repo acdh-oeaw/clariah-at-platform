@@ -11,6 +11,6 @@ export const config: ProxyConfig = {
 		 * public locale prefix (e.g. `/de`) to the locale (e.g. `de-AT`) for the `[locale]` route handler to match.
 		 */
 		"/:prefix/feed.xml",
-		"/((?!api/|health$|_next/|_vercel/|.*\\.(?:avif|css|csv|gif|ico|jpe?g|js|json|pdf|png|svg|txt|webmanifest|webp|woff2?|xml)$).*)",
+		"/((?!api/|og-images/|health$|_next/|_vercel/|.*\\.(?:avif|css|csv|gif|ico|jpe?g|js|json|pdf|png|svg|txt|webmanifest|webp|woff2?|xml)$).*)",
 	],
 };
