@@ -7,7 +7,7 @@ async function main() {
 			format: "po",
 			locales: "infer",
 			path: "./messages",
-			sourceLocale: "en",
+			sourceLocale: "de",
 		},
 		srcPath: ["./app", "./components", "./lib"],
 	});
