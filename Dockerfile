@@ -15,6 +15,8 @@ FROM deps AS builder
 ENV pnpm_config_verify_deps_before_run="false"
 COPY . .
 
+# Next.js embeds this identifier at build time for deployment cache busting.
+ARG NEXT_DEPLOYMENT_ID
 ARG NEXT_PUBLIC_API_BASE_URL
 ARG NEXT_PUBLIC_API_OPENAPI_PATHNAME
 ARG NEXT_PUBLIC_APP_BASE_URL
