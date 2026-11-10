@@ -283,7 +283,7 @@ interface RichTextContentProps {
 
 /** `max-inline-none`: the surrounding column sets the measure, so text and blocks share one width. */
 export const richTextClassName =
-	"leading-reading prose md:prose-lg max-inline-none prose-h2:mbs-10 md:prose-h2:mbs-14 prose-a:font-medium prose-a:hover:decoration-2 prose-headings:[&_a]:font-[inherit]";
+	"leading-reading prose md:prose-lg max-inline-none prose-h2:mbs-10 md:prose-h2:mbs-14 prose-h4:text-lg md:prose-h4:text-xl prose-a:font-medium prose-a:hover:decoration-2 prose-headings:[&_a]:font-[inherit]";
 
 export function RichTextContent(props: Readonly<RichTextContentProps>): ReactNode {
 	const { content, className } = props;
