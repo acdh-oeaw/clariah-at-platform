@@ -1,0 +1,37 @@
+name: Content issue
+description: Report incorrect, outdated, or missing content, or a broken link
+assignees:
+  - babslgam
+  - stefanprobst
+labels:
+  - needs-review
+type: content
+body:
+  - type: input
+    attributes:
+      label: Page URL
+      description: The address of the affected page, if there is one.
+      placeholder: https://www.clariah.at/...
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Description
+      description: What is incorrect, outdated, or missing? Quote the affected text where possible.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Suggested change
+      description: The correct or new content, if you know it.
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: |
+        Sources, links, or screenshots that support the change.
+
+        Tip: You can attach images or files by clicking this area to highlight it and then dragging files in.
+    validations:
+      required: false
