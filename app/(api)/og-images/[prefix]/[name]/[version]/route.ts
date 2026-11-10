@@ -1,7 +1,10 @@
-import { createSvgOpenGraphImage, getSvgImage } from "#/lib/images/open-graph.tsx";
+import { getSvgOpenGraphImage } from "#/lib/images/open-graph.tsx";
 import type { ImageAssetParams } from "#/lib/images/variants.ts";
 
-/** Render only SVG assets from the public api; never accept an arbitrary source URL. */
+/**
+ * Render only SVG assets from the public api; never accept an arbitrary source URL. The path is versioned, so a
+ * replaced asset gets a new url - which is why the response can be cached as immutable.
+ */
 export async function GET(
 	_request: Request,
 	context: { params: Promise<{ prefix: string; name: string; version: string }> },
@@ -20,7 +23,16 @@ export async function GET(
 	}
 
 	const params: ImageAssetParams = { prefix, name, version };
-	const svg = await getSvgImage(params);
+	const png = await getSvgOpenGraphImage(params);
 
-	return svg == null ? new Response(null, { status: 404 }) : createSvgOpenGraphImage(svg);
+	if (png == null) {
+		return new Response(null, { status: 404 });
+	}
+
+	return new Response(png, {
+		headers: {
+			"cache-control": "public, immutable, no-transform, max-age=31536000",
+			"content-type": "image/png",
+		},
+	});
 }
