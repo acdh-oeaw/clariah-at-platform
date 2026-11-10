@@ -14,6 +14,36 @@ export function isSvgImage(image: Readonly<{ mimeType: string }>): boolean {
 	return image.mimeType === "image/svg+xml";
 }
 
+export interface ImageAssetParams {
+	prefix: "avatars" | "documents" | "images" | "logos";
+	name: string;
+	version: "v1";
+}
+
+/** Read the public variant endpoint's parameters, accepting only assets from our own api. */
+export function parseImageAssetUrl(srcUrl: string): ImageAssetParams | null {
+	try {
+		const url = new URL(srcUrl);
+		const base = new URL(`${env.NEXT_PUBLIC_API_BASE_URL}/`);
+		if (url.origin !== base.origin || !url.pathname.startsWith(base.pathname)) {
+			return null;
+		}
+		const path = url.pathname.slice(base.pathname.length);
+		const match = /^api\/v1\/assets\/(?<prefix>avatars|documents|images|logos)\/(?<name>[^/]+)\/image\/v1$/u.exec(path);
+		const prefix = match?.groups?.prefix;
+		const name = match?.groups?.name;
+		if ((prefix !== "avatars" && prefix !== "documents" && prefix !== "images" && prefix !== "logos") || name == null) {
+			return null;
+		}
+		const decodedName = decodeURIComponent(name);
+		return decodedName !== "" && !/[\\/]/u.test(decodedName) && decodedName !== "." && decodedName !== ".."
+			? { prefix, name: decodedName, version: "v1" }
+			: null;
+	} catch {
+		return null;
+	}
+}
+
 /** The loader is global, so it has to tell api images from the app's own. */
 export function isApiImageSrc(src: string): boolean {
 	return src.startsWith(env.NEXT_PUBLIC_API_BASE_URL);
