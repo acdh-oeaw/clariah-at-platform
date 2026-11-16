@@ -72,6 +72,23 @@ const LeadIn = Node.create({
 	content: "inline*",
 });
 
+/**
+ * A quotation with a byline. `authors` is a list of `{ kind, name, entity, image }`, and `description` a `{ doc >
+ * paragraph }` value or null. Rendered by `components/rich-text.tsx`.
+ */
+const QuoteBlock = Node.create({
+	name: "quoteBlock",
+	group: "block",
+	content: "paragraph+",
+
+	addAttributes() {
+		return {
+			authors: { default: [] },
+			description: { default: null },
+		};
+	},
+});
+
 /** The cms stores a table's caption as a `{ doc > paragraph }` attribute. */
 const RichTextTable = Table.extend({
 	addAttributes() {
@@ -110,5 +127,6 @@ export function createRichTextExtensions(): Extensions {
 		PlaceholderValue,
 		ButtonLink,
 		LeadIn,
+		QuoteBlock,
 	];
 }
