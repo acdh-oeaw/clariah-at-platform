@@ -41,6 +41,15 @@ const config: NextConfig = {
 		strictRouteTypes: true,
 		turbopackRustReactCompiler: true,
 	},
+	/** Keep locale-switch redirect URLs out of search results, including when the route fails. */
+	headers() {
+		return [
+			{
+				source: "/api/locale-switch",
+				headers: [{ key: "X-Robots-Tag", value: "noindex" }],
+			},
+		];
+	},
 	images: {
 		/**
 		 * The widths the api's image-variant endpoint accepts. The two narrower than any viewport go in `imageSizes`, so a
