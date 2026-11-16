@@ -28,9 +28,15 @@ interface ApiImageProps extends Omit<ImageProps, "alt" | "src"> {
 	sizes: string;
 }
 
-/** An image served by the api's variant endpoint. */
+/**
+ * An image served by the api's variant endpoint. A cropped image (`object-fit: cover`) keeps the asset's focal point in
+ * view, by the same rule the cms's crop previews use. A caller's own `objectPosition` wins.
+ */
 export function ApiImage(props: Readonly<ApiImageProps>): ReactNode {
-	const { alt, image, ...rest } = props;
+	const { alt, image, style: callerStyle, ...rest } = props;
+
+	const objectPosition = toObjectPosition(image.focalPoint);
+	const style = objectPosition != null ? { objectPosition, ...callerStyle } : callerStyle;
 
 	/** Source dimensions stand in for a slot that declares none. `next/image` rejects them under `fill`. */
 	const intrinsic = rest.fill === true ? {} : { height: image.height ?? undefined, width: image.width ?? undefined };
@@ -42,7 +48,7 @@ export function ApiImage(props: Readonly<ApiImageProps>): ReactNode {
 
 		/** `next/image` refuses to render without dimensions, so this matches what it would render. */
 		if (layoutWidth == null && rest.fill !== true) {
-			const { className, fetchPriority, loading, preload, style } = rest;
+			const { className, fetchPriority, loading, preload } = rest;
 
 			return (
 				<Fragment>
@@ -62,12 +68,30 @@ export function ApiImage(props: Readonly<ApiImageProps>): ReactNode {
 			);
 		}
 
-		return <NextImage {...intrinsic} {...rest} alt={alt ?? image.alt ?? ""} src={src} unoptimized={true} />;
+		return (
+			<NextImage {...intrinsic} {...rest} alt={alt ?? image.alt ?? ""} src={src} style={style} unoptimized={true} />
+		);
 	}
 
 	const src = appendSearchParams(image.srcUrl, { [sourceWidthParam]: String(image.width) });
 
-	return <NextImage {...intrinsic} {...rest} alt={alt ?? image.alt ?? ""} loader={apiImageLoader} src={src} />;
+	return (
+		<NextImage {...intrinsic} {...rest} alt={alt ?? image.alt ?? ""} loader={apiImageLoader} src={src} style={style} />
+	);
+}
+
+/** Fractions of the source from the top left, as `object-position`. `undefined` keeps the default, the centre. */
+function toObjectPosition(focalPoint: ImageAsset["focalPoint"]): string | undefined {
+	if (focalPoint == null) {
+		return undefined;
+	}
+
+	return `${toPercent(focalPoint.x)} ${toPercent(focalPoint.y)}`;
+}
+
+/** Rounded, so e.g. `0.3` gives `30%`, not `30.000000000000004%`. */
+function toPercent(fraction: number): string {
+	return `${String(Math.round(fraction * 10_000) / 100)}%`;
 }
 
 function toLayoutWidth(width: NextImageProps["width"]): number | undefined {

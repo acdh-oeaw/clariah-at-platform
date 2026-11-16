@@ -264,17 +264,6 @@ function toQuoteAuthors(value: unknown): Array<QuoteAuthor> {
 	});
 }
 
-/** `object-position` from the focal point, so the round crop keeps it in view. */
-function toObjectPosition(image: ImageAsset): string | undefined {
-	const focalPoint = image.focalPoint;
-
-	if (focalPoint == null) {
-		return undefined;
-	}
-
-	return `${String(focalPoint.x * 100)}% ${String(focalPoint.y * 100)}%`;
-}
-
 /**
  * A quotation with a byline read from `attrs`: the authors' names, their portraits, and a description (e.g. a role).
  * Without authors or description, it renders as a plain quotation.
@@ -340,7 +329,6 @@ function QuoteBlockNode(
 									// oxlint-disable-next-line react/no-array-index-key -- Authors carry no id of their own.
 									key={index}
 									sizes="2.5rem"
-									style={{ objectPosition: toObjectPosition(author.image) }}
 									width={40}
 								/>
 							))}
