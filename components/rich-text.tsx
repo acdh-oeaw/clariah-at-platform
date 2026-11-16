@@ -6,8 +6,10 @@ import { useLocale, useExtracted as useTranslations } from "next-intl";
 import NextLink from "next/link";
 import { Fragment, type ReactNode, useId } from "react";
 
+import { ApiImage } from "#/components/image.tsx";
 import { LinkButton, type buttonStyles } from "#/components/ui/button.tsx";
-import { isValidLocale } from "#/lib/i18n/locales.ts";
+import { type IntlLocale, isValidLocale } from "#/lib/i18n/locales.ts";
+import type { ImageAsset } from "#/lib/images/variants.ts";
 import { localizeHref } from "#/lib/navigation/convert.ts";
 import { createRichTextExtensions } from "#/lib/rich-text-extensions.ts";
 import { collectFootnotes, identifyHeadings, isEmptyRichTextDocument, numberFootnotes } from "#/lib/rich-text.ts";
@@ -79,6 +81,15 @@ function LinkMark(
 
 const markMapping = { link: LinkMark };
 
+/**
+ * Renders a node or mark type the schema does not declare as its content alone. Without it, `Node.fromJSON` throws on
+ * the first type the cms adds before this renderer knows it, and the whole field fails to render. To render such a type
+ * properly, declare it in `createRichTextExtensions` and map it in `nodeMapping` or `markMapping`.
+ */
+function renderUnhandled(props: Readonly<{ children?: ReactNode | Array<ReactNode> }>): ReactNode {
+	return props.children ?? null;
+}
+
 /** Renders a `{ doc > paragraph }` value (a footnote's note, a caption) without the paragraph. */
 function renderInlineRichText(content: unknown): ReactNode {
 	if (isEmptyRichTextDocument(content as JSONContent | null | undefined)) {
@@ -90,6 +101,8 @@ function renderInlineRichText(content: unknown): ReactNode {
 		extensions,
 		options: {
 			markMapping,
+			unhandledMark: renderUnhandled,
+			unhandledNode: renderUnhandled,
 			nodeMapping: {
 				// oxlint-disable-next-line typescript/no-use-before-define -- Only read at render time, after the module has loaded.
 				...nodeMapping,
@@ -210,12 +223,146 @@ function renderTableNode(
 	);
 }
 
+interface QuoteAuthor {
+	name: string;
+	/** Root-relative and locale-less. Always null for persons today, since the website has no person pages. */
+	href: string | null;
+	locale: IntlLocale | null;
+	image: ImageAsset | null;
+}
+
+function toImageAsset(value: unknown): ImageAsset | null {
+	if (!isRecord(value) || typeof value.srcUrl !== "string" || typeof value.mimeType !== "string") {
+		return null;
+	}
+
+	return value as unknown as ImageAsset;
+}
+
+/** The api drops malformed entries, but the attribute is untyped, so this drops anything without a name. */
+function toQuoteAuthors(value: unknown): Array<QuoteAuthor> {
+	if (!Array.isArray(value)) {
+		return [];
+	}
+
+	return value.flatMap((author: unknown): Array<QuoteAuthor> => {
+		if (!isRecord(author) || typeof author.name !== "string" || author.name === "") {
+			return [];
+		}
+
+		const entity = isRecord(author.entity) ? author.entity : null;
+		const href = typeof entity?.href === "string" && entity.href !== "" ? entity.href : null;
+
+		return [
+			{
+				name: author.name,
+				href,
+				locale: isValidLocale(entity?.locale) ? entity.locale : null,
+				image: toImageAsset(author.image),
+			},
+		];
+	});
+}
+
+/** `object-position` from the focal point, so the round crop keeps it in view. */
+function toObjectPosition(image: ImageAsset): string | undefined {
+	const focalPoint = image.focalPoint;
+
+	if (focalPoint == null) {
+		return undefined;
+	}
+
+	return `${String(focalPoint.x * 100)}% ${String(focalPoint.y * 100)}%`;
+}
+
+/**
+ * A quotation with a byline read from `attrs`: the authors' names, their portraits, and a description (e.g. a role).
+ * Without authors or description, it renders as a plain quotation.
+ */
+function QuoteBlockNode(
+	props: Readonly<{
+		node: { attrs?: Record<string, unknown> | null };
+		children?: ReactNode | Array<ReactNode>;
+	}>,
+): ReactNode {
+	const attrs = props.node.attrs ?? null;
+	const authors = toQuoteAuthors(attrs?.authors);
+	const description = renderInlineRichText(attrs?.description);
+
+	const currentLocale = useLocale();
+
+	const portraits = authors.filter((author): author is QuoteAuthor & { image: ImageAsset } => author.image != null);
+
+	/** Splits the formatted list, so each name can carry its own link. */
+	const parts = new Intl.ListFormat(currentLocale, { style: "long", type: "conjunction" }).formatToParts(
+		authors.map((author) => author.name),
+	);
+	const names = parts.map((part, index) => {
+		if (part.type === "literal") {
+			// oxlint-disable-next-line react/no-array-index-key -- Static, server-rendered parts.
+			return <Fragment key={index}>{part.value}</Fragment>;
+		}
+
+		const author = authors[parts.slice(0, index).filter((previous) => previous.type === "element").length];
+
+		if (author?.href == null) {
+			// oxlint-disable-next-line react/no-array-index-key -- Static, server-rendered parts.
+			return <Fragment key={index}>{part.value}</Fragment>;
+		}
+
+		return (
+			// oxlint-disable-next-line react/no-array-index-key -- Static, server-rendered parts.
+			<NextLink href={localizeHref(author.href, author.locale ?? currentLocale)} key={index}>
+				{part.value}
+			</NextLink>
+		);
+	});
+
+	const hasByline = authors.length > 0 || description != null;
+
+	return (
+		<figure>
+			<blockquote className={hasByline ? "mbe-0" : undefined}>{props.children}</blockquote>
+			{hasByline ? (
+				/** Outside `prose`, so the portraits don't get its image margins. */
+				<figcaption className="not-prose flex items-center gap-3 text-small mbs-4 ps-5 [&_a]:font-medium [&_a]:underline [&_a]:hover:decoration-2">
+					{portraits.length > 0 ? (
+						<div className="flex shrink-0">
+							{portraits.map((author, index) => (
+								<ApiImage
+									alt=""
+									className={cn(
+										"rounded-full object-cover ring-2 ring-background-base block-10 inline-10",
+										index > 0 && "-ms-2",
+									)}
+									height={40}
+									image={author.image}
+									// oxlint-disable-next-line react/no-array-index-key -- Authors carry no id of their own.
+									key={index}
+									sizes="2.5rem"
+									style={{ objectPosition: toObjectPosition(author.image) }}
+									width={40}
+								/>
+							))}
+						</div>
+					) : null}
+					<div>
+						{authors.length > 0 ? <cite className="block font-bold not-italic">{names}</cite> : null}
+						{description != null ? <div>{description}</div> : null}
+					</div>
+				</figcaption>
+			) : null}
+		</figure>
+	);
+}
+
 const nodeMapping = {
 	buttonLink: ButtonLinkNode,
 	footnote: FootnoteNode,
 	heading: renderHeadingNode,
 	leadIn: renderLeadInNode,
 	placeholderValue: renderPlaceholderValueNode,
+	quoteBlock: QuoteBlockNode,
 	table: renderTableNode,
 };
 
@@ -297,7 +444,7 @@ export function RichTextContent(props: Readonly<RichTextContentProps>): ReactNod
 			{renderToReactElement({
 				content: content as JSONContent,
 				extensions,
-				options: { markMapping, nodeMapping },
+				options: { markMapping, nodeMapping, unhandledMark: renderUnhandled, unhandledNode: renderUnhandled },
 			})}
 		</div>
 	);

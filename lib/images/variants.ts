@@ -4,6 +4,8 @@ import { imageVariantWidths, maxImageVariantWidth, sourceWidthParam } from "#/co
 /** `width` and `height` are null for vectors. Use `""` for an unknown `mimeType`. */
 export interface ImageAsset {
 	alt?: string | null;
+	/** Fractions of the source width and height from the top left; null means the centre. */
+	focalPoint?: { x: number; y: number } | null;
 	height: number | null;
 	mimeType: string;
 	srcUrl: string;
