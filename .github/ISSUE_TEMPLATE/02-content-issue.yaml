@@ -11,7 +11,7 @@ body:
     attributes:
       label: Page URL
       description: The address of the affected page, if there is one.
-      placeholder: https://www.clariah.at/...
+      placeholder: https://clariah.at/...
     validations:
       required: false
   - type: textarea

@@ -1,1 +1,1 @@
-# [www.clariah.at](https://www.clariah.at) website
+# [clariah.at](https://clariah.at) website

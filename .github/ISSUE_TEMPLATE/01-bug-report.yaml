@@ -12,7 +12,7 @@ body:
     attributes:
       label: Page URL
       description: The address of the page where the problem occurs.
-      placeholder: https://www.clariah.at/...
+      placeholder: https://clariah.at/...
     validations:
       required: true
   - type: textarea
