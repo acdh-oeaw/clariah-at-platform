@@ -310,32 +310,34 @@ function QuoteBlockNode(
 	const hasByline = authors.length > 0 || description != null;
 
 	return (
-		<figure>
-			<blockquote className={hasByline ? "mbe-0" : undefined}>{props.children}</blockquote>
+		<figure className="border-s-4 border-(--tw-prose-quote-borders) ps-[1em]">
+			<blockquote className="border-s-0 ps-0 mbs-0 mbe-0">{props.children}</blockquote>
 			{hasByline ? (
 				/** Outside `prose`, so the portraits don't get its image margins. */
-				<figcaption className="not-prose flex items-center gap-3 text-small mbs-4 ps-5 [&_a]:font-medium [&_a]:underline [&_a]:hover:decoration-2">
+				<figcaption className="not-prose flex items-center gap-4 leading-snug text-(--tw-prose-body) mbs-5 [&_a]:font-medium [&_a]:underline [&_a]:hover:decoration-2">
 					{portraits.length > 0 ? (
 						<div className="flex shrink-0">
 							{portraits.map((author, index) => (
 								<ApiImage
 									alt=""
 									className={cn(
-										"rounded-full object-cover ring-2 ring-background-base block-10 inline-10",
+										"rounded-full object-cover ring-2 ring-background-base block-12 inline-12",
 										index > 0 && "-ms-2",
 									)}
-									height={40}
+									height={48}
 									image={author.image}
 									// oxlint-disable-next-line react/no-array-index-key -- Authors carry no id of their own.
 									key={index}
-									sizes="2.5rem"
-									width={40}
+									sizes="3rem"
+									width={48}
 								/>
 							))}
 						</div>
 					) : null}
 					<div>
-						{authors.length > 0 ? <cite className="block font-bold not-italic">{names}</cite> : null}
+						{authors.length > 0 ? (
+							<cite className="block font-semibold text-(--tw-prose-quotes) not-italic">{names}</cite>
+						) : null}
 						{description != null ? <div>{description}</div> : null}
 					</div>
 				</figcaption>
