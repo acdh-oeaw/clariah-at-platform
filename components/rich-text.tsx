@@ -311,7 +311,7 @@ function QuoteBlockNode(
 
 	return (
 		<figure className="border-s-4 border-(--tw-prose-quote-borders) ps-[1em]">
-			<blockquote className="border-s-0 ps-0 mbs-0 mbe-0">{props.children}</blockquote>
+			<blockquote className="border-s-0! ps-0! mbs-0! mbe-0!">{props.children}</blockquote>
 			{hasByline ? (
 				/** Outside `prose`, so the portraits don't get its image margins. */
 				<figcaption className="not-prose flex items-center gap-4 leading-snug text-(--tw-prose-body) mbs-5 [&_a]:font-medium [&_a]:underline [&_a]:hover:decoration-2">
@@ -338,7 +338,9 @@ function QuoteBlockNode(
 						{authors.length > 0 ? (
 							<cite className="block font-semibold text-(--tw-prose-quotes) not-italic">{names}</cite>
 						) : null}
-						{description != null ? <div>{description}</div> : null}
+						{description != null ? (
+							<div className="text-[0.875em] text-(--tw-prose-captions) mbs-0.5">{description}</div>
+						) : null}
 					</div>
 				</figcaption>
 			) : null}
